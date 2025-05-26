@@ -1,0 +1,29 @@
+/* Define application theme */
+
+:root {
+  --dwc-color-primary-h: 256;
+  --dwc-color-primary-s: 100%;
+
+  --dwc-tree-icon-fill: var(--dwc-color-primary);
+  --dwc-app-layout-drawer-width: 25em;
+  --dwc-app-layout-drawer-width: 25em;
+  --dwc-color-default-s: 10%
+}
+
+html[data-app-theme~='dark'],
+html[data-app-theme~='dark-pure'] {
+    --dwc-color-default-s: 3%
+}
+
+dwc-app-layout::part(content) {
+  padding: 0;
+}
+
+dwc-tree {
+  margin: var(--dwc-space-m);
+}
+
+.tippy-box[data-theme~=bbj]  strong {
+  color: var(--dwc-color-white);
+}
+

@@ -1,0 +1,43 @@
+{
+  "iconMappings": {
+    "java": "coffee",
+    "txt": "file-text",
+    "md": "markdown",
+    "xml": "code",
+    "json": "braces",
+    "html": "world",
+    "htm": "world",
+    "css": "palette",
+    "js": "brand-javascript",
+    "png": "photo",
+    "jpg": "photo",
+    "jpeg": "photo",
+    "gif": "photo"
+  },
+  "fileLanguageMappings": {
+    "java": "java",
+    "xml": "xml",
+    "json": "json",
+    "html": "html",
+    "htm": "html",
+    "css": "css",
+    "js": "javascript",
+    "md": "markdown",
+    "txt": "plaintext",
+    "yml": "yaml",
+    "yaml": "yaml",
+    "py": "python",
+    "rb": "ruby",
+    "php": "php",
+    "c": "c",
+    "cpp": "cpp",
+    "cs": "csharp",
+    "go": "go",
+    "rs": "rust",
+    "kt": "kotlin",
+    "swift": "swift",
+    "sh": "bash",
+    "bat": "batch",
+    "sql": "sql"
+  }
+}
