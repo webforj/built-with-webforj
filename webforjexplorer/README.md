@@ -6,10 +6,7 @@ A showcase application demonstrating the file navigation and code viewing capabi
 
 webforJ Explorer is a minimal code viewer that mimics the VSCode layout. It uses webforJ’s layout system, a file tree on the left, and a Monaco editor to display file contents in read-only mode. This project shows how to integrate dynamic data, build a tree UI, and embed third-party components.
 
-<video width="600" controls>
-  <source src="https://file.notion.so/f/f/e18554c2-bde9-4bce-9e26-66af1087f9d3/b12c3a2f-2fa3-4f6d-a124-f86fb70368d0/tree.mp4?table=block&id=1fbe5d1f-c2b1-8071-8d46-efc0fdd5af2a&spaceId=e18554c2-bde9-4bce-9e26-66af1087f9d3&expirationTimestamp=1748289600000&signature=_1IzX80q2Ionnf3b7QyE7km_b_NF3mLXcxqJ4wrvaU8&downloadName=tree.mp4" type="video/mp4">
-</video>
-
+https://github.com/user-attachments/assets/33c17a21-6880-4f0d-a1a2-d39d023d1615
 
 ### **Main Features**
 
