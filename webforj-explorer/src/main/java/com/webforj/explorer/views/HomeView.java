@@ -1,4 +1,4 @@
-package com.webforjexplorer.views;
+package com.webforj.explorer.views;
 
 import static com.webforj.component.tree.Tree.node;
 
@@ -18,8 +18,8 @@ import com.webforj.router.annotation.Route;
 import com.webforj.router.event.DidEnterEvent;
 import com.webforj.router.history.ParametersBag;
 import com.webforj.router.observer.DidEnterObserver;
-import com.webforjexplorer.components.Editor;
-import com.webforjexplorer.utils.Utility;
+import com.webforj.explorer.components.Editor;
+import com.webforj.explorer.utils.Utility;
 
 /**
  * Main view of the webforJ Explorer application.

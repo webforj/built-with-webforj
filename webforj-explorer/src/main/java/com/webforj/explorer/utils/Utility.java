@@ -1,4 +1,4 @@
-package com.webforjexplorer.utils;
+package com.webforj.explorer.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

@@ -1,4 +1,4 @@
-package com.webforjexplorer;
+package com.webforj.explorer;
 
 import com.webforj.App;
 import com.webforj.annotation.AppProfile;
@@ -26,7 +26,7 @@ import com.webforj.annotation.StyleSheet;
  * @author webforJ Team
  * @since 1.0
  */
-@Routify(packages = "com.webforjexplorer.views")
+@Routify(packages = "com.webforj.explorer.views")
 @StyleSheet("ws://app.css")
 @AppProfile(name = "webforJ Explorer", shortName = "webforJ Explorer")
 public class Application extends App {

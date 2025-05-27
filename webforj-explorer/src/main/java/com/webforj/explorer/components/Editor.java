@@ -1,4 +1,3 @@
-package com.webforjexplorer.components;
 
 import com.google.gson.JsonObject;
 import com.webforj.annotation.Attribute;

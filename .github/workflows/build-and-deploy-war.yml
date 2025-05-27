@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        app: [webforj-howdy, webforj-tictactoe, webforjexplorer]
+        app: [webforj-howdy, webforj-tictactoe, webforj-explorer]
 
     steps:
       - name: Checkout Repository
@@ -41,8 +41,4 @@ jobs:
         run: |
           # Extract app name without webforj- prefix for cleaner URLs
           APP_NAME=$(echo "${{ matrix.app }}" | sed 's/webforj-//')
-          # Special case for webforjexplorer
-          if [ "${{ matrix.app }}" = "webforjexplorer" ]; then
-            APP_NAME="explorer"
-          fi
           aws s3 cp target/*.war s3://webforj-webapps/${APP_NAME}.war
