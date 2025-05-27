@@ -11,6 +11,11 @@ This repository contains various webforJ projects that showcase different aspect
 - **webforj-tictactoe** - A simple implementation of a Tic-Tac-Toe game that supports two players taking turns. The game utilizes webforJ namespaces to share the Java game object between running instances. This project demonstrates the capabilities of webforJ namespaces. No database, RESTful API, or WebSocket implementation is used in this version. 
 - **webforjexplorer** - The webforJ Explorer app is a minimal code viewer that mimics the VSCode layout. It uses webforJ’s layout system, a file tree on the left, and a Monaco editor to display file contents in read-only mode. This project shows how to integrate dynamic data, build a tree UI, and embed third-party components.
 
+   ### startforJ
+
+   The startforJ app generates a minimal starter project based on various available archetypes that includes all required dependencies, configuration files, and a pre-wired layout - ready to build on. **While the project's code is not included here, it can be found in [this repository](https://github.com/webforj/startforj).**
+
+
 ## Getting Started
 
 To run any of the projects in this repository:
