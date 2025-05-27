@@ -1,0 +1,22 @@
+/* Define application theme */
+
+dwc-app-layout {
+  --dwc-app-layout-header-height: 60px;
+  --dwc-app-layout-footer-height: 60px;
+}
+
+.app-nav dwc-tab::part(tab-wrapper) {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 100px;
+}
+
+.app-nav dwc-tab::part(prefix) {
+  --dwc-icon-size: 2em;
+  cursor: pointer;
+}
+
+.app-nav dwc-tab[active]::part(prefix) {
+  color: var(--dwc-color-primary);
+}

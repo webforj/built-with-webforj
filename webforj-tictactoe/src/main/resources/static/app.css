@@ -1,0 +1,292 @@
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap");
+
+:root {
+  --dwc-color-primary-h: 160;
+  --dwc-color-primary-s: 100%;
+  --dwc-color-primary-c: 30;
+  --dwc-color-info-h: 250;
+  --dwc-color-info-s: 100%;
+  --dwc-color-info-c: 70;
+  --dwc-color-success-h: 150;
+  --dwc-color-success-s: 100%;
+  --dwc-color-success-c: 30;
+  --dwc-color-danger-h: 15;
+  --dwc-color-danger-s: 100%;
+  --dwc-color-danger-c: 45;
+  --dwc-color-warning-h: 60;
+  --dwc-color-warning-s: 100%;
+  --dwc-color-warning-c: 25;
+  --dwc-color-default-h: var(--dwc-color-primary-h);
+  --dwc-color-default-s: 3%;
+  --dwc-color-default-c: 45;
+  --dwc-color-primary-dark: var(--dwc-color-primary-15);
+  --dwc-color-on-primary-text-dark: var(--dwc-color-primary-text-15);
+  --dwc-color-primary: var(--dwc-color-primary-20);
+  --dwc-color-on-primary-text: var(--dwc-color-primary-text-20);
+  --dwc-color-primary-light: var(--dwc-color-primary-25);
+  --dwc-color-on-primary-text-light: var(--dwc-color-primary-text-25);
+  --dwc-color-info-dark: var(--dwc-color-info-55);
+  --dwc-color-on-info-text-dark: var(--dwc-color-info-text-55);
+  --dwc-color-info: var(--dwc-color-info-60);
+  --dwc-color-on-info-text: var(--dwc-color-info-text-60);
+  --dwc-color-info-light: var(--dwc-color-info-65);
+  --dwc-color-on-info-text-light: var(--dwc-color-info-text-65);
+  --dwc-color-success-dark: var(--dwc-color-success-15);
+  --dwc-color-on-success-text-dark: var(--dwc-color-success-text-15);
+  --dwc-color-success: var(--dwc-color-success-20);
+  --dwc-color-on-success-text: var(--dwc-color-success-text-20);
+  --dwc-color-success-light: var(--dwc-color-success-25);
+  --dwc-color-on-success-text-light: var(--dwc-color-success-text-25);
+  --dwc-color-danger-dark: var(--dwc-color-danger-30);
+  --dwc-color-on-danger-text-dark: var(--dwc-color-danger-text-30);
+  --dwc-color-danger: var(--dwc-color-danger-35);
+  --dwc-color-on-danger-text: var(--dwc-color-danger-text-35);
+  --dwc-color-danger-light: var(--dwc-color-danger-40);
+  --dwc-color-on-danger-text-light: var(--dwc-color-danger-text-40);
+  --dwc-color-warning-dark: var(--dwc-color-warning-10);
+  --dwc-color-on-warning-text-dark: var(--dwc-color-warning-text-10);
+  --dwc-color-warning: var(--dwc-color-warning-15);
+  --dwc-color-on-warning-text: var(--dwc-color-warning-text-15);
+  --dwc-color-warning-light: var(--dwc-color-warning-20);
+  --dwc-color-on-warning-text-light: var(--dwc-color-warning-text-20);
+  --dwc-color-default-dark: var(--dwc-color-default-85);
+  --dwc-color-on-default-text-dark: var(--dwc-color-default-text-85);
+  --dwc-color-default: var(--dwc-color-default-90);
+  --dwc-color-on-default-text: var(--dwc-color-default-text-90);
+  --dwc-color-default-light: var(--dwc-color-default-95);
+  --dwc-color-on-default-text-light: var(--dwc-color-default-text-95);
+  --dwc-color-primary-text-dark: var(--dwc-color-primary-10);
+  --dwc-color-primary-text: var(--dwc-color-primary-15);
+  --dwc-color-primary-text-light: var(--dwc-color-primary-20);
+  --dwc-color-info-text-dark: var(--dwc-color-info-55);
+  --dwc-color-info-text: var(--dwc-color-info-60);
+  --dwc-color-info-text-light: var(--dwc-color-info-65);
+  --dwc-color-success-text-dark: var(--dwc-color-success-15);
+  --dwc-color-success-text: var(--dwc-color-success-20);
+  --dwc-color-success-text-light: var(--dwc-color-success-25);
+  --dwc-color-danger-text-dark: var(--dwc-color-danger-30);
+  --dwc-color-danger-text: var(--dwc-color-danger-35);
+  --dwc-color-danger-text-light: var(--dwc-color-danger-40);
+  --dwc-color-warning-text-dark: var(--dwc-color-warning-10);
+  --dwc-color-warning-text: var(--dwc-color-warning-15);
+  --dwc-color-warning-text-light: var(--dwc-color-warning-20);
+  --dwc-color-default-text-dark: var(--dwc-color-default-30);
+  --dwc-color-default-text: var(--dwc-color-default-35);
+  --dwc-color-default-text-light: var(--dwc-color-default-40);
+
+  --dwc-font-family: "Patrick Hand", cursive;
+  --dwc-font-size: var(--dwc-font-size-xl);
+  --dwc-border-width: 6px;
+  --dwc-border-radius: var(--dwc-border-radius-pill);
+  --dwc-color-body-text: white;
+  --dwc-cursor-click: url(/static/img/cursor-click.cur), auto !important;
+}
+
+* {
+  cursor: var(--dwc-cursor-click);
+}
+
+dwc-window-content {
+  background: radial-gradient(
+      circle,
+      #00a36d 25%,
+      #00a36d 50%,
+      #005f4e 80%,
+      #004038 100%
+    ),
+    url("/static/img/brick-wall-dark.png");
+
+  background-blend-mode: overlay;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  gap: 2rem;
+  overflow: auto;
+}
+
+.view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--dwc-border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.view dwc-field {
+  width: 100%;
+  max-width: 25rem;
+}
+
+.view dwc-field::part(helper-text) {
+  color: white;
+}
+
+.logo {
+  width: 100%;
+  max-width: 15rem;
+}
+
+.canvas {
+  text-align: center;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  gap: 1rem;
+}
+
+.canvas.win::before {
+  background: url("/static/img/win.gif") no-repeat center center;
+}
+
+.canvas.lose::before {
+  background: url("/static/img/lose.gif") no-repeat center center;
+}
+
+.canvas.win::before,
+.canvas.lose::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  content: "";
+  opacity: 1;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-size: 300px;
+}
+
+.canvas h1 {
+  margin: 0;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: min(90vw, 300px);
+  height: min(90vw, 300px);
+  position: relative;
+  margin: 1rem 0;
+}
+
+.board::before,
+.board::after {
+  content: "";
+  position: absolute;
+  background: white;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.board::before {
+  background: linear-gradient(
+    to bottom,
+    transparent 32%,
+    white 32.8%,
+    white 34.2%,
+    transparent 35%,
+    transparent 65%,
+    white 65.8%,
+    white 67.2%,
+    transparent 68%
+  );
+  transform: rotate(-3deg);
+}
+
+.board::after {
+  background: linear-gradient(
+    to right,
+    transparent 32%,
+    white 32.8%,
+    white 34.2%,
+    transparent 35%,
+    transparent 65%,
+    white 65.8%,
+    white 67.2%,
+    transparent 68%
+  );
+  transform: rotate(3deg);
+}
+
+.cell {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  text-align: center;
+  cursor: var(--dwc-cursor-click);
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  max-width: 100px;
+}
+
+.cell.owner-move {
+  color: var(--dwc-color-primary);
+}
+
+.cell.winning {
+  animation: winning 1.5s infinite ease-in-out;
+}
+
+.cell:not([disabled]):hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.cell[disabled] {
+  cursor: not-allowed;
+}
+
+.start-new-game {
+  z-index: 2;
+}
+
+@keyframes winning {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 5px var(--dwc-color-success);
+    background: rgba(0, 255, 150, 0.2);
+  }
+  25% {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px var(--dwc-color-success);
+    background: rgba(0, 255, 150, 0.3);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 15px var(--dwc-color-success);
+    background: rgba(0, 255, 150, 0.4);
+  }
+  75% {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px var(--dwc-color-success);
+    background: rgba(0, 255, 150, 0.3);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 5px var(--dwc-color-success);
+    background: rgba(0, 255, 150, 0.2);
+  }
+}

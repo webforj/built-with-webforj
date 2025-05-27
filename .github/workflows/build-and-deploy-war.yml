@@ -1,0 +1,48 @@
+name: Build and Deploy WAR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy All Applications
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        app: [webforj-howdy, webforj-tictactoe, webforjexplorer]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      - name: Build with Maven
+        working-directory: ./${{ matrix.app }}
+        run: mvn clean package -Pprod
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.S3_WEBAPPS_KEY }}
+          aws-secret-access-key: ${{ secrets.S3_WEBAPPS_SECRET }}
+          aws-region: us-west-2
+
+      - name: Upload WAR to S3
+        working-directory: ./${{ matrix.app }}
+        run: |
+          # Extract app name without webforj- prefix for cleaner URLs
+          APP_NAME=$(echo "${{ matrix.app }}" | sed 's/webforj-//')
+          # Special case for webforjexplorer
+          if [ "${{ matrix.app }}" = "webforjexplorer" ]; then
+            APP_NAME="explorer"
+          fi
+          aws s3 cp target/*.war s3://webforj-webapps/${APP_NAME}.war

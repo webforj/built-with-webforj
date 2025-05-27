@@ -29,7 +29,6 @@ replay_pid*
 /.project
 /.classpath
 **/sample/
-*.claude
 
 /.settings/org.eclipse.core.resources.prefs
 /.settings/org.eclipse.jdt.core.prefs
@@ -41,4 +40,7 @@ bbj/.project
 
 .DS_Store
 *.versionsBackup
+
+/.editorconfig
+/.vscode
 
