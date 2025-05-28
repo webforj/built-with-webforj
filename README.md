@@ -12,7 +12,7 @@ This repository contains various webforJ projects that showcase different aspect
 
 ### startforJ
 
-The startforJ app generates a minimal starter project based on various available archetypes that includes all required dependencies, configuration files, and a pre-wired layout - ready to build on.
+The [startforJ app](https://docs.webforj.com/startforj/) generates a minimal starter project based on various available archetypes that includes all required dependencies, configuration files, and a pre-wired layout - ready to build on.
 
 ## Getting Started
 
