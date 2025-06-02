@@ -1,0 +1,624 @@
+/* Fix body and html scrolling */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 1. ROOT VARIABLES FOR CONSISTENT THEMING */
+:root {
+  /* Shadow definitions for elevation */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Transition durations */
+  --transition-fast: 150ms;
+  --transition-base: 200ms;
+  --transition-slow: 300ms;
+
+  /* Subtle gradient for backgrounds */
+  --gradient-subtle: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+/* Dark theme shadow adjustments */
+.app-theme-dark {
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5),
+    0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6),
+    0 10px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Ensure the flex layout scrolls */
+.dashboard-view {
+  overflow-y: auto;
+  height: 100%;
+  /* Add subtle background pattern */
+  background-image: radial-gradient(
+      circle at 20% 80%,
+      rgba(120, 119, 198, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 119, 119, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(119, 255, 119, 0.03) 0%,
+      transparent 50%
+    );
+}
+
+dwc-app-layout {
+  --dwc-app-layout-header-height: 60px;
+  --dwc-app-layout-drawer-width: 400px;
+  /* Set drawer placement to right */
+  --dwc-app-layout-drawer-placement: right;
+}
+
+/* Style the news drawer */
+dwc-app-layout::part(drawer) {
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure main content scrolls properly */
+dwc-app-layout::part(content) {
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  height: 100%;
+  /* Ensure content takes full width */
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Adjust card container when drawer is open */
+dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
+  justify-content: space-evenly !important;
+}
+
+/* Fix viewport on mobile */
+@media (max-width: 767px) {
+  dwc-app-layout::part(content) {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Make drawer full width on mobile */
+  dwc-app-layout {
+    --dwc-app-layout-drawer-width: 100vw;
+  }
+}
+
+.data-card {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--dwc-surface-3);
+  flex: 1 1 250px;
+  max-width: 33%;
+  padding: var(--dwc-space-m);
+  min-width: 250px;
+  /* 2. CARD ELEVATION AND HOVER EFFECTS */
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  transition: all var(--transition-base) ease;
+  position: relative;
+  overflow: hidden;
+  /* Add subtle gradient overlay */
+  background-image: var(--gradient-subtle);
+}
+
+/* Card hover state with elevation */
+.data-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: rgba(128, 128, 128, 0.2);
+}
+
+/* Add subtle animation on load */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.data-card {
+  animation: fadeInUp 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+/* Stagger animation for multiple cards */
+.data-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.data-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.data-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.data-card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.data-card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.data-card:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+/* Ensure proper card wrapping on small screens */
+@media (max-width: 767px) {
+  .data-card {
+    max-width: 100%;
+  }
+}
+.data-card__title {
+  font-size: var(--dwc-font-size-m);
+  color: var(--dwc-color-gray-15);
+  font-weight: 400;
+  /* Add subtle letter spacing for better readability */
+  letter-spacing: 0.02em;
+  transition: color var(--transition-fast) ease;
+}
+
+/* Lighten title on card hover */
+.data-card:hover .data-card__title {
+  color: var(--dwc-color-gray-10);
+}
+.data-card__price {
+  font-size: var(--dwc-font-size-2xl);
+  font-weight: 400;
+  /* Add smooth transition for value changes */
+  transition: color var(--transition-fast) ease;
+  /* Improve number readability */
+  letter-spacing: -0.02em;
+}
+.data-card__percent {
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.75rem;
+  font-size: var(--dwc-font-size-s);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  /* 3. ENHANCED PERCENTAGE BADGES */
+  transition: all var(--transition-fast) ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add pulse animation for percentage changes */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.data-card__percent:hover {
+  animation: pulse 0.6s ease-in-out;
+}
+.data-card__follow-button {
+  align-self: flex-end;
+  /* Add button hover effects */
+  transition: all var(--transition-fast) ease;
+}
+
+.data-card__follow-button:hover {
+  transform: scale(1.05);
+}
+.data-card__details {
+  font-size: var(--dwc-font-size-s);
+  color: var(--dwc-color-on-surface);
+}
+
+/* Small screens - hide follow button and adjust text */
+@media (max-width: 767px) {
+  .data-card__follow-button {
+    display: none;
+  }
+
+  .data-card__price {
+    font-size: var(--dwc-font-size-xl);
+  }
+
+  .data-card__details {
+    font-size: var(--dwc-font-size-xs);
+  }
+
+  .data-card {
+    padding: var(--dwc-space-s);
+  }
+}
+
+/* Very small screens - compact mode */
+@media (max-width: 480px) {
+  .data-card google-chart {
+    height: 60px !important;
+  }
+
+  .data-card__title {
+    font-size: var(--dwc-font-size-s);
+  }
+
+  .data-card__price {
+    font-size: var(--dwc-font-size-l);
+  }
+}
+.percentage-positive {
+  background-color: var(--dwc-color-success-95);
+  color: var(--dwc-color-success-25);
+  /* Add subtle glow effect */
+  box-shadow: 0 0 0 1px var(--dwc-color-success-25);
+}
+
+.percentage-positive:hover {
+  background-color: var(--dwc-color-success-95);
+  box-shadow: 0 0 0 2px var(--dwc-color-success-25);
+}
+
+.percentage-negative {
+  background-color: var(--dwc-color-danger-95);
+  color: var(--dwc-color-danger-40);
+  /* Add subtle glow effect */
+  box-shadow: 0 0 0 1px var(--dwc-color-danger-40);
+}
+
+.percentage-negative:hover {
+  background-color: var(--dwc-color-danger-95);
+  box-shadow: 0 0 0 2px var(--dwc-color-danger-40);
+}
+
+dwc-table {
+  font-family: system-ui, -apple-system, sans-serif;
+  min-height: 400px;
+  height: 65dvh;
+  /* Add table container styling */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  background-color: var(--dwc-surface-3);
+  /* Add fade-in animation */
+  animation: fadeInUp 0.6s ease-out 0.35s;
+  animation-fill-mode: both;
+}
+
+/* Remove extra space from first row */
+dwc-table::part(row):first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Responsive table adjustments */
+@media (max-width: 767px) {
+  dwc-table {
+    font-size: var(--dwc-font-size-s);
+  }
+
+  dwc-table::part(icon-cell) {
+    min-width: 200px !important;
+  }
+}
+
+dwc-table::part(cell) {
+  font-variant-numeric: tabular-nums;
+}
+
+dwc-table::part(cell-gain) {
+  color: var(--dwc-color-success-25);
+  font-weight: 600;
+}
+
+dwc-table::part(cell-loss) {
+  color: var(--dwc-color-danger-40);
+  font-weight: 600;
+}
+
+dwc-table::part(cell-neutral) {
+  color: var(--dwc-color-on-surface);
+}
+
+dwc-table::part(sparkline-cell) {
+  padding: 0;
+  width: 100%;
+  display: flex;
+}
+
+dwc-table::part(icon-cell) {
+  padding: 0;
+}
+
+dwc-table::part(price-cell) {
+  font-size: var(--dwc-font-size-xl);
+  color: var(--dwc-color-gray-15);
+  font-weight: 300;
+}
+
+.app-theme-dark dwc-table::part(icon-cell) img {
+  filter: grayscale(100%) brightness(0.7) sepia(1) hue-rotate(180deg)
+    saturate(0) !important;
+}
+
+.app-theme-dark dwc-table::part(icon-cell) > div > div {
+  color: #94a3b8 !important;
+  border-color: #94a3b8 !important;
+}
+
+dwc-table::part(symbol-cell) {
+  font-weight: 700;
+  color: var(--dwc-color-on-surface);
+}
+
+dwc-table::part(crypto-info) {
+  display: flex;
+  gap: var(--dwc-space-m);
+  align-items: center;
+}
+
+dwc-table::part(crypto-icon) {
+  width: var(--dwc-size-m);
+  height: var(--dwc-size-m);
+}
+dwc-table::part(crypto-name) {
+  font-size: var(--dwc-font-size-xl);
+  vertical-align: top;
+  font-weight: 400;
+}
+
+dwc-table::part(crypto-symbol) {
+  font-size: var(--dwc-font-size-m);
+  color: var(--dwc-color-gray-15);
+  font-weight: 300;
+}
+
+/* === 6. ADDITIONAL MODERN ENHANCEMENTS === */
+
+/* Smooth scrolling for better UX */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(128, 128, 128, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 4px;
+  transition: background var(--transition-fast) ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.5);
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--dwc-color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Improve chart rendering */
+google-chart {
+  transition: opacity var(--transition-fast) ease;
+}
+
+.data-card:hover google-chart {
+  opacity: 0.9;
+}
+
+/* Loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.loading {
+  background: linear-gradient(
+    90deg,
+    rgba(128, 128, 128, 0.1) 25%,
+    rgba(128, 128, 128, 0.2) 50%,
+    rgba(128, 128, 128, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .data-card,
+  dwc-table {
+    border-width: 2px;
+  }
+
+  .percentage-positive,
+  .percentage-negative,
+  dwc-table::part(percentage-badge-gain),
+  dwc-table::part(percentage-badge-loss) {
+    font-weight: 700;
+  }
+}
+
+/* Print styles */
+@media print {
+  .data-card,
+  dwc-table {
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+  }
+
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+dwc-table::part(price-change-container) {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+dwc-table::part(price-change-gain),
+dwc-table::part(price-change-loss),
+dwc-table::part(price-change-neutral) {
+  font-variant-numeric: tabular-nums;
+  font-weight: 300;
+  font-size: var(--dwc-font-size-l);
+}
+
+dwc-table::part(price-change-gain) {
+  color: var(--dwc-color-success-25);
+}
+
+dwc-table::part(price-change-loss) {
+  color: var(--dwc-color-danger-40);
+}
+
+dwc-table::part(price-change-neutral) {
+  color: var(--dwc-color-on-surface);
+}
+
+dwc-table::part(percentage-badge-gain),
+dwc-table::part(percentage-badge-loss),
+dwc-table::part(percentage-badge-neutral) {
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.75rem;
+  font-size: var(--dwc-font-size-s);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+dwc-table::part(percentage-badge-gain) {
+  background-color: var(--dwc-color-success-95);
+  color: var(--dwc-color-success-25);
+}
+
+dwc-table::part(percentage-badge-loss) {
+  background-color: var(--dwc-color-danger-95);
+  color: var(--dwc-color-danger-40);
+}
+
+dwc-table::part(percentage-badge-neutral) {
+  background-color: var(--dwc-color-gray-95);
+  color: var(--dwc-color-gray-15);
+  box-shadow: 0 0 0 1px var(--dwc-color-gray-15);
+  transition: all var(--transition-fast) ease;
+}
+
+dwc-table::part(row):hover dwc-table::part(percentage-badge-neutral) {
+  background-color: var(--dwc-color-gray-95);
+  box-shadow: 0 0 0 2px var(--dwc-color-gray-15);
+}
+
+.news-card {
+  padding: var(--dwc-space-m);
+  border-bottom: 1px solid var(--dwc-color-gray-95);
+  background-color: var(--dwc-surface-2);
+  transition: background-color var(--dwc-transition-fast) ease;
+  cursor: pointer;
+}
+
+.news-card:hover {
+  background-color: var(--dwc-surface-3);
+}
+
+/* Import modern font for titles */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap");
+
+/* Modern title styling for toolbar */
+dwc-toolbar h1 {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 200;
+  letter-spacing: -0.02em;
+  color: var(--dwc-color-on-surface);
+  margin: 0;
+  line-height: 1.2;
+  /* Add subtle gradient for modern look */
+  background: linear-gradient(
+    135deg,
+    var(--dwc-color-on-surface) 0%,
+    var(--dwc-color-gray-10) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* News drawer title styling */
+.news-drawer-title {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--dwc-color-on-surface);
+  margin: 0;
+  padding: var(--dwc-space-l) var(--dwc-space-m) var(--dwc-space-m);
+  border-bottom: 1px solid var(--dwc-color-gray-95);
+  /* Add subtle animation on drawer open */
+  animation: slideInFromRight 0.3s ease-out;
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Dark theme adjustments for titles */
+.app-theme-dark dwc-toolbar h1 {
+  background: linear-gradient(
+    135deg,
+    var(--dwc-color-on-surface) 0%,
+    var(--dwc-color-gray-95) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
