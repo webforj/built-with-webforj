@@ -293,9 +293,8 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
 dwc-table {
   font-family: system-ui, -apple-system, sans-serif;
   min-height: 400px;
-  height: 65dvh;
+  height: 62dvh;
   /* Add table container styling */
-  border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   border: 1px solid rgba(128, 128, 128, 0.1);
