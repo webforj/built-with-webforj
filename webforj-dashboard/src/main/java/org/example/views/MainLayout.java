@@ -62,7 +62,7 @@ public class MainLayout extends Composite<AppLayout> {
     themeToggle = new IconButton(TablerIcon.create(isDarkTheme ? "moon" : "sun"));
     themeToggle.onClick(e -> toggleTheme());
     
-    toolbar.addToEnd(newsToggle, themeToggle);
+    toolbar.addToEnd(themeToggle, newsToggle);
 
     self.addToHeader(toolbar);
   }
