@@ -81,10 +81,9 @@ dwc-app-layout::part(content) {
 .data-card {
   font-family: var(--dwc-font-family);
   background-color: var(--dwc-surface-3);
-  flex: 1 1 250px;
-  max-width: 33%;
+  flex: 1 1 300px;
   padding: var(--dwc-space-m);
-  min-width: 250px;
+  min-width: 280px;
   border-radius: var(--dwc-border-radius-m);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   border: var(--dwc-border-width) solid var(--dwc-color-gray-90);
@@ -462,6 +461,24 @@ dwc-toolbar h1 {
 /* ========================================
    9. RESPONSIVE STYLES
    ======================================== */
+
+/* Three cards per row - default behavior, cards grow to fill space */
+/* No media query needed - this is the default state */
+
+/* Two cards per row with third card full width */
+@media (max-width: 950px) {
+  .data-card:nth-child(3) {
+    flex: 1 1 100%;
+  }
+}
+
+/* One card per row on smaller screens */
+@media (max-width: 650px) {
+  .data-card {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+}
 
 @media (max-width: 767px) {
   /* Mobile app layout */
