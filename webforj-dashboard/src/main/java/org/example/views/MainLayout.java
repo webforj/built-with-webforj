@@ -18,7 +18,6 @@ import com.webforj.router.event.NavigateEvent;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.html.elements.H2;
-import com.webforj.component.html.elements.Div;
 import org.example.components.NewsCard;
 import org.example.services.NewsService;
 import org.example.models.NewsArticle;
