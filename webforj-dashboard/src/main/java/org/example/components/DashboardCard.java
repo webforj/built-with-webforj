@@ -41,13 +41,27 @@ public class DashboardCard extends Composite<FlexLayout> {
   FlexLayout detailText = new FlexLayout(followButton, details);
   private boolean isFollowing = false;
   
-  GoogleChart chart = new GoogleChart(GoogleChart.Type.AREA);
+  GoogleChart chart;
+  private GoogleChart.Type chartType = GoogleChart.Type.AREA;
 
   public DashboardCard() {
+    this.chart = new GoogleChart(this.chartType);
+    initComponent();
+  }
+  
+  public DashboardCard(GoogleChart.Type chartType) {
+    this.chartType = chartType;
+    this.chart = new GoogleChart(this.chartType);
     initComponent();
   }
 
   public DashboardCard(String title, double price, double percent, String detailText) {
+    this(title, price, percent, detailText, GoogleChart.Type.AREA);
+  }
+  
+  public DashboardCard(String title, double price, double percent, String detailText, GoogleChart.Type chartType) {
+    this.chartType = chartType;
+    this.chart = new GoogleChart(this.chartType);
     this.title.setText(title);
     this.price.setText(formatValue(title, price));
     this.percentChange.setText((percent >= 0 ? "+" : "") + String.format("%.2f", percent) + "%");
@@ -129,22 +143,49 @@ public class DashboardCard extends Composite<FlexLayout> {
         "height", "100%"
     ));
     
-    // Hide axes for a clean look
+    // Hide axes labels but show light gray grid lines
     options.put("hAxis", Map.of(
         "textPosition", "none",
-        "gridlines", Map.of("color", "light-gray"),
-        "baselineColor", "light-gray"
+        "gridlines", Map.of("color", "#e0e0e0"),
+        "baselineColor", "#e0e0e0"
     ));
     options.put("vAxis", Map.of(
         "textPosition", "none",
-        "gridlines", Map.of("color", "light-gray"),
-        "baselineColor", "light-gray"
+        "gridlines", Map.of("color", "#e0e0e0"),
+        "baselineColor", "#e0e0e0"
     ));
     
-    // Area chart specific options
-    options.put("areaOpacity", 0.3);
-    options.put("lineWidth", 2);
-    options.put("pointSize", 0);
+    // Chart type specific options
+    switch (chartType) {
+      case AREA:
+        options.put("areaOpacity", 0.3);
+        options.put("lineWidth", 2);
+        options.put("pointSize", 0);
+        break;
+      case LINE:
+        options.put("lineWidth", 3);
+        options.put("pointSize", 0);
+        options.put("curveType", "function");
+        break;
+      case COLUMN:
+        options.put("bar", Map.of("groupWidth", "80%"));
+        break;
+      case SCATTER:
+        options.put("pointSize", 8);
+        options.put("pointShape", "circle");
+        options.put("trendlines", Map.of(
+            "0", Map.of(
+                "type", "linear",
+                "color", color,
+                "lineWidth", 2,
+                "opacity", 0.3,
+                "showR2", false,
+                "visibleInLegend", false
+            )
+        ));
+        break;
+    }
+    
     options.put("tooltip", Map.of("trigger", "none"));
     
     // Animation
@@ -166,24 +207,41 @@ public class DashboardCard extends Composite<FlexLayout> {
     // Header row
     data.add(Arrays.asList("Time", "Value"));
     
-    // Generate 20 data points with more realistic variability
+    // Generate data points based on chart type
     Random random = new Random();
     double baseValue = 100;
-    double trendFactor = percentage >= 0 ? 1.005 : 0.995; // Smaller trend for more natural look
-    double momentum = 0; // Add momentum for more realistic movement
+    double trendFactor = percentage >= 0 ? 1.005 : 0.995;
+    double momentum = 0;
     
-    for (int i = 0; i < 20; i++) {
-      // Larger variation range and momentum-based movement
-      double randomChange = (random.nextDouble() - 0.5) * 15; // Increased from 5 to 15
-      momentum = momentum * 0.7 + randomChange * 0.3; // Smooth transitions
+    int dataPoints = (chartType == GoogleChart.Type.COLUMN) ? 10 : 
+                     (chartType == GoogleChart.Type.SCATTER) ? 30 : 20; // More points for scatter, fewer for column
+    
+    for (int i = 0; i < dataPoints; i++) {
+      String label;
+      if (chartType == GoogleChart.Type.COLUMN) {
+        // Use time labels for column charts (e.g., "12PM", "1PM", etc.)
+        label = String.format("%d:00", (i * 2 + 8) % 24);
+      } else {
+        label = String.valueOf(i);
+      }
       
-      // Add occasional spikes for more realistic market behavior
-      if (random.nextDouble() < 0.1) { // 10% chance of spike
+      // Generate realistic market movement
+      double randomChange = (random.nextDouble() - 0.5) * 15;
+      momentum = momentum * 0.7 + randomChange * 0.3;
+      
+      // Add occasional spikes
+      if (random.nextDouble() < 0.1) {
         momentum += (random.nextDouble() - 0.5) * 20;
       }
       
       double value = baseValue + momentum;
-      data.add(Arrays.asList(String.valueOf(i), Math.max(value, 10))); // Ensure positive values
+      
+      // For scatter charts, add more variation to create a cloud effect
+      if (chartType == GoogleChart.Type.SCATTER) {
+        value += (random.nextDouble() - 0.5) * 10; // Additional scatter
+      }
+      
+      data.add(Arrays.asList(label, Math.max(value, 10)));
       
       // Apply trend with some randomness
       baseValue *= trendFactor * (0.98 + random.nextDouble() * 0.04);

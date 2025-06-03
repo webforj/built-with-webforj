@@ -9,6 +9,7 @@ import org.example.utils.PriceChartRenderer;
 
 import com.webforj.Interval;
 import com.webforj.component.Composite;
+import com.webforj.component.googlecharts.GoogleChart;
 import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexJustifyContent;
@@ -76,8 +77,8 @@ public class DashboardView extends Composite<FlexLayout> {
     });
 
     DashboardCard card = new DashboardCard("Global Market Cap", 2875000000000.0, 3.45, "$2.88 Trillion total cryptocurrency market capitalization");
-    DashboardCard card2 = new DashboardCard("24 Hour Volume", 98500000000.0, -5.23, "$98.5 Billion traded across all exchanges");
-    DashboardCard card3 = new DashboardCard("Bitcoin Dominance", 52.7, 1.28, "BTC market share of total crypto market cap");
+    DashboardCard card2 = new DashboardCard("24 Hour Volume", 98500000000.0, -5.23, "$98.5 Billion traded across all exchanges", GoogleChart.Type.SCATTER);
+    DashboardCard card3 = new DashboardCard("Bitcoin Dominance", 52.7, 1.28, "BTC market share of total crypto market cap", GoogleChart.Type.COLUMN);
     FlexLayout cards = new FlexLayout(card, card2, card3);
     cards.setJustifyContent(FlexJustifyContent.BETWEEN)
          .setWidth("100%")
