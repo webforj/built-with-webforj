@@ -1,3 +1,7 @@
+dwc-table::part(cell-header) {
+  height: 65px;
+}
+
 /* Fix body and html scrolling */
 html,
 body {
