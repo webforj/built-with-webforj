@@ -10,56 +10,36 @@ import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 
 public class NewsCard extends Composite<FlexLayout> {
-    private FlexLayout self = getBoundComponent();
+  private FlexLayout self = getBoundComponent();
 
-    public NewsCard(String title, String description, String source, String timeAgo, String url) {
-        // Title
-        H3 titleElement = new H3(title);
-        titleElement.setStyle("margin", "0")
-                .setStyle("font-size", "var(--dwc-font-size-l)")
-                .setStyle("font-weight", "500")
-                .setStyle("line-height", "1.3")
-                .setStyle("color", "var(--dwc-color-on-surface)");
+  public NewsCard(String title, String description, String source, String timeAgo, String url) {
+    // Title
+    H3 titleElement = new H3(title);
 
-        // Description
-        Paragraph descElement = new Paragraph(description);
-        descElement.setStyle("margin", "var(--dwc-space-xs) 0")
-                .setStyle("font-size", "var(--dwc-font-size-s)")
-                .setStyle("color", "var(--dwc-color-gray-15)")
-                .setStyle("line-height", "1.5");
+    // Description
+    Paragraph descElement = new Paragraph(description);
 
-        // Source and time
-        Div metaInfo = new Div();
-        metaInfo.setStyle("display", "flex")
-                .setStyle("gap", "var(--dwc-space-xs)")
-                .setStyle("align-items", "center")
-                .setStyle("font-size", "var(--dwc-font-size-xs)")
-                .setStyle("color", "var(--dwc-color-gray-15)");
+    // Source and time
+    Div metaInfo = new Div();
+    metaInfo.addClassName("news-card__meta");
 
-        Span sourceSpan = new Span(source);
-        sourceSpan.setStyle("font-weight", "500");
+    Span sourceSpan = new Span(source);
 
-        Span separator = new Span("•");
-        separator.setStyle("color", "var(--dwc-color-gray-10)");
+    Span separator = new Span("•");
 
-        Span timeSpan = new Span(timeAgo);
+    Span timeSpan = new Span(timeAgo);
 
-        metaInfo.add(sourceSpan, separator, timeSpan);
+    metaInfo.add(sourceSpan, separator, timeSpan);
 
-        // Read more link
-        Anchor readMore = new Anchor(url, "Read more →");
-        readMore.setStyle("font-size", "var(--dwc-font-size-s)")
-                .setStyle("color", "var(--dwc-color-info-40)")
-                .setStyle("text-decoration", "none")
-                .setStyle("font-weight", "500")
-                .setStyle("margin-top", "var(--dwc-space-xs)")
-                .setTarget("_blank");
+    // Read more link
+    Anchor readMore = new Anchor(url, "Read more →");
+    readMore.setTarget("_blank");
 
-        // Configure card layout
-        self.setDirection(FlexDirection.COLUMN);
-        self.addClassName("news-card");
+    // Configure card layout
+    self.setDirection(FlexDirection.COLUMN);
+    self.addClassName("news-card");
 
-        // Add all elements
-        self.add(titleElement, descElement, metaInfo, readMore);
-    }
+    // Add all elements
+    self.add(titleElement, descElement, metaInfo, readMore);
+  }
 }

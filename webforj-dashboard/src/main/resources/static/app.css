@@ -402,6 +402,51 @@ dwc-toolbar h1 {
   background-color: var(--dwc-surface-3);
 }
 
+/* News card title */
+.news-card h3 {
+  margin: 0;
+  font-size: var(--dwc-font-size-l);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--dwc-color-on-surface);
+}
+
+/* News card description */
+.news-card p {
+  margin: var(--dwc-space-xs) 0;
+  font-size: var(--dwc-font-size-s);
+  color: var(--dwc-color-gray-15);
+  line-height: 1.5;
+}
+
+/* News card meta info container */
+.news-card__meta {
+  display: flex;
+  gap: var(--dwc-space-xs);
+  align-items: center;
+  font-size: var(--dwc-font-size-xs);
+  color: var(--dwc-color-gray-15);
+}
+
+/* News card source */
+.news-card__meta span:first-child {
+  font-weight: 500;
+}
+
+/* News card separator */
+.news-card__meta span:nth-child(2) {
+  color: var(--dwc-color-gray-10);
+}
+
+/* News card read more link */
+.news-card a {
+  font-size: var(--dwc-font-size-s);
+  color: var(--dwc-color-info-40);
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: var(--dwc-space-xs);
+}
+
 /* ========================================
    8. ANIMATIONS
    ======================================== */
