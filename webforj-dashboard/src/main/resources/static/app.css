@@ -52,7 +52,7 @@ body {
 dwc-app-layout {
   --dwc-app-layout-header-height: 60px;
   --dwc-app-layout-drawer-width: 400px;
-  --dwc-app-layout-drawer-placement: right;
+  /* --dwc-app-layout-drawer-placement: right; */
 }
 
 dwc-app-layout::part(drawer) {
@@ -200,7 +200,7 @@ dwc-app-layout::part(content) {
 dwc-table {
   font-family: var(--dwc-font-family);
   min-height: 400px;
-  height: 62dvh;
+  /* height: 62dvh; */
   overflow: hidden;
   background-color: var(--dwc-surface-3);
   animation: fadeInUp 600ms ease-out 350ms;
@@ -349,8 +349,8 @@ dwc-table::part(crypto-symbol) {
 dwc-toolbar h1 {
   font-family: "Inter", var(--dwc-font-family);
   font-size: 1.75rem;
-  font-weight: var(--dwc-font-weight-extralight);
-  letter-spacing: -0.02em;
+  font-weight: var(--dwc-font-weight-light);
+  letter-spacing: -0.01em;
   color: var(--dwc-color-on-surface);
   margin: 0;
   line-height: 1.2;

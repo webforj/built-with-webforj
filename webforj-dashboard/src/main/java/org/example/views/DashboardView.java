@@ -38,9 +38,9 @@ public class DashboardView extends Composite<FlexLayout> {
     cryptoTable.setData(cryptocurrencies);
 
     // Create dashboard cards
-    DashboardCard card = new DashboardCard("Global Market Cap", 2875000000000.0, 3.45, "$2.88 Trillion total cryptocurrency market capitalization");
-    DashboardCard card2 = new DashboardCard("24 Hour Volume", 98500000000.0, -5.23, "$98.5 Billion traded across all exchanges", GoogleChart.Type.SCATTER);
-    DashboardCard card3 = new DashboardCard("Bitcoin Dominance", 52.7, 1.28, "BTC market share of total crypto market cap", GoogleChart.Type.COLUMN);
+    DashboardCard card = new DashboardCard("Global Market Cap", 2875000000000.0, 3.45);
+    DashboardCard card2 = new DashboardCard("24 Hour Volume", 98500000000.0, -5.23, GoogleChart.Type.SCATTER);
+    DashboardCard card3 = new DashboardCard("Bitcoin Dominance", 52.7, 1.28, GoogleChart.Type.COLUMN);
     
     // Create cards layout
     FlexLayout cards = new FlexLayout(card, card2, card3);

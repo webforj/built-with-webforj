@@ -14,6 +14,7 @@ import java.util.List;
 
 public class CryptocurrencyTable extends Composite<Table> {
   
+  @SuppressWarnings("unchecked")
   private Table<Cryptocurrency> table = getBoundComponent();
   
   public CryptocurrencyTable() {
@@ -56,6 +57,7 @@ public class CryptocurrencyTable extends Composite<Table> {
         case "Price" -> parts.add("price-cell");
         case "Symbol" -> parts.add("symbol-cell");
         case "24h Change" -> parts.add("change-cell");
+        default -> { /* No special part for other columns */ }
       }
       
       return parts;

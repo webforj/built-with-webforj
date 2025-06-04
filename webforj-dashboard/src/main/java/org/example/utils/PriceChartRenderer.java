@@ -26,7 +26,7 @@ public class PriceChartRenderer extends Renderer<Cryptocurrency> {
 
               // Determine color based on price change
               const priceChange = cell.row.getValue('PriceChangePercentage24h');
-              const color = priceChange >= 0 ? 'rgb(34, 197, 94)' : 'rgb(239, 68, 68)';
+              const color = priceChange >= 0 ? 'var(--dwc-color-success)' : 'var(--dwc-color-danger)';
             %>
             <div part="sparkline-cell" style="width: 100%; display: flex;">
               <svg width="100%" height="<%= svgHeight %>" viewBox="0 0 <%= svgWidth %> <%= svgHeight %>" preserveAspectRatio="none" style="width: 100%;">
