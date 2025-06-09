@@ -1,0 +1,79 @@
+/* Settings View Styles - BEM Methodology */
+
+.settings-view {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  overflow-y: auto;
+  padding: var(--dwc-space-l);
+}
+
+.settings-view__section {
+  transition: border-color var(--dwc-transition-medium) ease;
+  border: var(--dwc-border-width) solid var(--dwc-color-gray-90);
+  background: var(--dwc-surface-1);
+  border-radius: var(--dwc-border-radius-m);
+  padding: var(--dwc-space-l);
+}
+
+.settings-view__section:hover {
+  border-color: var(--dwc-color-gray-80);
+}
+
+.settings-view__section > * + * {
+  margin-top: var(--dwc-space-m);
+}
+
+.settings-view__section-title {
+  margin: 0 0 var(--dwc-space-m) 0;
+}
+
+.settings-view__tab-content {
+  animation: fadeInUp 400ms ease-out;
+}
+
+/* Header elements */
+.settings-view__header {
+  flex-direction: column;
+  margin-bottom: var(--dwc-space-xl);
+}
+
+.settings-view__title {
+  margin: 0;
+}
+
+.settings-view__description {
+  color: var(--dwc-color-default-color);
+  margin: var(--dwc-space-s) 0 0 0;
+}
+
+/* Tabs */
+.settings-view__tabs {
+  margin-bottom: var(--dwc-space-l);
+}
+
+/* Content sections */
+.settings-view__content {
+  flex-direction: column;
+  gap: var(--dwc-space-xl);
+}
+
+@media (max-width: 768px) {
+  .settings-view {
+    padding: var(--dwc-space-m);
+  }
+  
+  .settings-view__section {
+    padding: var(--dwc-space-m);
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-view {
+    padding: var(--dwc-space-s);
+  }
+  
+  .settings-view__section {
+    padding: var(--dwc-space-s);
+  }
+}

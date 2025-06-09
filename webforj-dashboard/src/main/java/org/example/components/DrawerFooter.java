@@ -20,9 +20,8 @@ public class DrawerFooter extends Composite<FlexLayout> {
   }
   
   private void initComponent() {
+    self.addClassName("drawer-footer");
     self.setDirection(FlexDirection.COLUMN);
-    self.setStyle("padding", "var(--dwc-space-m)");
-    self.setStyle("border-top", "1px solid var(--dwc-color-gray-90)");
     
     // Add user profile section
     self.add(createUserSection());
@@ -36,42 +35,30 @@ public class DrawerFooter extends Composite<FlexLayout> {
   
   private FlexLayout createUserSection() {
     FlexLayout userSection = new FlexLayout();
+    userSection.addClassName("drawer-footer__user-section");
     userSection.setAlignment(FlexAlignment.CENTER);
-    userSection.setStyle("gap", "var(--dwc-space-s)");
-    userSection.setStyle("margin-bottom", "var(--dwc-space-m)");
     
     // User avatar
     Div avatar = new Div();
-    avatar.setStyle("width", "32px");
-    avatar.setStyle("height", "32px");
-    avatar.setStyle("border-radius", "50%");
-    avatar.setStyle("background", "linear-gradient(135deg, #667eea 0%, #764ba2 100%)");
-    avatar.setStyle("display", "flex");
-    avatar.setStyle("align-items", "center");
-    avatar.setStyle("justify-content", "center");
-    avatar.setStyle("color", "white");
-    avatar.setStyle("font-weight", "600");
+    avatar.addClassName("drawer-footer__avatar");
     avatar.setHtml("<span>JD</span>");
     
     // User info
     FlexLayout userInfo = new FlexLayout();
+    userInfo.addClassName("drawer-footer__user-info");
     userInfo.setDirection(FlexDirection.COLUMN);
-    userInfo.setStyle("flex", "1");
     
     Span userName = new Span("John Doe");
-    userName.setStyle("font-size", "var(--dwc-font-size-s)");
-    userName.setStyle("font-weight", "600");
-    userName.setStyle("color", "var(--dwc-color-on-surface)");
+    userName.addClassName("drawer-footer__user-name");
     
     Span userRole = new Span("Premium Member");
-    userRole.setStyle("font-size", "var(--dwc-font-size-xs)");
-    userRole.setStyle("color", "var(--dwc-color-gray-40)");
+    userRole.addClassName("drawer-footer__user-role");
     
     userInfo.add(userName, userRole);
     
     // Settings icon button
     IconButton userSettings = new IconButton(TablerIcon.create("dots-vertical"));
-    userSettings.setStyle("margin-left", "auto");
+    userSettings.addClassName("drawer-footer__user-settings");
     
     userSection.add(avatar, userInfo, userSettings);
     
@@ -80,23 +67,22 @@ public class DrawerFooter extends Composite<FlexLayout> {
   
   private FlexLayout createQuickActions() {
     FlexLayout quickActions = new FlexLayout();
-    quickActions.setStyle("gap", "var(--dwc-space-xs)");
-    quickActions.setStyle("margin-bottom", "var(--dwc-space-m)");
+    quickActions.addClassName("drawer-footer__quick-actions");
     
     Button helpBtn = new Button("");
+    helpBtn.addClassName("drawer-footer__action-button");
     helpBtn.setPrefixComponent(TablerIcon.create("help"));
     helpBtn.setTheme(ButtonTheme.OUTLINED_DEFAULT);
-    helpBtn.setStyle("flex", "1");
     
     Button notificationsBtn = new Button("");
+    notificationsBtn.addClassName("drawer-footer__action-button");
     notificationsBtn.setPrefixComponent(TablerIcon.create("bell"));
     notificationsBtn.setTheme(ButtonTheme.OUTLINED_DEFAULT);
-    notificationsBtn.setStyle("flex", "1");
     
     Button logoutBtn = new Button("");
+    logoutBtn.addClassName("drawer-footer__action-button");
     logoutBtn.setPrefixComponent(TablerIcon.create("logout"));
     logoutBtn.setTheme(ButtonTheme.OUTLINED_DEFAULT);
-    logoutBtn.setStyle("flex", "1");
     
     quickActions.add(helpBtn, notificationsBtn, logoutBtn);
     
@@ -105,10 +91,7 @@ public class DrawerFooter extends Composite<FlexLayout> {
   
   private Paragraph createVersionInfo() {
     Paragraph version = new Paragraph("v2.4.1 • © 2024 CryptoTracker");
-    version.setStyle("font-size", "var(--dwc-font-size-xs)");
-    version.setStyle("color", "var(--dwc-color-gray-50)");
-    version.setStyle("text-align", "center");
-    version.setStyle("margin", "0");
+    version.addClassName("drawer-footer__version-info");
     
     return version;
   }

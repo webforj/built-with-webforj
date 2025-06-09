@@ -6,6 +6,7 @@ import org.example.models.Cryptocurrency;
 import org.example.services.CryptocurrencyService;
 
 import com.webforj.Interval;
+import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Composite;
 import com.webforj.component.googlecharts.GoogleChart;
 import com.webforj.component.layout.flexlayout.FlexDirection;
@@ -18,6 +19,7 @@ import com.webforj.router.annotation.Route;
 import java.util.List;
 
 @Route(value = "/", outlet = MainLayout.class)
+@StyleSheet("ws://dashboard-view.css")
 @FrameTitle("Cryptocurrency Dashboard")
 public class DashboardView extends Composite<FlexLayout> {
   private FlexLayout self = getBoundComponent();
@@ -28,7 +30,7 @@ public class DashboardView extends Composite<FlexLayout> {
 
   public DashboardView() {
     self.addClassName("dashboard-view");
-    self.setStyle("overflow-y", "auto");
+    self.setDirection(FlexDirection.COLUMN);
 
     // Create cryptocurrency table
     cryptoTable = new CryptocurrencyTable();
@@ -44,13 +46,9 @@ public class DashboardView extends Composite<FlexLayout> {
     
     // Create cards layout
     FlexLayout cards = new FlexLayout(card, card2, card3);
-    cards.setJustifyContent(FlexJustifyContent.BETWEEN)
-         .setWidth("100%")
-         .setWrap(FlexWrap.WRAP)
-         .setStyle("gap", "var(--dwc-space-m)");
+    cards.addClassName("dashboard-view__cards");
     
     // Add components to view
-    self.setDirection(FlexDirection.COLUMN);
     self.add(cards, cryptoTable);
 
     // Update prices every 2 seconds

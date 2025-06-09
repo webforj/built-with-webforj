@@ -1,5 +1,6 @@
 package org.example.views;
 
+import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
@@ -24,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Route(value = "portfolio", outlet = MainLayout.class)
+@StyleSheet("ws://portfolio-view.css")
 @FrameTitle("Portfolio")
 public class PortfolioView extends Composite<FlexLayout> {
   private FlexLayout self = getBoundComponent();
@@ -32,8 +34,6 @@ public class PortfolioView extends Composite<FlexLayout> {
   public PortfolioView() {
     self.addClassName("portfolio-view");
     self.setDirection(FlexDirection.COLUMN);
-    self.setStyle("overflow-y", "auto");
-    self.setStyle("padding", "var(--dwc-space-l)");
     
     // Create header
     createHeader();
@@ -50,26 +50,24 @@ public class PortfolioView extends Composite<FlexLayout> {
 
   private void createHeader() {
     FlexLayout header = new FlexLayout();
+    header.addClassName("portfolio-view__header");
     header.setJustifyContent(FlexJustifyContent.BETWEEN)
-          .setStyle("margin-bottom", "var(--dwc-space-xl)")
-          .setWrap(FlexWrap.WRAP)
-          .setStyle("gap", "var(--dwc-space-m)");
+          .setWrap(FlexWrap.WRAP);
     
     FlexLayout titleSection = new FlexLayout();
     titleSection.setDirection(FlexDirection.COLUMN);
     
     H2 title = new H2("My Portfolio");
-    title.setStyle("margin", "0");
+    title.addClassName("portfolio-view__title");
     
     Paragraph description = new Paragraph("Track and manage your cryptocurrency investments");
-    description.setStyle("color", "var(--dwc-color-default-color)");
-    description.setStyle("margin", "var(--dwc-space-s) 0 0 0");
+    description.addClassName("portfolio-view__description");
     
     titleSection.add(title, description);
     
     // Action buttons
     FlexLayout actions = new FlexLayout();
-    actions.setStyle("gap", "var(--dwc-space-m)");
+    actions.addClassName("portfolio-view__actions");
     
     Button addButton = new Button("Add Asset");
     addButton.setPrefixComponent(TablerIcon.create("plus"));
@@ -86,10 +84,9 @@ public class PortfolioView extends Composite<FlexLayout> {
 
   private void createPortfolioSummary() {
     FlexLayout summaryCards = new FlexLayout();
+    summaryCards.addClassName("portfolio-view__summary-cards");
     summaryCards.setJustifyContent(FlexJustifyContent.BETWEEN)
-                .setWrap(FlexWrap.WRAP)
-                .setStyle("gap", "var(--dwc-space-m)")
-                .setStyle("margin-bottom", "var(--dwc-space-xl)");
+                .setWrap(FlexWrap.WRAP);
     
     summaryCards.add(
       createSummaryCard("Total Value", "$125,480.50", "+12.3%", true),
@@ -103,53 +100,41 @@ public class PortfolioView extends Composite<FlexLayout> {
 
   private Div createSummaryCard(String label, String value, String change, boolean showChange) {
     Div card = new Div();
-    card.addClassName("portfolio-summary-card");
-    card.setStyle("flex", "1 1 200px")
-        .setStyle("background", "var(--dwc-surface-1)")
-        .setStyle("border-radius", "var(--dwc-border-radius-m)")
-        .setStyle("padding", "var(--dwc-space-l)")
-        .setStyle("position", "relative");
+    card.addClassName("portfolio-view__summary-card");
     
     FlexLayout content = new FlexLayout();
     content.setDirection(FlexDirection.COLUMN);
     
     Paragraph labelText = new Paragraph(label);
-    labelText.setStyle("margin", "0")
-             .setStyle("color", "var(--dwc-color-default-color)")
-             .setStyle("font-size", "var(--dwc-font-size-s)");
+    labelText.addClassName("portfolio-view__summary-label");
     
     H3 valueText = new H3(value);
-    valueText.setStyle("margin", "var(--dwc-space-s) 0 0 0");
+    valueText.addClassName("portfolio-view__summary-value");
     
     content.add(labelText, valueText);
     
     if (showChange && !change.isEmpty()) {
       Paragraph changeText = new Paragraph(change);
-      changeText.setStyle("margin", "var(--dwc-space-xs) 0 0 0")
-                .setStyle("font-size", "var(--dwc-font-size-s)")
-                .setStyle("font-weight", "var(--dwc-font-weight-semibold)")
-                .setStyle("color", change.startsWith("+") ? "var(--dwc-color-success-25)" : "var(--dwc-color-danger-40)");
+      changeText.addClassName("portfolio-view__summary-change");
+      if (change.startsWith("+")) {
+        changeText.addClassName("portfolio-view__summary-change--positive");
+      } else {
+        changeText.addClassName("portfolio-view__summary-change--negative");
+      }
       content.add(changeText);
     }
     
     // Add action buttons at bottom right
     FlexLayout buttonGroup = new FlexLayout();
-    buttonGroup.setStyle("position", "absolute")
-               .setStyle("bottom", "var(--dwc-space-m)")
-               .setStyle("right", "var(--dwc-space-m)")
-               .setStyle("gap", "var(--dwc-space-xs)");
+    buttonGroup.addClassName("portfolio-view__summary-buttons");
     
     IconButton bellButton = new IconButton(TablerIcon.create("bell"));
-    bellButton.setStyle("padding", "var(--dwc-space-xs)")
-              .setStyle("background", "var(--dwc-surface-2)")
-              .setStyle("border-radius", "var(--dwc-border-radius-s)")
-              .setTooltipText("Set Alert");
+    bellButton.addClassName("portfolio-view__summary-card-button");
+    bellButton.setTooltipText("Set Alert");
     
     IconButton shareButton = new IconButton(TablerIcon.create("share"));
-    shareButton.setStyle("padding", "var(--dwc-space-xs)")
-               .setStyle("background", "var(--dwc-surface-2)")
-               .setStyle("border-radius", "var(--dwc-border-radius-s)")
-               .setTooltipText("Share");
+    shareButton.addClassName("portfolio-view__summary-card-button");
+    shareButton.setTooltipText("Share");
     
     buttonGroup.add(bellButton, shareButton);
     
@@ -159,20 +144,15 @@ public class PortfolioView extends Composite<FlexLayout> {
 
   private void createAllocationChart() {
     FlexLayout chartSection = new FlexLayout();
-    chartSection.setStyle("margin-bottom", "var(--dwc-space-xl)")
-                .setWrap(FlexWrap.WRAP)
-                .setStyle("gap", "var(--dwc-space-l)");
+    chartSection.addClassName("portfolio-view__chart-section");
+    chartSection.setWrap(FlexWrap.WRAP);
     
     // Pie chart
     Div pieChartCard = new Div();
-    pieChartCard.addClassName("allocation-chart-card");
-    pieChartCard.setStyle("flex", "1 1 400px")
-                .setStyle("background", "var(--dwc-surface-1)")
-                .setStyle("border-radius", "var(--dwc-border-radius-m)")
-                .setStyle("padding", "var(--dwc-space-l)");
+    pieChartCard.addClassName("portfolio-view__allocation-chart-card");
     
     H3 chartTitle = new H3("Portfolio Allocation");
-    chartTitle.setStyle("margin", "0 0 var(--dwc-space-m) 0");
+    chartTitle.addClassName("portfolio-view__chart-title");
     
     GoogleChart pieChart = new GoogleChart(GoogleChart.Type.PIE);
     List<Object> data = new ArrayList<>();
@@ -184,21 +164,16 @@ public class PortfolioView extends Composite<FlexLayout> {
     data.add(Arrays.asList("Solana", 16830.50));
     
     pieChart.setData(data);
-    pieChart.setStyle("width", "100%")
-            .setStyle("height", "300px");
+    pieChart.addClassName("portfolio-view__chart");
     
     pieChartCard.add(chartTitle, pieChart);
     
     // Performance chart
     Div performanceCard = new Div();
-    performanceCard.addClassName("performance-chart-card");
-    performanceCard.setStyle("flex", "1 1 400px")
-                   .setStyle("background", "var(--dwc-surface-1)")
-                   .setStyle("border-radius", "var(--dwc-border-radius-m)")
-                   .setStyle("padding", "var(--dwc-space-l)");
+    performanceCard.addClassName("portfolio-view__performance-chart-card");
     
     H3 perfTitle = new H3("Portfolio Performance (30d)");
-    perfTitle.setStyle("margin", "0 0 var(--dwc-space-m) 0");
+    perfTitle.addClassName("portfolio-view__chart-title");
     
     GoogleChart lineChart = new GoogleChart(GoogleChart.Type.LINE);
     List<Object> lineData = new ArrayList<>();
@@ -211,8 +186,7 @@ public class PortfolioView extends Composite<FlexLayout> {
     }
     
     lineChart.setData(lineData);
-    lineChart.setStyle("width", "100%")
-             .setStyle("height", "300px");
+    lineChart.addClassName("portfolio-view__chart");
     
     performanceCard.add(perfTitle, lineChart);
     
@@ -222,18 +196,13 @@ public class PortfolioView extends Composite<FlexLayout> {
 
   private void createHoldingsTable() {
     Div tableSection = new Div();
-    tableSection.addClassName("holdings-table-section");
-    tableSection.setStyle("background", "var(--dwc-surface-1)")
-                .setStyle("border-radius", "var(--dwc-border-radius-m)")
-                .setStyle("padding", "var(--dwc-space-l)")
-                .setStyle("overflow", "auto")
-                .setStyle("max-height", "600px");
+    tableSection.addClassName("portfolio-view__holdings-table-section");
     
     H3 tableTitle = new H3("Holdings");
-    tableTitle.setStyle("margin", "0 0 var(--dwc-space-m) 0");
+    tableTitle.addClassName("portfolio-view__table-title");
     
     portfolioTable = new Table<>();
-    portfolioTable.addClassName("portfolio-table");
+    portfolioTable.addClassName("portfolio-view__table");
     
     // Configure columns
     portfolioTable.addColumn("Asset", PortfolioItem::getAsset);
@@ -267,6 +236,16 @@ public class PortfolioView extends Composite<FlexLayout> {
     holdings.add(new PortfolioItem("Avalanche", 200, 65.40, 42.30));
     holdings.add(new PortfolioItem("Cosmos", 1200, 18.20, 25.60));
     holdings.add(new PortfolioItem("Near Protocol", 650, 12.50, 8.90));
+    holdings.add(new PortfolioItem("Litecoin", 85, 75.20, 92.15));
+    holdings.add(new PortfolioItem("Uniswap", 1200, 5.80, 7.25));
+    holdings.add(new PortfolioItem("VeChain", 45000, 0.032, 0.045));
+    holdings.add(new PortfolioItem("Algorand", 3500, 0.28, 0.31));
+    holdings.add(new PortfolioItem("Stellar", 8200, 0.095, 0.118));
+    holdings.add(new PortfolioItem("Tezos", 750, 1.85, 1.12));
+    holdings.add(new PortfolioItem("The Graph", 2800, 0.145, 0.185));
+    holdings.add(new PortfolioItem("Filecoin", 120, 8.50, 6.80));
+    holdings.add(new PortfolioItem("Hedera", 15000, 0.068, 0.095));
+    holdings.add(new PortfolioItem("Internet Computer", 45, 12.40, 8.90));
     return holdings;
   }
 

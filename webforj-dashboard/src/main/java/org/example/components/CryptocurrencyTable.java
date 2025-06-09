@@ -2,6 +2,7 @@ package org.example.components;
 
 import org.example.models.Cryptocurrency;
 import org.example.utils.CryptoIconRenderer;
+import org.example.utils.FormatUtils;
 import org.example.utils.PriceChangeRenderer;
 import org.example.utils.PriceChartRenderer;
 
@@ -9,7 +10,6 @@ import com.webforj.component.Composite;
 import com.webforj.component.table.Table;
 import com.webforj.data.repository.CollectionRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CryptocurrencyTable extends Composite<Table> {
@@ -27,7 +27,7 @@ public class CryptocurrencyTable extends Composite<Table> {
     table.addColumn("Name", Cryptocurrency::getName).setHidden(true);
     table.addColumn("Icon", Cryptocurrency::getSymbol)
         .setRenderer(new CryptoIconRenderer()).setMinWidth(250.0f);
-    table.addColumn("Price", c -> formatPrice(c.getCurrentPrice()))
+    table.addColumn("Price", c -> FormatUtils.formatPrice(c.getCurrentPrice()))
         .setSortable(true);
     table.addColumn("24h Change", Cryptocurrency::getPriceChange24h)
         .setRenderer(new PriceChangeRenderer())
@@ -35,9 +35,9 @@ public class CryptocurrencyTable extends Composite<Table> {
         .setMinWidth(180.0f);
     table.addColumn("PriceChange24h", Cryptocurrency::getPriceChange24h).setHidden(true);
     table.addColumn("PriceChangePercentage24h", Cryptocurrency::getPriceChangePercentage24h).setHidden(true);
-    table.addColumn("Market Cap", c -> formatLargeNumber(c.getMarketCap()))
+    table.addColumn("Market Cap", c -> FormatUtils.formatLargeNumber(c.getMarketCap()))
         .setSortable(true);
-    table.addColumn("Volume (24h)", c -> formatLargeNumber(c.getVolume24h()))
+    table.addColumn("Volume (24h)", c -> FormatUtils.formatLargeNumber(c.getVolume24h()))
         .setSortable(true);
     table.addColumn("Price Chart", Cryptocurrency::getCurrentPrice)
         .setRenderer(new PriceChartRenderer());
@@ -47,13 +47,6 @@ public class CryptocurrencyTable extends Composite<Table> {
     // Configure table properties
     table.setMultiSorting(true);
     table.setRowHeight(65);
-    
-    // Set cell part provider
-    table.setCellPartProvider((crypto, column) -> {
-      List<String> parts = new ArrayList<>();
-    
-      return parts;
-    });
   }
   
   public void setData(List<Cryptocurrency> cryptocurrencies) {
@@ -62,29 +55,5 @@ public class CryptocurrencyTable extends Composite<Table> {
   
   public CollectionRepository<Cryptocurrency> getRepository() {
     return (CollectionRepository<Cryptocurrency>) table.getRepository();
-  }
-  
-  private String formatPrice(double price) {
-    if (price >= 1000) {
-      return String.format("$%,.2f", price);
-    } else if (price >= 1) {
-      return String.format("$%.2f", price);
-    } else {
-      return String.format("$%.4f", price);
-    }
-  }
-  
-  private String formatLargeNumber(double number) {
-    if (number >= 1_000_000_000_000L) {
-      return String.format("$%.2fT", number / 1_000_000_000_000.0);
-    } else if (number >= 1_000_000_000) {
-      return String.format("$%.2fB", number / 1_000_000_000.0);
-    } else if (number >= 1_000_000) {
-      return String.format("$%.2fM", number / 1_000_000.0);
-    } else if (number >= 1_000) {
-      return String.format("$%.2fK", number / 1_000.0);
-    } else {
-      return String.format("$%.2f", number);
-    }
   }
 }

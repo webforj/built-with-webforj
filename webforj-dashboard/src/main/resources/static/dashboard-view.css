@@ -1,0 +1,20 @@
+/* Dashboard View Styles */
+
+.dashboard-view {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.dashboard-view__cards {
+  width: 100%;
+  gap: var(--dwc-space-m);
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Adjust card container when drawer is open */
+dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
+  justify-content: space-evenly !important;
+}
+
+/* Data card styles are in main app.css as they're shared */

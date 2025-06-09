@@ -1,5 +1,6 @@
 package org.example.views;
 
+import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Composite;
 import com.webforj.component.googlecharts.GoogleChart;
 import com.webforj.component.html.elements.Div;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Route(value = "analytics", outlet = MainLayout.class)
+@StyleSheet("ws://analytics-view.css")
 @FrameTitle("Market Analytics")
 public class AnalyticsView extends Composite<FlexLayout> {
   private FlexLayout self = getBoundComponent();
@@ -26,8 +28,6 @@ public class AnalyticsView extends Composite<FlexLayout> {
   public AnalyticsView() {
     self.addClassName("analytics-view");
     self.setDirection(FlexDirection.COLUMN);
-    self.setStyle("overflow-y", "auto");
-    self.setStyle("padding", "var(--dwc-space-l)");
     
     // Create header
     createHeader();
@@ -41,15 +41,14 @@ public class AnalyticsView extends Composite<FlexLayout> {
 
   private void createHeader() {
     FlexLayout header = new FlexLayout();
-    header.setDirection(FlexDirection.COLUMN)
-          .setStyle("margin-bottom", "var(--dwc-space-xl)");
+    header.addClassName("analytics-view__header");
+    header.setDirection(FlexDirection.COLUMN);
     
     H2 title = new H2("Market Analytics");
-    title.setStyle("margin", "0");
+    title.addClassName("analytics-view__title");
     
     Paragraph description = new Paragraph("Comprehensive market analysis and performance metrics");
-    description.setStyle("color", "var(--dwc-color-default-color)");
-    description.setStyle("margin", "var(--dwc-space-s) 0 0 0");
+    description.addClassName("analytics-view__description");
     
     header.add(title, description);
     self.add(header);
@@ -57,10 +56,9 @@ public class AnalyticsView extends Composite<FlexLayout> {
 
   private void createMetricCards() {
     FlexLayout cardsSection = new FlexLayout();
+    cardsSection.addClassName("analytics-view__cards-section");
     cardsSection.setJustifyContent(FlexJustifyContent.BETWEEN)
-                .setWrap(FlexWrap.WRAP)
-                .setStyle("gap", "var(--dwc-space-m)")
-                .setStyle("margin-bottom", "var(--dwc-space-xl)");
+                .setWrap(FlexWrap.WRAP);
     
     DashboardCard totalVolume = new DashboardCard("Total Market Volume", 152500000000.0, 12.5);
     DashboardCard avgTransaction = new DashboardCard("Avg Transaction Size", 3250.0, -2.1, GoogleChart.Type.BAR);
@@ -72,8 +70,8 @@ public class AnalyticsView extends Composite<FlexLayout> {
 
   private void createChartsSection() {
     FlexLayout chartsContainer = new FlexLayout();
-    chartsContainer.setWrap(FlexWrap.WRAP)
-                   .setStyle("gap", "var(--dwc-space-l)");
+    chartsContainer.addClassName("analytics-view__charts-container");
+    chartsContainer.setWrap(FlexWrap.WRAP);
     
     // Market Cap Distribution Chart
     Div marketCapChart = createChartCard("Market Cap Distribution", createPieChart());
@@ -84,8 +82,8 @@ public class AnalyticsView extends Composite<FlexLayout> {
     // Price Performance Chart
     Div performanceChart = createChartCard("Price Performance (7d)", createColumnChart());
     
-    // Market Sentiment Chart
-    Div sentimentChart = createChartCard("Market Sentiment", createAreaChart());
+    // Market Sentiment Chart (full width)
+    Div sentimentChart = createFullWidthChartCard("Market Sentiment", createAreaChart());
     
     chartsContainer.add(marketCapChart, volumeChart, performanceChart, sentimentChart);
     self.add(chartsContainer);
@@ -93,18 +91,27 @@ public class AnalyticsView extends Composite<FlexLayout> {
 
   private Div createChartCard(String title, GoogleChart chart) {
     Div card = new Div();
-    card.addClassName("analytics-chart-card");
-    card.setStyle("flex", "1 1 400px")
-        .setStyle("min-height", "400px")
-        .setStyle("background", "var(--dwc-surface-1)")
-        .setStyle("border-radius", "var(--dwc-border-radius-m)")
-        .setStyle("padding", "var(--dwc-space-l)");
+    card.addClassName("analytics-view__chart-card");
     
     H3 cardTitle = new H3(title);
-    cardTitle.setStyle("margin", "0 0 var(--dwc-space-m) 0");
+    cardTitle.addClassName("analytics-view__chart-title");
     
-    chart.setStyle("width", "100%")
-         .setStyle("height", "300px");
+    chart.addClassName("analytics-view__chart");
+    
+    card.add(cardTitle, chart);
+    return card;
+  }
+
+  private Div createFullWidthChartCard(String title, GoogleChart chart) {
+    Div card = new Div();
+    card.addClassName("analytics-view__chart-card");
+    card.addClassName("analytics-view__chart-card--full-width");
+    
+    H3 cardTitle = new H3(title);
+    cardTitle.addClassName("analytics-view__chart-title");
+    
+    chart.addClassName("analytics-view__chart");
+    chart.addClassName("analytics-view__chart--full-width");
     
     card.add(cardTitle, chart);
     return card;

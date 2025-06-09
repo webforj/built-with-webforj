@@ -1,6 +1,7 @@
 package org.example.views;
 
 import com.webforj.App;
+import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
@@ -15,7 +16,6 @@ import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.optioninput.RadioButton;
-import com.webforj.component.optioninput.RadioButtonGroup;
 import com.webforj.component.list.ChoiceBox;
 import com.webforj.component.tabbedpane.Tab;
 import com.webforj.component.tabbedpane.TabbedPane;
@@ -23,6 +23,7 @@ import com.webforj.router.annotation.FrameTitle;
 import com.webforj.router.annotation.Route;
 
 @Route(value = "settings", outlet = MainLayout.class)
+@StyleSheet("ws://settings-view.css")
 @FrameTitle("Settings")
 public class SettingsView extends Composite<FlexLayout> {
   private FlexLayout self = getBoundComponent();
@@ -32,8 +33,6 @@ public class SettingsView extends Composite<FlexLayout> {
   public SettingsView() {
     self.addClassName("settings-view");
     self.setDirection(FlexDirection.COLUMN);
-    self.setStyle("overflow-y", "auto");
-    self.setStyle("padding", "var(--dwc-space-l)");
     
     isDarkTheme = "dark".equals(App.getTheme());
     
@@ -46,15 +45,14 @@ public class SettingsView extends Composite<FlexLayout> {
 
   private void createHeader() {
     FlexLayout header = new FlexLayout();
-    header.setDirection(FlexDirection.COLUMN)
-          .setStyle("margin-bottom", "var(--dwc-space-xl)");
+    header.addClassName("settings-view__header");
+    header.setDirection(FlexDirection.COLUMN);
     
     H2 title = new H2("Settings");
-    title.setStyle("margin", "0");
+    title.addClassName("settings-view__title");
     
     Paragraph description = new Paragraph("Manage your application preferences and configuration");
-    description.setStyle("color", "var(--dwc-color-default-color)");
-    description.setStyle("margin", "var(--dwc-space-s) 0 0 0");
+    description.addClassName("settings-view__description");
     
     header.add(title, description);
     self.add(header);
@@ -62,7 +60,7 @@ public class SettingsView extends Composite<FlexLayout> {
 
   private void createSettingsTabs() {
     settingsTabs = new TabbedPane();
-    settingsTabs.setStyle("margin-bottom", "var(--dwc-space-l)");
+    settingsTabs.addClassName("settings-view__tabs");
     
     settingsTabs.addTab(new Tab("General"));
     settingsTabs.addTab(new Tab("Notifications"));
@@ -70,7 +68,7 @@ public class SettingsView extends Composite<FlexLayout> {
     settingsTabs.addTab(new Tab("Privacy"));
     
     Div tabContent = new Div();
-    tabContent.addClassName("settings-tab-content");
+    tabContent.addClassName("settings-view__tab-content");
     
     // Show general settings by default
     showGeneralSettings(tabContent);
@@ -101,8 +99,8 @@ public class SettingsView extends Composite<FlexLayout> {
 
   private void showGeneralSettings(Div container) {
     FlexLayout content = new FlexLayout();
-    content.setDirection(FlexDirection.COLUMN)
-           .setStyle("gap", "var(--dwc-space-xl)");
+    content.addClassName("settings-view__content");
+    content.setDirection(FlexDirection.COLUMN);
     
     
     // Display preferences
@@ -155,8 +153,8 @@ public class SettingsView extends Composite<FlexLayout> {
 
   private void showNotificationSettings(Div container) {
     FlexLayout content = new FlexLayout();
-    content.setDirection(FlexDirection.COLUMN)
-           .setStyle("gap", "var(--dwc-space-xl)");
+    content.addClassName("settings-view__content");
+    content.setDirection(FlexDirection.COLUMN);
     
     // Email notifications
     Div emailSection = createSettingsSection("Email Notifications");
@@ -228,8 +226,8 @@ public class SettingsView extends Composite<FlexLayout> {
 
   private void showApiSettings(Div container) {
     FlexLayout content = new FlexLayout();
-    content.setDirection(FlexDirection.COLUMN)
-           .setStyle("gap", "var(--dwc-space-xl)");
+    content.addClassName("settings-view__content");
+    content.setDirection(FlexDirection.COLUMN);
     
     // API configuration
     Div apiSection = createSettingsSection("API Configuration");
@@ -279,8 +277,8 @@ public class SettingsView extends Composite<FlexLayout> {
 
   private void showPrivacySettings(Div container) {
     FlexLayout content = new FlexLayout();
-    content.setDirection(FlexDirection.COLUMN)
-           .setStyle("gap", "var(--dwc-space-xl)");
+    content.addClassName("settings-view__content");
+    content.setDirection(FlexDirection.COLUMN);
     
     // Data privacy
     Div privacySection = createSettingsSection("Data Privacy");
@@ -337,13 +335,10 @@ public class SettingsView extends Composite<FlexLayout> {
 
   private Div createSettingsSection(String title) {
     Div section = new Div();
-    section.addClassName("settings-section");
-    section.setStyle("background", "var(--dwc-surface-1)")
-           .setStyle("border-radius", "var(--dwc-border-radius-m)")
-           .setStyle("padding", "var(--dwc-space-l)");
+    section.addClassName("settings-view__section");
     
     H3 sectionTitle = new H3(title);
-    sectionTitle.setStyle("margin", "0 0 var(--dwc-space-m) 0");
+    sectionTitle.addClassName("settings-view__section-title");
     
     section.add(sectionTitle);
     return section;

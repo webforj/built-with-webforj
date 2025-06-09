@@ -1,5 +1,6 @@
 package org.example.components;
 
+import org.example.utils.FormatUtils;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
@@ -77,15 +78,9 @@ public class DashboardCard extends Composite<FlexLayout> {
 
   private String formatValue(String title, double value) {
     if (title.contains("Dominance")) {
-      return String.format("%.1f%%", value);
-    } else if (value >= 1_000_000_000_000L) {
-      return String.format("$%.2fT", value / 1_000_000_000_000.0);
-    } else if (value >= 1_000_000_000) {
-      return String.format("$%.1fB", value / 1_000_000_000.0);
-    } else if (value >= 1_000_000) {
-      return String.format("$%.1fM", value / 1_000_000.0);
+      return FormatUtils.formatPercentage(value);
     } else {
-      return String.format("$%.2f", value);
+      return FormatUtils.formatLargeNumber(value);
     }
   }
 

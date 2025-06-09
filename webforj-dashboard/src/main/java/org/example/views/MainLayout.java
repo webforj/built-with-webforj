@@ -3,6 +3,7 @@ package org.example.views;
 import java.util.Set;
 
 import com.webforj.App;
+import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Component;
 import com.webforj.component.Composite;
 import com.webforj.component.html.elements.H1;
@@ -24,6 +25,7 @@ import com.webforj.router.annotation.Route;
 import com.webforj.router.event.NavigateEvent;
 
 @Route
+@StyleSheet("ws://main-layout.css")
 public class MainLayout extends Composite<AppLayout> {
   private AppLayout self = getBoundComponent();
   private H1 title = new H1();
@@ -43,8 +45,7 @@ public class MainLayout extends Composite<AppLayout> {
     self.setDrawerOpened(true);
     
     // Enable scrolling for the content area
-    self.setStyle("height", "100vh");
-    self.setStyle("overflow", "hidden");
+    self.addClassName("main-layout");
     
     Router.getCurrent().onNavigate(this::onNavigate);
   }
@@ -67,16 +68,15 @@ public class MainLayout extends Composite<AppLayout> {
   private void setNavDrawer() {
     // Create drawer container with FlexLayout
     FlexLayout drawerLayout = new FlexLayout();
+    drawerLayout.addClassName("main-layout__drawer");
     drawerLayout.setDirection(FlexDirection.COLUMN);
-    drawerLayout.setStyle("height", "100%");
-    drawerLayout.setStyle("display", "flex");
     
     // Add logo
     drawerLayout.add(new DrawerLogo());
     
     // Create navigation
     appNav = new AppNav();
-    appNav.setStyle("flex", "1");
+    appNav.addClassName("main-layout__nav");
     
     // Dashboard
     AppNavItem dashboard = new AppNavItem("Dashboard", DashboardView.class);

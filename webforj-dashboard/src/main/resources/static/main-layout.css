@@ -1,0 +1,15 @@
+/* Main Layout Styles */
+
+.main-layout {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-layout__drawer {
+  height: 100%;
+  display: flex;
+}
+
+.main-layout__nav {
+  flex: 1;
+}

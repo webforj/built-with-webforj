@@ -11,20 +11,16 @@ public class DrawerLogo extends Composite<FlexLayout> {
   private FlexLayout self = getBoundComponent();
 
   public DrawerLogo() {
+    self.addClassName("drawer-logo");
     self.setDirection(FlexDirection.COLUMN)
         .setJustifyContent(FlexJustifyContent.CENTER)
-        .setAlignment(FlexAlignment.CENTER)
-        .setStyle("padding", "var(--dwc-space-l)")
-        .setStyle("border-bottom", "var(--dwc-border-width) solid var(--dwc-color-gray-90)")
-        .setStyle("margin-bottom", "var(--dwc-space-m)");
+        .setAlignment(FlexAlignment.CENTER);
 
     // WebforJ Logo
     Img logo = new Img();
     logo.setSrc("https://documentation.webforj.com/img/webforj_icon.svg")
         .setAlt("WebforJ Logo")
-        .setStyle("width", "75px")
-        .setStyle("height", "75px")
-        .setStyle("margin-bottom", "var(--dwc-space-s)");
+        .addClassName("drawer-logo__image");
     self.add(logo);
   }
 }

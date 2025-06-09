@@ -24,6 +24,5 @@ public class CryptoIconRenderer extends Renderer<Cryptocurrency> {
             </div>
             </div>
             """;
-          }
-        }
-        // <img part='crypto-icon' src="<%= iconUrl %>" style="filter: grayscale(100%);" />
+  }
+}

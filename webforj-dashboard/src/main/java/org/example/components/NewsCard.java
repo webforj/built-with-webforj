@@ -64,13 +64,5 @@ public class NewsCard extends Composite<FlexLayout> {
 
     // Add all elements to card
     self.add(imageDiv, contentDiv);
-    
-    // Simple click handler to open in new window
-    self.onClick(e -> {
-      // Use a simple approach that works
-      // self.getElement().getNode().runWhenAttached(ui -> {
-      //   ui.getPage().open(url, "_blank");
-      // });
-    });
   }
 }
