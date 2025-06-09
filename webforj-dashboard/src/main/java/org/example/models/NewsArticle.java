@@ -6,6 +6,7 @@ public class NewsArticle {
   private String source;
   private String timeAgo;
   private String url;
+  private String imageUrl;
 
   public NewsArticle(String title, String description, String source, String timeAgo, String url) {
     this.title = title;
@@ -13,6 +14,15 @@ public class NewsArticle {
     this.source = source;
     this.timeAgo = timeAgo;
     this.url = url;
+  }
+
+  public NewsArticle(String title, String description, String source, String timeAgo, String url, String imageUrl) {
+    this.title = title;
+    this.description = description;
+    this.source = source;
+    this.timeAgo = timeAgo;
+    this.url = url;
+    this.imageUrl = imageUrl;
   }
 
   public String getTitle() {
@@ -53,5 +63,13 @@ public class NewsArticle {
 
   public void setUrl(String url) {
     this.url = url;
+  }
+
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
   }
 }

@@ -1,7 +1,6 @@
 package org.example.components;
 
 import com.webforj.component.Composite;
-import com.webforj.component.Theme;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.html.elements.Paragraph;
@@ -92,12 +91,12 @@ public class DashboardCard extends Composite<FlexLayout> {
 
   private void initComponent() {
     self.setDirection(FlexDirection.COLUMN);
-    self.setSpacing("0px");
+    self.setStyle("gap", "0px");
     self.add(textData, chart);
     textData.setJustifyContent(FlexJustifyContent.BETWEEN);
     textData.setStyle("min-height", "80px");
     textData.add(mainText, detailText);
-    mainText.setDirection(FlexDirection.COLUMN).setSpacing("0px");
+    mainText.setDirection(FlexDirection.COLUMN).setStyle("gap", "0px");
     detailText.setDirection(FlexDirection.COLUMN);
     numericData.setAlignment(FlexAlignment.CENTER);
     self.addClassName("data-card");
@@ -110,7 +109,7 @@ public class DashboardCard extends Composite<FlexLayout> {
     details.addClassName("data-card__details");
 
     // Add click event handler for follow/unfollow functionality
-    followButton.addClickListener(e -> toggleFollow());
+    followButton.onClick(e -> toggleFollow());
 
     if (Double.compare(percentage, 0.0) > 0) {
       percentChange.addClassName("percentage-positive");
@@ -260,7 +259,7 @@ public class DashboardCard extends Composite<FlexLayout> {
       followButton.setTheme(ButtonTheme.OUTLINED_DEFAULT);
 
       // Show following toast
-      Toast.show("Following " + title.getText(), Theme.DEFAULT);
+      Toast.show("Following " + title.getText());
     } else {
       // Change back to follow state
       followButton.setText("Follow");
@@ -268,7 +267,7 @@ public class DashboardCard extends Composite<FlexLayout> {
       followButton.setTheme(ButtonTheme.DEFAULT);
 
       // Show unfollowing toast
-      Toast.show("Unfollowed " + title.getText(), Theme.DEFAULT);
+      Toast.show("Unfollowed " + title.getText());
     }
   }
 }

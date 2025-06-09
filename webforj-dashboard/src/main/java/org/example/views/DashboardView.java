@@ -54,7 +54,7 @@ public class DashboardView extends Composite<FlexLayout> {
     self.add(cards, cryptoTable);
 
     // Update prices every 2 seconds
-    interval = new Interval(2f, e -> {
+    interval = new Interval(1f, e -> {
       cryptoService.updatePrices(cryptocurrencies);
       cryptoTable.getRepository().commit();
     });

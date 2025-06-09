@@ -14,7 +14,8 @@ public class NewsService {
             "Major financial institutions continue to show interest in Bitcoin as the cryptocurrency reaches new highs for the year. Analysts point to growing adoption and regulatory clarity.",
             "CoinDesk",
             "2 hours ago",
-            "https://example.com/bitcoin-surge"
+            "https://example.com/bitcoin-surge",
+            "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=250&fit=crop"
         ));
         
         articles.add(new NewsArticle(
@@ -22,7 +23,8 @@ public class NewsService {
             "The Ethereum network has reached a new all-time high in staked ETH, with over 28 million ETH now locked in staking contracts, representing significant confidence in the network's future.",
             "The Block",
             "4 hours ago",
-            "https://example.com/ethereum-staking"
+            "https://example.com/ethereum-staking",
+            "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=400&h=250&fit=crop"
         ));
         
         articles.add(new NewsArticle(
@@ -30,7 +32,8 @@ public class NewsService {
             "In a landmark decision, the Securities and Exchange Commission has approved multiple spot Bitcoin ETF applications, marking a significant milestone for cryptocurrency adoption.",
             "Reuters",
             "6 hours ago",
-            "https://example.com/sec-bitcoin-etf"
+            "https://example.com/sec-bitcoin-etf",
+            "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=250&fit=crop"
         ));
         
         articles.add(new NewsArticle(
@@ -38,7 +41,8 @@ public class NewsService {
             "The Solana blockchain processed over 65 million transactions in a single day, showcasing the network's scalability and growing ecosystem of decentralized applications.",
             "CryptoSlate",
             "8 hours ago",
-            "https://example.com/solana-record"
+            "https://example.com/solana-record",
+            "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=250&fit=crop"
         ));
         
         articles.add(new NewsArticle(
@@ -46,7 +50,8 @@ public class NewsService {
             "One of the world's largest banks announced the launch of its digital asset custody service, catering to institutional clients looking to securely store cryptocurrencies.",
             "Bloomberg",
             "12 hours ago",
-            "https://example.com/bank-crypto-custody"
+            "https://example.com/bank-crypto-custody",
+            "https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=250&fit=crop"
         ));
         
         articles.add(new NewsArticle(
@@ -54,7 +59,8 @@ public class NewsService {
             "The total value locked in decentralized finance protocols has surpassed $100 billion, indicating renewed confidence in the DeFi sector after recent market volatility.",
             "DeFi Pulse",
             "1 day ago",
-            "https://example.com/defi-tvl"
+            "https://example.com/defi-tvl",
+            "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop"
         ));
         
         articles.add(new NewsArticle(
@@ -62,7 +68,8 @@ public class NewsService {
             "In a significant development, Ripple Labs has won a crucial legal victory in its ongoing case with the SEC, with implications for the broader cryptocurrency industry.",
             "Forbes",
             "1 day ago",
-            "https://example.com/ripple-sec"
+            "https://example.com/ripple-sec",
+            "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400&h=250&fit=crop"
         ));
         
         articles.add(new NewsArticle(
@@ -70,7 +77,8 @@ public class NewsService {
             "The European Central Bank has begun its pilot program for a digital euro, testing the infrastructure needed for a potential central bank digital currency.",
             "Financial Times",
             "2 days ago",
-            "https://example.com/digital-euro"
+            "https://example.com/digital-euro",
+            "https://images.unsplash.com/photo-1566228015668-4c45dbc4e2f5?w=400&h=250&fit=crop"
         ));
         
         return articles;

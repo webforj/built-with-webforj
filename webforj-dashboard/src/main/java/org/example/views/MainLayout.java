@@ -11,17 +11,17 @@ import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.layout.applayout.AppLayout;
 import com.webforj.component.layout.applayout.AppLayout.DrawerPlacement;
 import com.webforj.component.layout.toolbar.Toolbar;
+import com.webforj.component.layout.appnav.AppNav;
+import com.webforj.component.layout.appnav.AppNavItem;
+import com.webforj.component.layout.applayout.AppDrawerToggle;
+import com.webforj.component.layout.flexlayout.FlexDirection;
+import com.webforj.component.layout.flexlayout.FlexLayout;
+import org.example.components.DrawerLogo;
+import org.example.components.DrawerFooter;
 import com.webforj.router.Router;
 import com.webforj.router.annotation.FrameTitle;
 import com.webforj.router.annotation.Route;
 import com.webforj.router.event.NavigateEvent;
-import com.webforj.component.layout.flexlayout.FlexDirection;
-import com.webforj.component.layout.flexlayout.FlexLayout;
-import com.webforj.component.html.elements.H2;
-import org.example.components.NewsCard;
-import org.example.services.NewsService;
-import org.example.models.NewsArticle;
-import java.util.List;
 
 @Route
 public class MainLayout extends Composite<AppLayout> {
@@ -29,17 +29,18 @@ public class MainLayout extends Composite<AppLayout> {
   private H1 title = new H1();
   private boolean isDarkTheme = false;
   private IconButton themeToggle;
-  private IconButton newsToggle;
-  private NewsService newsService = new NewsService();
+  private IconButton drawerToggle;
+  private AppNav appNav;
 
   public MainLayout() {
     String currentTheme = App.getTheme();
     isDarkTheme = "dark".equals(currentTheme);
     
     setHeader();
-    setNewsDrawer();
-    // Start with drawer closed
-    self.setDrawerOpened(false);
+    setNavDrawer();
+    
+    // Start with drawer open on desktop
+    self.setDrawerOpened(true);
     
     // Enable scrolling for the content area
     self.setStyle("height", "100vh");
@@ -50,22 +51,73 @@ public class MainLayout extends Composite<AppLayout> {
 
   private void setHeader() {
     Toolbar toolbar = new Toolbar();
-    // Remove drawer toggle since drawer is hidden
-    toolbar.addToTitle(title);
     
-    // News toggle button for drawer
-    newsToggle = new IconButton(TablerIcon.create("news"));
-    newsToggle.setAttribute("data-drawer-toggle", "true");
-    newsToggle.setTooltipText("Toggle News");
+    // Add proper drawer toggle
+    toolbar.addToStart(new AppDrawerToggle());
+    toolbar.addToTitle(title);
     
     themeToggle = new IconButton(TablerIcon.create(isDarkTheme ? "moon" : "sun"));
     themeToggle.onClick(e -> toggleTheme());
     
-    toolbar.addToEnd(themeToggle, newsToggle);
+    toolbar.addToEnd(themeToggle);
 
     self.addToHeader(toolbar);
   }
 
+  private void setNavDrawer() {
+    // Create drawer container with FlexLayout
+    FlexLayout drawerLayout = new FlexLayout();
+    drawerLayout.setDirection(FlexDirection.COLUMN);
+    drawerLayout.setStyle("height", "100%");
+    drawerLayout.setStyle("display", "flex");
+    
+    // Add logo
+    drawerLayout.add(new DrawerLogo());
+    
+    // Create navigation
+    appNav = new AppNav();
+    appNav.setStyle("flex", "1");
+    
+    // Dashboard
+    AppNavItem dashboard = new AppNavItem("Dashboard", DashboardView.class);
+    dashboard.setPrefixComponent(TablerIcon.create("dashboard"));
+    
+    // News
+    AppNavItem news = new AppNavItem("News", NewsView.class);
+    news.setPrefixComponent(TablerIcon.create("news"));
+    
+    // Analytics
+    AppNavItem analytics = new AppNavItem("Analytics", AnalyticsView.class);
+    analytics.setPrefixComponent(TablerIcon.create("chart-line"));
+    
+    // Portfolio
+    AppNavItem portfolio = new AppNavItem("Portfolio", PortfolioView.class);
+    portfolio.setPrefixComponent(TablerIcon.create("wallet"));
+    
+    // Settings
+    AppNavItem settings = new AppNavItem("Settings", SettingsView.class);
+    settings.setPrefixComponent(TablerIcon.create("settings"));
+    
+    // Add all items to navigation
+    appNav.addItem(dashboard);
+    appNav.addItem(news);
+    appNav.addItem(analytics);
+    appNav.addItem(portfolio);
+    appNav.addItem(settings);
+    
+    // Add navigation to drawer
+    drawerLayout.add(appNav);
+    
+    // Add footer component
+    drawerLayout.add(new DrawerFooter());
+    
+    // Configure drawer
+    self.setDrawerHeaderVisible(false);
+    self.addToDrawer(drawerLayout);
+    
+    // Set drawer to left side (default)
+    self.setDrawerPlacement(DrawerPlacement.LEFT);
+  }
 
   private void onNavigate(NavigateEvent ev) {
     Set<Component> components = ev.getContext().getAllComponents();
@@ -81,48 +133,6 @@ public class MainLayout extends Composite<AppLayout> {
   private void toggleTheme() {
     isDarkTheme = !isDarkTheme;
     App.setTheme(isDarkTheme ? "dark" : "light");
-    themeToggle.setName((isDarkTheme ? "moon" : "sun"));
-  }
-  
-  private void setNewsDrawer() {
-    // Create drawer header
-    H2 drawerTitle = new H2("Crypto News");
-    drawerTitle.addClassName("news-drawer-title");
-    
-    // Create scrollable container for news
-    FlexLayout newsContainer = new FlexLayout();
-    newsContainer.setDirection(FlexDirection.COLUMN)
-                 .setStyle("overflow-y", "auto")
-                 .setStyle("height", "calc(100vh - 100px)");
-    
-    // Add news articles
-    List<NewsArticle> articles = newsService.getMockCryptoNews();
-    for (NewsArticle article : articles) {
-      NewsCard card = new NewsCard(
-        article.getTitle(),
-        article.getDescription(),
-        article.getSource(),
-        article.getTimeAgo(),
-        article.getUrl()
-      );
-      newsContainer.add(card);
-    }
-    
-    // Create drawer content wrapper
-    FlexLayout drawerContent = new FlexLayout();
-    drawerContent.setDirection(FlexDirection.COLUMN)
-                 .setStyle("height", "100%")
-                 .setStyle("background-color", "var(--dwc-surface-1)")
-                 .add(drawerTitle, newsContainer);
-    
-    // Configure drawer
-    self.setDrawerHeaderVisible(false);
-    self.addToDrawer(drawerContent);
-    
-    // Set drawer to right side
-    self.setDrawerPlacement(DrawerPlacement.RIGHT);
-    
-    // Style the drawer
-    self.setStyle("--dwc-app-layout-drawer-width", "400px");
+    themeToggle.setName(isDarkTheme ? "moon" : "sun");
   }
 }

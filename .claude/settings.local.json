@@ -1,8 +1,18 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.webforj.com)",
+      "Bash(mvn compile:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(timeout 60s mvn compile:*)",
+      "Bash(rg:*)",
+      "WebFetch(domain:javadoc.io)",
+      "Bash(timeout 30s mvn compile:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
-  }
+  },
+  "enableAllProjectMcpServers": false
 }
