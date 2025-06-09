@@ -38,8 +38,8 @@ public class PortfolioView extends Composite<FlexLayout> {
     // Create header
     createHeader();
     
-    // Create portfolio summary
-    createPortfolioSummary();
+    // Create portfolio hero section
+    createPortfolioHero();
     
     // Create portfolio allocation chart
     createAllocationChart();
@@ -82,64 +82,77 @@ public class PortfolioView extends Composite<FlexLayout> {
     self.add(header);
   }
 
-  private void createPortfolioSummary() {
-    FlexLayout summaryCards = new FlexLayout();
-    summaryCards.addClassName("portfolio-view__summary-cards");
-    summaryCards.setJustifyContent(FlexJustifyContent.BETWEEN)
-                .setWrap(FlexWrap.WRAP);
+  private void createPortfolioHero() {
+    Div heroSection = new Div();
+    heroSection.addClassName("portfolio-view__hero");
     
-    summaryCards.add(
-      createSummaryCard("Total Value", "$125,480.50", "+12.3%", true),
-      createSummaryCard("Total Invested", "$98,200.00", "", false),
-      createSummaryCard("Total Profit", "$27,280.50", "+27.8%", true),
-      createSummaryCard("24h Change", "$3,420.15", "+2.8%", true)
+    // Main content area with metrics
+    FlexLayout heroContent = new FlexLayout();
+    heroContent.addClassName("portfolio-view__hero-content");
+    
+    // Left side - Main portfolio value
+    FlexLayout mainValue = new FlexLayout();
+    mainValue.addClassName("portfolio-view__hero-main");
+    mainValue.setDirection(FlexDirection.COLUMN);
+    
+    Paragraph welcomeText = new Paragraph("Portfolio Value");
+    welcomeText.addClassName("portfolio-view__hero-label");
+    
+    H2 totalValue = new H2("$125,480.50");
+    totalValue.addClassName("portfolio-view__hero-value");
+    
+    FlexLayout changeContainer = new FlexLayout();
+    changeContainer.addClassName("portfolio-view__hero-change");
+    
+    Span changeValue = new Span("+ $27,280.50");
+    changeValue.addClassName("portfolio-view__hero-change-value");
+    
+    Span changePercent = new Span("(+27.8%)");
+    changePercent.addClassName("portfolio-view__hero-change-percent");
+    
+    changeContainer.add(changeValue, changePercent);
+    
+    mainValue.add(welcomeText, totalValue, changeContainer);
+    
+    // Right side - Quick stats grid
+    FlexLayout statsGrid = new FlexLayout();
+    statsGrid.addClassName("portfolio-view__hero-stats");
+    statsGrid.setDirection(FlexDirection.COLUMN);
+    
+    statsGrid.add(
+      createQuickStat("24h Change", "+2.8%", "trending-up"),
+      createQuickStat("Total Assets", "20", "coins"),
+      createQuickStat("Best Performer", "SOL +22.4%", "trophy")
     );
     
-    self.add(summaryCards);
+    heroContent.add(mainValue, statsGrid);
+    heroSection.add(heroContent);
+    
+    self.add(heroSection);
   }
 
-  private Div createSummaryCard(String label, String value, String change, boolean showChange) {
-    Div card = new Div();
-    card.addClassName("portfolio-view__summary-card");
+  private FlexLayout createQuickStat(String label, String value, String iconName) {
+    FlexLayout stat = new FlexLayout();
+    stat.addClassName("portfolio-view__quick-stat");
     
-    FlexLayout content = new FlexLayout();
-    content.setDirection(FlexDirection.COLUMN);
+    Div iconContainer = new Div();
+    iconContainer.addClassName("portfolio-view__quick-stat-icon");
+    iconContainer.setHtml("<dwc-icon name=\"tabler:" + iconName + "\"></dwc-icon>");
     
-    Paragraph labelText = new Paragraph(label);
-    labelText.addClassName("portfolio-view__summary-label");
+    FlexLayout textContainer = new FlexLayout();
+    textContainer.addClassName("portfolio-view__quick-stat-text");
+    textContainer.setDirection(FlexDirection.COLUMN);
     
-    H3 valueText = new H3(value);
-    valueText.addClassName("portfolio-view__summary-value");
+    Paragraph statLabel = new Paragraph(label);
+    statLabel.addClassName("portfolio-view__quick-stat-label");
     
-    content.add(labelText, valueText);
+    Span statValue = new Span(value);
+    statValue.addClassName("portfolio-view__quick-stat-value");
     
-    if (showChange && !change.isEmpty()) {
-      Paragraph changeText = new Paragraph(change);
-      changeText.addClassName("portfolio-view__summary-change");
-      if (change.startsWith("+")) {
-        changeText.addClassName("portfolio-view__summary-change--positive");
-      } else {
-        changeText.addClassName("portfolio-view__summary-change--negative");
-      }
-      content.add(changeText);
-    }
+    textContainer.add(statLabel, statValue);
+    stat.add(iconContainer, textContainer);
     
-    // Add action buttons at bottom right
-    FlexLayout buttonGroup = new FlexLayout();
-    buttonGroup.addClassName("portfolio-view__summary-buttons");
-    
-    IconButton bellButton = new IconButton(TablerIcon.create("bell"));
-    bellButton.addClassName("portfolio-view__summary-card-button");
-    bellButton.setTooltipText("Set Alert");
-    
-    IconButton shareButton = new IconButton(TablerIcon.create("share"));
-    shareButton.addClassName("portfolio-view__summary-card-button");
-    shareButton.setTooltipText("Share");
-    
-    buttonGroup.add(bellButton, shareButton);
-    
-    card.add(content, buttonGroup);
-    return card;
+    return stat;
   }
 
   private void createAllocationChart() {
