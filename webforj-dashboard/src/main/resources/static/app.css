@@ -79,7 +79,7 @@ dwc-app-layout::part(content) {
    ======================================== */
 
 .data-card {
-  font-family: var(--dwc-font-family);
+  /* font-family: var(--dwc-font-family); */
   background-color: var(--dwc-surface-3);
   flex: 1 1 300px;
   padding: var(--dwc-space-m);
@@ -198,7 +198,7 @@ dwc-app-layout::part(content) {
    ======================================== */
 
 dwc-table {
-  font-family: var(--dwc-font-family);
+  /* font-family: var(--dwc-font-family); */
   min-height: 400px;
   /* height: 62dvh; */
   overflow: hidden;
@@ -347,9 +347,9 @@ dwc-table::part(crypto-symbol) {
    ======================================== */
 
 dwc-toolbar h1 {
-  font-family: "Inter", var(--dwc-font-family);
+  /* font-family: "Inter", var(--dwc-font-family); */
   font-size: 1.75rem;
-  font-weight: var(--dwc-font-weight-light);
+  font-weight: var(--dwc-font-weight-normal);
   letter-spacing: -0.01em;
   color: var(--dwc-color-on-surface);
   margin: 0;
@@ -379,7 +379,7 @@ dwc-toolbar h1 {
    ======================================== */
 
 .news-drawer-title {
-  font-family: "Inter", var(--dwc-font-family);
+  /* font-family: "Inter", var(--dwc-font-family); */
   font-size: 1.5rem;
   font-weight: var(--dwc-font-weight-light);
   letter-spacing: -0.02em;

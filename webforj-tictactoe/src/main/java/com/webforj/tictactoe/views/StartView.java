@@ -66,7 +66,7 @@ public class StartView extends Composite<Div> {
       Page.getCurrent().executeJsVoidAsync(script);
       SoundManager.getCurrent().playClick();
       Toast toast = new Toast();
-      toast.setTheme(Theme.SUCCESS);
+      toast.setTheme(Theme.DEFAULT);
 
       Button close = new Button(FeatherIcon.X.create());
       close.setTheme(ButtonTheme.DEFAULT);

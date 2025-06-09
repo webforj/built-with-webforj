@@ -51,15 +51,7 @@ public class CryptocurrencyTable extends Composite<Table> {
     // Set cell part provider
     table.setCellPartProvider((crypto, column) -> {
       List<String> parts = new ArrayList<>();
-      
-      switch (column.getId()) {
-        case "Icon" -> parts.add("icon-cell");
-        case "Price" -> parts.add("price-cell");
-        case "Symbol" -> parts.add("symbol-cell");
-        case "24h Change" -> parts.add("change-cell");
-        default -> { /* No special part for other columns */ }
-      }
-      
+    
       return parts;
     });
   }

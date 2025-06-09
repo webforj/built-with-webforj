@@ -106,7 +106,7 @@ public class DashboardCard extends Composite<FlexLayout> {
     percentChange.addClassName("data-card__percent");
     followButton.addClassName("data-card__follow-button")
         .setPrefixComponent(TablerIcon.create("plus"))
-        .setTheme(ButtonTheme.INFO);
+        .setTheme(ButtonTheme.DEFAULT);
     details.addClassName("data-card__details");
 
     // Add click event handler for follow/unfollow functionality
@@ -257,15 +257,15 @@ public class DashboardCard extends Composite<FlexLayout> {
       // Change to unfollow state
       followButton.setText("Unfollow");
       followButton.setPrefixComponent(TablerIcon.create("check"));
-      followButton.setTheme(ButtonTheme.OUTLINED_INFO);
+      followButton.setTheme(ButtonTheme.OUTLINED_DEFAULT);
 
       // Show following toast
-      Toast.show("Following " + title.getText(), Theme.SUCCESS);
+      Toast.show("Following " + title.getText(), Theme.DEFAULT);
     } else {
       // Change back to follow state
       followButton.setText("Follow");
       followButton.setPrefixComponent(TablerIcon.create("plus"));
-      followButton.setTheme(ButtonTheme.INFO);
+      followButton.setTheme(ButtonTheme.DEFAULT);
 
       // Show unfollowing toast
       Toast.show("Unfollowed " + title.getText(), Theme.DEFAULT);
