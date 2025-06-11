@@ -134,6 +134,9 @@ public class NewsView extends Composite<FlexLayout> {
     heroSection = new FlexLayout();
     heroSection.addClassName("news-view__hero");
     heroSection.setDirection(FlexDirection.COLUMN);
+    
+    // Set dynamic background based on theme
+    applyThemeAwareBackgrounds();
 
     // Background pattern
     Div bgPattern = new Div();
@@ -192,10 +195,15 @@ public class NewsView extends Composite<FlexLayout> {
     searchField.addClassName("news-view__search");
     searchField.setPlaceholder("Search news articles...");
     searchField.setPrefixComponent(TablerIcon.create("search"));
-    searchField.onValueChange(e -> {
-      searchTerm = e.getValue();
-      loadContent();
-    });
+    
+    // Add search button to suffix
+    Button searchButton = new Button();
+    searchButton.setIcon(TablerIcon.create("arrow-right"));
+    searchButton.setTheme(ButtonTheme.OUTLINED_PRIMARY);
+    searchButton.onClick(e -> performSearch());
+    searchField.setSuffixComponent(searchButton);
+    
+    // Don't search on every keystroke, wait for button click
 
     categoryFilter = new ChoiceBox();
     categoryFilter.addClassName("news-view__filter");
@@ -225,25 +233,40 @@ public class NewsView extends Composite<FlexLayout> {
 
     leftSection.add(searchField, categoryFilter, timeFilter);
 
-    // Right section - view options
+    // Right section - view options and actions
     FlexLayout rightSection = new FlexLayout();
     rightSection.addClassName("news-view__toolbar-right");
     rightSection.setAlignment(FlexAlignment.CENTER);
 
+    // Sort button
+    Button sortBtn = new Button("Sort");
+    sortBtn.setPrefixComponent(TablerIcon.create("arrows-sort"));
+    sortBtn.setTheme(ButtonTheme.OUTLINED_DEFAULT);
+    
+    // Export button
+    Button exportBtn = new Button();
+    exportBtn.setIcon(TablerIcon.create("download"));
+    exportBtn.setTheme(ButtonTheme.OUTLINED_DEFAULT);
+    
+    // Bookmark button
+    Button bookmarkBtn = new Button();
+    bookmarkBtn.setIcon(TablerIcon.create("bookmark"));
+    bookmarkBtn.setTheme(ButtonTheme.OUTLINED_DEFAULT);
+
     Span viewLabel = new Span("View:");
     viewLabel.addClassName("news-view__view-label");
 
-    Button gridViewBtn = new Button("");
+    Button gridViewBtn = new Button();
     gridViewBtn.addClassName("news-view__view-btn");
-    gridViewBtn.setPrefixComponent(TablerIcon.create("grid-dots"));
+    gridViewBtn.setIcon(TablerIcon.create("grid-dots"));
     gridViewBtn.setTheme(ButtonTheme.OUTLINED_DEFAULT);
 
-    Button listViewBtn = new Button("");
+    Button listViewBtn = new Button();
     listViewBtn.addClassName("news-view__view-btn");
-    listViewBtn.setPrefixComponent(TablerIcon.create("list"));
+    listViewBtn.setIcon(TablerIcon.create("list"));
     listViewBtn.setTheme(ButtonTheme.OUTLINED_DEFAULT);
 
-    rightSection.add(viewLabel, gridViewBtn, listViewBtn);
+    rightSection.add(sortBtn, exportBtn, bookmarkBtn, viewLabel, gridViewBtn, listViewBtn);
 
     toolbar.add(leftSection, rightSection);
     self.add(toolbar);
@@ -569,6 +592,9 @@ public class NewsView extends Composite<FlexLayout> {
     subscribeBtn.setTheme(ButtonTheme.DEFAULT);
 
     newsletterContainer.add(emailIcon, newsletterTitle, newsletterText, emailField, subscribeBtn);
+    
+    // Apply theme-aware background to newsletter
+    applyThemeAwareBackground(newsletterContainer);
     sidebarArea.add(newsletterContainer);
   }
 
@@ -615,6 +641,52 @@ public class NewsView extends Composite<FlexLayout> {
     // Simulate refreshing news
     allArticles = newsService.getMockCryptoNews();
     loadContent();
+  }
+
+  private void performSearch() {
+    searchTerm = searchField.getValue();
+    loadContent();
+  }
+  
+  private void applyThemeAwareBackgrounds() {
+    String theme = com.webforj.App.getTheme();
+    String backgroundGradient;
+    String textColor;
+    
+    if ("dark".equals(theme)) {
+      // Dark theme - lighter blue for better visibility
+      backgroundGradient = "linear-gradient(135deg, var(--dwc-color-primary-40) 0%, var(--dwc-color-primary-50) 100%)";
+      textColor = "var(--dwc-color-on-primary)";
+    } else {
+      // Light theme - darker blue for better contrast
+      backgroundGradient = "linear-gradient(135deg, var(--dwc-color-primary-60) 0%, var(--dwc-color-primary-70) 100%)";
+      textColor = "white";
+    }
+    
+    // Apply to hero section
+    if (heroSection != null) {
+      heroSection.setStyle("background", backgroundGradient);
+      heroSection.setStyle("color", textColor);
+    }
+  }
+  
+  private void applyThemeAwareBackground(Div component) {
+    String theme = com.webforj.App.getTheme();
+    String backgroundGradient;
+    String textColor;
+    
+    if ("dark".equals(theme)) {
+      // Dark theme - lighter blue for better visibility
+      backgroundGradient = "linear-gradient(135deg, var(--dwc-color-primary-40) 0%, var(--dwc-color-primary-50) 100%)";
+      textColor = "var(--dwc-color-on-primary)";
+    } else {
+      // Light theme - darker blue for better contrast
+      backgroundGradient = "linear-gradient(135deg, var(--dwc-color-primary-60) 0%, var(--dwc-color-primary-70) 100%)";
+      textColor = "white";
+    }
+    
+    component.setStyle("background", backgroundGradient);
+    component.setStyle("color", textColor);
   }
 
   /**

@@ -5,6 +5,15 @@
    1. GLOBAL STYLES AND RESETS
    ======================================== */
 
+/* Common utility classes */
+.u-margin-bottom-m {
+  margin: 0 0 var(--dwc-space-m) 0 !important;
+}
+
+.u-margin-bottom-xl {
+  margin: 0 0 var(--dwc-space-xl) 0 !important;
+}
+
 /* Fix body and html scrolling */
 html,
 body {
@@ -75,7 +84,6 @@ dwc-app-layout::part(content) {
    ======================================== */
 
 .data-card {
-  /* font-family: var(--dwc-font-family); */
   background-color: var(--dwc-surface-3);
   flex: 1 1 300px;
   padding: var(--dwc-space-m);
@@ -194,9 +202,7 @@ dwc-app-layout::part(content) {
    ======================================== */
 
 dwc-table {
-  /* font-family: var(--dwc-font-family); */
   min-height: 400px;
-  /* height: 62dvh; */
   overflow: hidden;
   background-color: var(--dwc-surface-3);
   animation: fadeInUp 600ms ease-out 350ms;
@@ -343,7 +349,6 @@ dwc-table::part(crypto-symbol) {
    ======================================== */
 
 dwc-toolbar h1 {
-  /* font-family: "Inter", var(--dwc-font-family); */
   font-size: 1.75rem;
   font-weight: var(--dwc-font-weight-normal);
   letter-spacing: -0.01em;
@@ -375,7 +380,6 @@ dwc-toolbar h1 {
    ======================================== */
 
 .news-drawer-title {
-  /* font-family: "Inter", var(--dwc-font-family); */
   font-size: 1.5rem;
   font-weight: var(--dwc-font-weight-light);
   letter-spacing: -0.02em;
@@ -386,62 +390,6 @@ dwc-toolbar h1 {
   animation: slideInFromRight var(--dwc-transition-slow) ease-out;
 }
 
-.news-card {
-  padding: var(--dwc-space-m);
-  border-bottom: var(--dwc-border-width) solid var(--dwc-color-gray-95);
-  background-color: var(--dwc-surface-2);
-  transition: background-color var(--dwc-transition-fast) ease;
-  cursor: pointer;
-}
-
-.news-card:hover {
-  background-color: var(--dwc-surface-3);
-}
-
-/* News card title */
-.news-card h3 {
-  margin: 0;
-  font-size: var(--dwc-font-size-l);
-  font-weight: 500;
-  line-height: 1.3;
-  color: var(--dwc-color-on-surface);
-}
-
-/* News card description */
-.news-card p {
-  margin: var(--dwc-space-xs) 0;
-  font-size: var(--dwc-font-size-s);
-  color: var(--dwc-color-gray-15);
-  line-height: 1.5;
-}
-
-/* News card meta info container */
-.news-card__meta {
-  display: flex;
-  gap: var(--dwc-space-xs);
-  align-items: center;
-  font-size: var(--dwc-font-size-xs);
-  color: var(--dwc-color-gray-15);
-}
-
-/* News card source */
-.news-card__meta span:first-child {
-  font-weight: 500;
-}
-
-/* News card separator */
-.news-card__meta span:nth-child(2) {
-  color: var(--dwc-color-gray-10);
-}
-
-/* News card read more link */
-.news-card a {
-  font-size: var(--dwc-font-size-s);
-  color: var(--dwc-color-info-40);
-  text-decoration: none;
-  font-weight: 500;
-  margin-top: var(--dwc-space-xs);
-}
 
 /* ========================================
    8. ANIMATIONS

@@ -59,6 +59,10 @@ public class SettingsView extends Composite<FlexLayout> {
   }
 
   private void createSettingsTabs() {
+    // Create container for tabs and content
+    Div tabsContainer = new Div();
+    tabsContainer.addClassName("settings-view__tabs-container");
+    
     settingsTabs = new TabbedPane();
     settingsTabs.addClassName("settings-view__tabs");
     
@@ -94,7 +98,9 @@ public class SettingsView extends Composite<FlexLayout> {
       }
     });
     
-    self.add(settingsTabs, tabContent);
+    // Add tabs and content to the container
+    tabsContainer.add(settingsTabs, tabContent);
+    self.add(tabsContainer);
   }
 
   private void showGeneralSettings(Div container) {

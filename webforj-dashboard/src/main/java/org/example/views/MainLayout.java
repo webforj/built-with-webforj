@@ -86,13 +86,9 @@ public class MainLayout extends Composite<AppLayout> {
     AppNavItem news = new AppNavItem("News", NewsView.class);
     news.setPrefixComponent(TablerIcon.create("news"));
     
-    // Analytics
-    AppNavItem analytics = new AppNavItem("Analytics", AnalyticsView.class);
-    analytics.setPrefixComponent(TablerIcon.create("chart-line"));
-    
-    // Portfolio
-    AppNavItem portfolio = new AppNavItem("Portfolio", PortfolioView.class);
-    portfolio.setPrefixComponent(TablerIcon.create("wallet"));
+    // Analytics & Portfolio
+    AppNavItem analytics = new AppNavItem("Analytics & Portfolio", AnalyticsView.class);
+    analytics.setPrefixComponent(TablerIcon.create("chart-pie"));
     
     // Settings
     AppNavItem settings = new AppNavItem("Settings", SettingsView.class);
@@ -102,7 +98,6 @@ public class MainLayout extends Composite<AppLayout> {
     appNav.addItem(dashboard);
     appNav.addItem(news);
     appNav.addItem(analytics);
-    appNav.addItem(portfolio);
     appNav.addItem(settings);
     
     // Add navigation to drawer

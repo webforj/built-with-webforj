@@ -10,7 +10,8 @@
       "Bash(rg:*)",
       "WebFetch(domain:javadoc.io)",
       "Bash(timeout 30s mvn compile:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   },

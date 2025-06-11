@@ -6,11 +6,13 @@
   background: var(--dwc-surface-1);
   animation: fadeInUp 500ms ease-out;
   animation-fill-mode: both;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .news-view__header {
   background: var(--dwc-surface-2);
-  padding: var(--dwc-space-l) var(--dwc-space-xl);
+  padding: var(--dwc-space-xl);
   border-bottom: 1px solid var(--dwc-color-gray-90);
   gap: var(--dwc-space-m);
 }
@@ -41,8 +43,6 @@
 }
 
 .news-view__hero {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  color: white;
   padding: var(--dwc-space-xl);
   position: relative;
   overflow: hidden;
@@ -55,7 +55,16 @@
   right: 0;
   bottom: 0;
   opacity: 0.1;
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><defs><pattern id="a" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle fill="white" cx="10" cy="10" r="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23a)"/></svg>');
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1) 25%,
+    transparent 25%,
+    transparent 75%,
+    rgba(255, 255, 255, 0.1) 75%,
+    rgba(255, 255, 255, 0.1)
+  );
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
 }
 
 .news-view__hero-content {
@@ -88,7 +97,7 @@
   background-size: cover;
   background-position: center;
   border-radius: var(--dwc-border-radius-l);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .news-view__toolbar {
@@ -133,10 +142,7 @@
 }
 
 .news-view__main-container {
-  padding: var(--dwc-space-xl);
   gap: var(--dwc-space-xl);
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
 .news-view__main-content {
@@ -192,7 +198,8 @@
 .news-view__card {
   background: var(--dwc-surface-1);
   border-radius: var(--dwc-border-radius-m);
-  border: 1px solid var(--dwc-color-gray-95);
+  border: none;
+  border: 1px solid var(--dwc-color-gray-90);
   cursor: pointer;
   transition: all var(--dwc-transition-medium) ease;
   animation: fadeInUp 600ms ease-out;
@@ -200,14 +207,30 @@
 }
 
 /* Stagger animation for multiple cards */
-.news-view__card:nth-child(1) { animation-delay: 100ms; }
-.news-view__card:nth-child(2) { animation-delay: 150ms; }
-.news-view__card:nth-child(3) { animation-delay: 200ms; }
-.news-view__card:nth-child(4) { animation-delay: 250ms; }
-.news-view__card:nth-child(5) { animation-delay: 300ms; }
-.news-view__card:nth-child(6) { animation-delay: 350ms; }
-.news-view__card:nth-child(7) { animation-delay: 400ms; }
-.news-view__card:nth-child(8) { animation-delay: 450ms; }
+.news-view__card:nth-child(1) {
+  animation-delay: 100ms;
+}
+.news-view__card:nth-child(2) {
+  animation-delay: 150ms;
+}
+.news-view__card:nth-child(3) {
+  animation-delay: 200ms;
+}
+.news-view__card:nth-child(4) {
+  animation-delay: 250ms;
+}
+.news-view__card:nth-child(5) {
+  animation-delay: 300ms;
+}
+.news-view__card:nth-child(6) {
+  animation-delay: 350ms;
+}
+.news-view__card:nth-child(7) {
+  animation-delay: 400ms;
+}
+.news-view__card:nth-child(8) {
+  animation-delay: 450ms;
+}
 
 .news-view__card--trending {
   flex: 1 1 200px;
@@ -331,9 +354,10 @@
 
 .news-view__market-item {
   padding: var(--dwc-space-s);
-  background: var(--dwc-surface-1);
+  background: inherit;
   border-radius: var(--dwc-border-radius-s);
-  border: 1px solid var(--dwc-color-gray-95);
+  border: none;
+  border-bottom: 1px solid var(--dwc-color-gray-95);
 }
 
 .news-view__market-name {
@@ -382,10 +406,8 @@
 }
 
 .news-view__newsletter {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
   border-radius: var(--dwc-border-radius-l);
   padding: var(--dwc-space-l);
-  color: white;
   text-align: center;
 }
 
@@ -396,7 +418,7 @@
 
 .news-view__newsletter-title {
   margin: 0 0 var(--dwc-space-s) 0;
-  color: white;
+  color: inherit;
 }
 
 .news-view__newsletter-text {
@@ -407,23 +429,23 @@
 
 .news-view__newsletter-email {
   margin-bottom: var(--dwc-space-m);
+  width: 100%;
 }
 
 .news-view__newsletter-btn {
-  color: white;
-  border-color: white;
+  color: var(--dwc-color-on-primary);
+  border-color: var(--dwc-color-on-primary);
   width: 100%;
 }
 
 /* Additional specific classes for remaining elements */
 .news-view__hero-button {
-  color: white;
-  border: 1px solid white;
+  color: var(--dwc-color-on-primary);
+  border: 1px solid var(--dwc-color-on-primary);
   border-radius: var(--dwc-border-radius-m);
   padding: var(--dwc-space-s) var(--dwc-space-m);
   text-decoration: none;
   display: inline-block;
-  transition: all var(--dwc-transition-fast) ease;
 }
 
 .news-view__articles-title {
@@ -436,12 +458,14 @@
 }
 
 .news-view__article-card {
-  background: var(--dwc-surface-1);
+  background: inherit;
   border-radius: var(--dwc-border-radius-m);
-  border: 1px solid var(--dwc-color-gray-95);
+  border: none;
+  border-bottom: 1px solid var(--dwc-color-gray-90);
   overflow: hidden;
   cursor: pointer;
   transition: all var(--dwc-transition-medium) ease;
+  margin-bottom: var(--dwc-space-m);
 }
 
 .news-view__article-meta {
@@ -473,12 +497,6 @@
 }
 
 /* Hover states */
-.news-view__card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: var(--dwc-color-gray-80);
-}
-
 .news-view__market-item:hover {
   background: var(--dwc-surface-3);
 }
@@ -487,14 +505,7 @@
   background: var(--dwc-surface-1);
 }
 
-/* Dark theme modifiers */
-.app-theme-dark .news-view__hero {
-  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
-}
-
-.app-theme-dark .news-view__newsletter {
-  background: linear-gradient(135deg, #1e40af, #1d4ed8);
-}
+/* Removed dark theme modifiers - now handled above with CSS variables */
 
 /* Modern News Grid Layout */
 .news-view__grid--modern {
@@ -594,16 +605,16 @@
   .news-view {
     padding: var(--dwc-space-m);
   }
-  
+
   .news-view__grid--modern {
     grid-template-columns: 1fr;
     gap: var(--dwc-space-l);
   }
-  
+
   .news-view__card--modern {
     height: 350px;
   }
-  
+
   .news-view__card--modern .news-view__image {
     height: 160px;
   }
@@ -613,11 +624,11 @@
   .news-view {
     padding: var(--dwc-space-s);
   }
-  
+
   .news-view__card--modern {
     height: 320px;
   }
-  
+
   .news-view__card--modern .news-view__image {
     height: 140px;
   }
