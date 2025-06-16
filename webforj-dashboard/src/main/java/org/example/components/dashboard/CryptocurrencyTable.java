@@ -1,4 +1,4 @@
-package org.example.components;
+package org.example.components.dashboard;
 
 import org.example.models.Cryptocurrency;
 import org.example.utils.CryptoIconRenderer;

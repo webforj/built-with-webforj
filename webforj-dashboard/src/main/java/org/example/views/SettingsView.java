@@ -1,5 +1,7 @@
 package org.example.views;
 
+import org.example.components.settings.SettingsSection;
+
 import com.webforj.App;
 import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Composite;
@@ -10,7 +12,6 @@ import com.webforj.component.field.TextField;
 import com.webforj.component.field.PasswordField;
 import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.H2;
-import com.webforj.component.html.elements.H3;
 import com.webforj.component.html.elements.Paragraph;
 import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.layout.flexlayout.FlexDirection;
@@ -26,20 +27,14 @@ import com.webforj.router.annotation.Route;
 @StyleSheet("ws://settings-view.css")
 @FrameTitle("Settings")
 public class SettingsView extends Composite<FlexLayout> {
-  private FlexLayout self = getBoundComponent();
+  private final FlexLayout self = getBoundComponent();
   private TabbedPane settingsTabs;
-  private boolean isDarkTheme;
 
   public SettingsView() {
     self.addClassName("settings-view");
     self.setDirection(FlexDirection.COLUMN);
     
-    isDarkTheme = "dark".equals(App.getTheme());
-    
-    // Create header
     createHeader();
-    
-    // Create settings tabs
     createSettingsTabs();
   }
 
@@ -110,7 +105,7 @@ public class SettingsView extends Composite<FlexLayout> {
     
     
     // Display preferences
-    Div displaySection = createSettingsSection("Display Preferences");
+    SettingsSection displaySection = createSettingsSection("Display Preferences", "Configure your display and currency preferences");
     
     FlexLayout displayContainer = new FlexLayout();
     displayContainer.setDirection(FlexDirection.COLUMN)
@@ -130,10 +125,10 @@ public class SettingsView extends Composite<FlexLayout> {
     timeFormatBox.setValue("12-hour");
     
     displayContainer.add(currencyBox, timeFormatBox);
-    displaySection.add(displayContainer);
+    displaySection.addContent(displayContainer);
     
     // Data refresh
-    Div dataSection = createSettingsSection("Data Refresh");
+    SettingsSection dataSection = createSettingsSection("Data Refresh", "Configure how often data is updated");
     
     FlexLayout dataContainer = new FlexLayout();
     dataContainer.setDirection(FlexDirection.COLUMN)
@@ -151,7 +146,7 @@ public class SettingsView extends Composite<FlexLayout> {
     autoRefreshSwitch.setChecked(true);
     
     dataContainer.add(refreshInterval, autoRefreshSwitch);
-    dataSection.add(dataContainer);
+    dataSection.addContent(dataContainer);
     
     content.add(displaySection, dataSection);
     container.add(content);
@@ -163,7 +158,7 @@ public class SettingsView extends Composite<FlexLayout> {
     content.setDirection(FlexDirection.COLUMN);
     
     // Email notifications
-    Div emailSection = createSettingsSection("Email Notifications");
+    SettingsSection emailSection = createSettingsSection("Email Notifications", "Manage your email notification preferences");
     
     FlexLayout emailContainer = new FlexLayout();
     emailContainer.setDirection(FlexDirection.COLUMN)
@@ -182,10 +177,10 @@ public class SettingsView extends Composite<FlexLayout> {
     portfolioSummary.setChecked(true);
     
     emailContainer.add(priceAlerts, newsUpdates, portfolioSummary);
-    emailSection.add(emailContainer);
+    emailSection.addContent(emailContainer);
     
     // Push notifications
-    Div pushSection = createSettingsSection("Push Notifications");
+    SettingsSection pushSection = createSettingsSection("Push Notifications", "Configure desktop and mobile push notifications");
     
     FlexLayout pushContainer = new FlexLayout();
     pushContainer.setDirection(FlexDirection.COLUMN)
@@ -200,10 +195,10 @@ public class SettingsView extends Composite<FlexLayout> {
     soundAlerts.setChecked(false);
     
     pushContainer.add(desktopNotifications, soundAlerts);
-    pushSection.add(pushContainer);
+    pushSection.addContent(pushContainer);
     
     // Alert thresholds
-    Div thresholdSection = createSettingsSection("Alert Thresholds");
+    SettingsSection thresholdSection = createSettingsSection("Alert Thresholds", "Set when to receive alerts based on price and volume changes");
     
     FlexLayout thresholdContainer = new FlexLayout();
     thresholdContainer.setDirection(FlexDirection.COLUMN)
@@ -224,7 +219,7 @@ public class SettingsView extends Composite<FlexLayout> {
     volumeChangeThreshold.setStep(1.0);
     
     thresholdContainer.add(priceChangeThreshold, volumeChangeThreshold);
-    thresholdSection.add(thresholdContainer);
+    thresholdSection.addContent(thresholdContainer);
     
     content.add(emailSection, pushSection, thresholdSection);
     container.add(content);
@@ -236,7 +231,7 @@ public class SettingsView extends Composite<FlexLayout> {
     content.setDirection(FlexDirection.COLUMN);
     
     // API configuration
-    Div apiSection = createSettingsSection("API Configuration");
+    SettingsSection apiSection = createSettingsSection("API Configuration", "Configure your exchange API settings");
     
     FlexLayout apiContainer = new FlexLayout();
     apiContainer.setDirection(FlexDirection.COLUMN)
@@ -257,10 +252,10 @@ public class SettingsView extends Composite<FlexLayout> {
     exchangeBox.add("Bitfinex");
     
     apiContainer.add(apiKey, apiSecret, exchangeBox);
-    apiSection.add(apiContainer);
+    apiSection.addContent(apiContainer);
     
     // Webhooks
-    Div webhookSection = createSettingsSection("Webhooks");
+    SettingsSection webhookSection = createSettingsSection("Webhooks", "Configure webhook endpoints for real-time updates");
     
     FlexLayout webhookContainer = new FlexLayout();
     webhookContainer.setDirection(FlexDirection.COLUMN)
@@ -275,7 +270,7 @@ public class SettingsView extends Composite<FlexLayout> {
     webhookEnabled.setChecked(false);
     
     webhookContainer.add(webhookUrl, webhookEnabled);
-    webhookSection.add(webhookContainer);
+    webhookSection.addContent(webhookContainer);
     
     content.add(apiSection, webhookSection);
     container.add(content);
@@ -287,7 +282,7 @@ public class SettingsView extends Composite<FlexLayout> {
     content.setDirection(FlexDirection.COLUMN);
     
     // Data privacy
-    Div privacySection = createSettingsSection("Data Privacy");
+    SettingsSection privacySection = createSettingsSection("Data Privacy", "Control how your data is collected and used");
     
     FlexLayout privacyContainer = new FlexLayout();
     privacyContainer.setDirection(FlexDirection.COLUMN)
@@ -302,10 +297,10 @@ public class SettingsView extends Composite<FlexLayout> {
     shareData.setChecked(false);
     
     privacyContainer.add(analyticsTracking, shareData);
-    privacySection.add(privacyContainer);
+    privacySection.addContent(privacyContainer);
     
     // Data management
-    Div dataManagementSection = createSettingsSection("Data Management");
+    SettingsSection dataManagementSection = createSettingsSection("Data Management", "Export or delete your personal data");
     
     Button exportData = new Button("Export My Data");
     exportData.setPrefixComponent(TablerIcon.create("download"));
@@ -318,10 +313,10 @@ public class SettingsView extends Composite<FlexLayout> {
     buttonGroup.setSpacing("var(--dwc-space-m)");
     buttonGroup.add(exportData, deleteData);
     
-    dataManagementSection.add(buttonGroup);
+    dataManagementSection.addContent(buttonGroup);
     
     // Account
-    Div accountSection = createSettingsSection("Account");
+    SettingsSection accountSection = createSettingsSection("Account", "Manage your account settings and security");
     
     Button changePassword = new Button("Change Password");
     changePassword.setPrefixComponent(TablerIcon.create("key"));
@@ -333,20 +328,13 @@ public class SettingsView extends Composite<FlexLayout> {
     accountButtons.setSpacing("var(--dwc-space-m)");
     accountButtons.add(changePassword, deactivateAccount);
     
-    accountSection.add(accountButtons);
+    accountSection.addContent(accountButtons);
     
     content.add(privacySection, dataManagementSection, accountSection);
     container.add(content);
   }
 
-  private Div createSettingsSection(String title) {
-    Div section = new Div();
-    section.addClassName("settings-view__section");
-    
-    H3 sectionTitle = new H3(title);
-    sectionTitle.addClassName("settings-view__section-title");
-    
-    section.add(sectionTitle);
-    return section;
+  private SettingsSection createSettingsSection(String title, String description) {
+    return new SettingsSection(title, description);
   }
 }

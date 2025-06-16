@@ -1,4 +1,4 @@
-package org.example.components;
+package org.example.components.news;
 
 import com.webforj.component.Composite;
 import com.webforj.component.html.elements.Div;

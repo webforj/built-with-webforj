@@ -9,7 +9,7 @@
 }
 
 .settings-view__tabs-container {
-  background: var(--dwc-surface-2);
+  background: var(--dwc-surface-3);
   border-radius: var(--dwc-border-radius-l);
   padding: var(--dwc-space-l);
   border: 1px solid var(--dwc-color-gray-90);
@@ -23,7 +23,7 @@
 .settings-view__section {
   transition: border-color var(--dwc-transition-medium) ease;
   border: var(--dwc-border-width) solid var(--dwc-color-gray-90);
-  background: var(--dwc-surface-1);
+  background: var(--dwc-surface-3);
   border-radius: var(--dwc-border-radius-m);
   padding: var(--dwc-space-l);
 }
@@ -39,8 +39,6 @@
 .settings-view__section-title {
   margin: 0 0 var(--dwc-space-m) 0;
 }
-
-/* Removed duplicate tab-content definition - now defined above */
 
 /* Header elements */
 .settings-view__header {

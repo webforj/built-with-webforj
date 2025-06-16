@@ -13,3 +13,48 @@
 .main-layout__nav {
   flex: 1;
 }
+
+/* Toolbar Styles */
+.main-layout__toolbar-container {
+  gap: var(--dwc-space-l);
+}
+
+.main-layout__toolbar-actions {
+  gap: var(--dwc-space-xs);
+}
+
+.main-layout__toolbar-btn {
+  padding: var(--dwc-space-xs);
+  transition: all var(--dwc-transition-fast) ease;
+}
+
+.main-layout__toolbar-btn:hover {
+  background: var(--dwc-surface-2);
+  transform: scale(1.05);
+}
+
+.main-layout__toolbar-btn:active {
+  transform: scale(0.95);
+}
+
+.main-layout__toolbar-btn--theme {
+  border-left: 1px solid var(--dwc-color-gray-90);
+  margin-left: var(--dwc-space-s);
+  padding-left: var(--dwc-space-s);
+}
+
+.main-layout__toolbar-btn--clickable {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-layout__toolbar-btn--clickable:hover {
+  background: var(--dwc-surface-2);
+  transform: scale(1.05);
+}
+
+.main-layout__toolbar-btn--clickable:active {
+  transform: scale(0.95);
+}

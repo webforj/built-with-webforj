@@ -1,4 +1,4 @@
-package org.example.components;
+package org.example.components.dashboard;
 
 import org.example.utils.FormatUtils;
 import com.webforj.component.Composite;
@@ -24,35 +24,30 @@ import java.time.format.DateTimeFormatter;
 
 public class DashboardCard extends Composite<FlexLayout> {
 
-  FlexLayout self = getBoundComponent();
-  FlexLayout textData = new FlexLayout();
-
-  double percentage = 0;
-
-  Paragraph title = new Paragraph();
-  Paragraph price = new Paragraph();
-  Paragraph percentChange = new Paragraph();
-  FlexLayout numericData = new FlexLayout(price, percentChange);
-  FlexLayout mainText = new FlexLayout(title, numericData);
-
-  Button followButton = new Button("Follow");
-  Paragraph details = new Paragraph();
-  FlexLayout detailText = new FlexLayout(followButton, details);
+  private final FlexLayout self = getBoundComponent();
+  private final FlexLayout textData = new FlexLayout();
+  private final Paragraph title = new Paragraph();
+  private final Paragraph price = new Paragraph();
+  private final Paragraph percentChange = new Paragraph();
+  private final FlexLayout numericData = new FlexLayout(price, percentChange);
+  private final FlexLayout mainText = new FlexLayout(title, numericData);
+  private final Button followButton = new Button("Follow");
+  private final Paragraph details = new Paragraph();
+  private final FlexLayout detailText = new FlexLayout(followButton, details);
+  private final GoogleChart chart;
+  private final Random random = new Random();
+  
+  private double percentage = 0;
   private boolean isFollowing = false;
-
-  GoogleChart chart;
-  private GoogleChart.Type chartType = GoogleChart.Type.AREA;
-
-  Random random = new Random();
+  private final GoogleChart.Type chartType;
 
   public DashboardCard() {
-    this.chart = new GoogleChart(this.chartType);
-    initComponent();
+    this(GoogleChart.Type.AREA);
   }
 
   public DashboardCard(GoogleChart.Type chartType) {
     this.chartType = chartType;
-    this.chart = new GoogleChart(this.chartType);
+    this.chart = new GoogleChart(chartType);
     initComponent();
   }
 
@@ -62,7 +57,7 @@ public class DashboardCard extends Composite<FlexLayout> {
 
   public DashboardCard(String title, double price, double percent, GoogleChart.Type chartType) {
     this.chartType = chartType;
-    this.chart = new GoogleChart(this.chartType);
+    this.chart = new GoogleChart(chartType);
     this.title.setText(title);
     this.price.setText(formatValue(title, price));
     this.percentChange.setText((percent >= 0 ? "+" : "") + String.format("%.2f", percent) + "%");
@@ -146,22 +141,19 @@ public class DashboardCard extends Composite<FlexLayout> {
         "gridlines", Map.of("color", "var(--dwc-color-gray-20)"),
         "baselineColor", "var(--dwc-color-gray-20)"));
 
-    // Chart type specific options
     switch (chartType) {
-      case AREA:
+      case AREA -> {
         options.put("areaOpacity", 0.3);
         options.put("lineWidth", 2);
         options.put("pointSize", 0);
-        break;
-      case LINE:
+      }
+      case LINE -> {
         options.put("lineWidth", 3);
         options.put("pointSize", 0);
         options.put("curveType", "function");
-        break;
-      case COLUMN:
-        options.put("bar", Map.of("groupWidth", "80%"));
-        break;
-      case SCATTER:
+      }
+      case COLUMN -> options.put("bar", Map.of("groupWidth", "80%"));
+      case SCATTER -> {
         options.put("pointSize", 8);
         options.put("pointShape", "circle");
         options.put("trendlines", Map.of(
@@ -172,10 +164,7 @@ public class DashboardCard extends Composite<FlexLayout> {
                 "opacity", 0.3,
                 "showR2", false,
                 "visibleInLegend", false)));
-
-        break;
-      default:
-        break;
+      }
     }
 
     options.put("tooltip", Map.of("trigger", "none"));
@@ -203,12 +192,11 @@ public class DashboardCard extends Composite<FlexLayout> {
     double trendFactor = percentage >= 0 ? 1.005 : 0.995;
     double momentum = 0;
 
-    int dataPoints;
-    switch (chartType) {
-      case GoogleChart.Type.COLUMN -> dataPoints = 10;
-      case GoogleChart.Type.SCATTER -> dataPoints = 30;
-      default -> dataPoints = 20;
-    }
+    int dataPoints = switch (chartType) {
+      case COLUMN -> 10;
+      case SCATTER -> 30;
+      default -> 20;
+    };
 
     for (int i = 0; i < dataPoints; i++) {
       String label;
@@ -264,5 +252,13 @@ public class DashboardCard extends Composite<FlexLayout> {
       // Show unfollowing toast
       Toast.show("Unfollowed " + title.getText());
     }
+  }
+  
+  /**
+   * Gets the GoogleChart instance for this card
+   * @return the chart component
+   */
+  public GoogleChart getChart() {
+    return chart;
   }
 }

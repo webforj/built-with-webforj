@@ -3,10 +3,13 @@ package org.example.views;
 import java.util.Set;
 
 import com.webforj.App;
+import com.webforj.Interval;
 import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Component;
 import com.webforj.component.Composite;
 import com.webforj.component.html.elements.H1;
+import com.webforj.component.html.elements.Div;
+import com.webforj.component.html.elements.Img;
 import com.webforj.component.icons.IconButton;
 import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.layout.applayout.AppLayout;
@@ -15,10 +18,12 @@ import com.webforj.component.layout.toolbar.Toolbar;
 import com.webforj.component.layout.appnav.AppNav;
 import com.webforj.component.layout.appnav.AppNavItem;
 import com.webforj.component.layout.applayout.AppDrawerToggle;
+import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import org.example.components.DrawerLogo;
 import org.example.components.DrawerFooter;
+import org.example.ChartRedrawable;
 import com.webforj.router.Router;
 import com.webforj.router.annotation.FrameTitle;
 import com.webforj.router.annotation.Route;
@@ -27,27 +32,22 @@ import com.webforj.router.event.NavigateEvent;
 @Route
 @StyleSheet("ws://main-layout.css")
 public class MainLayout extends Composite<AppLayout> {
-  private AppLayout self = getBoundComponent();
-  private H1 title = new H1();
+  private final AppLayout self = getBoundComponent();
+  private final H1 title = new H1();
   private boolean isDarkTheme = false;
   private IconButton themeToggle;
-  private IconButton drawerToggle;
-  private AppNav appNav;
 
   public MainLayout() {
-    String currentTheme = App.getTheme();
-    isDarkTheme = "dark".equals(currentTheme);
-    
+    isDarkTheme = "dark".equals(App.getTheme());
     setHeader();
     setNavDrawer();
-    
-    // Start with drawer open on desktop
     self.setDrawerOpened(true);
-    
-    // Enable scrolling for the content area
     self.addClassName("main-layout");
-    
     Router.getCurrent().onNavigate(this::onNavigate);
+    
+    // Add drawer event listeners for chart redrawing
+    self.onDrawerOpen(e -> redrawChartsInCurrentView());
+    self.onDrawerClose(e -> redrawChartsInCurrentView());
   }
 
   private void setHeader() {
@@ -57,10 +57,56 @@ public class MainLayout extends Composite<AppLayout> {
     toolbar.addToStart(new AppDrawerToggle());
     toolbar.addToTitle(title);
     
+    // Create main toolbar actions (left group)
+    FlexLayout mainActions = new FlexLayout();
+    mainActions.addClassName("main-layout__toolbar-actions");
+    mainActions.setAlignment(FlexAlignment.CENTER);
+    
+    // Language selector (US flag)
+    Div languageBtn = new Div();
+    languageBtn.addClassName("main-layout__toolbar-btn main-layout__toolbar-btn--clickable");
+    Img flagImg = new Img();
+    flagImg.setSrc("https://flagcdn.com/w20/us.png");
+    flagImg.setAlt("US Flag");
+    flagImg.setStyle("width", "16px");
+    flagImg.setStyle("height", "12px");
+    flagImg.setStyle("border-radius", "2px");
+    languageBtn.add(flagImg);
+    
+    // Notifications
+    IconButton notificationsBtn = new IconButton(TablerIcon.create("bell"));
+    notificationsBtn.addClassName("main-layout__toolbar-btn");
+    
+    // Help/Support
+    IconButton helpBtn = new IconButton(TablerIcon.create("help-circle"));
+    helpBtn.addClassName("main-layout__toolbar-btn");
+    
+    // Profile menu (avatar)
+    Div profileBtn = new Div();
+    profileBtn.addClassName("main-layout__toolbar-btn main-layout__toolbar-btn--clickable");
+    Img avatarImg = new Img();
+    avatarImg.setSrc("https://static.vecteezy.com/system/resources/previews/024/183/502/original/male-avatar-portrait-of-a-young-man-with-a-beard-illustration-of-male-character-in-modern-color-style-vector.jpg");
+    avatarImg.setAlt("Profile Avatar");
+    avatarImg.setStyle("width", "24px");
+    avatarImg.setStyle("height", "24px");
+    avatarImg.setStyle("border-radius", "50%");
+    avatarImg.setStyle("object-fit", "cover");
+    profileBtn.add(avatarImg);
+    
+    mainActions.add(languageBtn, notificationsBtn, helpBtn, profileBtn);
+    
+    // Theme toggle (separated on the right)
     themeToggle = new IconButton(TablerIcon.create(isDarkTheme ? "moon" : "sun"));
+    themeToggle.addClassName("main-layout__toolbar-btn main-layout__toolbar-btn--theme");
     themeToggle.onClick(e -> toggleTheme());
     
-    toolbar.addToEnd(themeToggle);
+    // Create container for all toolbar items
+    FlexLayout toolbarContainer = new FlexLayout();
+    toolbarContainer.addClassName("main-layout__toolbar-container");
+    toolbarContainer.setAlignment(FlexAlignment.CENTER);
+    toolbarContainer.add(mainActions, themeToggle);
+    
+    toolbar.addToEnd(toolbarContainer);
 
     self.addToHeader(toolbar);
   }
@@ -74,43 +120,31 @@ public class MainLayout extends Composite<AppLayout> {
     // Add logo
     drawerLayout.add(new DrawerLogo());
     
-    // Create navigation
-    appNav = new AppNav();
+    AppNav appNav = new AppNav();
     appNav.addClassName("main-layout__nav");
     
-    // Dashboard
     AppNavItem dashboard = new AppNavItem("Dashboard", DashboardView.class);
     dashboard.setPrefixComponent(TablerIcon.create("dashboard"));
     
-    // News
     AppNavItem news = new AppNavItem("News", NewsView.class);
     news.setPrefixComponent(TablerIcon.create("news"));
     
-    // Analytics & Portfolio
     AppNavItem analytics = new AppNavItem("Analytics & Portfolio", AnalyticsView.class);
     analytics.setPrefixComponent(TablerIcon.create("chart-pie"));
     
-    // Settings
     AppNavItem settings = new AppNavItem("Settings", SettingsView.class);
     settings.setPrefixComponent(TablerIcon.create("settings"));
     
-    // Add all items to navigation
     appNav.addItem(dashboard);
     appNav.addItem(news);
     appNav.addItem(analytics);
     appNav.addItem(settings);
     
-    // Add navigation to drawer
     drawerLayout.add(appNav);
-    
-    // Add footer component
     drawerLayout.add(new DrawerFooter());
     
-    // Configure drawer
     self.setDrawerHeaderVisible(false);
     self.addToDrawer(drawerLayout);
-    
-    // Set drawer to left side (default)
     self.setDrawerPlacement(DrawerPlacement.LEFT);
   }
 
@@ -129,5 +163,38 @@ public class MainLayout extends Composite<AppLayout> {
     isDarkTheme = !isDarkTheme;
     App.setTheme(isDarkTheme ? "dark" : "light");
     themeToggle.setName(isDarkTheme ? "moon" : "sun");
+  }
+  
+  /**
+   * Triggers chart redraw in the current view if it implements ChartRedrawable
+   */
+  private void redrawChartsInCurrentView() {
+    // Small delay to allow drawer animation to complete    
+    // Use an interval that fires once after a delay
+    Interval interval = new Interval(0.2f, e -> {
+      // Stop the interval immediately since we only want it to fire once
+      e.getInterval().stop();
+      
+      // Find and redraw charts in the current view
+      findAndRedrawCharts();
+    });
+    interval.start();
+  }
+  
+  /**
+   * Finds ChartRedrawable components in the current window and redraws their charts
+   */
+  private void findAndRedrawCharts() {
+    try {
+      // Find all components in the current window that implement ChartRedrawable
+      self.getComponents().stream()
+          .filter(c -> c instanceof ChartRedrawable)
+          .filter(c -> c.getClass().getSimpleName().endsWith("View")) // Only view components
+          .findFirst()
+          .ifPresent(view -> {
+            ((ChartRedrawable) view).redrawCharts();
+          });
+    } catch (Exception ex) {
+    }
   }
 }

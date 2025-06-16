@@ -5,14 +5,6 @@
    1. GLOBAL STYLES AND RESETS
    ======================================== */
 
-/* Common utility classes */
-.u-margin-bottom-m {
-  margin: 0 0 var(--dwc-space-m) 0 !important;
-}
-
-.u-margin-bottom-xl {
-  margin: 0 0 var(--dwc-space-xl) 0 !important;
-}
 
 /* Fix body and html scrolling */
 html,
@@ -61,8 +53,6 @@ body {
 /* App Layout Configuration */
 dwc-app-layout {
   --dwc-app-layout-header-height: 60px;
-
-  /* --dwc-app-layout-drawer-placement: right; */
 }
 
 dwc-app-layout::part(drawer) {
@@ -570,26 +560,6 @@ google-chart {
   transition: opacity var(--dwc-transition-fast) ease;
 }
 
-/* ========================================
-   11. NAVIGATION AND LAYOUT UPDATES
-   ======================================== */
-
-/* App Navigation Styling */
-/* 
-dwc-app-nav::part(item) {
-  margin-bottom: var(--dwc-space-xs);
-  border-radius: var(--dwc-border-radius-m);
-  transition: all var(--dwc-transition-fast) ease;
-}
-
-dwc-app-nav::part(item):hover {
-  background-color: var(--dwc-surface-3);
-}
-
-dwc-app-nav::part(item-selected) {
-  background-color: var(--dwc-color-primary-95);
-  color: var(--dwc-color-primary-40);
-} */
 
 /* ========================================
    12. DRAWER LOGO STYLES
@@ -673,6 +643,3 @@ dwc-app-nav::part(item-selected) {
   text-align: center;
   margin: 0;
 }
-
-
-

@@ -1,6 +1,5 @@
-package org.example.components;
+package org.example.components.analytics;
 
-import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Composite;
 import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.H2;
@@ -9,7 +8,6 @@ import com.webforj.component.html.elements.Span;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 
-@StyleSheet("ws://portfolio-hero.css")
 public class PortfolioHero extends Composite<Div> {
   private Div self = getBoundComponent();
 
