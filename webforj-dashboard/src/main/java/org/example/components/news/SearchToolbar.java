@@ -1,6 +1,7 @@
 package org.example.components.news;
 
 import com.webforj.component.Composite;
+import com.webforj.component.Expanse;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.field.TextField;
@@ -106,6 +107,7 @@ public class SearchToolbar extends Composite<FlexLayout> {
     Button sortBtn = new Button("Sort");
     sortBtn.setPrefixComponent(TablerIcon.create("arrows-sort"));
     sortBtn.setTheme(ButtonTheme.OUTLINED_DEFAULT);
+    sortBtn.setExpanse(Expanse.NONE);
 
     // Export button
     Button exportBtn = new Button();
