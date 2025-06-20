@@ -1,4 +1,40 @@
 /* ========================================
+   THEME COLORS - PRIMARY ONLY
+   ======================================== */
+
+:root {
+  /* Primary color definition */
+  --dwc-color-primary-h: 235;
+  --dwc-color-primary-s: 50%;
+  --dwc-color-primary-c: 55;
+  
+  /* Primary color variations */
+  --dwc-color-primary-dark: var(--dwc-color-primary-50);
+  --dwc-color-on-primary-text-dark: var(--dwc-color-primary-text-50);
+  --dwc-color-primary: var(--dwc-color-primary-55);
+  --dwc-color-on-primary-text: var(--dwc-color-primary-text-55);
+  --dwc-color-primary-light: var(--dwc-color-primary-60);
+  --dwc-color-on-primary-text-light: var(--dwc-color-primary-text-60);
+  
+  /* Primary text colors */
+  --dwc-color-primary-text-dark: var(--dwc-color-primary-35);
+  --dwc-color-primary-text: var(--dwc-color-primary-40);
+  --dwc-color-primary-text-light: var(--dwc-color-primary-45);
+}
+
+/* Dark theme primary overrides */
+html[data-app-theme~='dark'],
+html[data-app-theme~='dark-pure'] {
+  /* Override primary color to be lighter in dark mode */
+  --dwc-color-primary: var(--dwc-color-primary-25);
+  --dwc-color-on-primary-text: var(--dwc-color-primary-text-25);
+  
+  --dwc-color-primary-text-dark: var(--dwc-color-primary-20);
+  --dwc-color-primary-text: var(--dwc-color-primary-25);
+  --dwc-color-primary-text-light: var(--dwc-color-primary-30);
+}
+
+/* ========================================
    1. GLOBAL STYLES AND RESETS
    ======================================== */
 
@@ -569,12 +605,131 @@ google-chart {
   padding: var(--dwc-space-l);
   border-bottom: var(--dwc-border-width) solid var(--dwc-color-gray-90);
   margin-bottom: var(--dwc-space-m);
+  gap: var(--dwc-space-s);
 }
 
-.drawer-logo__image {
-  width: 75px;
-  height: 75px;
-  margin-bottom: var(--dwc-space-s);
+.drawer-logo__container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer-logo__orb {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  animation: orbPulse 4s ease-in-out infinite;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.drawer-logo__brand {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dwc-color-on-surface);
+  letter-spacing: -0.5px;
+}
+
+.drawer-logo__tagline {
+  font-size: var(--dwc-font-size-xs);
+  color: var(--dwc-color-gray-40);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.drawer-logo__crypto-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: cryptoFade 24s ease-in-out infinite;
+}
+
+/* Background images for each crypto logo */
+.crypto-logo-0 {
+  background-image: url('./images/ethereum-eth-logo.svg');
+}
+
+.crypto-logo-1 {
+  background-image: url('./images/cardano-ada-logo.svg');
+}
+
+.crypto-logo-2 {
+  background-image: url('./images/near-protocol-near-logo.svg');
+}
+
+.crypto-logo-3 {
+  background-image: url('./images/tron-trx-logo.svg');
+}
+
+.crypto-logo-4 {
+  background-image: url('./images/vechain-vet-logo.svg');
+}
+
+.crypto-logo-5 {
+  background-image: url('./images/xrp-xrp-logo.svg');
+}
+
+.drawer-logo__crypto-icon[class*="crypto-logo-"] {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: brightness(0) invert(1);
+}
+
+/* Individual timing for each of the 6 logos - stagger by 4 seconds to sync with pulse */
+.drawer-logo__crypto-icon--0 { animation-delay: 0s; }     /* Ethereum */
+.drawer-logo__crypto-icon--1 { animation-delay: 4s; }     /* Cardano */
+.drawer-logo__crypto-icon--2 { animation-delay: 8s; }     /* Near Protocol */
+.drawer-logo__crypto-icon--3 { animation-delay: 12s; }    /* Tron */
+.drawer-logo__crypto-icon--4 { animation-delay: 16s; }    /* VeChain */
+.drawer-logo__crypto-icon--5 { animation-delay: 20s; }    /* XRP */
+
+@keyframes orbPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 4px 30px rgba(102, 126, 234, 0.6);
+  }
+}
+
+@keyframes cryptoFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  8% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  12% {
+    opacity: 1;
+    transform: scale(1.05); /* Sync with pulse peak */
+  }
+  16% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
 }
 
 /* ========================================
@@ -590,7 +745,6 @@ google-chart {
 .drawer-footer__user-section {
   align-items: center;
   gap: var(--dwc-space-s);
-  margin-bottom: var(--dwc-space-m);
 }
 
 .drawer-footer__avatar {
@@ -637,6 +791,6 @@ google-chart {
 .drawer-footer__version-info {
   font-size: var(--dwc-font-size-xs);
   color: var(--dwc-color-gray-50);
-  text-align: center;
+  text-align: left;
   margin: 0;
 }

@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.webforj.App;
 import com.webforj.Interval;
+import com.webforj.Page;
 import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Component;
 import com.webforj.component.Composite;
@@ -56,6 +57,7 @@ public class MainLayout extends Composite<AppLayout> {
     // Add proper drawer toggle
     toolbar.addToStart(new AppDrawerToggle());
     toolbar.addToTitle(title);
+    getBoundComponent().setHeaderOffscreen(false);
     
     // Create main toolbar actions (left group)
     FlexLayout mainActions = new FlexLayout();
@@ -122,6 +124,7 @@ public class MainLayout extends Composite<AppLayout> {
     
     AppNav appNav = new AppNav();
     appNav.addClassName("main-layout__nav");
+    appNav.setAutoOpen(true);
     
     AppNavItem dashboard = new AppNavItem("Dashboard", DashboardView.class);
     dashboard.setPrefixComponent(TablerIcon.create("dashboard"));
@@ -135,10 +138,32 @@ public class MainLayout extends Composite<AppLayout> {
     AppNavItem settings = new AppNavItem("Settings", SettingsView.class);
     settings.setPrefixComponent(TablerIcon.create("settings"));
     
+    // About section with expandable children
+    AppNavItem about = new AppNavItem("About");
+    about.setPrefixComponent(TablerIcon.create("info-circle"));
+    
+    // Overview item links to the About view
+    AppNavItem overview = new AppNavItem("Overview", AboutView.class);
+    overview.setPrefixComponent(TablerIcon.create("home"));
+    about.addItem(overview);
+    
+    // Documentation - external link
+    about.addItem(new AppNavItem("Documentation", "https://docs.webforj.com", TablerIcon.create("book"))
+        .setSuffixComponent(TablerIcon.create("external-link")));
+    
+    // GitHub - external link
+    about.addItem(new AppNavItem("GitHub", "https://github.com/webforj", TablerIcon.create("brand-github"))
+        .setSuffixComponent(TablerIcon.create("external-link")));
+    
+    // Built with webforJ - external link
+    about.addItem(new AppNavItem("Built with webforJ", "https://github.com/webforj/built-with-webforj", TablerIcon.create("apps"))
+        .setSuffixComponent(TablerIcon.create("external-link")));
+    
     appNav.addItem(dashboard);
     appNav.addItem(news);
     appNav.addItem(analytics);
     appNav.addItem(settings);
+    appNav.addItem(about);
     
     drawerLayout.add(appNav);
     drawerLayout.add(new DrawerFooter());

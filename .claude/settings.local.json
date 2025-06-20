@@ -11,7 +11,9 @@
       "WebFetch(domain:javadoc.io)",
       "Bash(timeout 30s mvn compile:*)",
       "Bash(grep:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(claude mcp add:*)",
+      "Bash(claude mcp:*)"
     ],
     "deny": []
   },
