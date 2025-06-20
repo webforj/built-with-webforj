@@ -1,11 +1,11 @@
 package org.example.views;
 
-import org.example.ChartRedrawable;
 import org.example.components.dashboard.CryptocurrencyTable;
 import org.example.components.dashboard.DashboardCard;
 import org.example.models.Cryptocurrency;
 import org.example.services.CryptocurrencyService;
 import org.example.utils.ChartRedrawHelper;
+import org.example.utils.ChartRedrawable;
 
 import com.webforj.Interval;
 import com.webforj.annotation.StyleSheet;

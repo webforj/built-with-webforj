@@ -24,9 +24,6 @@ public class ChartCard extends Composite<Div> {
     cardTitle.addClassName("analytics-view__chart-title");
     
     chart.addClassName("analytics-view__chart");
-    if (fullWidth) {
-      chart.addClassName("analytics-view__chart--full-width");
-    }
     
     self.add(cardTitle, chart);
   }

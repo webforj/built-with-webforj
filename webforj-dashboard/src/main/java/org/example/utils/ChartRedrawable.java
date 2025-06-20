@@ -1,9 +1,8 @@
-package org.example;
+package org.example.utils;
 
 import com.webforj.component.googlecharts.GoogleChart;
 import org.example.components.analytics.ChartCard;
 import org.example.components.dashboard.DashboardCard;
-import org.example.utils.ChartRedrawHelper;
 
 import java.util.List;
 

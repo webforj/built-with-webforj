@@ -15,8 +15,6 @@ import com.webforj.component.layout.flexlayout.FlexWrap;
 import com.webforj.router.annotation.FrameTitle;
 import com.webforj.router.annotation.Route;
 
-import org.example.ChartRedrawable;
-import org.example.utils.ChartRedrawHelper;
 
 import org.example.components.analytics.ChartCard;
 import org.example.components.analytics.HoldingsTable;
@@ -32,7 +30,7 @@ import java.util.Map;
 @Route(value = "analytics", outlet = MainLayout.class)
 @StyleSheet("ws://analytics-view.css")
 @FrameTitle("Analytics & Portfolio")
-public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawable {
+public class AnalyticsView extends Composite<FlexLayout> implements org.example.utils.ChartRedrawable {
   private final FlexLayout self = getBoundComponent();
   private HoldingsTable holdingsTable;
   
@@ -94,7 +92,7 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
 
   private void createMetricCards() {
     FlexLayout cardsSection = new FlexLayout();
-    cardsSection.addClassName("analytics-view__cards-section");
+    cardsSection.addClassName("analytics-view__cards");
     cardsSection.setJustifyContent(FlexJustifyContent.BETWEEN)
                 .setWrap(FlexWrap.WRAP);
     
@@ -108,25 +106,17 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
 
   private void createChartsSection() {
     FlexLayout chartsContainer = new FlexLayout();
-    chartsContainer.addClassName("analytics-view__charts-container");
+    chartsContainer.addClassName("analytics-view__charts");
     chartsContainer.setWrap(FlexWrap.WRAP);
     
-    // Portfolio Allocation Chart
     allocationChart = new ChartCard("Portfolio Allocation", createPortfolioAllocationChart());
-    
-    // Trading Volume History Chart
     volumeChart = new ChartCard("24h Trading Volume", createLineChart());
-    
-    // Asset Performance Chart
     performanceChart = new ChartCard("Top Assets Performance (7d)", createColumnChart());
-    
-    // Market Sentiment Chart (full width)
     sentimentChart = new ChartCard("Market Sentiment Analysis", createAreaChart(), true);
     
     chartsContainer.add(allocationChart, volumeChart, performanceChart, sentimentChart);
     self.add(chartsContainer);
   }
-
 
   private GoogleChart createPortfolioAllocationChart() {
     GoogleChart chart = new GoogleChart(GoogleChart.Type.PIE);
@@ -138,22 +128,13 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
     data.add(Arrays.asList("Cardano", 18500.00));
     data.add(Arrays.asList("Polkadot", 12800.00));
     data.add(Arrays.asList("Solana", 16830.50));
-    
     chart.setData(data);
     
-    // Configure theme-aware options
     Map<String, Object> options = new HashMap<>();
     options.put("backgroundColor", "transparent");
     options.put("pieSliceTextStyle", Map.of("color", "white"));
-    options.put("legend", Map.of(
-        "textStyle", Map.of("color", "#6b7280")
-    ));
-    options.put("chartArea", Map.of(
-        "left", "10%",
-        "top", "10%",
-        "width", "80%",
-        "height", "75%"
-    ));
+    options.put("legend", Map.of("textStyle", Map.of("color", "#6b7280")));
+    options.put("chartArea", Map.of("left", "10%", "top", "10%", "width", "80%", "height", "75%"));
     chart.setOptions(options);
     
     return chart;
@@ -166,32 +147,11 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
     data.add(Arrays.asList("Hour", "Volume (Billions)"));
     
     for (int i = 0; i < 24; i++) {
-      double volume = 80 + Math.random() * 40;
-      data.add(Arrays.asList(i + ":00", volume));
+      data.add(Arrays.asList(i + ":00", 80 + Math.random() * 40));
     }
     
     chart.setData(data);
-    
-    // Configure theme-aware options
-    Map<String, Object> options = new HashMap<>();
-    options.put("backgroundColor", "transparent");
-    options.put("colors", List.of("#3b82f6"));
-    options.put("legend", "none");
-    options.put("hAxis", Map.of(
-        "textStyle", Map.of("color", "#6b7280"),
-        "gridlines", Map.of("color", "#e5e7eb")
-    ));
-    options.put("vAxis", Map.of(
-        "textStyle", Map.of("color", "#6b7280"),
-        "gridlines", Map.of("color", "#e5e7eb")
-    ));
-    options.put("chartArea", Map.of(
-        "left", "10%",
-        "top", "10%",
-        "width", "80%",
-        "height", "75%"
-    ));
-    chart.setOptions(options);
+    chart.setOptions(createStandardChartOptions("#3b82f6"));
     
     return chart;
   }
@@ -209,26 +169,7 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
     data.add(Arrays.asList("DOT", -5.8));
     
     chart.setData(data);
-    
-    // Configure theme-aware options
-    Map<String, Object> options = new HashMap<>();
-    options.put("backgroundColor", "transparent");
-    options.put("colors", List.of("#10b981"));
-    options.put("legend", "none");
-    options.put("hAxis", Map.of(
-        "textStyle", Map.of("color", "#6b7280")
-    ));
-    options.put("vAxis", Map.of(
-        "textStyle", Map.of("color", "#6b7280"),
-        "gridlines", Map.of("color", "#e5e7eb")
-    ));
-    options.put("chartArea", Map.of(
-        "left", "10%",
-        "top", "10%",
-        "width", "80%",
-        "height", "75%"
-    ));
-    chart.setOptions(options);
+    chart.setOptions(createStandardChartOptions("#10b981"));
     
     return chart;
   }
@@ -242,36 +183,32 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
     String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
     for (String day : days) {
       double bullish = 40 + Math.random() * 30;
-      double bearish = 100 - bullish;
-      data.add(Arrays.asList(day, bullish, bearish));
+      data.add(Arrays.asList(day, bullish, 100 - bullish));
     }
     
     chart.setData(data);
     
-    // Configure theme-aware options
-    Map<String, Object> options = new HashMap<>();
-    options.put("backgroundColor", "transparent");
+    Map<String, Object> options = createStandardChartOptions(null);
     options.put("colors", List.of("#10b981", "#ef4444"));
     options.put("isStacked", true);
-    options.put("hAxis", Map.of(
-        "textStyle", Map.of("color", "#6b7280")
-    ));
-    options.put("vAxis", Map.of(
-        "textStyle", Map.of("color", "#6b7280"),
-        "gridlines", Map.of("color", "#e5e7eb")
-    ));
-    options.put("legend", Map.of(
-        "textStyle", Map.of("color", "#6b7280")
-    ));
-    options.put("chartArea", Map.of(
-        "left", "10%",
-        "top", "10%",
-        "width", "80%",
-        "height", "70%"
-    ));
+    options.put("legend", Map.of("textStyle", Map.of("color", "#6b7280")));
+    options.put("chartArea", Map.of("left", "10%", "top", "10%", "width", "80%", "height", "70%"));
     chart.setOptions(options);
     
     return chart;
+  }
+  
+  private Map<String, Object> createStandardChartOptions(String color) {
+    Map<String, Object> options = new HashMap<>();
+    options.put("backgroundColor", "transparent");
+    if (color != null) {
+      options.put("colors", List.of(color));
+    }
+    options.put("legend", "none");
+    options.put("hAxis", Map.of("textStyle", Map.of("color", "#6b7280"), "gridlines", Map.of("color", "#e5e7eb")));
+    options.put("vAxis", Map.of("textStyle", Map.of("color", "#6b7280"), "gridlines", Map.of("color", "#e5e7eb")));
+    options.put("chartArea", Map.of("left", "10%", "top", "10%", "width", "80%", "height", "75%"));
+    return options;
   }
   
   private void createHoldingsTable() {

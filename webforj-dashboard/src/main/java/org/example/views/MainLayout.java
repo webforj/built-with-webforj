@@ -23,8 +23,9 @@ import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import org.example.components.DrawerLogo;
+import org.example.utils.ChartRedrawable;
 import org.example.components.DrawerFooter;
-import org.example.ChartRedrawable;
+
 import com.webforj.router.Router;
 import com.webforj.router.annotation.FrameTitle;
 import com.webforj.router.annotation.Route;

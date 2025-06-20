@@ -13,7 +13,7 @@ public class HoldingsTable extends Composite<Div> {
   private Table<PortfolioItem> portfolioTable;
 
   public HoldingsTable() {
-    self.addClassName("analytics-view__holdings-table-section");
+    self.addClassName("analytics-view__table-section");
     
     H3 tableTitle = new H3("Portfolio Holdings");
     tableTitle.addClassName("analytics-view__table-title");
@@ -27,15 +27,10 @@ public class HoldingsTable extends Composite<Div> {
     portfolioTable.addColumn("Avg Buy Price", item -> String.format("$%.2f", item.getAvgBuyPrice()));
     portfolioTable.addColumn("Current Price", item -> String.format("$%.2f", item.getCurrentPrice()));
     portfolioTable.addColumn("Value", item -> String.format("$%.2f", item.getValue()));
-    portfolioTable.addColumn("Profit/Loss", item -> {
-      double pl = item.getProfitLoss();
-      String formatted = String.format("$%.2f (%.1f%%)", pl, item.getProfitLossPercent());
-      return formatted;
-    });
+    portfolioTable.addColumn("Profit/Loss", item -> 
+        String.format("$%.2f (%.1f%%)", item.getProfitLoss(), item.getProfitLossPercent()));
     
-    // Add sample data
-    List<PortfolioItem> holdings = createSampleHoldings();
-    portfolioTable.setItems(holdings);
+    portfolioTable.setItems(createSampleHoldings());
     
     self.add(tableTitle, portfolioTable);
   }
