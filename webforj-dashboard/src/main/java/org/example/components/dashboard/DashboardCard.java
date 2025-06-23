@@ -13,15 +13,14 @@ import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.googlecharts.GoogleChart;
 import com.webforj.component.toast.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Dashboard card component focused solely on UI presentation.
+ * This component displays title, price, percentage change, and a chart
+ * without handling chart generation or data creation logic.
+ */
 public class DashboardCard extends Composite<FlexLayout> {
 
   private final FlexLayout self = getBoundComponent();
@@ -34,41 +33,83 @@ public class DashboardCard extends Composite<FlexLayout> {
   private final Button followButton = new Button("Follow");
   private final Paragraph details = new Paragraph();
   private final FlexLayout detailText = new FlexLayout(followButton, details);
-  private final GoogleChart chart;
-  private final Random random = new Random();
+  private GoogleChart chart;
   
   private double percentage = 0;
   private boolean isFollowing = false;
-  private final GoogleChart.Type chartType;
 
+  /**
+   * Creates an empty dashboard card without any chart.
+   * Use setChart() to add a chart after creation.
+   */
   public DashboardCard() {
-    this(GoogleChart.Type.AREA);
-  }
-
-  public DashboardCard(GoogleChart.Type chartType) {
-    this.chartType = chartType;
-    this.chart = new GoogleChart(chartType);
     initComponent();
   }
 
-  public DashboardCard(String title, double price, double percent) {
-    this(title, price, percent, GoogleChart.Type.AREA);
+  /**
+   * Creates a dashboard card with the provided chart.
+   * 
+   * @param chart The GoogleChart to display in the card
+   */
+  public DashboardCard(GoogleChart chart) {
+    this.chart = chart;
+    initComponent();
   }
 
-  public DashboardCard(String title, double price, double percent, GoogleChart.Type chartType) {
-    this.chartType = chartType;
-    this.chart = new GoogleChart(chartType);
+  /**
+   * Creates a dashboard card with data and a chart.
+   * 
+   * @param title The title to display
+   * @param price The price value to display
+   * @param percent The percentage change
+   * @param chart The GoogleChart to display
+   */
+  public DashboardCard(String title, double price, double percent, GoogleChart chart) {
+    this.chart = chart;
+    this.percentage = percent;
+    
+    setCardData(title, price, percent);
+    initComponent();
+  }
+
+  /**
+   * Sets the card data (title, price, percentage).
+   * 
+   * @param title The title to display
+   * @param price The price value
+   * @param percent The percentage change
+   */
+  public void setCardData(String title, double price, double percent) {
     this.title.setText(title);
     this.price.setText(formatValue(title, price));
-    this.percentChange.setText((percent >= 0 ? "+" : "") + String.format("%.2f", percent) + "%");
     this.percentage = percent;
-
+    
+    // Format percentage with proper sign
+    this.percentChange.setText((percent >= 0 ? "+" : "") + String.format("%.2f", percent) + "%");
+    
+    // Update timestamp
     LocalDateTime now = LocalDateTime.now();
     String date = now.format(DateTimeFormatter.ofPattern("MMM d"));
     String time = now.format(DateTimeFormatter.ofPattern("h:mm a"));
     this.details.setHtml("<span style='color: var(--dwc-color-gray-40);'>Last updated: </span>" + date + " • " + time);
-
-    initComponent();
+    
+    // Update percentage styling
+    updatePercentageStyle();
+  }
+  
+  /**
+   * Sets the chart for this card.
+   * 
+   * @param chart The GoogleChart to display
+   */
+  public void setChart(GoogleChart chart) {
+    if (this.chart != null) {
+      self.remove(this.chart);
+    }
+    this.chart = chart;
+    if (chart != null) {
+      self.add(chart);
+    }
   }
 
   private String formatValue(String title, double value) {
@@ -80,15 +121,27 @@ public class DashboardCard extends Composite<FlexLayout> {
   }
 
   private void initComponent() {
+    // Layout setup
     self.setDirection(FlexDirection.COLUMN);
     self.setStyle("gap", "0px");
-    self.add(textData, chart);
+    
+    // Add text data section
+    self.add(textData);
+    
+    // Add chart if present
+    if (chart != null) {
+      self.add(chart);
+    }
+    
+    // Configure layouts
     textData.setJustifyContent(FlexJustifyContent.BETWEEN);
     textData.setStyle("min-height", "80px");
     textData.add(mainText, detailText);
     mainText.setDirection(FlexDirection.COLUMN).setStyle("gap", "0px");
     detailText.setDirection(FlexDirection.COLUMN);
     numericData.setAlignment(FlexAlignment.CENTER);
+    
+    // Apply CSS classes
     self.addClassName("data-card");
     title.addClassName("data-card__title");
     price.addClassName("data-card__price");
@@ -101,6 +154,11 @@ public class DashboardCard extends Composite<FlexLayout> {
     // Add click event handler for follow/unfollow functionality
     followButton.onClick(e -> toggleFollow());
 
+    // Update percentage styling
+    updatePercentageStyle();
+  }
+  
+  private void updatePercentageStyle() {
     if (Double.compare(percentage, 0.0) > 0) {
       percentChange.addClassName("percentage-positive");
       percentChange.removeClassName("percentage-negative");
@@ -108,128 +166,6 @@ public class DashboardCard extends Composite<FlexLayout> {
       percentChange.addClassName("percentage-negative");
       percentChange.removeClassName("percentage-positive");
     }
-
-    // Configure the chart
-    configureChart();
-  }
-
-  private void configureChart() {
-    chart.setHeight("100px");
-    chart.setWidth("100%");
-
-    // Configure chart options
-    Map<String, Object> options = new HashMap<>();
-    String color = percentage >= 0 ? "#22c55e" : "#ef4444";
-    options.put("colors", List.of(color));
-    options.put("backgroundColor", "transparent");
-    options.put("legend", "none");
-
-    // Configure chart area to fill the space
-    options.put("chartArea", Map.of(
-        "left", 0,
-        "top", 0,
-        "width", "100%",
-        "height", "100%"));
-
-    // Hide axes labels but show light gray grid lines
-    options.put("hAxis", Map.of(
-        "textPosition", "none",
-        "gridlines", Map.of("color", "var(--dwc-color-gray-20)"),
-        "baselineColor", "var(--dwc-color-gray-20)"));
-    options.put("vAxis", Map.of(
-        "textPosition", "none",
-        "gridlines", Map.of("color", "var(--dwc-color-gray-20)"),
-        "baselineColor", "var(--dwc-color-gray-20)"));
-
-    switch (chartType) {
-      case AREA -> {
-        options.put("areaOpacity", 0.3);
-        options.put("lineWidth", 2);
-        options.put("pointSize", 0);
-      }
-      case LINE -> {
-        options.put("lineWidth", 3);
-        options.put("pointSize", 0);
-        options.put("curveType", "function");
-      }
-      case COLUMN -> options.put("bar", Map.of("groupWidth", "80%"));
-      case SCATTER -> {
-        options.put("pointSize", 8);
-        options.put("pointShape", "circle");
-        options.put("trendlines", Map.of(
-            "0", Map.of(
-                "type", "linear",
-                "color", color,
-                "lineWidth", 2,
-                "opacity", 0.3,
-                "showR2", false,
-                "visibleInLegend", false)));
-      }
-    }
-
-    options.put("tooltip", Map.of("trigger", "none"));
-
-    // Animation
-    options.put("animation", Map.of(
-        "startup", true,
-        "duration", 1500,
-        "easing", "out"));
-
-    chart.setOptions(options);
-
-    // Generate and set data
-    List<Object> data = generateChartData();
-    chart.setData(data);
-  }
-
-  private List<Object> generateChartData() {
-    List<Object> data = new ArrayList<>();
-    // Header row
-    data.add(Arrays.asList("Time", "Value"));
-
-    // Generate data points based on chart type
-    double baseValue = 100;
-    double trendFactor = percentage >= 0 ? 1.005 : 0.995;
-    double momentum = 0;
-
-    int dataPoints = switch (chartType) {
-      case COLUMN -> 10;
-      case SCATTER -> 30;
-      default -> 20;
-    };
-
-    for (int i = 0; i < dataPoints; i++) {
-      String label;
-      if (chartType == GoogleChart.Type.COLUMN) {
-        // Use time labels for column charts (e.g., "12PM", "1PM", etc.)
-        label = String.format("%d:00", (i * 2 + 8) % 24);
-      } else {
-        label = String.valueOf(i);
-      }
-
-      // Generate realistic market movement
-      double randomChange = (random.nextDouble() - 0.5) * 15;
-      momentum = momentum * 0.7 + randomChange * 0.3;
-
-      // Add occasional spikes
-      if (random.nextDouble() < 0.1) {
-        momentum += (random.nextDouble() - 0.5) * 20;
-      }
-
-      double value = baseValue + momentum;
-
-      // For scatter charts, add more variation to create a cloud effect
-      if (chartType == GoogleChart.Type.SCATTER) {
-        value += (random.nextDouble() - 0.5) * 10; // Additional scatter
-      }
-
-      data.add(Arrays.asList(label, Math.max(value, 10)));
-
-      // Apply trend with some randomness
-      baseValue *= trendFactor * (0.98 + random.nextDouble() * 0.04);
-    }
-
-    return data;
   }
 
   private void toggleFollow() {
@@ -255,8 +191,9 @@ public class DashboardCard extends Composite<FlexLayout> {
   }
   
   /**
-   * Gets the GoogleChart instance for this card
-   * @return the chart component
+   * Gets the GoogleChart instance for this card.
+   * 
+   * @return the chart component, or null if no chart is set
    */
   public GoogleChart getChart() {
     return chart;

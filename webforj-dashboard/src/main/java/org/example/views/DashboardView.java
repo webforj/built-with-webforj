@@ -4,8 +4,8 @@ import org.example.components.dashboard.CryptocurrencyTable;
 import org.example.components.dashboard.DashboardCard;
 import org.example.models.Cryptocurrency;
 import org.example.services.CryptocurrencyService;
-import org.example.utils.ChartRedrawHelper;
-import org.example.utils.ChartRedrawable;
+import org.example.utils.charts.ChartRedrawable;
+import org.example.utils.charts.DashboardChartBuilder;
 
 import com.webforj.Interval;
 import com.webforj.annotation.StyleSheet;
@@ -24,6 +24,7 @@ import java.util.List;
 public class DashboardView extends Composite<FlexLayout> implements ChartRedrawable {
   private final FlexLayout self = getBoundComponent();
   private final CryptocurrencyService cryptoService = new CryptocurrencyService();
+  private final DashboardChartBuilder chartBuilder = new DashboardChartBuilder();
   private CryptocurrencyTable cryptoTable;
   private List<Cryptocurrency> cryptocurrencies;
   private Interval interval;
@@ -42,10 +43,10 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
     cryptocurrencies = cryptoService.generateCryptocurrencies();
     cryptoTable.setData(cryptocurrencies);
 
-    // Create dashboard cards
-    card1 = new DashboardCard("Global Market Cap", 2875000000000.0, 3.45);
-    card2 = new DashboardCard("24 Hour Volume", 98500000000.0, -5.23, GoogleChart.Type.SCATTER);
-    card3 = new DashboardCard("Bitcoin Dominance", 52.7, 1.28, GoogleChart.Type.COLUMN);
+    // Create dashboard cards using the new architecture
+    card1 = createCard("Global Market Cap", 2875000000000.0, 3.45, GoogleChart.Type.AREA);
+    card2 = createCard("24 Hour Volume", 98500000000.0, -5.23, GoogleChart.Type.SCATTER);
+    card3 = createCard("Bitcoin Dominance", 52.7, 1.28, GoogleChart.Type.COLUMN);
     
     // Create cards layout
     FlexLayout cards = new FlexLayout(card1, card2, card3);
@@ -61,6 +62,23 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
     });
 
     interval.start();
+  }
+  
+  /**
+   * Creates a dashboard card with chart using the new architecture.
+   * 
+   * @param title The card title
+   * @param value The card value
+   * @param percentage The percentage change
+   * @param chartType The type of chart to create
+   * @return A configured DashboardCard
+   */
+  private DashboardCard createCard(String title, double value, double percentage, GoogleChart.Type chartType) {
+    // Build the chart using the chart builder
+    GoogleChart chart = chartBuilder.buildDashboardChart(chartType, percentage);
+    
+    // Create the card with data and chart
+    return new DashboardCard(title, value, percentage, chart);
   }
 
   @Override

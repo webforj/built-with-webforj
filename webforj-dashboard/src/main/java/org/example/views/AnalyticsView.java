@@ -20,7 +20,8 @@ import org.example.components.analytics.ChartCard;
 import org.example.components.analytics.HoldingsTable;
 import org.example.components.analytics.PortfolioHero;
 import org.example.components.dashboard.DashboardCard;
-import org.example.utils.ChartRedrawable;
+import org.example.utils.charts.ChartRedrawable;
+import org.example.utils.charts.DashboardChartBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +34,7 @@ import java.util.Map;
 @FrameTitle("Analytics & Portfolio")
 public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawable {
   private final FlexLayout self = getBoundComponent();
+  private final DashboardChartBuilder chartBuilder = new DashboardChartBuilder();
   
   // Store references to dashboard cards with charts
   private DashboardCard totalVolumeCard;
@@ -97,9 +99,10 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
                 .setWrap(FlexWrap.WRAP)
                 .setSpacing("var(--dwc-space-m)");
     
-    totalVolumeCard = new DashboardCard("Total Market Volume", 152500000000.0, 12.5);
-    portfolioValueCard = new DashboardCard("Portfolio Performance", 125480.50, 27.8, GoogleChart.Type.AREA);
-    volatilityIndexCard = new DashboardCard("Market Volatility", 68.5, 8.7, GoogleChart.Type.LINE);
+    // Create dashboard cards using the new architecture
+    totalVolumeCard = createAnalyticsCard("Total Market Volume", 152500000000.0, 12.5, GoogleChart.Type.AREA);
+    portfolioValueCard = createAnalyticsCard("Portfolio Performance", 125480.50, 27.8, GoogleChart.Type.AREA);
+    volatilityIndexCard = createAnalyticsCard("Market Volatility", 68.5, 8.7, GoogleChart.Type.LINE);
     
     cardsSection.add(totalVolumeCard, portfolioValueCard, volatilityIndexCard);
     self.add(cardsSection);
@@ -214,6 +217,22 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
     return options;
   }
   
+  /**
+   * Creates a dashboard card for analytics using the new architecture.
+   * 
+   * @param title The card title
+   * @param value The card value
+   * @param percentage The percentage change
+   * @param chartType The type of chart to create
+   * @return A configured DashboardCard
+   */
+  private DashboardCard createAnalyticsCard(String title, double value, double percentage, GoogleChart.Type chartType) {
+    // Build the chart using the chart builder
+    GoogleChart chart = chartBuilder.buildDashboardChart(chartType, percentage);
+    
+    // Create the card with data and chart
+    return new DashboardCard(title, value, percentage, chart);
+  }
   
   @Override
   public void redrawCharts() {

@@ -20,7 +20,8 @@ public class PortfolioHero extends Composite<FlexLayout> {
     heroContent.addClassName("portfolio-hero__content")
                .setJustifyContent(FlexJustifyContent.BETWEEN)
                .setAlignment(FlexAlignment.START)
-               .setSpacing("var(--dwc-space-xl)");
+               .setSpacing("var(--dwc-space-xl)")
+               .setWidth("100%");
 
     // Left side - Main portfolio value
     FlexLayout mainValue = new FlexLayout();

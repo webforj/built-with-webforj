@@ -4,7 +4,6 @@ import java.util.Set;
 
 import com.webforj.App;
 import com.webforj.Interval;
-import com.webforj.Page;
 import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Component;
 import com.webforj.component.Composite;
@@ -23,7 +22,7 @@ import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import org.example.components.DrawerLogo;
-import org.example.utils.ChartRedrawable;
+import org.example.utils.charts.ChartRedrawable;
 import org.example.components.DrawerFooter;
 
 import com.webforj.router.Router;
@@ -65,17 +64,6 @@ public class MainLayout extends Composite<AppLayout> {
     mainActions.addClassName("main-layout__toolbar-actions");
     mainActions.setAlignment(FlexAlignment.CENTER);
     
-    // Language selector (US flag)
-    Div languageBtn = new Div();
-    languageBtn.addClassName("main-layout__toolbar-btn main-layout__toolbar-btn--clickable");
-    Img flagImg = new Img();
-    flagImg.setSrc("https://flagcdn.com/w20/us.png");
-    flagImg.setAlt("US Flag");
-    flagImg.setStyle("width", "16px");
-    flagImg.setStyle("height", "12px");
-    flagImg.setStyle("border-radius", "2px");
-    languageBtn.add(flagImg);
-    
     // Notifications
     IconButton notificationsBtn = new IconButton(TablerIcon.create("bell"));
     notificationsBtn.addClassName("main-layout__toolbar-btn");
@@ -96,7 +84,7 @@ public class MainLayout extends Composite<AppLayout> {
     avatarImg.setStyle("object-fit", "cover");
     profileBtn.add(avatarImg);
     
-    mainActions.add(languageBtn, notificationsBtn, helpBtn, profileBtn);
+    mainActions.add(notificationsBtn, helpBtn, profileBtn);
     
     // Theme toggle (separated on the right)
     themeToggle = new IconButton(TablerIcon.create(isDarkTheme ? "moon" : "sun"));

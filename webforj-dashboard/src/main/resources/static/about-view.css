@@ -40,7 +40,7 @@
 .about-view__title {
   margin: 0 0 var(--dwc-space-s) 0;
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: var(--dwc-font-weight-bolder);
   position: relative;
   z-index: 1;
 }
@@ -71,7 +71,7 @@
 .about-view__section-title {
   margin: 0 0 var(--dwc-space-l) 0;
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: var(--dwc-font-weight-semibold);
   color: var(--dwc-color-on-surface);
   text-align: center;
 }
@@ -100,7 +100,7 @@
 
 .about-view__feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--dwc-shadow-l);
 }
 
 .about-view__clickable-card {
@@ -113,7 +113,7 @@
 
 .about-view__clickable-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--dwc-shadow-xl);
   text-decoration: none;
   color: inherit;
 }
@@ -122,7 +122,7 @@
   width: 48px;
   height: 48px;
   background: linear-gradient(135deg, var(--dwc-color-primary-60) 0%, var(--dwc-color-primary-70) 100%);
-  border-radius: 50%;
+  border-radius: var(--dwc-border-radius-round);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,7 +134,7 @@
 .about-view__feature-title {
   margin: 0 0 var(--dwc-space-s) 0;
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: var(--dwc-font-weight-semibold);
   color: var(--dwc-color-on-surface);
 }
 

@@ -1,4 +1,4 @@
-package org.example.utils;
+package org.example.utils.charts;
 
 import com.webforj.component.googlecharts.GoogleChart;
 import org.example.components.dashboard.DashboardCard;

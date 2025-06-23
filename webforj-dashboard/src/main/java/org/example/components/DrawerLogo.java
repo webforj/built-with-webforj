@@ -3,16 +3,11 @@ package org.example.components;
 import com.webforj.component.Composite;
 import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.H2;
-import com.webforj.component.html.elements.Img;
 import com.webforj.component.html.elements.Span;
 import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexJustifyContent;
 import com.webforj.component.layout.flexlayout.FlexLayout;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 public class DrawerLogo extends Composite<FlexLayout> {
   private FlexLayout self = getBoundComponent();
