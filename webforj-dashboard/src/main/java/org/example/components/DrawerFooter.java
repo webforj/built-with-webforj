@@ -10,57 +10,56 @@ import com.webforj.component.layout.flexlayout.FlexLayout;
 
 public class DrawerFooter extends Composite<FlexLayout> {
   private FlexLayout self = getBoundComponent();
-  
+
   public DrawerFooter() {
     initComponent();
   }
-  
+
   private void initComponent() {
     self.addClassName("drawer-footer");
     self.setDirection(FlexDirection.COLUMN);
     self.setStyle("gap", "5px"); // Remove gap between sections
-    
+
     // Add user profile section
     self.add(createUserSection());
-    
+
     // Add version info
     self.add(createVersionInfo());
   }
-  
+
   private FlexLayout createUserSection() {
     FlexLayout userSection = new FlexLayout();
     userSection.addClassName("drawer-footer__user-section");
     userSection.setAlignment(FlexAlignment.CENTER);
-    
+
     // User avatar
     Div avatar = new Div();
     avatar.addClassName("drawer-footer__avatar");
     avatar.setHtml("<span>JD</span>");
-    
+
     // User info
     FlexLayout userInfo = new FlexLayout();
     userInfo.addClassName("drawer-footer__user-info");
     userInfo.setDirection(FlexDirection.COLUMN);
     userInfo.setStyle("gap", "5px"); // Remove gap between name and role
-    
+
     Span userName = new Span("John Doe");
     userName.addClassName("drawer-footer__user-name");
-    
+
     Span userRole = new Span("Premium Member");
     userRole.addClassName("drawer-footer__user-role");
-    
+
     userInfo.add(userName, userRole);
-    
+
     userSection.add(avatar, userInfo);
-    
+
     return userSection;
   }
-  
-  
+
   private Paragraph createVersionInfo() {
     Paragraph version = new Paragraph("v2.4.1 • © 2024 CryptoTracker");
     version.addClassName("drawer-footer__version-info");
-    
+
     return version;
   }
 }

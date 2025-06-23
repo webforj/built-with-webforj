@@ -13,7 +13,7 @@ import com.webforj.component.layout.flexlayout.FlexWrap;
 
 public class HeroSection extends Composite<FlexLayout> {
   private FlexLayout self = getBoundComponent();
-  
+
   private static final String LINK_TARGET_BLANK = "_blank";
   private static final String[] HERO_IMAGES = {
       "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=1200&h=600&fit=crop",
@@ -24,7 +24,7 @@ public class HeroSection extends Composite<FlexLayout> {
   public HeroSection() {
     self.addClassName("news-view__hero");
     self.setDirection(FlexDirection.COLUMN);
-    
+
     // Set dynamic background based on theme
     applyThemeAwareBackgrounds();
 
@@ -74,7 +74,7 @@ public class HeroSection extends Composite<FlexLayout> {
     String theme = com.webforj.App.getTheme();
     String backgroundGradient;
     String textColor;
-    
+
     if ("dark".equals(theme)) {
       // Dark theme - lighter blue for better visibility
       backgroundGradient = "linear-gradient(135deg, var(--dwc-color-primary-40) 0%, var(--dwc-color-primary-50) 100%)";
@@ -84,7 +84,7 @@ public class HeroSection extends Composite<FlexLayout> {
       backgroundGradient = "linear-gradient(135deg, var(--dwc-color-primary-60) 0%, var(--dwc-color-primary-70) 100%)";
       textColor = "white";
     }
-    
+
     self.setStyle("background", backgroundGradient);
     self.setStyle("color", textColor);
   }

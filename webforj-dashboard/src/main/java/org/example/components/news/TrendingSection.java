@@ -24,7 +24,7 @@ public class TrendingSection extends Composite<FlexLayout> {
   public TrendingSection(List<NewsArticle> articles) {
     self.addClassName("news-view__section")
         .setDirection(FlexDirection.COLUMN);
-    
+
     createTrendingContent(articles);
   }
 

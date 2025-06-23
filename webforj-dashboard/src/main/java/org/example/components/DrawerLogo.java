@@ -21,36 +21,36 @@ public class DrawerLogo extends Composite<FlexLayout> {
     // Create a sleek modern design
     Div logoContainer = new Div();
     logoContainer.addClassName("drawer-logo__container");
-    
+
     // Create animated gradient orb with crypto logos
     Div gradientOrb = new Div();
     gradientOrb.addClassName("drawer-logo__orb");
-    
+
     // Array of crypto logo file names
     String[] cryptoLogos = {
-        "ethereum-eth-logo.svg", 
+        "ethereum-eth-logo.svg",
         "cardano-ada-logo.svg",
         "near-protocol-near-logo.svg",
         "tron-trx-logo.svg",
         "vechain-vet-logo.svg",
         "xrp-xrp-logo.svg"
     };
-    
+
     // Create div elements with CSS background images
     for (int i = 0; i < cryptoLogos.length; i++) {
-        Div cryptoIcon = new Div();
-        cryptoIcon.addClassName("drawer-logo__crypto-icon", "drawer-logo__crypto-icon--" + i, "crypto-logo-" + i);
-        gradientOrb.add(cryptoIcon);
+      Div cryptoIcon = new Div();
+      cryptoIcon.addClassName("drawer-logo__crypto-icon", "drawer-logo__crypto-icon--" + i, "crypto-logo-" + i);
+      gradientOrb.add(cryptoIcon);
     }
-    
+
     // Add brand text
     H2 brandName = new H2("CryptoTracker");
     brandName.addClassName("drawer-logo__brand");
-    
+
     // Add tagline
     Span tagline = new Span("Real-time insights");
     tagline.addClassName("drawer-logo__tagline");
-    
+
     logoContainer.add(gradientOrb);
     self.add(logoContainer, brandName, tagline);
   }

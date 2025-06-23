@@ -18,11 +18,11 @@ public class ChartCard extends Composite<FlexLayout> {
     this.chart = chart;
     self.addClassName("analytics-view__chart-card")
         .setDirection(FlexDirection.COLUMN);
-    
+
     if (fullWidth) {
       self.addClassName("analytics-view__chart-card--full-width");
     }
-    
+
     H3 cardTitle = new H3(title);
     cardTitle.addClassName("analytics-view__chart-title");
     chart.addClassName("analytics-view__chart");

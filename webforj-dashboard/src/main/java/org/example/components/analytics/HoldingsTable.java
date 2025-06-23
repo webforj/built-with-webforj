@@ -16,7 +16,7 @@ public class HoldingsTable extends Composite<FlexLayout> {
   public HoldingsTable() {
     self.addClassName("analytics-view__table-section")
         .setDirection(FlexDirection.COLUMN);
-    
+
     H3 tableTitle = new H3("Portfolio Holdings");
     tableTitle.addClassName("analytics-view__table-title");
     portfolioTable = new Table<>();

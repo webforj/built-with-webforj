@@ -18,15 +18,15 @@ public class PortfolioHero extends Composite<FlexLayout> {
 
     FlexLayout heroContent = new FlexLayout();
     heroContent.addClassName("portfolio-hero__content")
-               .setJustifyContent(FlexJustifyContent.BETWEEN)
-               .setAlignment(FlexAlignment.START)
-               .setSpacing("var(--dwc-space-xl)")
-               .setWidth("100%");
+        .setJustifyContent(FlexJustifyContent.BETWEEN)
+        .setAlignment(FlexAlignment.START)
+        .setSpacing("var(--dwc-space-xl)")
+        .setWidth("100%");
 
     // Left side - Main portfolio value
     FlexLayout mainValue = new FlexLayout();
     mainValue.addClassName("portfolio-hero__main")
-             .setDirection(FlexDirection.COLUMN);
+        .setDirection(FlexDirection.COLUMN);
     mainValue.setStyle("flex", "1 1 400px");
 
     Paragraph welcomeText = new Paragraph("Portfolio Value");
@@ -37,8 +37,8 @@ public class PortfolioHero extends Composite<FlexLayout> {
 
     FlexLayout changeContainer = new FlexLayout();
     changeContainer.addClassName("portfolio-hero__change")
-                   .setAlignment(FlexAlignment.CENTER)
-                   .setSpacing("var(--dwc-space-s)");
+        .setAlignment(FlexAlignment.CENTER)
+        .setSpacing("var(--dwc-space-s)");
 
     Span changeValue = new Span("+ $27,280.50");
     changeValue.addClassName("portfolio-hero__change-value");
@@ -52,8 +52,8 @@ public class PortfolioHero extends Composite<FlexLayout> {
     // Right side - Quick stats
     FlexLayout statsGrid = new FlexLayout();
     statsGrid.addClassName("portfolio-hero__stats")
-             .setDirection(FlexDirection.COLUMN)
-             .setSpacing("var(--dwc-space-m)");
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-m)");
     statsGrid.setStyle("flex", "0 0 300px");
     statsGrid.add(
         createQuickStat("24h Change", "+2.8%", "trending-up"),
@@ -76,7 +76,7 @@ public class PortfolioHero extends Composite<FlexLayout> {
 
     FlexLayout textContainer = new FlexLayout();
     textContainer.addClassName("portfolio-hero__quick-stat-text")
-                 .setDirection(FlexDirection.COLUMN);
+        .setDirection(FlexDirection.COLUMN);
     textContainer.setStyle("flex", "1");
 
     Paragraph statLabel = new Paragraph(label);

@@ -14,7 +14,7 @@ public class MarketHighlights extends Composite<FlexLayout> {
   public MarketHighlights() {
     self.addClassName("news-view__section")
         .setDirection(FlexDirection.COLUMN);
-    
+
     createMarketContent();
   }
 

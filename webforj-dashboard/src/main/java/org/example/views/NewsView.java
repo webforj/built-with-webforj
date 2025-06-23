@@ -50,7 +50,6 @@ public class NewsView extends Composite<FlexLayout> {
   private FlexLayout articlesGrid;
   private FlexLayout articlesContainer;
 
-
   public NewsView() {
     self.addClassName("news-view")
         .setDirection(FlexDirection.COLUMN)
@@ -151,7 +150,6 @@ public class NewsView extends Composite<FlexLayout> {
     mainContentArea.add(new TrendingSection(allArticles));
   }
 
-
   private void createMainArticles() {
     articlesContainer = createSectionContainer();
 
@@ -165,7 +163,7 @@ public class NewsView extends Composite<FlexLayout> {
 
     articlesContainer.add(articlesTitle, articlesGrid);
     mainContentArea.add(articlesContainer);
-    
+
     // Load initial articles
     updateArticlesGrid();
   }
@@ -234,7 +232,6 @@ public class NewsView extends Composite<FlexLayout> {
     sidebarArea.add(new NewsletterSignup());
   }
 
-
   private void createPopularArticles() {
     FlexLayout popularContainer = createSectionContainer();
 
@@ -278,7 +275,6 @@ public class NewsView extends Composite<FlexLayout> {
     sidebarArea.add(popularContainer);
   }
 
-
   private boolean matchesCategory(NewsArticle article, String category) {
     if ("All Categories".equals(category)) {
       return true;
@@ -321,14 +317,14 @@ public class NewsView extends Composite<FlexLayout> {
   private void performSearch() {
     updateArticlesGrid();
   }
-  
+
   private void updateArticlesGrid() {
     articlesGrid.removeAll();
-    
+
     // Filter articles
     String currentCategory = searchToolbar.getSelectedCategory();
     String searchTerm = searchToolbar.getSearchTerm();
-    
+
     List<NewsArticle> filteredArticles = allArticles.stream()
         .filter(article -> matchesCategory(article, currentCategory))
         .filter(article -> matchesSearch(article, searchTerm))
@@ -358,8 +354,6 @@ public class NewsView extends Composite<FlexLayout> {
       }
     }
   }
-  
-  
 
   /**
    * Creates a standard section container with consistent styling

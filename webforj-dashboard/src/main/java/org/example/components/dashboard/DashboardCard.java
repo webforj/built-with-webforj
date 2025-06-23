@@ -34,7 +34,7 @@ public class DashboardCard extends Composite<FlexLayout> {
   private final Paragraph details = new Paragraph();
   private final FlexLayout detailText = new FlexLayout(followButton, details);
   private GoogleChart chart;
-  
+
   private double percentage = 0;
   private boolean isFollowing = false;
 
@@ -59,15 +59,15 @@ public class DashboardCard extends Composite<FlexLayout> {
   /**
    * Creates a dashboard card with data and a chart.
    * 
-   * @param title The title to display
-   * @param price The price value to display
+   * @param title   The title to display
+   * @param price   The price value to display
    * @param percent The percentage change
-   * @param chart The GoogleChart to display
+   * @param chart   The GoogleChart to display
    */
   public DashboardCard(String title, double price, double percent, GoogleChart chart) {
     this.chart = chart;
     this.percentage = percent;
-    
+
     setCardData(title, price, percent);
     initComponent();
   }
@@ -75,28 +75,28 @@ public class DashboardCard extends Composite<FlexLayout> {
   /**
    * Sets the card data (title, price, percentage).
    * 
-   * @param title The title to display
-   * @param price The price value
+   * @param title   The title to display
+   * @param price   The price value
    * @param percent The percentage change
    */
   public void setCardData(String title, double price, double percent) {
     this.title.setText(title);
     this.price.setText(formatValue(title, price));
     this.percentage = percent;
-    
+
     // Format percentage with proper sign
     this.percentChange.setText((percent >= 0 ? "+" : "") + String.format("%.2f", percent) + "%");
-    
+
     // Update timestamp
     LocalDateTime now = LocalDateTime.now();
     String date = now.format(DateTimeFormatter.ofPattern("MMM d"));
     String time = now.format(DateTimeFormatter.ofPattern("h:mm a"));
     this.details.setHtml("<span style='color: var(--dwc-color-gray-40);'>Last updated: </span>" + date + " • " + time);
-    
+
     // Update percentage styling
     updatePercentageStyle();
   }
-  
+
   /**
    * Sets the chart for this card.
    * 
@@ -124,15 +124,15 @@ public class DashboardCard extends Composite<FlexLayout> {
     // Layout setup
     self.setDirection(FlexDirection.COLUMN);
     self.setStyle("gap", "0px");
-    
+
     // Add text data section
     self.add(textData);
-    
+
     // Add chart if present
     if (chart != null) {
       self.add(chart);
     }
-    
+
     // Configure layouts
     textData.setJustifyContent(FlexJustifyContent.BETWEEN);
     textData.setStyle("min-height", "80px");
@@ -140,7 +140,7 @@ public class DashboardCard extends Composite<FlexLayout> {
     mainText.setDirection(FlexDirection.COLUMN).setStyle("gap", "0px");
     detailText.setDirection(FlexDirection.COLUMN);
     numericData.setAlignment(FlexAlignment.CENTER);
-    
+
     // Apply CSS classes
     self.addClassName("data-card");
     title.addClassName("data-card__title");
@@ -157,7 +157,7 @@ public class DashboardCard extends Composite<FlexLayout> {
     // Update percentage styling
     updatePercentageStyle();
   }
-  
+
   private void updatePercentageStyle() {
     if (Double.compare(percentage, 0.0) > 0) {
       percentChange.addClassName("percentage-positive");
@@ -189,7 +189,7 @@ public class DashboardCard extends Composite<FlexLayout> {
       Toast.show("Unfollowed " + title.getText());
     }
   }
-  
+
   /**
    * Gets the GoogleChart instance for this card.
    * 

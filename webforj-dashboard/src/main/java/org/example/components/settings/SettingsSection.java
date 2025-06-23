@@ -13,17 +13,17 @@ public class SettingsSection extends Composite<Div> {
 
   public SettingsSection(String title, String description) {
     self.addClassName("settings-view__section");
-    
+
     H3 sectionTitle = new H3(title);
     sectionTitle.addClassName("settings-view__section-title");
-    
+
     Paragraph sectionDesc = new Paragraph(description);
     sectionDesc.addClassName("settings-view__section-description");
-    
+
     content = new FlexLayout();
     content.addClassName("settings-view__section-content");
     content.setDirection(FlexDirection.COLUMN);
-    
+
     self.add(sectionTitle, sectionDesc, content);
   }
 

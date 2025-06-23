@@ -13,14 +13,14 @@ import com.webforj.data.repository.CollectionRepository;
 import java.util.List;
 
 public class CryptocurrencyTable extends Composite<Table> {
-  
+
   @SuppressWarnings("unchecked")
   private Table<Cryptocurrency> table = getBoundComponent();
-  
+
   public CryptocurrencyTable() {
     initializeTable();
   }
-  
+
   private void initializeTable() {
     // Add columns for cryptocurrency data
     table.addColumn("Symbol", Cryptocurrency::getSymbol).setHidden(true);
@@ -43,16 +43,16 @@ public class CryptocurrencyTable extends Composite<Table> {
         .setRenderer(new PriceChartRenderer());
     table.addColumn("PriceHistory", Cryptocurrency::getPriceHistoryJson)
         .setHidden(true);
-    
+
     // Configure table properties
     table.setMultiSorting(true);
     table.setRowHeight(65);
   }
-  
+
   public void setData(List<Cryptocurrency> cryptocurrencies) {
     table.setRepository(new CollectionRepository<>(cryptocurrencies));
   }
-  
+
   public CollectionRepository<Cryptocurrency> getRepository() {
     return (CollectionRepository<Cryptocurrency>) table.getRepository();
   }

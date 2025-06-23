@@ -38,7 +38,7 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
 
     // Create cryptocurrency table
     cryptoTable = new CryptocurrencyTable();
-    
+
     // Generate and set data
     cryptocurrencies = cryptoService.generateCryptocurrencies();
     cryptoTable.setData(cryptocurrencies);
@@ -47,11 +47,11 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
     card1 = createCard("Global Market Cap", 2875000000000.0, 3.45, GoogleChart.Type.AREA);
     card2 = createCard("24 Hour Volume", 98500000000.0, -5.23, GoogleChart.Type.SCATTER);
     card3 = createCard("Bitcoin Dominance", 52.7, 1.28, GoogleChart.Type.COLUMN);
-    
+
     // Create cards layout
     FlexLayout cards = new FlexLayout(card1, card2, card3);
     cards.addClassName("dashboard-view__cards");
-    
+
     // Add components to view
     self.add(cards, cryptoTable);
 
@@ -63,20 +63,20 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
 
     interval.start();
   }
-  
+
   /**
    * Creates a dashboard card with chart using the new architecture.
    * 
-   * @param title The card title
-   * @param value The card value
+   * @param title      The card title
+   * @param value      The card value
    * @param percentage The percentage change
-   * @param chartType The type of chart to create
+   * @param chartType  The type of chart to create
    * @return A configured DashboardCard
    */
   private DashboardCard createCard(String title, double value, double percentage, GoogleChart.Type chartType) {
     // Build the chart using the chart builder
     GoogleChart chart = chartBuilder.buildDashboardChart(chartType, percentage);
-    
+
     // Create the card with data and chart
     return new DashboardCard(title, value, percentage, chart);
   }
@@ -86,7 +86,7 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
     super.onDidDestroy();
     interval.stop();
   }
-  
+
   @Override
   public void redrawCharts() {
     // Using the default interface method
