@@ -48,12 +48,13 @@ public class NewsView extends Composite<FlexLayout> {
   private FlexLayout sidebarArea;
   private SearchToolbar searchToolbar;
   private FlexLayout articlesGrid;
-  private Div articlesContainer;
+  private FlexLayout articlesContainer;
 
 
   public NewsView() {
-    self.addClassName("news-view");
-    self.setDirection(FlexDirection.COLUMN);
+    self.addClassName("news-view")
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-xl)");
 
     allArticles = newsService.getMockCryptoNews();
     createHeader();
@@ -65,15 +66,17 @@ public class NewsView extends Composite<FlexLayout> {
 
   private void createHeader() {
     FlexLayout header = new FlexLayout();
-    header.addClassName("news-view__header");
-    header.setJustifyContent(FlexJustifyContent.BETWEEN)
+    header.addClassName("news-view__header")
+        .setJustifyContent(FlexJustifyContent.BETWEEN)
         .setAlignment(FlexAlignment.CENTER)
-        .setWrap(FlexWrap.WRAP);
+        .setWrap(FlexWrap.WRAP)
+        .setSpacing("var(--dwc-space-m)");
 
     // Brand section
     FlexLayout brand = new FlexLayout();
-    brand.addClassName("news-view__brand");
-    brand.setAlignment(FlexAlignment.CENTER);
+    brand.addClassName("news-view__brand")
+        .setAlignment(FlexAlignment.CENTER)
+        .setSpacing("var(--dwc-space-s)");
 
     H1 title = new H1("Market News");
     title.addClassName("news-view__title");
@@ -85,7 +88,8 @@ public class NewsView extends Composite<FlexLayout> {
 
     // Action buttons
     FlexLayout actions = new FlexLayout();
-    actions.addClassName("news-view__actions");
+    actions.addClassName("news-view__actions")
+        .setSpacing("var(--dwc-space-s)");
 
     Button subscribeBtn = new Button("Subscribe");
     subscribeBtn.setTheme(ButtonTheme.OUTLINED_DEFAULT);
@@ -114,18 +118,21 @@ public class NewsView extends Composite<FlexLayout> {
 
   private void createMainLayout() {
     FlexLayout mainContainer = new FlexLayout();
-    mainContainer.addClassName("news-view__main-container");
-    mainContainer.setWrap(FlexWrap.WRAP);
+    mainContainer.addClassName("news-view__main-container")
+        .setWrap(FlexWrap.WRAP)
+        .setSpacing("var(--dwc-space-xl)");
 
     // Main content area (2/3 width)
     mainContentArea = new FlexLayout();
-    mainContentArea.addClassName("news-view__main-content");
-    mainContentArea.setDirection(FlexDirection.COLUMN);
+    mainContentArea.addClassName("news-view__main-content")
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-xl)");
 
     // Sidebar area (1/3 width)
     sidebarArea = new FlexLayout();
-    sidebarArea.addClassName("news-view__sidebar");
-    sidebarArea.setDirection(FlexDirection.COLUMN);
+    sidebarArea.addClassName("news-view__sidebar")
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-xl)");
 
     mainContainer.add(mainContentArea, sidebarArea);
     self.add(mainContainer);
@@ -152,8 +159,9 @@ public class NewsView extends Composite<FlexLayout> {
     articlesTitle.addClassName("news-view__articles-title");
 
     articlesGrid = new FlexLayout();
-    articlesGrid.addClassName("news-view__articles-grid");
-    articlesGrid.setDirection(FlexDirection.COLUMN);
+    articlesGrid.addClassName("news-view__articles-grid")
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-l)");
 
     articlesContainer.add(articlesTitle, articlesGrid);
     mainContentArea.add(articlesContainer);
@@ -162,13 +170,16 @@ public class NewsView extends Composite<FlexLayout> {
     updateArticlesGrid();
   }
 
-  private Div createMainArticleCard(NewsArticle article, int index) {
-    Div card = new Div();
-    card.addClassName("news-view__article-card");
+  private FlexLayout createMainArticleCard(NewsArticle article, int index) {
+    FlexLayout card = new FlexLayout();
+    card.addClassName("news-view__article-card")
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-m)");
 
     FlexLayout cardContent = new FlexLayout();
-    cardContent.addClassName("news-view__article-content");
-    cardContent.setWrap(FlexWrap.WRAP);
+    cardContent.addClassName("news-view__article-content")
+        .setWrap(FlexWrap.WRAP)
+        .setSpacing("var(--dwc-space-m)");
 
     // Article image
     Div imageContainer = new Div();
@@ -178,8 +189,9 @@ public class NewsView extends Composite<FlexLayout> {
 
     // Article content
     FlexLayout textContent = new FlexLayout();
-    textContent.addClassName("news-view__article-text");
-    textContent.setDirection(FlexDirection.COLUMN);
+    textContent.addClassName("news-view__article-text")
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-s)");
 
     // Meta info
     FlexLayout metaInfo = new FlexLayout();
@@ -224,27 +236,31 @@ public class NewsView extends Composite<FlexLayout> {
 
 
   private void createPopularArticles() {
-    Div popularContainer = createSectionContainer();
+    FlexLayout popularContainer = createSectionContainer();
 
     H3 popularTitle = new H3("Most Popular");
     popularTitle.addClassName("news-view__section-title");
 
     FlexLayout popularList = new FlexLayout();
-    popularList.addClassName("news-view__popular-list");
-    popularList.setDirection(FlexDirection.COLUMN);
+    popularList.addClassName("news-view__popular-list")
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-m)");
 
     for (int i = 0; i < Math.min(POPULAR_ARTICLES_LIMIT, allArticles.size()); i++) {
       NewsArticle article = allArticles.get(i);
 
       FlexLayout item = new FlexLayout();
-      item.addClassName("news-view__popular-item");
+      item.addClassName("news-view__popular-item")
+          .setAlignment(FlexAlignment.START)
+          .setSpacing("var(--dwc-space-s)");
 
       Span rank = new Span(String.valueOf(i + 1));
       rank.addClassName("news-view__popular-rank");
 
       FlexLayout content = new FlexLayout();
-      content.addClassName("news-view__popular-content");
-      content.setDirection(FlexDirection.COLUMN);
+      content.addClassName("news-view__popular-content")
+          .setDirection(FlexDirection.COLUMN)
+          .setSpacing("var(--dwc-space-xs)");
 
       H4 title = new H4(article.getTitle());
       title.addClassName("news-view__popular-item-title");
@@ -337,7 +353,7 @@ public class NewsView extends Composite<FlexLayout> {
     } else {
       for (int i = 0; i < filteredArticles.size(); i++) {
         NewsArticle article = filteredArticles.get(i);
-        Div articleCard = createMainArticleCard(article, i);
+        FlexLayout articleCard = createMainArticleCard(article, i);
         articlesGrid.add(articleCard);
       }
     }
@@ -348,9 +364,11 @@ public class NewsView extends Composite<FlexLayout> {
   /**
    * Creates a standard section container with consistent styling
    */
-  private Div createSectionContainer() {
-    Div container = new Div();
-    container.addClassName("news-view__section");
+  private FlexLayout createSectionContainer() {
+    FlexLayout container = new FlexLayout();
+    container.addClassName("news-view__section")
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-m)");
     return container;
   }
 }

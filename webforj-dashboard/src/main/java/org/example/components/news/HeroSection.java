@@ -35,15 +35,17 @@ public class HeroSection extends Composite<FlexLayout> {
     self.add(bgPattern);
 
     FlexLayout heroContent = new FlexLayout();
-    heroContent.addClassName("news-view__hero-content");
-    heroContent.setJustifyContent(FlexJustifyContent.BETWEEN)
+    heroContent.addClassName("news-view__hero-content")
+        .setJustifyContent(FlexJustifyContent.BETWEEN)
         .setAlignment(FlexAlignment.CENTER)
-        .setWrap(FlexWrap.WRAP);
+        .setWrap(FlexWrap.WRAP)
+        .setSpacing("var(--dwc-space-xl)");
 
     // Hero text
     FlexLayout heroText = new FlexLayout();
-    heroText.addClassName("news-view__hero-text");
-    heroText.setDirection(FlexDirection.COLUMN);
+    heroText.addClassName("news-view__hero-text")
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-l)");
 
     H2 heroTitle = new H2("Breaking: Bitcoin Reaches New All-Time High");
     heroTitle.addClassName("news-view__hero-title");

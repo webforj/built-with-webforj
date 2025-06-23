@@ -20,6 +20,7 @@ import org.example.components.analytics.ChartCard;
 import org.example.components.analytics.HoldingsTable;
 import org.example.components.analytics.PortfolioHero;
 import org.example.components.dashboard.DashboardCard;
+import org.example.utils.ChartRedrawable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,9 +31,8 @@ import java.util.Map;
 @Route(value = "analytics", outlet = MainLayout.class)
 @StyleSheet("ws://analytics-view.css")
 @FrameTitle("Analytics & Portfolio")
-public class AnalyticsView extends Composite<FlexLayout> implements org.example.utils.ChartRedrawable {
+public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawable {
   private final FlexLayout self = getBoundComponent();
-  private HoldingsTable holdingsTable;
   
   // Store references to dashboard cards with charts
   private DashboardCard totalVolumeCard;
@@ -46,20 +46,20 @@ public class AnalyticsView extends Composite<FlexLayout> implements org.example.
   private ChartCard sentimentChart;
 
   public AnalyticsView() {
-    self.addClassName("analytics-view");
-    self.setDirection(FlexDirection.COLUMN);
+    self.addClassName("analytics-view")
+        .setDirection(FlexDirection.COLUMN);
     
     createHeader();
     self.add(new PortfolioHero());
     createMetricCards();
     createChartsSection();
-    createHoldingsTable();
+    self.add(new HoldingsTable());
   }
 
   private void createHeader() {
     FlexLayout header = new FlexLayout();
-    header.addClassName("analytics-view__header");
-    header.setJustifyContent(FlexJustifyContent.BETWEEN)
+    header.addClassName("analytics-view__header")
+          .setJustifyContent(FlexJustifyContent.BETWEEN)
           .setWrap(FlexWrap.WRAP);
     
     FlexLayout titleSection = new FlexLayout();
@@ -78,8 +78,8 @@ public class AnalyticsView extends Composite<FlexLayout> implements org.example.
     actions.addClassName("analytics-view__actions");
     
     Button addButton = new Button("Add Asset");
-    addButton.setPrefixComponent(TablerIcon.create("plus"));
-    addButton.setTheme(ButtonTheme.PRIMARY);
+    addButton.setPrefixComponent(TablerIcon.create("plus"))
+             .setTheme(ButtonTheme.PRIMARY);
     
     Button exportButton = new Button("Export");
     exportButton.setPrefixComponent(TablerIcon.create("download"));
@@ -92,9 +92,10 @@ public class AnalyticsView extends Composite<FlexLayout> implements org.example.
 
   private void createMetricCards() {
     FlexLayout cardsSection = new FlexLayout();
-    cardsSection.addClassName("analytics-view__cards");
-    cardsSection.setJustifyContent(FlexJustifyContent.BETWEEN)
-                .setWrap(FlexWrap.WRAP);
+    cardsSection.addClassName("analytics-view__cards")
+                .setJustifyContent(FlexJustifyContent.BETWEEN)
+                .setWrap(FlexWrap.WRAP)
+                .setSpacing("var(--dwc-space-m)");
     
     totalVolumeCard = new DashboardCard("Total Market Volume", 152500000000.0, 12.5);
     portfolioValueCard = new DashboardCard("Portfolio Performance", 125480.50, 27.8, GoogleChart.Type.AREA);
@@ -106,8 +107,9 @@ public class AnalyticsView extends Composite<FlexLayout> implements org.example.
 
   private void createChartsSection() {
     FlexLayout chartsContainer = new FlexLayout();
-    chartsContainer.addClassName("analytics-view__charts");
-    chartsContainer.setWrap(FlexWrap.WRAP);
+    chartsContainer.addClassName("analytics-view__charts")
+                   .setWrap(FlexWrap.WRAP)
+                   .setSpacing("var(--dwc-space-l)");
     
     allocationChart = new ChartCard("Portfolio Allocation", createPortfolioAllocationChart());
     volumeChart = new ChartCard("24h Trading Volume", createLineChart());
@@ -121,13 +123,14 @@ public class AnalyticsView extends Composite<FlexLayout> implements org.example.
   private GoogleChart createPortfolioAllocationChart() {
     GoogleChart chart = new GoogleChart(GoogleChart.Type.PIE);
     
-    List<Object> data = new ArrayList<>();
-    data.add(Arrays.asList("Asset", "Value"));
-    data.add(Arrays.asList("Bitcoin", 45250.00));
-    data.add(Arrays.asList("Ethereum", 32100.00));
-    data.add(Arrays.asList("Cardano", 18500.00));
-    data.add(Arrays.asList("Polkadot", 12800.00));
-    data.add(Arrays.asList("Solana", 16830.50));
+    List<Object> data = Arrays.asList(
+        Arrays.asList("Asset", "Value"),
+        Arrays.asList("Bitcoin", 45250.00),
+        Arrays.asList("Ethereum", 32100.00),
+        Arrays.asList("Cardano", 18500.00),
+        Arrays.asList("Polkadot", 12800.00),
+        Arrays.asList("Solana", 16830.50)
+    );
     chart.setData(data);
     
     Map<String, Object> options = new HashMap<>();
@@ -159,15 +162,15 @@ public class AnalyticsView extends Composite<FlexLayout> implements org.example.
   private GoogleChart createColumnChart() {
     GoogleChart chart = new GoogleChart(GoogleChart.Type.COLUMN);
     
-    List<Object> data = new ArrayList<>();
-    data.add(Arrays.asList("Crypto", "Performance %"));
-    data.add(Arrays.asList("BTC", 12.5));
-    data.add(Arrays.asList("ETH", 8.3));
-    data.add(Arrays.asList("BNB", -2.1));
-    data.add(Arrays.asList("ADA", 15.7));
-    data.add(Arrays.asList("SOL", 22.4));
-    data.add(Arrays.asList("DOT", -5.8));
-    
+    List<Object> data = Arrays.asList(
+        Arrays.asList("Crypto", "Performance %"),
+        Arrays.asList("BTC", 12.5),
+        Arrays.asList("ETH", 8.3),
+        Arrays.asList("BNB", -2.1),
+        Arrays.asList("ADA", 15.7),
+        Arrays.asList("SOL", 22.4),
+        Arrays.asList("DOT", -5.8)
+    );
     chart.setData(data);
     chart.setOptions(createStandardChartOptions("#10b981"));
     
@@ -211,10 +214,6 @@ public class AnalyticsView extends Composite<FlexLayout> implements org.example.
     return options;
   }
   
-  private void createHoldingsTable() {
-    holdingsTable = new HoldingsTable();
-    self.add(holdingsTable);
-  }
   
   @Override
   public void redrawCharts() {

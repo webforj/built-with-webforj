@@ -10,11 +10,8 @@
   
   /* Primary color variations */
   --dwc-color-primary-dark: var(--dwc-color-primary-50);
-  --dwc-color-on-primary-text-dark: var(--dwc-color-primary-text-50);
   --dwc-color-primary: var(--dwc-color-primary-55);
-  --dwc-color-on-primary-text: var(--dwc-color-primary-text-55);
   --dwc-color-primary-light: var(--dwc-color-primary-60);
-  --dwc-color-on-primary-text-light: var(--dwc-color-primary-text-60);
   
   /* Primary text colors */
   --dwc-color-primary-text-dark: var(--dwc-color-primary-35);
@@ -27,7 +24,6 @@ html[data-app-theme~='dark'],
 html[data-app-theme~='dark-pure'] {
   /* Override primary color to be lighter in dark mode */
   --dwc-color-primary: var(--dwc-color-primary-25);
-  --dwc-color-on-primary-text: var(--dwc-color-primary-text-25);
   
   --dwc-color-primary-text-dark: var(--dwc-color-primary-20);
   --dwc-color-primary-text: var(--dwc-color-primary-25);

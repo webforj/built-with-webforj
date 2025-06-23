@@ -1,7 +1,6 @@
 package org.example.components.news;
 
 import com.webforj.component.Composite;
-import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.H3;
 import com.webforj.component.html.elements.Span;
 import com.webforj.component.layout.flexlayout.FlexAlignment;
@@ -9,11 +8,12 @@ import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexJustifyContent;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 
-public class MarketHighlights extends Composite<Div> {
-  private Div self = getBoundComponent();
+public class MarketHighlights extends Composite<FlexLayout> {
+  private FlexLayout self = getBoundComponent();
 
   public MarketHighlights() {
-    self.addClassName("news-view__section");
+    self.addClassName("news-view__section")
+        .setDirection(FlexDirection.COLUMN);
     
     createMarketContent();
   }

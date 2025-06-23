@@ -5,7 +5,9 @@ import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.H3;
 import com.webforj.component.html.elements.Paragraph;
 import com.webforj.component.html.elements.Span;
+import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
+import com.webforj.component.layout.flexlayout.FlexJustifyContent;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 
 public class NewsCard extends Composite<FlexLayout> {
@@ -21,16 +23,9 @@ public class NewsCard extends Composite<FlexLayout> {
   };
 
   public NewsCard(String title, String description, String source, String timeAgo, String url) {
-    // Simple card for backward compatibility
-    self.setDirection(FlexDirection.COLUMN);
-    self.addClassName("news-card");
-    self.setStyle("background", "var(--dwc-surface-1)")
-        .setStyle("border", "1px solid var(--dwc-color-gray-95)")
-        .setStyle("border-radius", "var(--dwc-border-radius-m)")
-        .setStyle("padding", "var(--dwc-space-m)")
-        .setStyle("cursor", "pointer")
-        .setStyle("transition", "all var(--dwc-transition-medium) ease");
-    
+    self.addClassName("news-card")
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-m)");    
     // Add image (random stock image)
     Div imageDiv = new Div();
     imageDiv.addClassName("news-image");
@@ -38,8 +33,10 @@ public class NewsCard extends Composite<FlexLayout> {
     imageDiv.setStyle("background-image", "url('" + imageUrl + "')");
     
     // Content container
-    Div contentDiv = new Div();
-    contentDiv.addClassName("news-content");
+    FlexLayout contentDiv = new FlexLayout();
+    contentDiv.addClassName("news-content")
+        .setDirection(FlexDirection.COLUMN)
+        .setSpacing("var(--dwc-space-s)");
     
     // Title
     H3 titleElement = new H3(title);
@@ -48,8 +45,10 @@ public class NewsCard extends Composite<FlexLayout> {
     Paragraph descElement = new Paragraph(description);
 
     // Meta information container
-    Div metaDiv = new Div();
-    metaDiv.addClassName("news-meta");
+    FlexLayout metaDiv = new FlexLayout();
+    metaDiv.addClassName("news-meta")
+        .setJustifyContent(FlexJustifyContent.BETWEEN)
+        .setAlignment(FlexAlignment.CENTER);
     
     Span sourceSpan = new Span(source);
     sourceSpan.addClassName("news-source");

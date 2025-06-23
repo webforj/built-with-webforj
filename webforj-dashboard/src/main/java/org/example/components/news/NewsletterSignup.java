@@ -12,13 +12,14 @@ import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 
-public class NewsletterSignup extends Composite<Div> {
-  private Div self = getBoundComponent();
+public class NewsletterSignup extends Composite<FlexLayout> {
+  private FlexLayout self = getBoundComponent();
   private Div headerSection;
   private Div formSection;
 
   public NewsletterSignup() {
-    self.addClassName("news-view__newsletter");
+    self.addClassName("news-view__newsletter")
+        .setDirection(FlexDirection.COLUMN);
     
     createNewsletterContent();
     applyThemeAwareBackground();

@@ -36,10 +36,11 @@ public class SearchToolbar extends Composite<FlexLayout> {
   private static final String TIME_ALL = "All Time";
 
   public SearchToolbar() {
-    self.addClassName("news-view__toolbar");
-    self.setJustifyContent(FlexJustifyContent.BETWEEN)
+    self.addClassName("news-view__toolbar")
+        .setJustifyContent(FlexJustifyContent.BETWEEN)
         .setAlignment(FlexAlignment.CENTER)
-        .setWrap(FlexWrap.WRAP);
+        .setWrap(FlexWrap.WRAP)
+        .setSpacing("var(--dwc-space-m)");
 
     createLeftSection();
     createRightSection();
@@ -47,8 +48,9 @@ public class SearchToolbar extends Composite<FlexLayout> {
 
   private void createLeftSection() {
     FlexLayout leftSection = new FlexLayout();
-    leftSection.addClassName("news-view__toolbar-left");
-    leftSection.setAlignment(FlexAlignment.CENTER);
+    leftSection.addClassName("news-view__toolbar-left")
+        .setAlignment(FlexAlignment.CENTER)
+        .setSpacing("var(--dwc-space-m)");
 
     searchField = new TextField();
     searchField.addClassName("news-view__search");
@@ -100,8 +102,9 @@ public class SearchToolbar extends Composite<FlexLayout> {
 
   private void createRightSection() {
     FlexLayout rightSection = new FlexLayout();
-    rightSection.addClassName("news-view__toolbar-right");
-    rightSection.setAlignment(FlexAlignment.CENTER);
+    rightSection.addClassName("news-view__toolbar-right")
+        .setAlignment(FlexAlignment.CENTER)
+        .setSpacing("var(--dwc-space-s)");
 
     // Sort button
     Button sortBtn = new Button("Sort");

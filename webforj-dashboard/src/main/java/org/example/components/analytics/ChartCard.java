@@ -2,11 +2,12 @@ package org.example.components.analytics;
 
 import com.webforj.component.Composite;
 import com.webforj.component.googlecharts.GoogleChart;
-import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.H3;
+import com.webforj.component.layout.flexlayout.FlexDirection;
+import com.webforj.component.layout.flexlayout.FlexLayout;
 
-public class ChartCard extends Composite<Div> {
-  private final Div self = getBoundComponent();
+public class ChartCard extends Composite<FlexLayout> {
+  private final FlexLayout self = getBoundComponent();
   private GoogleChart chart;
 
   public ChartCard(String title, GoogleChart chart) {
@@ -15,21 +16,22 @@ public class ChartCard extends Composite<Div> {
 
   public ChartCard(String title, GoogleChart chart, boolean fullWidth) {
     this.chart = chart;
-    self.addClassName("analytics-view__chart-card");
+    self.addClassName("analytics-view__chart-card")
+        .setDirection(FlexDirection.COLUMN);
+    
     if (fullWidth) {
       self.addClassName("analytics-view__chart-card--full-width");
     }
     
     H3 cardTitle = new H3(title);
     cardTitle.addClassName("analytics-view__chart-title");
-    
     chart.addClassName("analytics-view__chart");
-    
     self.add(cardTitle, chart);
   }
-  
+
   /**
    * Gets the GoogleChart instance for this card
+   * 
    * @return the chart component
    */
   public GoogleChart getChart() {
