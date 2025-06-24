@@ -205,13 +205,14 @@ public class MainLayout extends Composite<AppLayout> {
     try {
       // Find all components in the current window that implement ChartRedrawable
       self.getComponents().stream()
-          .filter(c -> c instanceof ChartRedrawable)
+          .filter(ChartRedrawable.class::isInstance)
           .filter(c -> c.getClass().getSimpleName().endsWith("View")) // Only view components
           .findFirst()
           .ifPresent(view -> {
             ((ChartRedrawable) view).redrawCharts();
           });
     } catch (Exception ex) {
+      App.console().log(ex.getMessage());
     }
   }
 }

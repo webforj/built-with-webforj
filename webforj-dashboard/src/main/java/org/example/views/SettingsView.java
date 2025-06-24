@@ -2,7 +2,6 @@ package org.example.views;
 
 import org.example.components.settings.SettingsSection;
 
-import com.webforj.App;
 import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
@@ -90,6 +89,7 @@ public class SettingsView extends Composite<FlexLayout> {
         case "Privacy":
           showPrivacySettings(tabContent);
           break;
+        default:
       }
     });
     

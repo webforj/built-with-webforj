@@ -3,14 +3,11 @@ package org.example.views;
 import com.webforj.Page;
 import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Composite;
-import com.webforj.component.button.Button;
-import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.H1;
 import com.webforj.component.html.elements.H2;
 import com.webforj.component.html.elements.H3;
 import com.webforj.component.html.elements.Paragraph;
-import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexJustifyContent;
@@ -54,7 +51,6 @@ public class AboutView extends Composite<FlexLayout> {
   }
 
   private void createAboutSection() {
-    // Section container with surface-2 background
     FlexLayout section = new FlexLayout();
     section.addClassName("about-view__section-container");
     section.setDirection(FlexDirection.COLUMN);
@@ -90,7 +86,6 @@ public class AboutView extends Composite<FlexLayout> {
   }
 
   private void createBuiltWithSection() {
-    // Section container with surface-2 background
     FlexLayout section = new FlexLayout();
     section.addClassName("about-view__section-container");
     section.setDirection(FlexDirection.COLUMN);
@@ -141,7 +136,6 @@ public class AboutView extends Composite<FlexLayout> {
   }
 
   private void createDocumentationSection() {
-    // Section container with surface-2 background
     FlexLayout section = new FlexLayout();
     section.addClassName("about-view__section-container");
     section.setDirection(FlexDirection.COLUMN);
@@ -179,7 +173,6 @@ public class AboutView extends Composite<FlexLayout> {
   }
 
   private void createGitHubSection() {
-    // Section container with surface-2 background
     FlexLayout section = new FlexLayout();
     section.addClassName("about-view__section-container");
     section.setDirection(FlexDirection.COLUMN);

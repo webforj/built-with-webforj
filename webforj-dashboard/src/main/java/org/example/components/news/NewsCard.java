@@ -58,10 +58,8 @@ public class NewsCard extends Composite<FlexLayout> {
 
     metaDiv.add(sourceSpan, timeSpan);
 
-    // Add content to content container
     contentDiv.add(titleElement, descElement, metaDiv);
 
-    // Add all elements to card
     self.add(imageDiv, contentDiv);
   }
 }

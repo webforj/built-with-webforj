@@ -18,7 +18,7 @@ public class DrawerFooter extends Composite<FlexLayout> {
   private void initComponent() {
     self.addClassName("drawer-footer");
     self.setDirection(FlexDirection.COLUMN);
-    self.setStyle("gap", "5px"); // Remove gap between sections
+    self.setStyle("gap", "5px");
 
     // Add user profile section
     self.add(createUserSection());
@@ -41,7 +41,7 @@ public class DrawerFooter extends Composite<FlexLayout> {
     FlexLayout userInfo = new FlexLayout();
     userInfo.addClassName("drawer-footer__user-info");
     userInfo.setDirection(FlexDirection.COLUMN);
-    userInfo.setStyle("gap", "5px"); // Remove gap between name and role
+    userInfo.setStyle("gap", "5px");
 
     Span userName = new Span("John Doe");
     userName.addClassName("drawer-footer__user-name");

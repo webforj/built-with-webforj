@@ -8,7 +8,6 @@ import org.example.utils.charts.ChartRedrawable;
 import org.example.utils.charts.DashboardChartBuilder;
 
 import com.webforj.Interval;
-import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Composite;
 import com.webforj.component.googlecharts.GoogleChart;
 import com.webforj.component.layout.flexlayout.FlexDirection;
@@ -19,7 +18,6 @@ import com.webforj.router.annotation.Route;
 import java.util.List;
 
 @Route(value = "/", outlet = MainLayout.class)
-@StyleSheet("ws://dashboard-view.css")
 @FrameTitle("Cryptocurrency Dashboard")
 public class DashboardView extends Composite<FlexLayout> implements ChartRedrawable {
   private final FlexLayout self = getBoundComponent();

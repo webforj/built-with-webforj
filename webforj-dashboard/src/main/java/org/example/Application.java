@@ -8,6 +8,7 @@ import com.webforj.annotation.StyleSheet;
 
 @Routify(packages = "org.example.views")
 @StyleSheet("ws://app.css")
+@StyleSheet("ws://dashboard-view.css")
 @AppTheme("light")
 @AppProfile(name = "webforj-dashboard", shortName = "webforj-dashboard")
 public class Application extends App {

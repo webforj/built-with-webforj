@@ -15,7 +15,6 @@ import com.webforj.component.layout.flexlayout.FlexDirection;
 public class NewsletterSignup extends Composite<FlexLayout> {
   private FlexLayout self = getBoundComponent();
   private Div headerSection;
-  private Div formSection;
 
   public NewsletterSignup() {
     self.addClassName("news-view__newsletter")
@@ -42,7 +41,7 @@ public class NewsletterSignup extends Composite<FlexLayout> {
     headerSection.add(emailIcon, newsletterTitle, newsletterText);
 
     // Create form section (surface-2 background)
-    formSection = new Div();
+    Div formSection = new Div();
     formSection.addClassName("news-view__newsletter-form");
 
     TextField emailField = new TextField();

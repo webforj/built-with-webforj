@@ -30,7 +30,6 @@ import com.webforj.router.annotation.FrameTitle;
 import com.webforj.router.annotation.Route;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Route(value = "news", outlet = MainLayout.class)
 @StyleSheet("ws://news-view.css")
@@ -168,7 +167,7 @@ public class NewsView extends Composite<FlexLayout> {
     updateArticlesGrid();
   }
 
-  private FlexLayout createMainArticleCard(NewsArticle article, int index) {
+  private FlexLayout createMainArticleCard(NewsArticle article) {
     FlexLayout card = new FlexLayout();
     card.addClassName("news-view__article-card")
         .setDirection(FlexDirection.COLUMN)
@@ -329,7 +328,7 @@ public class NewsView extends Composite<FlexLayout> {
         .filter(article -> matchesCategory(article, currentCategory))
         .filter(article -> matchesSearch(article, searchTerm))
         .limit(MAIN_ARTICLES_LIMIT)
-        .collect(Collectors.toList());
+        .toList();
 
     if (filteredArticles.isEmpty()) {
       Div noResults = new Div();
@@ -349,7 +348,7 @@ public class NewsView extends Composite<FlexLayout> {
     } else {
       for (int i = 0; i < filteredArticles.size(); i++) {
         NewsArticle article = filteredArticles.get(i);
-        FlexLayout articleCard = createMainArticleCard(article, i);
+        FlexLayout articleCard = createMainArticleCard(article);
         articlesGrid.add(articleCard);
       }
     }
