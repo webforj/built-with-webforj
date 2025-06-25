@@ -3,10 +3,10 @@
 .about-view {
   overflow-y: auto;
   padding: 0;
-  background: var(--dwc-surface-1);
+  background: white;
   animation: fadeInUp 500ms ease-out;
   animation-fill-mode: both;
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 0 auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
@@ -53,13 +53,11 @@
   z-index: 1;
 }
 
-/* Section Container - surface 2 background */
+/* Section Container - white background */
 .about-view__section-container {
-  background: var(--dwc-surface-2);
-  padding: var(--dwc-space-xl);
+  background: white;
+  padding: var(--dwc-space-xl) var(--dwc-space-l);
   margin-bottom: var(--dwc-space-xl);
-  border-radius: var(--dwc-border-radius-l);
-  border: 1px solid var(--dwc-color-gray-90);
 }
 
 /* Cards Grid */
@@ -68,11 +66,49 @@
   margin-top: var(--dwc-space-l);
 }
 
+/* Subsection Titles */
+.about-view__subsection-title {
+  margin: var(--dwc-space-l) 0 var(--dwc-space-m) 0;
+  font-size: var(--dwc-font-size-xl);
+  font-weight: var(--dwc-font-weight-semibold);
+  color: var(--dwc-color-gray-20);
+  text-align: left;
+}
+
+/* Lists */
+.about-view__features-list,
+.about-view__docs-list,
+.about-view__repos-list {
+  margin: 0 0 var(--dwc-space-l) 0;
+  padding-left: var(--dwc-space-xl);
+}
+
+.about-view__features-list li,
+.about-view__docs-list li,
+.about-view__repos-list li {
+  margin-bottom: var(--dwc-space-m);
+  font-size: var(--dwc-font-size-l);
+  line-height: 1.7;
+  color: black;
+}
+
+.about-view__features-list li strong,
+.about-view__docs-list li a,
+.about-view__repos-list li a {
+  color: var(--dwc-color-primary-40);
+  text-decoration: none;
+}
+
+.about-view__docs-list li a:hover,
+.about-view__repos-list li a:hover {
+  text-decoration: underline;
+}
+
 .about-view__section-title {
   margin: 0 0 var(--dwc-space-l) 0;
   font-size: var(--dwc-font-size-3xl);
   font-weight: var(--dwc-font-weight-semibold);
-  color: var(--dwc-color-on-surface);
+  color: black;
   text-align: center;
 }
 
@@ -80,28 +116,10 @@
   margin: 0 0 var(--dwc-space-l) 0;
   font-size: var(--dwc-font-size-l);
   line-height: 1.6;
-  color: var(--dwc-color-gray-40);
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  color: black;
+  text-align: left;
 }
 
-/* Feature Card */
-.about-view__feature-card {
-  background: var(--dwc-surface-3);
-  border-radius: var(--dwc-border-radius-l);
-  padding: var(--dwc-space-l);
-  text-align: center;
-  flex: 1 1 300px;
-  min-width: 280px;
-  border: var(--dwc-border-width) solid var(--dwc-color-gray-90);
-  transition: all var(--dwc-transition-medium) ease;
-}
-
-.about-view__feature-card:hover {
-  transform: none;
-  box-shadow: none;
-}
 
 .about-view__clickable-card {
   cursor: pointer;
@@ -135,7 +153,7 @@
   margin: 0 0 var(--dwc-space-s) 0;
   font-size: var(--dwc-font-size-xl);
   font-weight: var(--dwc-font-weight-semibold);
-  color: var(--dwc-color-on-surface);
+  color: var(--dwc-color-gray-40);
 }
 
 .about-view__feature-description {
@@ -160,16 +178,6 @@
   opacity: 1;
 }
 
-/* Repository Cards */
-.about-view__repo-card {
-  background: var(--dwc-surface-3);
-  border-radius: var(--dwc-border-radius-l);
-  padding: var(--dwc-space-l);
-  flex: 1 1 300px;
-  min-width: 280px;
-  border: var(--dwc-border-width) solid var(--dwc-color-gray-90);
-  transition: all var(--dwc-transition-medium) ease;
-}
 
 /* App Cards */
 .about-view__app-card {
@@ -191,6 +199,7 @@
   justify-content: center;
   background: linear-gradient(135deg, var(--dwc-color-primary-60) 0%, var(--dwc-color-primary-70) 100%);
   border-radius: var(--dwc-border-radius-m);
+  margin-bottom: var(--dwc-space-l);
 }
 
 /* Current App Highlight */
@@ -234,13 +243,13 @@
   margin: 0 0 var(--dwc-space-xs) 0;
   font-size: var(--dwc-font-size-l);
   font-weight: var(--dwc-font-weight-semibold);
-  color: var(--dwc-color-on-surface);
+  color: black;
 }
 
 .about-view__card-description {
   margin: 0;
   font-size: var(--dwc-font-size-s);
-  color: var(--dwc-color-gray-40);
+  color: var(--dwc-color-gray-50);
   line-height: 1.5;
 }
 
@@ -261,21 +270,15 @@
 
 /* Two cards per row with third/fourth card full width */
 @media (max-width: 950px) {
-  .about-view__feature-card:nth-child(3),
-  .about-view__feature-card:nth-child(4),
   .about-view__app-card:nth-child(3),
-  .about-view__app-card:nth-child(4),
-  .about-view__repo-card:nth-child(3),
-  .about-view__repo-card:nth-child(4) {
+  .about-view__app-card:nth-child(4) {
     flex: 1 1 100%;
   }
 }
 
 /* One card per row on smaller screens */
 @media (max-width: 650px) {
-  .about-view__feature-card,
-  .about-view__app-card,
-  .about-view__repo-card {
+  .about-view__app-card {
     flex: 1 1 100%;
     min-width: 100%;
   }

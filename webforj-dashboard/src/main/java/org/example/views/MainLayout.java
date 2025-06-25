@@ -12,6 +12,9 @@ import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.Img;
 import com.webforj.component.icons.IconButton;
 import com.webforj.component.icons.TablerIcon;
+import com.webforj.component.icons.FeatherIcon;
+import com.webforj.component.toast.Toast;
+import com.webforj.component.Theme;
 import com.webforj.component.layout.applayout.AppLayout;
 import com.webforj.component.layout.applayout.AppLayout.DrawerPlacement;
 import com.webforj.component.layout.toolbar.Toolbar;
@@ -49,6 +52,12 @@ public class MainLayout extends Composite<AppLayout> {
     // Add drawer event listeners for chart redrawing
     self.onDrawerOpen(e -> redrawChartsInCurrentView());
     self.onDrawerClose(e -> redrawChartsInCurrentView());
+    
+    // Show demo data disclaimer toast on load
+    showDemoDataToast();
+    
+    // Add demo banner to content area
+    addDemoBanner();
   }
 
   private void setHeader() {
@@ -117,44 +126,41 @@ public class MainLayout extends Composite<AppLayout> {
     appNav.setAutoOpen(true);
 
     AppNavItem dashboard = new AppNavItem("Dashboard", DashboardView.class);
-    dashboard.setPrefixComponent(TablerIcon.create("dashboard"));
+    dashboard.setPrefixComponent(FeatherIcon.GRID.create());
 
     AppNavItem news = new AppNavItem("News", NewsView.class);
-    news.setPrefixComponent(TablerIcon.create("news"));
+    news.setPrefixComponent(FeatherIcon.RSS.create());
 
     AppNavItem analytics = new AppNavItem("Analytics & Portfolio", AnalyticsView.class);
-    analytics.setPrefixComponent(TablerIcon.create("chart-pie"));
+    analytics.setPrefixComponent(FeatherIcon.PIE_CHART.create());
 
     AppNavItem settings = new AppNavItem("Settings", SettingsView.class);
-    settings.setPrefixComponent(TablerIcon.create("settings"));
+    settings.setPrefixComponent(FeatherIcon.SETTINGS.create());
 
-    // About section with expandable children
-    AppNavItem about = new AppNavItem("About");
-    about.setPrefixComponent(TablerIcon.create("info-circle"));
-
-    // Overview item links to the About view
-    AppNavItem overview = new AppNavItem("Overview", AboutView.class);
-    overview.setPrefixComponent(TablerIcon.create("home"));
-    about.addItem(overview);
+    // About as individual item
+    AppNavItem about = new AppNavItem("About", AboutView.class);
+    about.setPrefixComponent(FeatherIcon.INFO.create());
 
     // Documentation - external link
-    about.addItem(new AppNavItem("Documentation", "https://docs.webforj.com", TablerIcon.create("book"))
-        .setSuffixComponent(TablerIcon.create("external-link")));
+    AppNavItem documentation = new AppNavItem("Documentation", "https://docs.webforj.com", FeatherIcon.BOOK_OPEN.create());
+    documentation.setSuffixComponent(FeatherIcon.EXTERNAL_LINK.create());
 
     // GitHub - external link
-    about.addItem(new AppNavItem("GitHub", "https://github.com/webforj", TablerIcon.create("brand-github"))
-        .setSuffixComponent(TablerIcon.create("external-link")));
+    AppNavItem github = new AppNavItem("GitHub", "https://github.com/webforj", FeatherIcon.GITHUB.create());
+    github.setSuffixComponent(FeatherIcon.EXTERNAL_LINK.create());
 
     // Built with webforJ - external link
-    about.addItem(
-        new AppNavItem("Built with webforJ", "https://github.com/webforj/built-with-webforj", TablerIcon.create("apps"))
-            .setSuffixComponent(TablerIcon.create("external-link")));
+    AppNavItem builtWith = new AppNavItem("Built with webforJ", "https://github.com/webforj/built-with-webforj", FeatherIcon.LAYERS.create());
+    builtWith.setSuffixComponent(FeatherIcon.EXTERNAL_LINK.create());
 
     appNav.addItem(dashboard);
     appNav.addItem(news);
     appNav.addItem(analytics);
     appNav.addItem(settings);
     appNav.addItem(about);
+    appNav.addItem(documentation);
+    appNav.addItem(github);
+    appNav.addItem(builtWith);
 
     drawerLayout.add(appNav);
     drawerLayout.add(new DrawerFooter());
@@ -214,5 +220,41 @@ public class MainLayout extends Composite<AppLayout> {
     } catch (Exception ex) {
       App.console().log(ex.getMessage());
     }
+  }
+  
+  /**
+   * Shows a toast notification about demo data
+   */
+  private void showDemoDataToast() {
+    Toast.show("📊 Demo Mode: All data displayed is for demonstration purposes only", 
+               Theme.INFO);
+  }
+  
+  /**
+   * Adds a dismissible demo banner to the content area
+   */
+  private void addDemoBanner() {
+    // Create banner container
+    FlexLayout banner = new FlexLayout();
+    banner.addClassName("demo-banner");
+    banner.setAlignment(FlexAlignment.CENTER);
+    
+    // Info icon
+    banner.add(FeatherIcon.INFO.create());
+    
+    // Banner text
+    Div bannerText = new Div();
+    bannerText.addClassName("demo-banner__text");
+    bannerText.setText("Demo Mode: All cryptocurrency data shown is simulated for demonstration purposes only");
+    banner.add(bannerText);
+    
+    // Close button
+    IconButton closeBtn = new IconButton(FeatherIcon.X.create());
+    closeBtn.addClassName("demo-banner__close");
+    closeBtn.onClick(e -> banner.setVisible(false));
+    banner.add(closeBtn);
+    
+    // Add banner to the content area at the top
+    self.addToContent(banner);
   }
 }

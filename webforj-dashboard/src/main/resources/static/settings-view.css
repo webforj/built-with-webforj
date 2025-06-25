@@ -6,6 +6,7 @@
   width: 100%;
   overflow-y: auto;
   padding: var(--dwc-space-l);
+  box-sizing: border-box;
 }
 
 .settings-view__tabs-container {
@@ -69,6 +70,11 @@
 @media (max-width: 768px) {
   .settings-view {
     padding: var(--dwc-space-m);
+    max-width: 100%;
+  }
+  
+  .settings-view__tabs-container {
+    padding: var(--dwc-space-m);
   }
   
   .settings-view__section {
@@ -78,6 +84,11 @@
 
 @media (max-width: 480px) {
   .settings-view {
+    padding: var(--dwc-space-m);
+    max-width: 100%;
+  }
+  
+  .settings-view__tabs-container {
     padding: var(--dwc-space-s);
   }
   

@@ -19,7 +19,7 @@ public class PortfolioHero extends Composite<FlexLayout> {
     FlexLayout heroContent = new FlexLayout();
     heroContent.addClassName("portfolio-hero__content")
         .setJustifyContent(FlexJustifyContent.BETWEEN)
-        .setAlignment(FlexAlignment.START)
+        .setAlignment(FlexAlignment.CENTER)
         .setSpacing("var(--dwc-space-xl)")
         .setWidth("100%");
 
@@ -27,7 +27,7 @@ public class PortfolioHero extends Composite<FlexLayout> {
     FlexLayout mainValue = new FlexLayout();
     mainValue.addClassName("portfolio-hero__main")
         .setDirection(FlexDirection.COLUMN);
-    mainValue.setStyle("flex", "1 1 400px");
+    mainValue.setStyle("flex", "1 1 300px");
 
     Paragraph welcomeText = new Paragraph("Portfolio Value");
     welcomeText.addClassName("portfolio-hero__label");
@@ -49,19 +49,81 @@ public class PortfolioHero extends Composite<FlexLayout> {
     changeContainer.add(changeValue, changePercent);
     mainValue.add(welcomeText, totalValue, changeContainer);
 
+    // Center - Performance ring
+    FlexLayout centerElement = createPerformanceRing();
+    centerElement.setStyle("flex", "0 0 auto");
+    
     // Right side - Quick stats
     FlexLayout statsGrid = new FlexLayout();
     statsGrid.addClassName("portfolio-hero__stats")
         .setDirection(FlexDirection.COLUMN)
         .setSpacing("var(--dwc-space-m)");
-    statsGrid.setStyle("flex", "0 0 300px");
+    statsGrid.setStyle("flex", "1 1 300px");
     statsGrid.add(
         createQuickStat("24h Change", "+2.8%", "trending-up"),
         createQuickStat("Total Assets", "20", "coins"),
         createQuickStat("Best Performer", "SOL +22.4%", "trophy"));
 
-    heroContent.add(mainValue, statsGrid);
+    heroContent.add(mainValue, centerElement, statsGrid);
     self.add(heroContent);
+  }
+
+  private FlexLayout createPerformanceRing() {
+    FlexLayout container = new FlexLayout();
+    container.addClassName("portfolio-hero__performance-ring")
+        .setDirection(FlexDirection.COLUMN)
+        .setAlignment(FlexAlignment.CENTER)
+        .setJustifyContent(FlexJustifyContent.CENTER);
+    
+    // Circular progress ring
+    Div progressRing = new Div();
+    progressRing.addClassName("performance-ring");
+    
+    // Center content with percentage and label
+    FlexLayout centerContent = new FlexLayout();
+    centerContent.addClassName("performance-ring__content")
+        .setDirection(FlexDirection.COLUMN)
+        .setAlignment(FlexAlignment.CENTER);
+    
+    H2 percentage = new H2("+27.8%");
+    percentage.addClassName("performance-ring__percentage");
+    
+    Paragraph label = new Paragraph("YTD Growth");
+    label.addClassName("performance-ring__label");
+    
+    centerContent.add(percentage, label);
+    
+    // Small metric indicators around the ring
+    FlexLayout metricsContainer = new FlexLayout();
+    metricsContainer.addClassName("performance-ring__metrics")
+        .setJustifyContent(FlexJustifyContent.BETWEEN);
+    
+    metricsContainer.add(
+        createMiniMetric("P/L", "+$27K"),
+        createMiniMetric("ROI", "28.5%"),
+        createMiniMetric("Sharpe", "1.85")
+    );
+    
+    container.add(progressRing, centerContent, metricsContainer);
+    
+    return container;
+  }
+  
+  private FlexLayout createMiniMetric(String label, String value) {
+    FlexLayout metric = new FlexLayout();
+    metric.addClassName("mini-metric")
+        .setDirection(FlexDirection.COLUMN)
+        .setAlignment(FlexAlignment.CENTER);
+    
+    Span metricValue = new Span(value);
+    metricValue.addClassName("mini-metric__value");
+    
+    Span metricLabel = new Span(label);
+    metricLabel.addClassName("mini-metric__label");
+    
+    metric.add(metricValue, metricLabel);
+    
+    return metric;
   }
 
   private FlexLayout createQuickStat(String label, String value, String iconName) {

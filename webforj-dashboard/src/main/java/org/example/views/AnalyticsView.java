@@ -181,21 +181,59 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
     GoogleChart chart = new GoogleChart(GoogleChart.Type.AREA);
 
     List<Object> data = new ArrayList<>();
-    data.add(Arrays.asList("Day", "Bullish", "Bearish"));
+    data.add(Arrays.asList("Time", "Bullish", "Bearish", "Neutral"));
 
-    String[] days = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
-    for (String day : days) {
-      double bullish = 40 + Math.random() * 30;
-      data.add(Arrays.asList(day, bullish, 100 - bullish));
+    // Create 48 data points (every 30 minutes for 24 hours)
+    double previousBullish = 45;
+    double previousNeutral = 15;
+    
+    for (int i = 0; i < 48; i++) {
+      String timeLabel;
+      if (i % 4 == 0) { // Show hour labels every 2 hours
+        int hour = (i / 2) % 24;
+        timeLabel = String.format("%02d:00", hour);
+      } else {
+        timeLabel = "";
+      }
+      
+      // Create more realistic sentiment fluctuations with momentum
+      double momentum = (Math.random() - 0.5) * 8;
+      double volatility = Math.sin(i * 0.3) * 5; // Add cyclical pattern
+      
+      double bullish = Math.max(20, Math.min(65, previousBullish + momentum + volatility));
+      double neutral = Math.max(10, Math.min(30, previousNeutral + (Math.random() - 0.5) * 3));
+      double bearish = 100 - bullish - neutral;
+      
+      data.add(Arrays.asList(timeLabel, bullish, bearish, neutral));
+      
+      previousBullish = bullish;
+      previousNeutral = neutral;
     }
 
     chart.setData(data);
 
     Map<String, Object> options = createStandardChartOptions(null);
-    options.put("colors", List.of("#10b981", "#ef4444"));
+    options.put("colors", List.of("#10b981", "#ef4444", "#6b7280"));
     options.put("isStacked", true);
-    options.put("legend", Map.of("textStyle", Map.of("color", "#6b7280")));
-    options.put("chartArea", Map.of("left", "10%", "top", "10%", "width", "80%", "height", "70%"));
+    options.put("areaOpacity", 0.8);
+    options.put("legend", Map.of(
+        "position", "top",
+        "textStyle", Map.of("color", "#6b7280", "fontSize", 12)
+    ));
+    options.put("hAxis", Map.of(
+        "textStyle", Map.of("color", "#6b7280", "fontSize", 10),
+        "gridlines", Map.of("color", "#e5e7eb"),
+        "showTextEvery", 4,
+        "slantedText", false
+    ));
+    options.put("vAxis", Map.of(
+        "textStyle", Map.of("color", "#6b7280"),
+        "gridlines", Map.of("color", "#e5e7eb"),
+        "format", "#'%'"
+    ));
+    options.put("chartArea", Map.of("left", "10%", "top", "15%", "width", "85%", "height", "65%"));
+    options.put("curveType", "function");
+    options.put("animation", Map.of("startup", true, "duration", 1000));
     chart.setOptions(options);
 
     return chart;

@@ -7,7 +7,9 @@ import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.H1;
 import com.webforj.component.html.elements.H2;
 import com.webforj.component.html.elements.H3;
+import com.webforj.component.html.elements.ListEntry;
 import com.webforj.component.html.elements.Paragraph;
+import com.webforj.component.html.elements.UnorderedList;
 import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexJustifyContent;
@@ -67,21 +69,30 @@ public class AboutView extends Composite<FlexLayout> {
         though you can enhance your applications with these technologies when needed.
         """);
 
-    // Cards container
-    FlexLayout cardsGrid = new FlexLayout();
-    cardsGrid.addClassName("about-view__cards-grid");
-    cardsGrid.setWrap(FlexWrap.WRAP);
-    cardsGrid.setJustifyContent(FlexJustifyContent.BETWEEN);
+    UnorderedList featuresList = new UnorderedList();
+    featuresList.addClassName("about-view__features-list");
+    
+    ListEntry item1 = new ListEntry();
+    item1.setHtml("<strong>Java-First:</strong> Write web applications using pure Java");
+    
+    ListEntry item2 = new ListEntry();
+    item2.setHtml("<strong>Component-Based:</strong> Reusable UI components with familiar patterns");
+    
+    ListEntry item3 = new ListEntry();
+    item3.setHtml("<strong>Responsive Design:</strong> Built-in responsive layouts and styling");
+    
+    ListEntry item4 = new ListEntry();
+    item4.setHtml("<strong>Modern UI:</strong> Contemporary design with theming support");
+    
+    ListEntry item5 = new ListEntry();
+    item5.setHtml("<strong>Easy Deployment:</strong> Deploy anywhere Java runs");
+    
+    ListEntry item6 = new ListEntry();
+    item6.setHtml("<strong>Active Community:</strong> Growing ecosystem and support");
+    
+    featuresList.add(item1, item2, item3, item4, item5, item6);
 
-    cardsGrid.add(
-        createFeatureCard("Java-First", "Write web applications using pure Java", "code"),
-        createFeatureCard("Component-Based", "Reusable UI components with familiar patterns", "components"),
-        createFeatureCard("Responsive Design", "Built-in responsive layouts and styling", "device-mobile"),
-        createFeatureCard("Modern UI", "Contemporary design with theming support", "palette"),
-        createFeatureCard("Easy Deployment", "Deploy anywhere Java runs", "rocket"),
-        createFeatureCard("Active Community", "Growing ecosystem and support", "users"));
-
-    section.add(sectionTitle, description, cardsGrid);
+    section.add(sectionTitle, description, featuresList);
     self.add(section);
   }
 
@@ -150,25 +161,27 @@ public class AboutView extends Composite<FlexLayout> {
         From getting started tutorials to advanced topics, our documentation has you covered.
         """);
 
-    // Docs grid
-    FlexLayout docsGrid = new FlexLayout();
-    docsGrid.addClassName("about-view__cards-grid");
-    docsGrid.setWrap(FlexWrap.WRAP);
-    docsGrid.setJustifyContent(FlexJustifyContent.BETWEEN);
+    UnorderedList docsList = new UnorderedList();
+    docsList.addClassName("about-view__docs-list");
+    
+    ListEntry doc1 = new ListEntry();
+    doc1.setHtml("<a href='https://docs.webforj.com/docs/introduction/getting-started' target='_blank'>Getting Started</a> - Core concepts and quick start guide");
+    
+    ListEntry doc2 = new ListEntry();
+    doc2.setHtml("<a href='https://docs.webforj.com/docs/components/overview' target='_blank'>Components</a> - UI components and layout systems");
+    
+    ListEntry doc3 = new ListEntry();
+    doc3.setHtml("<a href='https://docs.webforj.com/docs/routing/overview' target='_blank'>Routing</a> - Navigation and page management");
+    
+    ListEntry doc4 = new ListEntry();
+    doc4.setHtml("<a href='https://docs.webforj.com/docs/styling/overview' target='_blank'>Styling</a> - Themes, CSS, and visual design");
+    
+    ListEntry doc5 = new ListEntry();
+    doc5.setHtml("<a href='https://docs.webforj.com/docs/building-ui/archetypes/overview' target='_blank'>Archetypes</a> - Project templates and scaffolding");
+    
+    docsList.add(doc1, doc2, doc3, doc4, doc5);
 
-    docsGrid.add(
-        createDocCard("Getting Started", "Core concepts and quick start guide", "rocket",
-            "https://docs.webforj.com/docs/introduction/getting-started"),
-        createDocCard("Components", "UI components and layout systems", "components",
-            "https://docs.webforj.com/docs/components/overview"),
-        createDocCard("Routing", "Navigation and page management", "route",
-            "https://docs.webforj.com/docs/routing/overview"),
-        createDocCard("Styling", "Themes, CSS, and visual design", "palette",
-            "https://docs.webforj.com/docs/styling/overview"),
-        createDocCard("Archetypes", "Project templates and scaffolding", "template",
-            "https://docs.webforj.com/docs/building-ui/archetypes/overview"));
-
-    section.add(sectionTitle, description, docsGrid);
+    section.add(sectionTitle, description, docsList);
     self.add(section);
   }
 
@@ -187,41 +200,24 @@ public class AboutView extends Composite<FlexLayout> {
         report issues, or explore the codebase. Together, we're building the future of Java web development.
         """);
 
-    // Repos grid
-    FlexLayout reposGrid = new FlexLayout();
-    reposGrid.addClassName("about-view__cards-grid");
-    reposGrid.setWrap(FlexWrap.WRAP);
-    reposGrid.setJustifyContent(FlexJustifyContent.BETWEEN);
+    UnorderedList reposList = new UnorderedList();
+    reposList.addClassName("about-view__repos-list");
+    
+    ListEntry repo1 = new ListEntry();
+    repo1.setHtml("<a href='https://github.com/webforj/webforj' target='_blank'>webforj/webforj</a> - Core framework repository");
+    
+    ListEntry repo2 = new ListEntry();
+    repo2.setHtml("<a href='https://github.com/webforj/webforj-archetypes' target='_blank'>webforj/webforj-archetypes</a> - Project templates and starters");
+    
+    ListEntry repo3 = new ListEntry();
+    repo3.setHtml("<a href='https://github.com/webforj/built-with-webforj' target='_blank'>webforj/built-with-webforj</a> - Example applications");
+    
+    reposList.add(repo1, repo2, repo3);
 
-    reposGrid.add(
-        createRepoCard("webforj/webforj", "Core framework repository",
-            "https://github.com/webforj/webforj"),
-        createRepoCard("webforj/webforj-archetypes", "Project templates and starters",
-            "https://github.com/webforj/webforj-archetypes"),
-        createRepoCard("webforj/built-with-webforj", "Example applications",
-            "https://github.com/webforj/built-with-webforj"));
-
-    section.add(sectionTitle, description, reposGrid);
+    section.add(sectionTitle, description, reposList);
     self.add(section);
   }
 
-  private Div createFeatureCard(String title, String description, String iconName) {
-    Div card = new Div();
-    card.addClassName("about-view__feature-card");
-
-    Div iconContainer = new Div();
-    iconContainer.addClassName("about-view__feature-icon");
-    iconContainer.setHtml("<dwc-icon name='" + iconName + "'></dwc-icon>");
-
-    H3 cardTitle = new H3(title);
-    cardTitle.addClassName("about-view__feature-title");
-
-    Paragraph cardDesc = new Paragraph(description);
-    cardDesc.addClassName("about-view__feature-description");
-
-    card.add(iconContainer, cardTitle, cardDesc);
-    return card;
-  }
 
   private Component createAppCard(String title, String description, String icon, String url) {
     Div card = new Div();
@@ -269,50 +265,6 @@ public class AboutView extends Composite<FlexLayout> {
     return card;
   }
 
-  private Div createDocCard(String title, String description, String iconName, String url) {
-    Div card = new Div();
-    card.addClassName("about-view__feature-card", "about-view__clickable-card");
-    card.onClick(e -> Page.getCurrent().open(url, "_blank"));
 
-    Div iconContainer = new Div();
-    iconContainer.addClassName("about-view__feature-icon");
-    iconContainer.setHtml("<dwc-icon name='" + iconName + "'></dwc-icon>");
-
-    H3 cardTitle = new H3(title);
-    cardTitle.addClassName("about-view__feature-title");
-
-    Paragraph cardDesc = new Paragraph(description);
-    cardDesc.addClassName("about-view__feature-description");
-
-    Div linkIcon = new Div();
-    linkIcon.addClassName("about-view__external-icon");
-    linkIcon.setHtml("<dwc-icon name='external-link'></dwc-icon>");
-
-    card.add(iconContainer, cardTitle, cardDesc, linkIcon);
-    return card;
-  }
-
-  private Component createRepoCard(String title, String description, String url) {
-    Div card = new Div();
-    card.addClassName("about-view__repo-card", "about-view__clickable-card");
-    card.onClick(e -> Page.getCurrent().open(url, "_blank"));
-
-    Div iconContainer = new Div();
-    iconContainer.addClassName("about-view__feature-icon");
-    iconContainer.setHtml("<dwc-icon name='brand-github'></dwc-icon>");
-
-    H3 cardTitle = new H3(title);
-    cardTitle.addClassName("about-view__card-title");
-
-    Paragraph cardDesc = new Paragraph(description);
-    cardDesc.addClassName("about-view__card-description");
-
-    Div linkIcon = new Div();
-    linkIcon.addClassName("about-view__external-icon");
-    linkIcon.setHtml("<dwc-icon name='external-link'></dwc-icon>");
-
-    card.add(iconContainer, cardTitle, cardDesc, linkIcon);
-    return card;
-  }
 
 }

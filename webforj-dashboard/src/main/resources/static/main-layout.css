@@ -56,3 +56,47 @@
 .main-layout__toolbar-btn--clickable:active {
   background: var(--dwc-surface-1);
 }
+
+/* Demo Banner Styles */
+.demo-banner {
+  background: var(--dwc-surface-2);
+  border-bottom: 1px solid var(--dwc-color-gray-90);
+  padding: var(--dwc-space-s) var(--dwc-space-l);
+  gap: var(--dwc-space-m);
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.demo-banner dwc-icon {
+  color: var(--dwc-color-primary-40);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.demo-banner__text {
+  flex: 1;
+  font-size: var(--dwc-font-size-s);
+  color: var(--dwc-color-on-surface);
+}
+
+.demo-banner__close {
+  padding: var(--dwc-space-xs);
+  border-radius: var(--dwc-border-radius-s);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--dwc-transition-fast) ease;
+  flex-shrink: 0;
+}
+
+.demo-banner__close:hover {
+  background: var(--dwc-surface-3);
+}
+
+.demo-banner__close dwc-icon {
+  color: var(--dwc-color-gray-40);
+  font-size: 16px;
+}
