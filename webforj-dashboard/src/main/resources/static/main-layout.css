@@ -30,11 +30,10 @@
 
 .main-layout__toolbar-btn:hover {
   background: var(--dwc-surface-2);
-  transform: scale(1.05);
 }
 
 .main-layout__toolbar-btn:active {
-  transform: scale(0.95);
+  background: var(--dwc-surface-1);
 }
 
 .main-layout__toolbar-btn--theme {
@@ -52,9 +51,8 @@
 
 .main-layout__toolbar-btn--clickable:hover {
   background: var(--dwc-surface-2);
-  transform: scale(1.05);
 }
 
 .main-layout__toolbar-btn--clickable:active {
-  transform: scale(0.95);
+  background: var(--dwc-surface-1);
 }

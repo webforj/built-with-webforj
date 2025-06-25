@@ -14,11 +14,9 @@ public class HoldingsTable extends Composite<FlexLayout> {
   private Table<PortfolioItem> portfolioTable;
 
   public HoldingsTable() {
-    self.addClassName("analytics-view__table-section")
+    self.addClassName("analytics-view__table-solo")
         .setDirection(FlexDirection.COLUMN);
 
-    H3 tableTitle = new H3("Portfolio Holdings");
-    tableTitle.addClassName("analytics-view__table-title");
     portfolioTable = new Table<>();
     portfolioTable.addClassName("analytics-view__table");
 
@@ -31,7 +29,7 @@ public class HoldingsTable extends Composite<FlexLayout> {
     portfolioTable.addColumn("Profit/Loss",
         item -> String.format("$%.2f (%.1f%%)", item.getProfitLoss(), item.getProfitLossPercent()));
     portfolioTable.setItems(createSampleHoldings());
-    self.add(tableTitle, portfolioTable);
+    self.add(portfolioTable);
   }
 
   private List<PortfolioItem> createSampleHoldings() {

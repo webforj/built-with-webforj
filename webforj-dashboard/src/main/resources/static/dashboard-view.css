@@ -33,7 +33,7 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
   padding: var(--dwc-space-m);
   min-width: 280px;
   border-radius: var(--dwc-border-radius-m);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
   border: var(--dwc-border-width) solid var(--dwc-color-gray-90);
   transition: all var(--dwc-transition-medium) ease;
   position: relative;
@@ -59,8 +59,8 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
 
 /* Card hover state */
 .data-card:hover {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
+  box-shadow: none;
+  transform: none;
   border-color: var(--dwc-color-gray-85);
 }
 
@@ -124,21 +124,21 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
 .percentage-positive {
   background-color: var(--dwc-color-success-95);
   color: var(--dwc-color-success-25);
-  box-shadow: 0 0 0 1px var(--dwc-color-success-25);
+  border: 1px solid var(--dwc-color-success-25);
 }
 
 .percentage-positive:hover {
-  box-shadow: 0 0 0 2px var(--dwc-color-success-25);
+  border: 2px solid var(--dwc-color-success-25);
 }
 
 .percentage-negative {
   background-color: var(--dwc-color-danger-95);
   color: var(--dwc-color-danger-40);
-  box-shadow: 0 0 0 1px var(--dwc-color-danger-40);
+  border: 1px solid var(--dwc-color-danger-40);
 }
 
 .percentage-negative:hover {
-  box-shadow: 0 0 0 2px var(--dwc-color-danger-40);
+  border: 2px solid var(--dwc-color-danger-40);
 }
 
 /* ========================================
@@ -148,7 +148,6 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
 dwc-table {
   min-height: 400px;
   overflow: hidden;
-  background-color: var(--dwc-surface-3);
   animation: fadeInUp 600ms ease-out 350ms;
   animation-fill-mode: both;
 }

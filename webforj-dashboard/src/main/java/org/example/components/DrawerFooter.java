@@ -23,6 +23,9 @@ public class DrawerFooter extends Composite<FlexLayout> {
     // Add user profile section
     self.add(createUserSection());
 
+    // Add separator
+    self.add(createSeparator());
+
     // Add version info
     self.add(createVersionInfo());
   }
@@ -54,6 +57,12 @@ public class DrawerFooter extends Composite<FlexLayout> {
     userSection.add(avatar, userInfo);
 
     return userSection;
+  }
+
+  private Div createSeparator() {
+    Div separator = new Div();
+    separator.addClassName("drawer-footer__separator");
+    return separator;
   }
 
   private Paragraph createVersionInfo() {

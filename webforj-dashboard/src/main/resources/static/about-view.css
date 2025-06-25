@@ -99,8 +99,8 @@
 }
 
 .about-view__feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--dwc-shadow-l);
+  transform: none;
+  box-shadow: none;
 }
 
 .about-view__clickable-card {
@@ -112,8 +112,8 @@
 }
 
 .about-view__clickable-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--dwc-shadow-xl);
+  transform: none;
+  box-shadow: none;
   text-decoration: none;
   color: inherit;
 }

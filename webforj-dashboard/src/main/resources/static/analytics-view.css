@@ -38,13 +38,13 @@
   padding: var(--dwc-space-l);
   transition: all var(--dwc-transition-medium) ease;
   border: var(--dwc-border-width) solid transparent;
-  box-shadow: var(--dwc-shadow-xs);
+  box-shadow: none;
 }
 
 .analytics-view__chart-card:hover,
 .analytics-view__table-section:hover {
-  box-shadow: var(--dwc-shadow-s);
-  transform: translateY(-2px);
+  box-shadow: none;
+  transform: none;
 }
 
 .analytics-view__chart-card--full-width {
@@ -70,9 +70,14 @@
   background: var(--dwc-surface-2);
   border-radius: var(--dwc-border-radius-m);
   padding: var(--dwc-space-l);
-  box-shadow: var(--dwc-shadow-xs);
+  box-shadow: none;
   margin-top: var(--dwc-space-xl);
   transition: all var(--dwc-transition-medium) ease;
+}
+
+/* Solo table without card wrapper */
+.analytics-view__table-solo {
+  margin-top: var(--dwc-space-xl);
 }
 
 .analytics-view__table {
@@ -151,14 +156,14 @@
   font-size: 3.5rem;
   font-weight: var(--dwc-font-weight-bolder);
   letter-spacing: -0.02em;
-  text-shadow: var(--dwc-shadow-xs);
+  text-shadow: none;
 }
 
 
 .portfolio-hero__change-value {
   font-size: var(--dwc-font-size-xl);
   font-weight: var(--dwc-font-weight-semibold);
-  color: var(--dwc-color-success-25);
+  color: var(--dwc-color-success-50);
 }
 
 .portfolio-hero__change-percent {

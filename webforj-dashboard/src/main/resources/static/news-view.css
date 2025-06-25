@@ -93,13 +93,15 @@
   background-size: cover;
   background-position: center;
   border-radius: var(--dwc-border-radius-l);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: none;
 }
 
 .news-view__toolbar {
-  background: var(--dwc-surface-2);
+  background: var(--dwc-surface-3);
   padding: var(--dwc-space-m) var(--dwc-space-xl);
-  border-bottom: 1px solid var(--dwc-color-gray-95);
+  border: 1px solid var(--dwc-color-gray-90);
+  border-radius: var(--dwc-border-radius-m);
+  margin-bottom: var(--dwc-space-m);
 }
 
 .news-view__toolbar-left {
@@ -165,7 +167,7 @@
 }
 
 .news-view__card {
-  background: var(--dwc-surface-1);
+  background: var(--dwc-surface-3);
   border-radius: var(--dwc-border-radius-m);
   border: var(--dwc-border-width) solid var(--dwc-color-gray-90);
   cursor: pointer;
@@ -457,7 +459,7 @@
 
 /* Hover states */
 .news-view__market-item:hover {
-  background: var(--dwc-surface-3);
+  background: var(--dwc-surface-1);
 }
 
 .news-view__popular-item:hover {

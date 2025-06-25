@@ -431,6 +431,13 @@ google-chart {
   flex: 1;
 }
 
+.drawer-footer__separator {
+  width: 100%;
+  height: 1px;
+  background-color: var(--dwc-color-gray-90);
+  margin: var(--dwc-space-s) 0;
+}
+
 .drawer-footer__version-info {
   font-size: var(--dwc-font-size-xs);
   color: var(--dwc-color-gray-50);
