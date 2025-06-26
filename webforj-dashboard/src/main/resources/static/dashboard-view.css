@@ -32,9 +32,9 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
   flex: 1 1 300px;
   padding: var(--dwc-space-m);
   min-width: 280px;
-  border-radius: var(--dwc-border-radius-m);
+  border-radius: var(--dwc-border-radius);
   box-shadow: none;
-  border: var(--dwc-border-width) solid var(--dwc-color-gray-90);
+  border: var(--dwc-border-width) solid var(--dwc-color-default);
   transition: all var(--dwc-transition-medium) ease;
   position: relative;
   overflow: hidden;

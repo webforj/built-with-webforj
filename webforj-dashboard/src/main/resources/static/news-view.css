@@ -3,7 +3,6 @@
 .news-view {
   overflow-y: auto;
   padding: 0;
-  background: var(--dwc-surface-1);
   animation: fadeInUp 500ms ease-out;
   animation-fill-mode: both;
   max-width: 1400px;
@@ -17,9 +16,10 @@
 }
 
 .news-view__header {
-  background: var(--dwc-surface-2);
+  background: var(--dwc-surface-3);
   padding: var(--dwc-space-xl);
-  border-bottom: 1px solid var(--dwc-color-gray-90);
+  border: 1px solid var(--dwc-color-default);
+  border-radius: var(--dwc-border-radius);
 }
 
 .news-view__title {
@@ -41,6 +41,10 @@
 
 .news-view__hero {
   padding: var(--dwc-space-xl);
+  background: var(--dwc-color-primary);
+  color: var(--dwc-color-on-primary-text);
+  border: thin solid var(--dwc-color-primary-dark);
+  border-radius: var(--dwc-border-radius);
   position: relative;
   overflow: hidden;
 }
@@ -99,8 +103,8 @@
 .news-view__toolbar {
   background: var(--dwc-surface-3);
   padding: var(--dwc-space-m) var(--dwc-space-xl);
-  border: 1px solid var(--dwc-color-gray-90);
-  border-radius: var(--dwc-border-radius-m);
+  border: 1px solid var(--dwc-color-default);
+  border-radius: var(--dwc-border-radius);
   margin-bottom: var(--dwc-space-m);
 }
 
@@ -140,10 +144,10 @@
 }
 
 .news-view__section {
-  background: var(--dwc-surface-2);
-  border-radius: var(--dwc-border-radius-l);
+  background: var(--dwc-surface-3);
   padding: var(--dwc-space-l);
-  border: 1px solid var(--dwc-color-gray-90);
+  border: 1px solid var(--dwc-color-default);
+  border-radius: var(--dwc-border-radius);
   animation: fadeInUp 700ms ease-out;
   animation-fill-mode: both;
 }
@@ -369,17 +373,22 @@
   border-radius: var(--dwc-border-radius-l);
   overflow: hidden;
   text-align: center;
+  gap: 0 !important;
 }
 
 .news-view__newsletter-header {
+  background: var(--dwc-color-primary);
+  color: var(--dwc-color-on-primary-text);
   padding: var(--dwc-space-l) var(--dwc-space-l) var(--dwc-space-m);
   border-radius: var(--dwc-border-radius-l) var(--dwc-border-radius-l) 0 0;
 }
 
 .news-view__newsletter-form {
-  background: var(--dwc-surface-2);
+  background: var(--dwc-surface-3);
   padding: var(--dwc-space-m) var(--dwc-space-l) var(--dwc-space-l);
   border-radius: 0 0 var(--dwc-border-radius-l) var(--dwc-border-radius-l);
+  border: thin solid var(--dwc-color-default);
+  border-top: 0;
 }
 
 .news-view__newsletter-icon {
@@ -459,11 +468,11 @@
 
 /* Hover states */
 .news-view__market-item:hover {
-  background: var(--dwc-surface-1);
+  background: var(--dwc-surface-3);
 }
 
 .news-view__popular-item:hover {
-  background: var(--dwc-surface-1);
+  background: var(--dwc-surface-3);
 }
 
 /* Removed dark theme modifiers - now handled above with CSS variables */
@@ -481,7 +490,7 @@
 .news-view__card--modern {
   border: var(--dwc-border-width) solid var(--dwc-color-gray-90);
   border-radius: var(--dwc-border-radius-l);
-  background: var(--dwc-surface-1);
+  background: var(--dwc-surface-3);
   overflow: hidden;
   transition: all var(--dwc-transition-medium) ease;
   cursor: pointer;
@@ -597,7 +606,7 @@
 
 /* NewsCard component styles */
 .news-card {
-  background: var(--dwc-surface-1);
+  background: var(--dwc-surface-3);
   border: 1px solid var(--dwc-color-gray-95);
   border-radius: var(--dwc-border-radius-m);
   padding: var(--dwc-space-m);

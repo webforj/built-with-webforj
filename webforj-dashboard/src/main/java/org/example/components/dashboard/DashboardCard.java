@@ -2,6 +2,7 @@ package org.example.components.dashboard;
 
 import org.example.utils.FormatUtils;
 import com.webforj.component.Composite;
+import com.webforj.component.Theme;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.html.elements.Paragraph;
@@ -48,7 +49,7 @@ public class DashboardCard extends Composite<FlexLayout> {
 
   /**
    * Creates a dashboard card with the provided chart.
-   * 
+   *
    * @param chart The GoogleChart to display in the card
    */
   public DashboardCard(GoogleChart chart) {
@@ -58,7 +59,7 @@ public class DashboardCard extends Composite<FlexLayout> {
 
   /**
    * Creates a dashboard card with data and a chart.
-   * 
+   *
    * @param title   The title to display
    * @param price   The price value to display
    * @param percent The percentage change
@@ -74,7 +75,7 @@ public class DashboardCard extends Composite<FlexLayout> {
 
   /**
    * Sets the card data (title, price, percentage).
-   * 
+   *
    * @param title   The title to display
    * @param price   The price value
    * @param percent The percentage change
@@ -99,7 +100,7 @@ public class DashboardCard extends Composite<FlexLayout> {
 
   /**
    * Sets the chart for this card.
-   * 
+   *
    * @param chart The GoogleChart to display
    */
   public void setChart(GoogleChart chart) {
@@ -178,7 +179,7 @@ public class DashboardCard extends Composite<FlexLayout> {
       followButton.setTheme(ButtonTheme.OUTLINED_DEFAULT);
 
       // Show following toast
-      Toast.show("Following " + title.getText());
+      Toast.show("Following " + title.getText(), Theme.GRAY);
     } else {
       // Change back to follow state
       followButton.setText("Follow");
@@ -186,13 +187,13 @@ public class DashboardCard extends Composite<FlexLayout> {
       followButton.setTheme(ButtonTheme.DEFAULT);
 
       // Show unfollowing toast
-      Toast.show("Unfollowed " + title.getText());
+      Toast.show("Unfollowed " + title.getText(), Theme.GRAY);
     }
   }
 
   /**
    * Gets the GoogleChart instance for this card.
-   * 
+   *
    * @return the chart component, or null if no chart is set
    */
   public GoogleChart getChart() {

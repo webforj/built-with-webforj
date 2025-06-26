@@ -25,9 +25,6 @@ public class HeroSection extends Composite<FlexLayout> {
     self.addClassName("news-view__hero");
     self.setDirection(FlexDirection.COLUMN);
 
-    // Set dynamic background based on theme
-    applyThemeAwareBackgrounds();
-
     // Background pattern
     Div bgPattern = new Div();
     bgPattern.addClassName("news-view__hero-pattern");
@@ -68,28 +65,5 @@ public class HeroSection extends Composite<FlexLayout> {
 
     heroContent.add(heroText, heroImageContainer);
     self.add(heroContent);
-  }
-
-  private void applyThemeAwareBackgrounds() {
-    String theme = com.webforj.App.getTheme();
-    String backgroundGradient;
-    String textColor;
-
-    if ("dark".equals(theme)) {
-      // Dark theme - lighter blue for better visibility
-      backgroundGradient = "linear-gradient(135deg, var(--dwc-color-primary-40) 0%, var(--dwc-color-primary-50) 100%)";
-      textColor = "var(--dwc-color-on-primary)";
-    } else {
-      // Light theme - darker blue for better contrast
-      backgroundGradient = "linear-gradient(135deg, var(--dwc-color-primary-60) 0%, var(--dwc-color-primary-70) 100%)";
-      textColor = "white";
-    }
-
-    self.setStyle("background", backgroundGradient);
-    self.setStyle("color", textColor);
-  }
-
-  public void updateTheme() {
-    applyThemeAwareBackgrounds();
   }
 }

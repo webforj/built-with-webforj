@@ -52,10 +52,10 @@ public class MainLayout extends Composite<AppLayout> {
     // Add drawer event listeners for chart redrawing
     self.onDrawerOpen(e -> redrawChartsInCurrentView());
     self.onDrawerClose(e -> redrawChartsInCurrentView());
-    
+
     // Show demo data disclaimer toast on load
     showDemoDataToast();
-    
+
     // Add demo banner to content area
     addDemoBanner();
   }
@@ -138,11 +138,16 @@ public class MainLayout extends Composite<AppLayout> {
     settings.setPrefixComponent(FeatherIcon.SETTINGS.create());
 
     // About as individual item
-    AppNavItem about = new AppNavItem("About", AboutView.class);
-    about.setPrefixComponent(FeatherIcon.INFO.create());
+    // AppNavItem about = new AppNavItem("About", AboutView.class);
+    // about.setPrefixComponent(FeatherIcon.INFO.create());
+
+    AppNavItem about = new AppNavItem("About", "https://webforj.com/",
+        FeatherIcon.INFO.create());
+    about.setSuffixComponent(FeatherIcon.EXTERNAL_LINK.create());
 
     // Documentation - external link
-    AppNavItem documentation = new AppNavItem("Documentation", "https://docs.webforj.com", FeatherIcon.BOOK_OPEN.create());
+    AppNavItem documentation = new AppNavItem("Documentation", "https://docs.webforj.com",
+        FeatherIcon.BOOK_OPEN.create());
     documentation.setSuffixComponent(FeatherIcon.EXTERNAL_LINK.create());
 
     // GitHub - external link
@@ -150,7 +155,8 @@ public class MainLayout extends Composite<AppLayout> {
     github.setSuffixComponent(FeatherIcon.EXTERNAL_LINK.create());
 
     // Built with webforJ - external link
-    AppNavItem builtWith = new AppNavItem("Built with webforJ", "https://github.com/webforj/built-with-webforj", FeatherIcon.LAYERS.create());
+    AppNavItem builtWith = new AppNavItem("Built with webforJ", "https://github.com/webforj/built-with-webforj",
+        FeatherIcon.LAYERS.create());
     builtWith.setSuffixComponent(FeatherIcon.EXTERNAL_LINK.create());
 
     appNav.addItem(dashboard);
@@ -221,15 +227,15 @@ public class MainLayout extends Composite<AppLayout> {
       App.console().log(ex.getMessage());
     }
   }
-  
+
   /**
    * Shows a toast notification about demo data
    */
   private void showDemoDataToast() {
-    Toast.show("📊 Demo Mode: All data displayed is for demonstration purposes only", 
-               Theme.INFO);
+    Toast.show("📊 Demo Mode: All data displayed is for demonstration purposes only",
+        Theme.GRAY);
   }
-  
+
   /**
    * Adds a dismissible demo banner to the content area
    */
@@ -238,22 +244,22 @@ public class MainLayout extends Composite<AppLayout> {
     FlexLayout banner = new FlexLayout();
     banner.addClassName("demo-banner");
     banner.setAlignment(FlexAlignment.CENTER);
-    
+
     // Info icon
     banner.add(FeatherIcon.INFO.create());
-    
+
     // Banner text
     Div bannerText = new Div();
     bannerText.addClassName("demo-banner__text");
     bannerText.setText("Demo Mode: All cryptocurrency data shown is simulated for demonstration purposes only");
     banner.add(bannerText);
-    
+
     // Close button
     IconButton closeBtn = new IconButton(FeatherIcon.X.create());
     closeBtn.addClassName("demo-banner__close");
     closeBtn.onClick(e -> banner.setVisible(false));
     banner.add(closeBtn);
-    
+
     // Add banner to the content area at the top
     self.addToContent(banner);
   }

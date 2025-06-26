@@ -59,8 +59,9 @@
 
 /* Demo Banner Styles */
 .demo-banner {
-  background: var(--dwc-surface-2);
-  border-bottom: 1px solid var(--dwc-color-gray-90);
+  background: var(--dwc-surface-3);
+  border: 1px solid var(--dwc-color-default);
+  border-radius: var(--dwc-border-radius);
   padding: var(--dwc-space-s) var(--dwc-space-l);
   gap: var(--dwc-space-m);
   width: 100%;
@@ -68,6 +69,7 @@
   top: 0;
   z-index: 10;
   box-sizing: border-box;
+  margin-bottom: 1rem;
 }
 
 .demo-banner dwc-icon {

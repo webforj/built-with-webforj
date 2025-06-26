@@ -21,7 +21,6 @@ public class NewsletterSignup extends Composite<FlexLayout> {
         .setDirection(FlexDirection.COLUMN);
 
     createNewsletterContent();
-    applyThemeAwareBackground();
   }
 
   private void createNewsletterContent() {
@@ -56,29 +55,5 @@ public class NewsletterSignup extends Composite<FlexLayout> {
 
     // Add both sections to the container
     self.add(headerSection, formSection);
-  }
-
-  private void applyThemeAwareBackground() {
-    String theme = com.webforj.App.getTheme();
-    String backgroundGradient;
-    String textColor;
-
-    if ("dark".equals(theme)) {
-      // Dark theme - lighter blue for better visibility
-      backgroundGradient = "linear-gradient(135deg, var(--dwc-color-primary-40) 0%, var(--dwc-color-primary-50) 100%)";
-      textColor = "var(--dwc-color-on-primary)";
-    } else {
-      // Light theme - darker blue for better contrast
-      backgroundGradient = "linear-gradient(135deg, var(--dwc-color-primary-60) 0%, var(--dwc-color-primary-70) 100%)";
-      textColor = "white";
-    }
-
-    // Apply gradient only to header section
-    headerSection.setStyle("background", backgroundGradient);
-    headerSection.setStyle("color", textColor);
-  }
-
-  public void updateTheme() {
-    applyThemeAwareBackground();
   }
 }
