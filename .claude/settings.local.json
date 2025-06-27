@@ -13,7 +13,10 @@
       "Bash(grep:*)",
       "Bash(rm:*)",
       "Bash(claude mcp add:*)",
-      "Bash(claude mcp:*)"
+      "Bash(claude mcp:*)",
+      "Bash(python3:*)",
+      "WebFetch(domain:mcp.webforj.com)",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   },

@@ -328,28 +328,56 @@ dwc-table::part(crypto-symbol) {
     font-size: var(--dwc-font-size-xs);
   }
 
-  /* Table adjustments */
   dwc-table {
     font-size: var(--dwc-font-size-s);
   }
 
-  dwc-table::part(icon-cell) {
-    min-width: 200px !important;
   }
-}
 
 @media (max-width: 480px) {
-  /* Very small screens */
-  .data-card google-chart {
-    height: 60px !important;
+
+  
+  /* Make table full width on mobile */
+  dwc-table {
+    width: 100% !important;
+    margin: 0 !important;
   }
 
-  .data-card__title {
+  /* Extra small table adjustments */
+  dwc-table::part(crypto-icon) {
+    width: 20px;
+    height: 20px;
+  }
+
+  dwc-table::part(crypto-name) {
     font-size: var(--dwc-font-size-s);
   }
 
-  .data-card__price {
-    font-size: var(--dwc-font-size-l);
+  dwc-table::part(crypto-symbol) {
+    font-size: var(--dwc-font-size-xs);
+  }
+
+  dwc-table::part(cell-header) {
+    font-size: var(--dwc-font-size-xs);
+    padding: var(--dwc-space-2xs);
+  }
+
+  dwc-table::part(cell) {
+    font-size: var(--dwc-font-size-s);
+    padding: var(--dwc-space-xs);
+  }
+
+  dwc-table::part(percentage-badge-gain),
+  dwc-table::part(percentage-badge-loss),
+  dwc-table::part(percentage-badge-neutral) {
+    font-size: var(--dwc-font-size-xs);
+  }
+  
+  /* Make 24h change text smaller on small screens */
+  dwc-table::part(price-change-gain),
+  dwc-table::part(price-change-loss),
+  dwc-table::part(price-change-neutral) {
+    font-size: var(--dwc-font-size-s);
   }
 }
 
@@ -380,6 +408,7 @@ dwc-table::part(crypto-symbol) {
     border: 1px solid #000 !important;
   }
 }
+
 
 /* ========================================
    DASHBOARD ANIMATIONS

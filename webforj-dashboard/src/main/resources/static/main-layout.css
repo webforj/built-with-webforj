@@ -1,7 +1,7 @@
 /* Main Layout Styles */
 
 .main-layout {
-  height: 100vh;
+  height: 100svh;
   overflow: hidden;
 }
 
@@ -57,48 +57,3 @@
   background: var(--dwc-surface-1);
 }
 
-/* Demo Banner Styles */
-.demo-banner {
-  background: var(--dwc-surface-3);
-  border: 1px solid var(--dwc-color-default);
-  border-radius: var(--dwc-border-radius);
-  padding: var(--dwc-space-s) var(--dwc-space-l);
-  gap: var(--dwc-space-m);
-  width: 100%;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  box-sizing: border-box;
-  margin-bottom: 1rem;
-}
-
-.demo-banner dwc-icon {
-  color: var(--dwc-color-primary-40);
-  font-size: 18px;
-  flex-shrink: 0;
-}
-
-.demo-banner__text {
-  flex: 1;
-  font-size: var(--dwc-font-size-s);
-  color: var(--dwc-color-on-surface);
-}
-
-.demo-banner__close {
-  padding: var(--dwc-space-xs);
-  border-radius: var(--dwc-border-radius-s);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: all var(--dwc-transition-fast) ease;
-  flex-shrink: 0;
-}
-
-.demo-banner__close:hover {
-  background: var(--dwc-surface-3);
-}
-
-.demo-banner__close dwc-icon {
-  color: var(--dwc-color-gray-40);
-  font-size: 16px;
-}

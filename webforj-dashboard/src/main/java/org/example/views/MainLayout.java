@@ -53,11 +53,6 @@ public class MainLayout extends Composite<AppLayout> {
     self.onDrawerOpen(e -> redrawChartsInCurrentView());
     self.onDrawerClose(e -> redrawChartsInCurrentView());
 
-    // Show demo data disclaimer toast on load
-    showDemoDataToast();
-
-    // Add demo banner to content area
-    addDemoBanner();
   }
 
   private void setHeader() {
@@ -228,39 +223,4 @@ public class MainLayout extends Composite<AppLayout> {
     }
   }
 
-  /**
-   * Shows a toast notification about demo data
-   */
-  private void showDemoDataToast() {
-    Toast.show("📊 Demo Mode: All data displayed is for demonstration purposes only",
-        Theme.GRAY);
-  }
-
-  /**
-   * Adds a dismissible demo banner to the content area
-   */
-  private void addDemoBanner() {
-    // Create banner container
-    FlexLayout banner = new FlexLayout();
-    banner.addClassName("demo-banner");
-    banner.setAlignment(FlexAlignment.CENTER);
-
-    // Info icon
-    banner.add(FeatherIcon.INFO.create());
-
-    // Banner text
-    Div bannerText = new Div();
-    bannerText.addClassName("demo-banner__text");
-    bannerText.setText("Demo Mode: All cryptocurrency data shown is simulated for demonstration purposes only");
-    banner.add(bannerText);
-
-    // Close button
-    IconButton closeBtn = new IconButton(FeatherIcon.X.create());
-    closeBtn.addClassName("demo-banner__close");
-    closeBtn.onClick(e -> banner.setVisible(false));
-    banner.add(closeBtn);
-
-    // Add banner to the content area at the top
-    self.addToContent(banner);
-  }
 }

@@ -6,8 +6,11 @@ import org.example.utils.FormatUtils;
 import org.example.utils.PriceChangeRenderer;
 import org.example.utils.PriceChartRenderer;
 
+import com.webforj.Page;
 import com.webforj.component.Composite;
+import com.webforj.component.table.Column;
 import com.webforj.component.table.Table;
+import com.webforj.component.table.Column.PinDirection;
 import com.webforj.data.repository.CollectionRepository;
 
 import java.util.List;
@@ -16,16 +19,21 @@ public class CryptocurrencyTable extends Composite<Table> {
 
   @SuppressWarnings("unchecked")
   private Table<Cryptocurrency> table = getBoundComponent();
+  private Column<Cryptocurrency, ?> cryptoColumn;
+  private Column<Cryptocurrency, ?> marketCapColumn;
+  private Column<Cryptocurrency, ?> volumeColumn;
+  private boolean isMobile = false;
 
   public CryptocurrencyTable() {
     initializeTable();
+    applyResponsiveSettingsOnLoad();
   }
 
   private void initializeTable() {
     // Add columns for cryptocurrency data
     table.addColumn("Symbol", Cryptocurrency::getSymbol).setHidden(true);
     table.addColumn("Name", Cryptocurrency::getName).setHidden(true);
-    table.addColumn("Icon", Cryptocurrency::getSymbol)
+    cryptoColumn = table.addColumn("Crypto", Cryptocurrency::getSymbol)
         .setRenderer(new CryptoIconRenderer()).setMinWidth(250.0f);
     table.addColumn("Price", c -> FormatUtils.formatPrice(c.getCurrentPrice()))
         .setSortable(true);
@@ -35,9 +43,9 @@ public class CryptocurrencyTable extends Composite<Table> {
         .setMinWidth(180.0f);
     table.addColumn("PriceChange24h", Cryptocurrency::getPriceChange24h).setHidden(true);
     table.addColumn("PriceChangePercentage24h", Cryptocurrency::getPriceChangePercentage24h).setHidden(true);
-    table.addColumn("Market Cap", c -> FormatUtils.formatLargeNumber(c.getMarketCap()))
+    marketCapColumn = table.addColumn("Market Cap", c -> FormatUtils.formatLargeNumber(c.getMarketCap()))
         .setSortable(true);
-    table.addColumn("Volume (24h)", c -> FormatUtils.formatLargeNumber(c.getVolume24h()))
+    volumeColumn = table.addColumn("Volume (24h)", c -> FormatUtils.formatLargeNumber(c.getVolume24h()))
         .setSortable(true);
     table.addColumn("Price Chart", Cryptocurrency::getCurrentPrice)
         .setRenderer(new PriceChartRenderer());
@@ -55,5 +63,57 @@ public class CryptocurrencyTable extends Composite<Table> {
 
   public CollectionRepository<Cryptocurrency> getRepository() {
     return (CollectionRepository<Cryptocurrency>) table.getRepository();
+  }
+
+  private void applyMobileSettings() {
+    isMobile = true;
+    if (cryptoColumn != null) {
+      cryptoColumn.setPinDirection(PinDirection.LEFT);
+      cryptoColumn.setMinWidth(125.0f);
+    }
+    if (marketCapColumn != null) {
+      marketCapColumn.setHidden(true);
+    }
+    if (volumeColumn != null) {
+      volumeColumn.setHidden(true);
+    }
+  }
+
+  private void applyDesktopSettings() {
+    isMobile = false;
+    if (cryptoColumn != null) {
+      cryptoColumn.setPinDirection(PinDirection.AUTO);
+      cryptoColumn.setMinWidth(250.0f);
+    }
+    if (marketCapColumn != null) {
+      marketCapColumn.setHidden(false);
+    }
+    if (volumeColumn != null) {
+      volumeColumn.setHidden(false);
+    }
+  }
+
+  private void applyResponsiveSettingsOnLoad() {
+    try {
+      Object result = Page.getCurrent().executeJs("window.innerWidth");
+      if (result != null) {
+        double width = 0;
+        if (result instanceof Number) {
+          width = ((Number) result).doubleValue();
+        } else {
+          width = Double.parseDouble(result.toString());
+        }
+
+        if (width <= 480) {
+          applyMobileSettings();
+        } else {
+          applyDesktopSettings();
+        }
+      } else {
+        applyDesktopSettings();
+      }
+    } catch (Exception e) {
+      applyDesktopSettings();
+    }
   }
 }

@@ -110,6 +110,7 @@
 
 .news-view__toolbar-left {
   flex: 1 1 400px;
+  flex-wrap: wrap;
 }
 
 .news-view__search {

@@ -42,7 +42,6 @@ public class CryptocurrencyService {
       { "MNT", "Mantle", "0.72", "2440000000", "109680000" },
       { "VET", "VeChain", "0.026", "2320000000", "26540000" },
       { "RENDER", "Render", "4.37", "2260000000", "160830000" },
-      { "FET", "Artificial Superintelligence Alliance", "0.87", "2200000000", "110670000" },
       { "FIL", "Filecoin", "2.82", "1900000000", "84930000" },
       { "ALGO", "Algorand", "0.21", "1860000000", "32050000" },
       { "ATOM", "Cosmos", "4.72", "1850000000", "69970000" },

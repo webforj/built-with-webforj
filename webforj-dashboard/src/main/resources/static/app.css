@@ -77,8 +77,8 @@
   --dwc-color-default-text-light: var(--dwc-color-default-45);
 }
 
-html[data-app-theme~='dark'],
-html[data-app-theme~='dark-pure'] {
+html[data-app-theme~="dark"],
+html[data-app-theme~="dark-pure"] {
   --dwc-color-primary-text-dark: var(--dwc-color-primary-20);
   --dwc-color-primary-text: var(--dwc-color-primary-25);
   --dwc-color-primary-text-light: var(--dwc-color-primary-30);
@@ -103,7 +103,6 @@ html[data-app-theme~='dark-pure'] {
 /* ========================================
    1. GLOBAL STYLES AND RESETS
    ======================================== */
-
 
 /* Fix body and html scrolling */
 html,
@@ -202,8 +201,6 @@ dwc-toolbar h1 {
   background-clip: text;
 }
 
-
-
 /* ========================================
    4. ANIMATIONS
    ======================================== */
@@ -220,7 +217,8 @@ dwc-toolbar h1 {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -272,9 +270,9 @@ dwc-toolbar h1 {
 
   dwc-app-layout::part(content) {
     -webkit-overflow-scrolling: touch;
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
-
 
 /* ========================================
    6. ACCESSIBILITY AND PRINT STYLES
@@ -306,7 +304,6 @@ dwc-toolbar h1 {
 google-chart {
   transition: opacity var(--dwc-transition-fast) ease;
 }
-
 
 /* ========================================
    7. DRAWER LOGO STYLES
@@ -378,27 +375,27 @@ google-chart {
 
 /* Background images for each crypto logo */
 .crypto-logo-0 {
-  background-image: url('./images/ethereum-eth-logo.svg');
+  background-image: url("./images/ethereum-eth-logo.svg");
 }
 
 .crypto-logo-1 {
-  background-image: url('./images/cardano-ada-logo.svg');
+  background-image: url("./images/cardano-ada-logo.svg");
 }
 
 .crypto-logo-2 {
-  background-image: url('./images/near-protocol-near-logo.svg');
+  background-image: url("./images/near-protocol-near-logo.svg");
 }
 
 .crypto-logo-3 {
-  background-image: url('./images/tron-trx-logo.svg');
+  background-image: url("./images/tron-trx-logo.svg");
 }
 
 .crypto-logo-4 {
-  background-image: url('./images/vechain-vet-logo.svg');
+  background-image: url("./images/vechain-vet-logo.svg");
 }
 
 .crypto-logo-5 {
-  background-image: url('./images/xrp-xrp-logo.svg');
+  background-image: url("./images/xrp-xrp-logo.svg");
 }
 
 .drawer-logo__crypto-icon[class*="crypto-logo-"] {
@@ -409,15 +406,28 @@ google-chart {
 }
 
 /* Individual timing for each of the 6 logos - stagger by 4 seconds to sync with pulse */
-.drawer-logo__crypto-icon--0 { animation-delay: 0s; }     /* Ethereum */
-.drawer-logo__crypto-icon--1 { animation-delay: 4s; }     /* Cardano */
-.drawer-logo__crypto-icon--2 { animation-delay: 8s; }     /* Near Protocol */
-.drawer-logo__crypto-icon--3 { animation-delay: 12s; }    /* Tron */
-.drawer-logo__crypto-icon--4 { animation-delay: 16s; }    /* VeChain */
-.drawer-logo__crypto-icon--5 { animation-delay: 20s; }    /* XRP */
+.drawer-logo__crypto-icon--0 {
+  animation-delay: 0s;
+} /* Ethereum */
+.drawer-logo__crypto-icon--1 {
+  animation-delay: 4s;
+} /* Cardano */
+.drawer-logo__crypto-icon--2 {
+  animation-delay: 8s;
+} /* Near Protocol */
+.drawer-logo__crypto-icon--3 {
+  animation-delay: 12s;
+} /* Tron */
+.drawer-logo__crypto-icon--4 {
+  animation-delay: 16s;
+} /* VeChain */
+.drawer-logo__crypto-icon--5 {
+  animation-delay: 20s;
+} /* XRP */
 
 @keyframes orbPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     /* box-shadow: 0 4px 12px var(--dwc-color-gray-75); */
   }
