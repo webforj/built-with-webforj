@@ -133,12 +133,8 @@ public class MainLayout extends Composite<AppLayout> {
     settings.setPrefixComponent(FeatherIcon.SETTINGS.create());
 
     // About as individual item
-    // AppNavItem about = new AppNavItem("About", AboutView.class);
-    // about.setPrefixComponent(FeatherIcon.INFO.create());
-
-    AppNavItem about = new AppNavItem("About", "https://webforj.com/",
-        FeatherIcon.INFO.create());
-    about.setSuffixComponent(FeatherIcon.EXTERNAL_LINK.create());
+    AppNavItem about = new AppNavItem("About", AboutView.class);
+    about.setPrefixComponent(FeatherIcon.INFO.create());
 
     // Documentation - external link
     AppNavItem documentation = new AppNavItem("Documentation", "https://docs.webforj.com",

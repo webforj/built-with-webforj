@@ -33,7 +33,6 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
   padding: var(--dwc-space-m);
   min-width: 280px;
   border-radius: var(--dwc-border-radius);
-  box-shadow: none;
   border: var(--dwc-border-width) solid var(--dwc-color-default);
   transition: all var(--dwc-transition-medium) ease;
   position: relative;
@@ -59,7 +58,6 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
 
 /* Card hover state */
 .data-card:hover {
-  box-shadow: none;
   transform: none;
   border-color: var(--dwc-color-gray-85);
 }
@@ -339,61 +337,65 @@ dwc-table::part(crypto-symbol) {
 @media (max-width: 480px) {
   /* Display cards in a single row */
   .dashboard-view__cards {
-    flex-wrap: nowrap;
-    gap: var(--dwc-space-s) !important;
-    height: 70px;
+    gap: var(--dwc-space-xs) !important;
+    width: 100%;
+    margin-bottom: var(--dwc-space-s);
   }
 
-    /* Hide chart on small screens */
+  /* Hide chart on small screens */
   .data-card google-chart {
-    display: none;
+    display: none !important;
   }
 
   /* Make each card take equal space */
   .data-card {
     flex: 1 1 0 !important;
-    min-width: 0 !important;
-    padding: var(--dwc-space-s) !important;
+    max-width: none;
+    min-width: 0;
+    width: auto;
+    padding: var(--dwc-space-xs);
+    margin: 0;
+    box-sizing: border-box;
     background: linear-gradient(
       135deg,
       var(--dwc-color-primary) 0%,
       var(--dwc-color-primary-light) 100%
-    ) !important;
-    color: var(--dwc-color-on-primary-text) !important;
+    );
+    color: var(--dwc-color-on-primary-text);
   }
 
   /* Override card internal layout for mobile */
   .data-card > * {
-    width: 100% !important;
+    width: 100%;
   }
 
   /* Compact card content for mobile row layout */
   .data-card__title {
-    font-size: var(--dwc-font-size-xs) !important;
-    margin-bottom: var(--dwc-space-2xs) !important;
+    font-size: var(--dwc-font-size-xs);
+    margin-bottom: var(--dwc-space-2xs);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--dwc-color-on-primary-text) !important;
+    color: var(--dwc-color-on-primary-text);
   }
 
   .data-card__price {
-    font-size: var(--dwc-font-size-m) !important;
-    margin-bottom: var(--dwc-space-2xs) !important;
+    font-size: var(--dwc-font-size-m);
+    margin-bottom: var(--dwc-space-2xs);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--dwc-color-on-primary-text) !important;
+    color: var(--dwc-color-on-primary-text);
   }
 
   .data-card__percent {
-    font-size: var(--dwc-font-size-xs) !important;
-    padding: 2px var(--dwc-space-2xs) !important;
+    font-size: var(--dwc-font-size-xs);
+    padding: 2px var(--dwc-space-2xs);
     white-space: nowrap;
     display: inline-block !important;
-    background: rgba(255, 255, 255, 0.2) !important;
-    color: var(--dwc-color-on-primary-text) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--dwc-color-on-primary-text);
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
   /* Hide chart, follow button, and details on extra small screens */
@@ -402,11 +404,15 @@ dwc-table::part(crypto-symbol) {
   .data-card__details {
     display: none !important;
   }
+
+  .data-card div > div {
+    gap: var(--dwc-space-xs) !important;
+  }
   
   /* Make table full width on mobile */
   dwc-table {
-    width: 100% !important;
-    margin: 0 !important;
+    width: 100%;
+    margin: 0;
   }
 
   /* Extra small table adjustments */
@@ -444,6 +450,44 @@ dwc-table::part(crypto-symbol) {
   dwc-table::part(price-change-loss),
   dwc-table::part(price-change-neutral) {
     font-size: var(--dwc-font-size-s);
+  }
+}
+
+/* Extra small screens - 375px and below */
+@media (max-width: 375px) {
+  /* Allow text wrapping instead of ellipsis */
+  .data-card__title {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.2;
+  }
+  
+  /* Hide price amounts, show only percentages */
+  .data-card__price {
+    display: none !important;
+  }
+  
+  /* Make percentage more prominent */
+  .data-card__percent {
+    font-size: var(--dwc-font-size-s);
+    padding: var(--dwc-space-xs) var(--dwc-space-s);
+    margin-top: var(--dwc-space-xs);
+  }
+  
+  /* Adjust card height for content changes */
+  .dashboard-view__cards {
+    height: auto;
+    min-height: 60px;
+  }
+  
+  .data-card {
+    padding: var(--dwc-space-xs);
+    min-height: 60px;
+  }
+
+  .data-card div > div {
+    gap: 0px !important;
   }
 }
 

@@ -136,11 +136,10 @@ public class DashboardCard extends Composite<FlexLayout> {
 
     // Configure layouts
     textData.setJustifyContent(FlexJustifyContent.BETWEEN);
-    textData.setStyle("min-height", "80px");
     textData.add(mainText, detailText);
-    mainText.setDirection(FlexDirection.COLUMN).setStyle("gap", "0px");
+    mainText.setDirection(FlexDirection.COLUMN);
     detailText.setDirection(FlexDirection.COLUMN);
-    numericData.setAlignment(FlexAlignment.CENTER);
+    numericData.setAlignment(FlexAlignment.CENTER).setJustifyContent(FlexJustifyContent.BETWEEN);
 
     // Apply CSS classes
     self.addClassName("data-card");

@@ -38,7 +38,7 @@ public class AboutView extends Composite<FlexLayout> {
 
   private void createHeader() {
     FlexLayout header = new FlexLayout();
-    header.addClassName("about-view__header");
+    header.addClassName("about-view__header about-view__primary-gradient");
     header.setDirection(FlexDirection.COLUMN);
     header.setAlignment(FlexAlignment.CENTER);
 
@@ -70,7 +70,7 @@ public class AboutView extends Composite<FlexLayout> {
         """);
 
     UnorderedList featuresList = new UnorderedList();
-    featuresList.addClassName("about-view__features-list");
+    featuresList.addClassName("about-view__list");
     
     ListEntry item1 = new ListEntry();
     item1.setHtml("<strong>Java-First:</strong> Write web applications using pure Java");
@@ -113,7 +113,7 @@ public class AboutView extends Composite<FlexLayout> {
 
     // Current app highlight
     Div highlightCard = new Div();
-    highlightCard.addClassName("about-view__highlight-card");
+    highlightCard.addClassName("about-view__highlight-card about-view__primary-gradient");
 
     H3 appTitle = new H3("You're Here! 🎉 Cryptocurrency Dashboard");
     appTitle.addClassName("about-view__app-title");
@@ -162,7 +162,7 @@ public class AboutView extends Composite<FlexLayout> {
         """);
 
     UnorderedList docsList = new UnorderedList();
-    docsList.addClassName("about-view__docs-list");
+    docsList.addClassName("about-view__list");
     
     ListEntry doc1 = new ListEntry();
     doc1.setHtml("<a href='https://docs.webforj.com/docs/introduction/getting-started' target='_blank'>Getting Started</a> - Core concepts and quick start guide");
@@ -201,7 +201,7 @@ public class AboutView extends Composite<FlexLayout> {
         """);
 
     UnorderedList reposList = new UnorderedList();
-    reposList.addClassName("about-view__repos-list");
+    reposList.addClassName("about-view__list");
     
     ListEntry repo1 = new ListEntry();
     repo1.setHtml("<a href='https://github.com/webforj/webforj' target='_blank'>webforj/webforj</a> - Core framework repository");
@@ -221,11 +221,11 @@ public class AboutView extends Composite<FlexLayout> {
 
   private Component createAppCard(String title, String description, String icon, String url) {
     Div card = new Div();
-    card.addClassName("about-view__app-card", "about-view__clickable-card");
+    card.addClassName("about-view__card about-view__app-card about-view__card--clickable");
     card.onClick(e -> Page.getCurrent().open(url, "_blank"));
 
     Div iconDiv = new Div();
-    iconDiv.addClassName("about-view__app-icon");
+    iconDiv.addClassName("about-view__icon about-view__primary-gradient");
     iconDiv.setText(icon);
 
     H3 cardTitle = new H3(title);
@@ -244,11 +244,11 @@ public class AboutView extends Composite<FlexLayout> {
 
   private Component createContributeCard() {
     Div card = new Div();
-    card.addClassName("about-view__app-card", "about-view__clickable-card");
+    card.addClassName("about-view__card about-view__app-card about-view__card--clickable");
     card.onClick(e -> Page.getCurrent().open("https://github.com/webforj/built-with-webforj", "_blank"));
 
     Div iconDiv = new Div();
-    iconDiv.addClassName("about-view__app-icon");
+    iconDiv.addClassName("about-view__icon about-view__primary-gradient");
     iconDiv.setText("➕");
 
     H3 cardTitle = new H3("Contribute Your App");
