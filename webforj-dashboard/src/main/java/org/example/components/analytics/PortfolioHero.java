@@ -27,7 +27,6 @@ public class PortfolioHero extends Composite<FlexLayout> {
     FlexLayout mainValue = new FlexLayout();
     mainValue.addClassName("portfolio-hero__main")
         .setDirection(FlexDirection.COLUMN);
-    mainValue.setStyle("flex", "1 1 300px");
 
     Paragraph welcomeText = new Paragraph("Portfolio Value");
     welcomeText.addClassName("portfolio-hero__label");
@@ -58,7 +57,6 @@ public class PortfolioHero extends Composite<FlexLayout> {
     statsGrid.addClassName("portfolio-hero__stats")
         .setDirection(FlexDirection.COLUMN)
         .setSpacing("var(--dwc-space-m)");
-    statsGrid.setStyle("flex", "1 1 300px");
     statsGrid.add(
         createQuickStat("24h Change", "+2.8%", "trending-up"),
         createQuickStat("Total Assets", "20", "coins"),

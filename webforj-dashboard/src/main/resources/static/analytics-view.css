@@ -1,7 +1,6 @@
 /* Analytics View Styles - BEM Methodology */
 
 .analytics-view {
-  overflow-y: auto;
   padding: var(--dwc-space-l);
 }
 
@@ -94,7 +93,6 @@
   }
 
   .analytics-view__chart-card {
-    min-width: 100%;
     margin-bottom: var(--dwc-space-m);
   }
 }
@@ -142,7 +140,7 @@
   position: relative;
   z-index: 1;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   gap: var(--dwc-space-xl);
   width: 100%;
@@ -177,10 +175,16 @@
 }
 
 
+.portfolio-hero__main {
+  flex: 1;
+}
+
+.portfolio-hero__performance-ring {
+  flex: 1;
+}
+
 .portfolio-hero__stats {
-  width: 90px;
-  flex: 0 0 90px;
-  margin-left: auto;
+  flex: 1;
   align-items: end;
 }
 
@@ -349,7 +353,6 @@
     flex-direction: column;
     gap: var(--dwc-space-l);
     align-items: center;
-    text-align: center;
   }
 
   .portfolio-hero__main {
@@ -380,24 +383,17 @@
   }
 
   .portfolio-hero__content {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    text-align: left;
+    justify-content: center;
     gap: var(--dwc-space-m);
-    flex-wrap: nowrap;
   }
 
   .portfolio-hero__main {
-    flex: 1 1 auto;
-    min-width: 0;
-    order: 1;
+    flex: 1;
+    text-align: center;
   }
 
   .portfolio-hero__performance-ring {
-    flex: 0 0 auto;
-    order: 2;
-    margin: 0;
+    flex: 1;
   }
 
   .portfolio-hero__value {
@@ -408,6 +404,7 @@
   .portfolio-hero__change {
     flex-wrap: wrap;
     gap: var(--dwc-space-xs);
+    justify-content: center;
   }
 
   .performance-ring {
@@ -418,17 +415,20 @@
 
 @media (max-width: 480px) {
   .portfolio-hero__content {
-    flex-wrap: wrap;
+    flex-direction: column !important;
+    justify-content: center;
+    gap: var(--dwc-space-s);
   }
 
   .portfolio-hero__main {
-    flex: 1 1 100%;
-    margin-bottom: var(--dwc-space-s);
+    flex: 1;
+    text-align: center;
   }
 
   .portfolio-hero__performance-ring {
-    flex: 0 0 auto;
-    align-self: center;
+    flex: 1;
+    display: flex;
+    justify-content: center;
   }
 
   .performance-ring {

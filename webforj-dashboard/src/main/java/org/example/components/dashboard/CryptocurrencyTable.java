@@ -77,6 +77,8 @@ public class CryptocurrencyTable extends Composite<Table> {
     if (volumeColumn != null) {
       volumeColumn.setHidden(true);
     }
+    table.setRowHeight(50);
+    table.getColumnById("Price").setMinWidth(125.0f);
   }
 
   private void applyDesktopSettings() {
@@ -91,6 +93,7 @@ public class CryptocurrencyTable extends Composite<Table> {
     if (volumeColumn != null) {
       volumeColumn.setHidden(false);
     }
+    table.setRowHeight(65);
   }
 
   private void applyResponsiveSettingsOnLoad() {

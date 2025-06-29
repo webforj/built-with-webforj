@@ -301,8 +301,8 @@ dwc-table::part(crypto-symbol) {
   }
 }
 
-/* One card per row on smaller screens */
-@media (max-width: 650px) {
+/* One card per row on smaller screens - but not on extra small */
+@media (min-width: 481px) and (max-width: 650px) {
   .data-card {
     flex: 1 1 100%;
     min-width: 100%;
@@ -325,8 +325,10 @@ dwc-table::part(crypto-symbol) {
   }
 
   .data-card__details {
-    font-size: var(--dwc-font-size-xs);
+    display: none;
   }
+
+
 
   dwc-table {
     font-size: var(--dwc-font-size-s);
@@ -335,7 +337,60 @@ dwc-table::part(crypto-symbol) {
   }
 
 @media (max-width: 480px) {
+  /* Display cards in a single row */
+  .dashboard-view__cards {
+    flex-wrap: nowrap;
+    gap: var(--dwc-space-s) !important;
+    height: 70px;
+  }
 
+    /* Hide chart on small screens */
+  .data-card google-chart {
+    display: none;
+  }
+
+  /* Make each card take equal space */
+  .data-card {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    padding: var(--dwc-space-s) !important;
+  }
+
+  /* Override card internal layout for mobile */
+  .data-card > * {
+    width: 100% !important;
+  }
+
+  /* Compact card content for mobile row layout */
+  .data-card__title {
+    font-size: var(--dwc-font-size-xs) !important;
+    margin-bottom: var(--dwc-space-2xs) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .data-card__price {
+    font-size: var(--dwc-font-size-m) !important;
+    margin-bottom: var(--dwc-space-2xs) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .data-card__percent {
+    font-size: var(--dwc-font-size-xs) !important;
+    padding: 2px var(--dwc-space-2xs) !important;
+    white-space: nowrap;
+    display: inline-block !important;
+  }
+
+  /* Hide chart, follow button, and details on extra small screens */
+  .data-card google-chart,
+  .data-card__follow-button,
+  .data-card__details {
+    display: none !important;
+  }
   
   /* Make table full width on mobile */
   dwc-table {
