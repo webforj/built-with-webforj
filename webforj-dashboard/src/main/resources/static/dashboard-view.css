@@ -354,6 +354,12 @@ dwc-table::part(crypto-symbol) {
     flex: 1 1 0 !important;
     min-width: 0 !important;
     padding: var(--dwc-space-s) !important;
+    background: linear-gradient(
+      135deg,
+      var(--dwc-color-primary) 0%,
+      var(--dwc-color-primary-light) 100%
+    ) !important;
+    color: var(--dwc-color-on-primary-text) !important;
   }
 
   /* Override card internal layout for mobile */
@@ -368,6 +374,7 @@ dwc-table::part(crypto-symbol) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--dwc-color-on-primary-text) !important;
   }
 
   .data-card__price {
@@ -376,6 +383,7 @@ dwc-table::part(crypto-symbol) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--dwc-color-on-primary-text) !important;
   }
 
   .data-card__percent {
@@ -383,6 +391,9 @@ dwc-table::part(crypto-symbol) {
     padding: 2px var(--dwc-space-2xs) !important;
     white-space: nowrap;
     display: inline-block !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: var(--dwc-color-on-primary-text) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
   }
 
   /* Hide chart, follow button, and details on extra small screens */
