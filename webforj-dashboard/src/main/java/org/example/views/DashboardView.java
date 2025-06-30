@@ -2,6 +2,7 @@ package org.example.views;
 
 import org.example.components.dashboard.CryptocurrencyTable;
 import org.example.components.dashboard.DashboardCard;
+import org.example.components.dashboard.DashboardToolbar;
 import org.example.models.Cryptocurrency;
 import org.example.services.CryptocurrencyService;
 import org.example.utils.charts.ChartRedrawable;
@@ -24,6 +25,7 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
   private final CryptocurrencyService cryptoService = new CryptocurrencyService();
   private final DashboardChartBuilder chartBuilder = new DashboardChartBuilder();
   private CryptocurrencyTable cryptoTable;
+  private DashboardToolbar toolbar;
   private List<Cryptocurrency> cryptocurrencies;
   private Interval interval;
   private DashboardCard card1;
@@ -33,6 +35,9 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
   public DashboardView() {
     self.addClassName("dashboard-view");
     self.setDirection(FlexDirection.COLUMN);
+
+    // Create toolbar
+    toolbar = new DashboardToolbar();
 
     // Create cryptocurrency table
     cryptoTable = new CryptocurrencyTable();
@@ -59,7 +64,7 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
     tableWrapper.addClassName("dashboard-view__table-wrapper");
 
     // Add components to view
-    self.add(cardsWrapper, tableWrapper);
+    self.add(toolbar, cardsWrapper, tableWrapper);
 
     // Update prices every 2 seconds
     interval = new Interval(1f, e -> {

@@ -34,6 +34,55 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
 }
 
 /* ========================================
+   DASHBOARD TOOLBAR STYLES
+   ======================================== */
+
+.dashboard-toolbar {
+  align-self: flex-start;
+  margin-bottom: calc( -1 * var(--dwc-space-s));
+}
+
+.dashboard-toolbar__dropdown {
+  min-width: 80px;
+  font-size: var(--dwc-font-size-xs);
+  height: 100%;
+}
+
+.dashboard-toolbar__dropdown::part(control) {
+  height: 100%;
+}
+
+.dashboard-toolbar__interval-container {
+  background-color: var(--dwc-color-primary);
+  border-radius: 5px;
+}
+
+.dashboard-toolbar__flame-icon {
+  color: var(--dwc-color-on-primary-text);
+}
+.dashboard-toolbar__interval-tabs {
+  color: var(--dwc-color-on-primary-text);
+  margin-left: var(--dwc-space-xs);
+}
+
+.dashboard-toolbar__interval-tabs::part(body) {
+  display: none;
+}
+
+.dashboard-toolbar__interval-tabs > dwc-tab {
+  margin-top: var(--dwc-space-xs);
+  border-radius: 5px;
+}
+.dashboard-toolbar__interval-tabs > dwc-tab[active] {
+  background: white;
+  transition: background-color var(--dwc-transition-fast) ease-in-out, color var(--dwc-transition-fast) ease-in-out;
+}
+
+.dashboard-toolbar__interval-tabs > dwc-tab {
+  transition: background-color var(--dwc-transition-fast) ease-in-out, color var(--dwc-transition-fast) ease-in-out;
+}
+
+/* ========================================
    DASHBOARD CARD STYLES
    ======================================== */
 
@@ -60,12 +109,24 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
 }
 
 /* Stagger animation for multiple cards */
-.data-card:nth-child(1) { animation-delay: 50ms; }
-.data-card:nth-child(2) { animation-delay: 100ms; }
-.data-card:nth-child(3) { animation-delay: 150ms; }
-.data-card:nth-child(4) { animation-delay: 200ms; }
-.data-card:nth-child(5) { animation-delay: 250ms; }
-.data-card:nth-child(6) { animation-delay: 300ms; }
+.data-card:nth-child(1) {
+  animation-delay: 50ms;
+}
+.data-card:nth-child(2) {
+  animation-delay: 100ms;
+}
+.data-card:nth-child(3) {
+  animation-delay: 150ms;
+}
+.data-card:nth-child(4) {
+  animation-delay: 200ms;
+}
+.data-card:nth-child(5) {
+  animation-delay: 250ms;
+}
+.data-card:nth-child(6) {
+  animation-delay: 300ms;
+}
 
 /* Card hover state */
 .data-card:hover {
@@ -288,7 +349,8 @@ dwc-table::part(crypto-symbol) {
 
 /* Dark theme adjustments for dashboard table */
 .app-theme-dark dwc-table::part(icon-cell) img {
-  filter: grayscale(100%) brightness(0.7) sepia(1) hue-rotate(180deg) saturate(0) !important;
+  filter: grayscale(100%) brightness(0.7) sepia(1) hue-rotate(180deg)
+    saturate(0) !important;
 }
 
 .app-theme-dark dwc-table::part(icon-cell) > div > div {
@@ -329,13 +391,10 @@ dwc-table::part(crypto-symbol) {
     font-size: var(--dwc-font-size-xl);
   }
 
-
-
   dwc-table {
     font-size: var(--dwc-font-size-s);
   }
-
-  }
+}
 
 @media (max-width: 480px) {
   /* Remove content padding only for dashboard */
@@ -343,13 +402,13 @@ dwc-table::part(crypto-symbol) {
     padding: 0;
     margin: 0;
   }
-  
+
   /* Target the parent content area when dashboard is active */
   body:has(.dashboard-view) dwc-app-layout::part(content) {
     padding-left: 0;
     padding-right: 0;
   }
-  
+
   /* Reorder cards below table on mobile */
   .dashboard-view__cards-wrapper {
     order: 2 !important;
@@ -359,7 +418,7 @@ dwc-table::part(crypto-symbol) {
     margin: 0;
     box-sizing: border-box;
   }
-  
+
   /* Make table wrapper full screen width */
   .dashboard-view__table-wrapper {
     order: 1 !important;
@@ -371,7 +430,7 @@ dwc-table::part(crypto-symbol) {
     margin-right: 0;
     box-sizing: border-box;
   }
-  
+
   /* Display cards in column layout */
   .dashboard-view__cards {
     flex-direction: column !important;
@@ -382,7 +441,7 @@ dwc-table::part(crypto-symbol) {
     margin: 0;
     box-sizing: border-box;
   }
-  
+
   /* Make cards full width */
   .data-card {
     flex: 1 1 auto !important;
@@ -392,18 +451,18 @@ dwc-table::part(crypto-symbol) {
     margin: 0;
     box-sizing: border-box;
   }
-  
+
   /* Hide crypto name on small screens, show only ticker and icon */
   dwc-table::part(crypto-name),
   .crypto-name-desktop {
     display: none !important;
   }
-  
+
   /* Adjust crypto info layout for mobile */
   dwc-table::part(crypto-info) {
     gap: var(--dwc-space-s);
   }
-  
+
   /* Make table full width on mobile */
   dwc-table {
     width: 100%;
@@ -439,30 +498,30 @@ dwc-table::part(crypto-symbol) {
   dwc-table::part(percentage-badge-neutral) {
     font-size: var(--dwc-font-size-xs);
   }
-  
+
   /* Make 24h change text smaller on small screens */
   dwc-table::part(price-change-gain),
   dwc-table::part(price-change-loss),
   dwc-table::part(price-change-neutral) {
     font-size: var(--dwc-font-size-s);
   }
-  
+
   /* Ensure table rows are compact on mobile */
   dwc-table::part(row) {
     height: 30px;
     min-height: 30px;
   }
-  
+
   dwc-table::part(cell) {
     height: 30px;
   }
-  
+
   /* Ensure sparkline cell fits properly */
   dwc-table::part(sparkline-cell) {
     height: 30px;
     padding: 0;
   }
-  
+
   .sparkline-container {
     height: 100%;
   }
@@ -501,7 +560,6 @@ dwc-table::part(crypto-symbol) {
   }
 }
 
-
 /* ========================================
    DASHBOARD ANIMATIONS
    ======================================== */
@@ -518,7 +576,8 @@ dwc-table::part(crypto-symbol) {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {

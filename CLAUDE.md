@@ -60,3 +60,17 @@ This is a webforJ dashboard application with multiple example projects (dashboar
 - Test responsive design at multiple screen sizes
 - Prefer editing existing files over creating new ones
 - Run lint/typecheck commands when available before committing changes
+
+## CSS Best Practices
+- **Minimal & Effective CSS**: Always aim for the most concise, direct solutions
+- **Avoid Redundancy**: Don't duplicate CSS rules across media queries unnecessarily
+- **Base Styles First**: Apply general fixes (like box-sizing, max-width) to base styles rather than repeating in media queries
+- **Specific Only When Needed**: Use media queries only for properties that actually need to change at specific breakpoints
+- **Consolidate Rules**: If multiple breakpoints need the same fix, apply it more broadly rather than repeating
+
+## Responsive Design Patterns
+- **Targeted Overrides**: Use CSS `:has()` selectors to target specific pages (e.g., `body:has(.dashboard-view)`) rather than global changes
+- **Component-Level Padding**: Apply padding to specific wrappers when different components need different spacing behavior
+- **Flex Order for Reordering**: Use `order` property with `!important` to reorder elements responsively (needed to override webforJ inline styles)
+- **Progressive Enhancement**: Start with base styles that work everywhere, then add responsive enhancements
+- **Container-Specific Solutions**: When global changes affect other pages, move overrides to component-specific CSS files

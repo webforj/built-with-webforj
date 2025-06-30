@@ -120,6 +120,7 @@ public class CryptocurrencyTable extends Composite<Table> {
   }
 
   private void setupResizeListener() {
+    applyResponsiveSettings();
     PageEventOptions options = new PageEventOptions();
     options.setDebounce(500);
     Page.getCurrent().addEventListener("resize", e -> {
