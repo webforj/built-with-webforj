@@ -69,7 +69,7 @@ public class CryptocurrencyTable extends Composite<Table> {
     isMobile = true;
     if (cryptoColumn != null) {
       cryptoColumn.setPinDirection(PinDirection.LEFT);
-      cryptoColumn.setMinWidth(125.0f);
+      cryptoColumn.setMinWidth(80.0f);
     }
     if (marketCapColumn != null) {
       marketCapColumn.setHidden(true);
@@ -77,7 +77,7 @@ public class CryptocurrencyTable extends Composite<Table> {
     if (volumeColumn != null) {
       volumeColumn.setHidden(true);
     }
-    table.setRowHeight(50);
+    table.setRowHeight(30);
     table.getColumnById("Price").setMinWidth(125.0f);
   }
 
@@ -94,6 +94,7 @@ public class CryptocurrencyTable extends Composite<Table> {
       volumeColumn.setHidden(false);
     }
     table.setRowHeight(65);
+
   }
 
   private void applyResponsiveSettingsOnLoad() {

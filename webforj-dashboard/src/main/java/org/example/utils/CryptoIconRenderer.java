@@ -19,7 +19,7 @@ public class CryptoIconRenderer extends Renderer<Cryptocurrency> {
           <div part='crypto-info'>
             <img part='crypto-icon' src="<%= iconUrl %>" />
             <div>
-            <div part='crypto-name'><%= cryptoName%></div>
+            <div part='crypto-name' class='crypto-name-desktop'><%= cryptoName%></div>
             <div part='crypto-symbol'><%= cryptoSymbol%></div>
             </div>
             </div>

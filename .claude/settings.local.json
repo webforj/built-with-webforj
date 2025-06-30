@@ -17,7 +17,9 @@
       "Bash(python3:*)",
       "WebFetch(domain:mcp.webforj.com)",
       "Bash(git checkout:*)",
-      "Bash(mvn clean:*)"
+      "Bash(mvn clean:*)",
+      "mcp__webforj-mcp__webforj-knowledge-base",
+      "Bash(mvn jetty:run:*)"
     ],
     "deny": []
   },

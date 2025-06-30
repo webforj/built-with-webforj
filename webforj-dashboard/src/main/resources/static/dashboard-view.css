@@ -16,6 +16,16 @@
   gap: var(--dwc-space-m);
   justify-content: space-between;
   flex-wrap: wrap;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure wrappers have proper width constraints */
+.dashboard-view__cards-wrapper,
+.dashboard-view__table-wrapper {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Adjust card container when drawer is open */
@@ -37,6 +47,7 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
   transition: all var(--dwc-transition-medium) ease;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
   /* Subtle gradient overlay */
   background-image: linear-gradient(
     135deg,
@@ -144,7 +155,7 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
    ======================================== */
 
 dwc-table {
-  min-height: 400px;
+  min-height: 60svh;
   overflow: hidden;
   animation: fadeInUp 600ms ease-out 350ms;
   animation-fill-mode: both;
@@ -335,84 +346,77 @@ dwc-table::part(crypto-symbol) {
   }
 
 @media (max-width: 480px) {
-  /* Display cards in a single row */
-  .dashboard-view__cards {
-    gap: var(--dwc-space-xs) !important;
+  /* Remove content padding only for dashboard */
+  .dashboard-view {
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Target the parent content area when dashboard is active */
+  body:has(.dashboard-view) dwc-app-layout::part(content) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  /* Reorder cards below table on mobile */
+  .dashboard-view__cards-wrapper {
+    order: 2 !important;
     width: 100%;
-    margin-bottom: var(--dwc-space-s);
-  }
-
-  /* Hide chart on small screens */
-  .data-card google-chart {
-    display: none !important;
-  }
-
-  /* Make each card take equal space */
-  .data-card {
-    flex: 1 1 0 !important;
-    max-width: none;
-    min-width: 0;
-    width: auto;
-    padding: var(--dwc-space-xs);
+    max-width: 100%;
+    padding: 0 var(--dwc-space-l);
     margin: 0;
     box-sizing: border-box;
-    background: linear-gradient(
-      135deg,
-      var(--dwc-color-primary) 0%,
-      var(--dwc-color-primary-light) 100%
-    );
-    color: var(--dwc-color-on-primary-text);
   }
-
-  /* Override card internal layout for mobile */
-  .data-card > * {
+  
+  /* Make table wrapper full screen width */
+  .dashboard-view__table-wrapper {
+    order: 1 !important;
+    margin-bottom: var(--dwc-space-l);
     width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
   }
-
-  /* Compact card content for mobile row layout */
-  .data-card__title {
-    font-size: var(--dwc-font-size-xs);
-    margin-bottom: var(--dwc-space-2xs);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: var(--dwc-color-on-primary-text);
+  
+  /* Display cards in column layout */
+  .dashboard-view__cards {
+    flex-direction: column !important;
+    gap: var(--dwc-space-m) !important;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
   }
-
-  .data-card__price {
-    font-size: var(--dwc-font-size-m);
-    margin-bottom: var(--dwc-space-2xs);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: var(--dwc-color-on-primary-text);
+  
+  /* Make cards full width */
+  .data-card {
+    flex: 1 1 auto !important;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0;
+    box-sizing: border-box;
   }
-
-  .data-card__percent {
-    font-size: var(--dwc-font-size-xs);
-    padding: 2px var(--dwc-space-2xs);
-    white-space: nowrap;
-    display: inline-block !important;
-    background: rgba(255, 255, 255, 0.2);
-    color: var(--dwc-color-on-primary-text);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  /* Hide chart, follow button, and details on extra small screens */
-  .data-card google-chart,
-  .data-card__follow-button,
-  .data-card__details {
+  
+  /* Hide crypto name on small screens, show only ticker and icon */
+  dwc-table::part(crypto-name),
+  .crypto-name-desktop {
     display: none !important;
   }
-
-  .data-card div > div {
-    gap: var(--dwc-space-xs) !important;
+  
+  /* Adjust crypto info layout for mobile */
+  dwc-table::part(crypto-info) {
+    gap: var(--dwc-space-s);
   }
   
   /* Make table full width on mobile */
   dwc-table {
     width: 100%;
     margin: 0;
+    min-height: 75svh;
   }
 
   /* Extra small table adjustments */
@@ -436,7 +440,6 @@ dwc-table::part(crypto-symbol) {
 
   dwc-table::part(cell) {
     font-size: var(--dwc-font-size-s);
-    padding: var(--dwc-space-xs);
   }
 
   dwc-table::part(percentage-badge-gain),
@@ -451,44 +454,31 @@ dwc-table::part(crypto-symbol) {
   dwc-table::part(price-change-neutral) {
     font-size: var(--dwc-font-size-s);
   }
+  
+  /* Ensure table rows are compact on mobile */
+  dwc-table::part(row) {
+    height: 30px;
+    min-height: 30px;
+  }
+  
+  dwc-table::part(cell) {
+    height: 30px;
+  }
+  
+  /* Ensure sparkline cell fits properly */
+  dwc-table::part(sparkline-cell) {
+    height: 30px;
+    padding: 0;
+  }
+  
+  .sparkline-container {
+    height: 100%;
+  }
 }
 
 /* Extra small screens - 375px and below */
 @media (max-width: 375px) {
-  /* Allow text wrapping instead of ellipsis */
-  .data-card__title {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-    line-height: 1.2;
-  }
-  
-  /* Hide price amounts, show only percentages */
-  .data-card__price {
-    display: none !important;
-  }
-  
-  /* Make percentage more prominent */
-  .data-card__percent {
-    font-size: var(--dwc-font-size-s);
-    padding: var(--dwc-space-xs) var(--dwc-space-s);
-    margin-top: var(--dwc-space-xs);
-  }
-  
-  /* Adjust card height for content changes */
-  .dashboard-view__cards {
-    height: auto;
-    min-height: 60px;
-  }
-  
-  .data-card {
-    padding: var(--dwc-space-xs);
-    min-height: 60px;
-  }
-
-  .data-card div > div {
-    gap: 0px !important;
-  }
+  /* Keep any table-specific styles if needed */
 }
 
 /* ========================================

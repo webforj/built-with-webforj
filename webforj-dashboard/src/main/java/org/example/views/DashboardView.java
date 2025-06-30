@@ -50,8 +50,16 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
     FlexLayout cards = new FlexLayout(card1, card2, card3);
     cards.addClassName("dashboard-view__cards");
 
+    // Add wrapper for cards to control order on mobile
+    FlexLayout cardsWrapper = new FlexLayout(cards);
+    cardsWrapper.addClassName("dashboard-view__cards-wrapper");
+    
+    // Add wrapper for table to control order on mobile
+    FlexLayout tableWrapper = new FlexLayout(cryptoTable);
+    tableWrapper.addClassName("dashboard-view__table-wrapper");
+
     // Add components to view
-    self.add(cards, cryptoTable);
+    self.add(cardsWrapper, tableWrapper);
 
     // Update prices every 2 seconds
     interval = new Interval(1f, e -> {

@@ -15,12 +15,15 @@ public class PriceChartRenderer extends Renderer<Cryptocurrency> {
               const max = Math.max(...values);
               const range = max - min || 1;
               const svgWidth = 200; // Viewbox width for calculations
-              const svgHeight = 35;
+              const isMobile = window.innerWidth <= 480;
+              const svgHeight = isMobile ? 30 : 35;
+              const strokeWidth = isMobile ? 1.5 : 2;
+              const padding = isMobile ? 2 : 3; // Add padding for mobile
 
-              // Generate sparkline path
+              // Generate sparkline path with padding for mobile
               const points = values.map((v, i) => {
                 const x = (i / (values.length - 1)) * svgWidth;
-                const y = svgHeight - ((v - min) / range) * svgHeight;
+                const y = padding + (svgHeight - 2 * padding) - ((v - min) / range) * (svgHeight - 2 * padding);
                 return `${x},${y}`;
               }).join(' ');
 
@@ -28,13 +31,13 @@ public class PriceChartRenderer extends Renderer<Cryptocurrency> {
               const priceChange = cell.row.getValue('PriceChangePercentage24h');
               const color = priceChange >= 0 ? 'var(--dwc-color-success)' : 'var(--dwc-color-danger)';
             %>
-            <div part="sparkline-cell" style="width: 100%; display: flex;">
+            <div part="sparkline-cell" class="sparkline-container" style="width: 100%; display: flex; align-items: center;">
               <svg width="100%" height="<%= svgHeight %>" viewBox="0 0 <%= svgWidth %> <%= svgHeight %>" preserveAspectRatio="none" style="width: 100%;">
                 <polyline
                   points="<%= points %>"
                   fill="none"
                   stroke="<%= color %>"
-                  stroke-width="2"
+                  stroke-width="<%= strokeWidth %>"
                   stroke-linejoin="round"
                   stroke-linecap="round"
                   vector-effect="non-scaling-stroke"
