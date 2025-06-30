@@ -155,7 +155,7 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
    ======================================== */
 
 dwc-table {
-  min-height: 60svh;
+  min-height: 65svh;
   overflow: hidden;
   animation: fadeInUp 600ms ease-out 350ms;
   animation-fill-mode: both;
@@ -325,16 +325,8 @@ dwc-table::part(crypto-symbol) {
     padding: var(--dwc-space-s);
   }
 
-  .data-card__follow-button {
-    display: none;
-  }
-
   .data-card__price {
     font-size: var(--dwc-font-size-xl);
-  }
-
-  .data-card__details {
-    display: none;
   }
 
 

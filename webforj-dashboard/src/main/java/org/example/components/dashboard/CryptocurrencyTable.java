@@ -12,6 +12,7 @@ import com.webforj.component.table.Column;
 import com.webforj.component.table.Table;
 import com.webforj.component.table.Column.PinDirection;
 import com.webforj.data.repository.CollectionRepository;
+import com.webforj.event.page.PageEventOptions;
 
 import java.util.List;
 
@@ -22,11 +23,10 @@ public class CryptocurrencyTable extends Composite<Table> {
   private Column<Cryptocurrency, ?> cryptoColumn;
   private Column<Cryptocurrency, ?> marketCapColumn;
   private Column<Cryptocurrency, ?> volumeColumn;
-  private boolean isMobile = false;
 
   public CryptocurrencyTable() {
     initializeTable();
-    applyResponsiveSettingsOnLoad();
+    setupResizeListener();
   }
 
   private void initializeTable() {
@@ -66,7 +66,6 @@ public class CryptocurrencyTable extends Composite<Table> {
   }
 
   private void applyMobileSettings() {
-    isMobile = true;
     if (cryptoColumn != null) {
       cryptoColumn.setPinDirection(PinDirection.LEFT);
       cryptoColumn.setMinWidth(80.0f);
@@ -82,7 +81,6 @@ public class CryptocurrencyTable extends Composite<Table> {
   }
 
   private void applyDesktopSettings() {
-    isMobile = false;
     if (cryptoColumn != null) {
       cryptoColumn.setPinDirection(PinDirection.AUTO);
       cryptoColumn.setMinWidth(250.0f);
@@ -97,7 +95,7 @@ public class CryptocurrencyTable extends Composite<Table> {
 
   }
 
-  private void applyResponsiveSettingsOnLoad() {
+  private void applyResponsiveSettings() {
     try {
       Object result = Page.getCurrent().executeJs("window.innerWidth");
       if (result != null) {
@@ -119,5 +117,13 @@ public class CryptocurrencyTable extends Composite<Table> {
     } catch (Exception e) {
       applyDesktopSettings();
     }
+  }
+
+  private void setupResizeListener() {
+    PageEventOptions options = new PageEventOptions();
+    options.setDebounce(500);
+    Page.getCurrent().addEventListener("resize", e -> {
+      applyResponsiveSettings();
+    }, options);
   }
 }
