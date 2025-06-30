@@ -18,7 +18,9 @@ import com.webforj.router.annotation.Route;
 import org.example.components.analytics.ChartCard;
 import org.example.components.analytics.HoldingsTable;
 import org.example.components.analytics.PortfolioHero;
+import org.example.components.dashboard.DashboardCard;
 import org.example.utils.charts.ChartRedrawable;
+import org.example.utils.charts.DashboardChartBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +39,13 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
   private ChartCard volumeChart;
   private ChartCard performanceChart;
   private ChartCard sentimentChart;
+  
+  // Store references to dashboard cards
+  private DashboardCard marketCapCard;
+  private DashboardCard totalVolumeCard;
+  private DashboardCard fearGreedCard;
+  
+  private final DashboardChartBuilder chartBuilder = new DashboardChartBuilder();
 
   public AnalyticsView() {
     self.addClassName("analytics-view")
@@ -44,6 +53,7 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
 
     createHeader();
     self.add(new PortfolioHero());
+    createDashboardCardsSection();
     createChartsSection();
     self.add(new HoldingsTable());
   }
@@ -229,10 +239,31 @@ public class AnalyticsView extends Composite<FlexLayout> implements ChartRedrawa
   }
 
 
+  private void createDashboardCardsSection() {
+    FlexLayout dashboardCards = new FlexLayout();
+    dashboardCards.addClassName("analytics-view__dashboard-cards")
+        .setWrap(FlexWrap.WRAP)
+        .setSpacing("var(--dwc-space-l)");
+
+    // Create dashboard cards with market insights
+    marketCapCard = new DashboardCard("Total Market Cap", 2420000000000.0, 2.85, 
+        chartBuilder.buildDashboardChart(GoogleChart.Type.AREA, 2.85));
+    
+    totalVolumeCard = new DashboardCard("24h Volume", 89400000000.0, -1.24, 
+        chartBuilder.buildDashboardChart(GoogleChart.Type.COLUMN, -1.24));
+    
+    fearGreedCard = new DashboardCard("Fear & Greed Index", 68.0, 4.12, 
+        chartBuilder.buildDashboardChart(GoogleChart.Type.LINE, 4.12));
+
+    dashboardCards.add(marketCapCard, totalVolumeCard, fearGreedCard);
+    self.add(dashboardCards);
+  }
+
   @Override
   public void redrawCharts() {
     // Using the default interface methods
     redrawChartCards(allocationChart, volumeChart, performanceChart, sentimentChart);
+    redrawDashboardCards(marketCapCard, totalVolumeCard, fearGreedCard);
   }
 
 }

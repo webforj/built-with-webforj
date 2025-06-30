@@ -2,6 +2,7 @@
 
 .analytics-view {
   padding: var(--dwc-space-l);
+  padding-bottom: var(--dwc-space-l);
 }
 
 .analytics-view__header {
@@ -28,6 +29,9 @@
   margin-bottom: var(--dwc-space-xl);
 }
 
+.analytics-view__dashboard-cards {
+  margin-bottom: var(--dwc-space-xl);
+}
 
 .analytics-view__chart-card {
   flex: 1 1 300px;
@@ -71,6 +75,7 @@
   padding: var(--dwc-space-l);
   box-shadow: none;
   margin-top: var(--dwc-space-xl);
+  margin-bottom: 0;
   transition: all var(--dwc-transition-medium) ease;
 }
 
@@ -79,12 +84,12 @@
   height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
+  min-height: unset;
 }
 
 .analytics-view__table dwc-table::part(row):hover {
   background-color: var(--dwc-surface-1);
 }
-
 
 /* Responsive styles */
 @media (max-width: 768px) {
@@ -125,7 +130,7 @@
 }
 
 .portfolio-hero::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   right: -50%;
@@ -146,7 +151,6 @@
   width: 100%;
 }
 
-
 .portfolio-hero__label {
   margin: 0 0 var(--dwc-space-s) 0;
   font-size: var(--dwc-font-size-l);
@@ -162,7 +166,6 @@
   text-shadow: none;
 }
 
-
 .portfolio-hero__change-value {
   font-size: var(--dwc-font-size-xl);
   font-weight: var(--dwc-font-weight-semibold);
@@ -173,7 +176,6 @@
   font-size: var(--dwc-font-size-l);
   opacity: 0.8;
 }
-
 
 .portfolio-hero__main {
   flex: 1;
@@ -214,7 +216,6 @@
   font-size: 12px;
 }
 
-
 .portfolio-hero__quick-stat-label {
   margin: 0;
   font-size: var(--dwc-font-size-xs);
@@ -228,7 +229,8 @@
 
 /* Portfolio hero animations */
 @keyframes portfolioHeroFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
@@ -261,7 +263,7 @@
 }
 
 .performance-ring::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 10px;
   left: 10px;
@@ -308,7 +310,7 @@
 }
 
 .mini-metric__value {
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
   font-weight: var(--dwc-font-weight-semibold);
   color: white;
   display: block;
@@ -316,7 +318,7 @@
 }
 
 .mini-metric__label {
-  font-size: var(--dwc-font-size-xs);
+  font-size: var(--dwc-font-size-s);
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -429,11 +431,16 @@
     flex: 1;
     display: flex;
     justify-content: center;
+    width: 100%;
   }
 
   .performance-ring {
     width: 80px;
     height: 80px;
+  }
+
+  .performance-ring__metrics {
+    width: 100%;
   }
 
   .portfolio-hero__value {
