@@ -10,7 +10,6 @@ import com.webforj.component.html.elements.H3;
 import com.webforj.component.html.elements.ListEntry;
 import com.webforj.component.html.elements.Paragraph;
 import com.webforj.component.html.elements.UnorderedList;
-import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexJustifyContent;
 import com.webforj.component.layout.flexlayout.FlexLayout;
@@ -40,7 +39,6 @@ public class AboutView extends Composite<FlexLayout> {
     FlexLayout header = new FlexLayout();
     header.addClassName("about-view__header about-view__primary-gradient");
     header.setDirection(FlexDirection.COLUMN);
-    header.setAlignment(FlexAlignment.CENTER);
 
     H1 title = new H1("About webforJ");
     title.addClassName("about-view__title");
