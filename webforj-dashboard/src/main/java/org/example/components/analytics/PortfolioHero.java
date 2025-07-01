@@ -18,9 +18,7 @@ public class PortfolioHero extends Composite<FlexLayout> {
 
     FlexLayout heroContent = new FlexLayout();
     heroContent.addClassName("portfolio-hero__content")
-        .setJustifyContent(FlexJustifyContent.BETWEEN)
         .setAlignment(FlexAlignment.CENTER)
-        .setSpacing("var(--dwc-space-xl)")
         .setWidth("100%");
 
     // Left side - Main portfolio value
@@ -50,7 +48,6 @@ public class PortfolioHero extends Composite<FlexLayout> {
 
     // Center - Performance ring
     FlexLayout centerElement = createPerformanceRing();
-    centerElement.setStyle("flex", "0 0 auto");
     
     // Right side - Quick stats
     FlexLayout statsGrid = new FlexLayout();
