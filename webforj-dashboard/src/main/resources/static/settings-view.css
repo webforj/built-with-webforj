@@ -72,11 +72,11 @@
     padding: var(--dwc-space-m);
     max-width: 100%;
   }
-  
+
   .settings-view__tabs-container {
     padding: var(--dwc-space-m);
   }
-  
+
   .settings-view__section {
     padding: var(--dwc-space-m);
   }
@@ -87,11 +87,11 @@
     padding: var(--dwc-space-m);
     max-width: 100%;
   }
-  
+
   .settings-view__tabs-container {
     padding: var(--dwc-space-s);
   }
-  
+
   .settings-view__section {
     padding: var(--dwc-space-s);
   }

@@ -39,7 +39,7 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
 
 .dashboard-toolbar {
   align-self: flex-start;
-  margin-bottom: calc( -1 * var(--dwc-space-s));
+  margin-bottom: calc(-1 * var(--dwc-space-s));
 }
 
 .dashboard-toolbar__dropdown {
@@ -75,11 +75,13 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
 }
 .dashboard-toolbar__interval-tabs > dwc-tab[active] {
   background: white;
-  transition: background-color var(--dwc-transition-fast) ease-in-out, color var(--dwc-transition-fast) ease-in-out;
+  transition: background-color var(--dwc-transition-fast) ease-in-out,
+    color var(--dwc-transition-fast) ease-in-out;
 }
 
 .dashboard-toolbar__interval-tabs > dwc-tab {
-  transition: background-color var(--dwc-transition-fast) ease-in-out, color var(--dwc-transition-fast) ease-in-out;
+  transition: background-color var(--dwc-transition-fast) ease-in-out,
+    color var(--dwc-transition-fast) ease-in-out;
 }
 
 /* ========================================
@@ -397,6 +399,10 @@ dwc-table::part(crypto-symbol) {
 }
 
 @media (max-width: 480px) {
+  dwc-app-layout::part(content) {
+    padding-top: 0;
+  }
+
   /* Remove content padding only for dashboard */
   .dashboard-view {
     padding: 0;
@@ -409,38 +415,9 @@ dwc-table::part(crypto-symbol) {
     padding-right: 0;
   }
 
-  /* Reorder cards below table on mobile */
-  .dashboard-view__cards-wrapper {
-    order: 2 !important;
-    width: 100%;
-    max-width: 100%;
-    padding: 0 var(--dwc-space-l);
-    margin: 0;
-    box-sizing: border-box;
-  }
-
-  /* Make table wrapper full screen width */
-  .dashboard-view__table-wrapper {
-    order: 1 !important;
-    margin-bottom: var(--dwc-space-l);
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
-    margin-left: 0;
-    margin-right: 0;
-    box-sizing: border-box;
-  }
-
-  /* Display cards in column layout */
-  .dashboard-view__cards {
-    flex-direction: column !important;
-    gap: var(--dwc-space-m) !important;
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
+   .dashboard-view__cards-wrapper {
+    display: none !important;
+   }
 
   /* Make cards full width */
   .data-card {
@@ -467,7 +444,7 @@ dwc-table::part(crypto-symbol) {
   dwc-table {
     width: 100%;
     margin: 0;
-    min-height: 75svh;
+    min-height: 100svh;
   }
 
   /* Extra small table adjustments */

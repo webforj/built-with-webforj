@@ -6,6 +6,7 @@ import com.webforj.component.html.elements.H3;
 import com.webforj.component.html.elements.Paragraph;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
+import com.webforj.component.layout.flexlayout.FlexWrap;
 
 public class SettingsSection extends Composite<Div> {
   private Div self = getBoundComponent();
@@ -23,6 +24,7 @@ public class SettingsSection extends Composite<Div> {
     content = new FlexLayout();
     content.addClassName("settings-view__section-content");
     content.setDirection(FlexDirection.COLUMN);
+    content.setWrap(FlexWrap.WRAP);
 
     self.add(sectionTitle, sectionDesc, content);
   }

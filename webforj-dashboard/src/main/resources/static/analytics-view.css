@@ -25,10 +25,6 @@
   margin-bottom: var(--dwc-space-xl);
 }
 
-.analytics-view__charts {
-  margin-bottom: var(--dwc-space-xl);
-}
-
 .analytics-view__dashboard-cards {
   margin-bottom: var(--dwc-space-xl);
 }

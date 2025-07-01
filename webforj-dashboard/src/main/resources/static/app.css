@@ -149,15 +149,12 @@ body {
    ======================================== */
 
 /* App Layout Configuration */
-dwc-app-layout {
-  --dwc-app-layout-header-height: 60px;
-}
 
 dwc-app-layout::part(drawer) {
   box-shadow: none;
 }
 
-dwc-app-layout::part(content) {
+/* dwc-app-layout::part(content) {
   overflow-y: auto !important;
   overflow-x: hidden;
   height: 100%;
@@ -165,7 +162,7 @@ dwc-app-layout::part(content) {
   margin-left: 0;
   margin-right: 0;
   padding: var(--dwc-space-l);
-}
+} */
 
 dwc-app-nav-item[selected]::part(link-wrapper) {
   color: var(--dwc-color-primary-text);

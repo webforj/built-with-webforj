@@ -603,6 +603,10 @@
   .news-view__card--modern .news-view__image {
     height: 140px;
   }
+
+  .news-view__article-image {
+    flex: 0 0 100%
+  }
 }
 
 /* NewsCard component styles */
