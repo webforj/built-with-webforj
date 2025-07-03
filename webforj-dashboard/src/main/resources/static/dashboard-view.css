@@ -3,85 +3,20 @@
 .dashboard-view {
   overflow-y: auto;
   height: 100%;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
 }
 
-.dashboard-view::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
 
 .dashboard-view__cards {
   width: 100%;
-  gap: var(--dwc-space-m);
   justify-content: space-between;
   flex-wrap: wrap;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 /* Ensure wrappers have proper width constraints */
-.dashboard-view__cards-wrapper,
 .dashboard-view__table-wrapper {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-}
-
-/* Adjust card container when drawer is open */
-dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
-  justify-content: space-evenly !important;
-}
-
-/* ========================================
-   DASHBOARD TOOLBAR STYLES
-   ======================================== */
-
-.dashboard-toolbar {
-  align-self: flex-start;
-  margin-bottom: calc(-1 * var(--dwc-space-s));
-}
-
-.dashboard-toolbar__dropdown {
-  min-width: 80px;
-  font-size: var(--dwc-font-size-xs);
-  height: 100%;
-}
-
-.dashboard-toolbar__dropdown::part(control) {
-  height: 100%;
-}
-
-.dashboard-toolbar__interval-container {
-  background-color: var(--dwc-color-primary);
-  border-radius: 5px;
-}
-
-.dashboard-toolbar__flame-icon {
-  color: var(--dwc-color-on-primary-text);
-}
-.dashboard-toolbar__interval-tabs {
-  color: var(--dwc-color-on-primary-text);
-  margin-left: var(--dwc-space-xs);
-}
-
-.dashboard-toolbar__interval-tabs::part(body) {
-  display: none;
-}
-
-.dashboard-toolbar__interval-tabs > dwc-tab {
-  margin-top: var(--dwc-space-xs);
-  border-radius: 5px;
-}
-.dashboard-toolbar__interval-tabs > dwc-tab[active] {
-  background: white;
-  transition: background-color var(--dwc-transition-fast) ease-in-out,
-    color var(--dwc-transition-fast) ease-in-out;
-}
-
-.dashboard-toolbar__interval-tabs > dwc-tab {
-  transition: background-color var(--dwc-transition-fast) ease-in-out,
-    color var(--dwc-transition-fast) ease-in-out;
 }
 
 /* ========================================
@@ -96,16 +31,6 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
   border-radius: var(--dwc-border-radius);
   border: var(--dwc-border-width) solid var(--dwc-color-default);
   transition: all var(--dwc-transition-medium) ease;
-  position: relative;
-  overflow: hidden;
-  box-sizing: border-box;
-  /* Subtle gradient overlay */
-  background-image: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  /* Fade-in animation */
   animation: fadeInUp 500ms ease-out;
   animation-fill-mode: both;
 }
@@ -130,34 +55,18 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
   animation-delay: 300ms;
 }
 
-/* Card hover state */
-.data-card:hover {
-  transform: none;
-  border-color: var(--dwc-color-gray-85);
-}
-
-.data-card:hover google-chart {
-  opacity: 0.9;
-}
-
 /* Card content styles */
 .data-card__title {
   font-size: var(--dwc-font-size-m);
   color: var(--dwc-color-gray-15);
   font-weight: var(--dwc-font-weight-normal);
-  letter-spacing: 0.02em;
   transition: color var(--dwc-transition-fast) ease;
-}
-
-.data-card:hover .data-card__title {
-  color: var(--dwc-color-gray-10);
 }
 
 .data-card__price {
   font-size: var(--dwc-font-size-2xl);
   font-weight: var(--dwc-font-weight-normal);
   transition: color var(--dwc-transition-fast) ease;
-  letter-spacing: -0.02em;
 }
 
 .data-card__percent {
@@ -165,10 +74,7 @@ dwc-app-layout[drawer-opened] .dashboard-view > div:first-child {
   border-radius: var(--dwc-border-radius-m);
   font-size: var(--dwc-font-size-s);
   font-weight: var(--dwc-font-weight-semibold);
-  font-variant-numeric: tabular-nums;
   transition: all var(--dwc-transition-fast) ease;
-  position: relative;
-  overflow: hidden;
 }
 
 .data-card__percent:hover {
@@ -228,15 +134,6 @@ dwc-table::part(cell-header) {
   height: 65px;
 }
 
-dwc-table::part(row):first-child {
-  margin-top: 0;
-  padding-top: 0;
-}
-
-dwc-table::part(cell) {
-  font-variant-numeric: tabular-nums;
-}
-
 /* Price cells */
 dwc-table::part(price-cell) {
   font-size: var(--dwc-font-size-xl);
@@ -266,7 +163,6 @@ dwc-table::part(price-change-neutral) {
 dwc-table::part(price-change-gain),
 dwc-table::part(price-change-loss),
 dwc-table::part(price-change-neutral) {
-  font-variant-numeric: tabular-nums;
   font-weight: var(--dwc-font-weight-light);
   font-size: var(--dwc-font-size-l);
 }
@@ -419,16 +315,6 @@ dwc-table::part(crypto-symbol) {
     display: none !important;
    }
 
-  /* Make cards full width */
-  .data-card {
-    flex: 1 1 auto !important;
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    margin: 0;
-    box-sizing: border-box;
-  }
-
   /* Hide crypto name on small screens, show only ticker and icon */
   dwc-table::part(crypto-name),
   .crypto-name-desktop {
@@ -501,39 +387,6 @@ dwc-table::part(crypto-symbol) {
 
   .sparkline-container {
     height: 100%;
-  }
-}
-
-/* Extra small screens - 375px and below */
-@media (max-width: 375px) {
-  /* Keep any table-specific styles if needed */
-}
-
-/* ========================================
-   DASHBOARD ACCESSIBILITY AND PRINT
-   ======================================== */
-
-/* High contrast mode support for dashboard */
-@media (prefers-contrast: high) {
-  .data-card,
-  dwc-table {
-    border-width: 2px;
-  }
-
-  .percentage-positive,
-  .percentage-negative,
-  dwc-table::part(percentage-badge-gain),
-  dwc-table::part(percentage-badge-loss) {
-    font-weight: var(--dwc-font-weight-bold);
-  }
-}
-
-/* Print styles for dashboard */
-@media print {
-  .data-card,
-  dwc-table {
-    box-shadow: none !important;
-    border: 1px solid #000 !important;
   }
 }
 
