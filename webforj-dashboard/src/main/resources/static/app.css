@@ -4,7 +4,7 @@
   --dwc-color-primary-c: 60;
   --dwc-color-default-h: var(--dwc-color-primary-h);
   --dwc-color-default-s: 10%;
-  --dwc-color-default-c: 50; 
+  --dwc-color-default-c: 50;
   --dwc-color-primary-dark: var(--dwc-color-primary-40);
   --dwc-color-on-primary-text-dark: var(--dwc-color-primary-text-40);
   --dwc-color-primary: var(--dwc-color-primary-45);
@@ -19,7 +19,7 @@
   --dwc-color-on-default-text-light: var(--dwc-color-default-text-95);
   --dwc-color-default-text-dark: var(--dwc-color-default-35);
   --dwc-color-default-text: var(--dwc-color-default-40);
-  --dwc-color-default-text-light: var(--dwc-color-default-45); 
+  --dwc-color-default-text-light: var(--dwc-color-default-45);
 }
 
 html[data-app-theme~="dark"],
@@ -29,7 +29,7 @@ html[data-app-theme~="dark-pure"] {
   --dwc-color-default-text-dark: var(--dwc-color-default-30);
   --dwc-color-default-text: var(--dwc-color-default-35);
   --dwc-color-default-text-light: var(--dwc-color-default-40);
-  --dwc-color-default-s: 3%; 
+  --dwc-color-default-s: 3%;
 }
 
 /* ========================================
@@ -128,11 +128,10 @@ dwc-toolbar h1 {
    5. RESPONSIVE STYLES
    ======================================== */
 
-  dwc-app-layout::part(content) {
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
+dwc-app-layout::part(content) {
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom);
+}
 
 /* ========================================
    6. ACCESSIBILITY AND PRINT STYLES
@@ -209,6 +208,10 @@ google-chart {
   position: absolute;
   width: 24px;
   height: 24px;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: cryptoFade 24s ease-in-out infinite;
 }
 

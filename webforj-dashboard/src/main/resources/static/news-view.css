@@ -205,7 +205,6 @@
   font-size: var(--dwc-font-size-m);
 }
 
-/* Remove? */
 .news-view__source,
 .news-source {
   color: var(--dwc-color-primary-40);
@@ -213,7 +212,6 @@
   font-size: var(--dwc-font-size-xs);
 }
 
-/* Remove? */
 .news-view__source--meta {
   font-weight: 600;
   font-size: var(--dwc-font-size-s);

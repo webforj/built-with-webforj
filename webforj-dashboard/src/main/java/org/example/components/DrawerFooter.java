@@ -2,7 +2,6 @@ package org.example.components;
 
 import com.webforj.component.Composite;
 import com.webforj.component.html.elements.Div;
-import com.webforj.component.html.elements.Paragraph;
 import com.webforj.component.html.elements.Span;
 import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
