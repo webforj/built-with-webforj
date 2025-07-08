@@ -8,7 +8,7 @@
   <packaging>war</packaging>
   <name>webforJ Explorer</name>
   <properties>
-    <webforj.version>25.01-SNAPSHOT</webforj.version>
+    <webforj.version>25.01</webforj.version>
     <jetty.scan>0</jetty.scan>
     <maven.compiler.target>21</maven.compiler.target>
     <maven.compiler.source>21</maven.compiler.source>
