@@ -1,23 +1,7 @@
-/* ========================================
-   THEME COLORS - PRIMARY ONLY
-   ======================================== */
-
 :root {
   --dwc-color-primary-h: 262;
   --dwc-color-primary-s: 52%;
   --dwc-color-primary-c: 60;
-  --dwc-color-info-h: 82;
-  --dwc-color-info-s: 54%;
-  --dwc-color-info-c: 35;
-  --dwc-color-success-h: 150;
-  --dwc-color-success-s: 54%;
-  --dwc-color-success-c: 35;
-  --dwc-color-danger-h: 345;
-  --dwc-color-danger-s: 54%;
-  --dwc-color-danger-c: 55;
-  --dwc-color-warning-h: 15;
-  --dwc-color-warning-s: 54%;
-  --dwc-color-warning-c: 50;
   --dwc-color-default-h: var(--dwc-color-primary-h);
   --dwc-color-default-s: 10%;
   --dwc-color-default-c: 50;
@@ -27,51 +11,12 @@
   --dwc-color-on-primary-text: var(--dwc-color-primary-text-45);
   --dwc-color-primary-light: var(--dwc-color-primary-50);
   --dwc-color-on-primary-text-light: var(--dwc-color-primary-text-50);
-  --dwc-color-info-dark: var(--dwc-color-info-65);
-  --dwc-color-on-info-text-dark: var(--dwc-color-info-text-65);
-  --dwc-color-info: var(--dwc-color-info-70);
-  --dwc-color-on-info-text: var(--dwc-color-info-text-70);
-  --dwc-color-info-light: var(--dwc-color-info-75);
-  --dwc-color-on-info-text-light: var(--dwc-color-info-text-75);
-  --dwc-color-success-dark: var(--dwc-color-success-65);
-  --dwc-color-on-success-text-dark: var(--dwc-color-success-text-65);
-  --dwc-color-success: var(--dwc-color-success-70);
-  --dwc-color-on-success-text: var(--dwc-color-success-text-70);
-  --dwc-color-success-light: var(--dwc-color-success-75);
-  --dwc-color-on-success-text-light: var(--dwc-color-success-text-75);
-  --dwc-color-danger-dark: var(--dwc-color-danger-65);
-  --dwc-color-on-danger-text-dark: var(--dwc-color-danger-text-65);
-  --dwc-color-danger: var(--dwc-color-danger-70);
-  --dwc-color-on-danger-text: var(--dwc-color-danger-text-70);
-  --dwc-color-danger-light: var(--dwc-color-danger-75);
-  --dwc-color-on-danger-text-light: var(--dwc-color-danger-text-75);
-  --dwc-color-warning-dark: var(--dwc-color-warning-65);
-  --dwc-color-on-warning-text-dark: var(--dwc-color-warning-text-65);
-  --dwc-color-warning: var(--dwc-color-warning-70);
-  --dwc-color-on-warning-text: var(--dwc-color-warning-text-70);
-  --dwc-color-warning-light: var(--dwc-color-warning-75);
-  --dwc-color-on-warning-text-light: var(--dwc-color-warning-text-75);
   --dwc-color-default-dark: var(--dwc-color-default-85);
   --dwc-color-on-default-text-dark: var(--dwc-color-default-text-85);
   --dwc-color-default: var(--dwc-color-default-90);
   --dwc-color-on-default-text: var(--dwc-color-default-text-90);
   --dwc-color-default-light: var(--dwc-color-default-95);
   --dwc-color-on-default-text-light: var(--dwc-color-default-text-95);
-  --dwc-color-primary-text-dark: var(--dwc-color-primary-40);
-  --dwc-color-primary-text: var(--dwc-color-primary-45);
-  --dwc-color-primary-text-light: var(--dwc-color-primary-50);
-  --dwc-color-info-text-dark: var(--dwc-color-info-20);
-  --dwc-color-info-text: var(--dwc-color-info-25);
-  --dwc-color-info-text-light: var(--dwc-color-info-30);
-  --dwc-color-success-text-dark: var(--dwc-color-success-20);
-  --dwc-color-success-text: var(--dwc-color-success-25);
-  --dwc-color-success-text-light: var(--dwc-color-success-30);
-  --dwc-color-danger-text-dark: var(--dwc-color-danger-35);
-  --dwc-color-danger-text: var(--dwc-color-danger-40);
-  --dwc-color-danger-text-light: var(--dwc-color-danger-45);
-  --dwc-color-warning-text-dark: var(--dwc-color-warning-30);
-  --dwc-color-warning-text: var(--dwc-color-warning-35);
-  --dwc-color-warning-text-light: var(--dwc-color-warning-40);
   --dwc-color-default-text-dark: var(--dwc-color-default-35);
   --dwc-color-default-text: var(--dwc-color-default-40);
   --dwc-color-default-text-light: var(--dwc-color-default-45);
@@ -81,19 +26,6 @@ html[data-app-theme~="dark"],
 html[data-app-theme~="dark-pure"] {
   --dwc-color-primary-text-dark: var(--dwc-color-primary-20);
   --dwc-color-primary-text: var(--dwc-color-primary-25);
-  --dwc-color-primary-text-light: var(--dwc-color-primary-30);
-  --dwc-color-info-text-dark: var(--dwc-color-info-45);
-  --dwc-color-info-text: var(--dwc-color-info-50);
-  --dwc-color-info-text-light: var(--dwc-color-info-55);
-  --dwc-color-success-text-dark: var(--dwc-color-success-45);
-  --dwc-color-success-text: var(--dwc-color-success-50);
-  --dwc-color-success-text-light: var(--dwc-color-success-55);
-  --dwc-color-danger-text-dark: var(--dwc-color-danger-25);
-  --dwc-color-danger-text: var(--dwc-color-danger-30);
-  --dwc-color-danger-text-light: var(--dwc-color-danger-35);
-  --dwc-color-warning-text-dark: var(--dwc-color-warning-30);
-  --dwc-color-warning-text: var(--dwc-color-warning-35);
-  --dwc-color-warning-text-light: var(--dwc-color-warning-40);
   --dwc-color-default-text-dark: var(--dwc-color-default-30);
   --dwc-color-default-text: var(--dwc-color-default-35);
   --dwc-color-default-text-light: var(--dwc-color-default-40);
@@ -123,27 +55,6 @@ body {
   border-radius: var(--dwc-border-radius-s);
 }
 
-/* Custom scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--dwc-color-gray-95);
-  border-radius: var(--dwc-border-radius-xs);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--dwc-color-gray-85);
-  border-radius: var(--dwc-border-radius-xs);
-  transition: background var(--dwc-transition-fast) ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--dwc-color-gray-75);
-}
-
 /* ========================================
    2. LAYOUT COMPONENTS
    ======================================== */
@@ -153,17 +64,6 @@ body {
 dwc-app-layout::part(drawer) {
   box-shadow: none;
 }
-
-/* dwc-app-layout::part(content) {
-  overflow-y: auto !important;
-  overflow-x: hidden;
-  height: 100%;
-  width: 100%;
-  margin-left: 0;
-  margin-right: 0;
-  padding: var(--dwc-space-l);
-} */
-
 dwc-app-nav-item[selected]::part(link-wrapper) {
   color: var(--dwc-color-primary-text);
 }
@@ -224,54 +124,14 @@ dwc-toolbar h1 {
   }
 }
 
-@keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-/* Loading state utility class */
-.loading {
-  background: linear-gradient(
-    90deg,
-    var(--dwc-color-gray-90) 25%,
-    var(--dwc-color-gray-85) 50%,
-    var(--dwc-color-gray-90) 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
 /* ========================================
    5. RESPONSIVE STYLES
    ======================================== */
 
-@media (max-width: 767px) {
-  /* Mobile app layout */
-  dwc-app-layout {
-    --dwc-app-layout-drawer-width: 100vw;
-  }
-
-  dwc-app-layout::part(content) {
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
+dwc-app-layout::part(content) {
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom);
 }
-
 
 /* ========================================
    6. ACCESSIBILITY AND PRINT STYLES
@@ -284,11 +144,6 @@ dwc-toolbar h1 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  /* Add high contrast styles for global elements if needed */
 }
 
 /* Print styles */
@@ -309,22 +164,14 @@ google-chart {
    ======================================== */
 
 .drawer-logo {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: var(--dwc-space-l);
   border-bottom: var(--dwc-border-width) solid var(--dwc-color-gray-90);
   margin-bottom: var(--dwc-space-m);
-  gap: var(--dwc-space-s);
 }
 
 .drawer-logo__container {
-  position: relative;
   width: 60px;
   height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .drawer-logo__orb {
@@ -337,26 +184,22 @@ google-chart {
     var(--dwc-color-primary-light) 100%
   );
   animation: orbPulse 4s ease-in-out infinite;
-  /* box-shadow: 0 4px 12px var(--dwc-color-gray-75); */
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 .drawer-logo__brand {
-  margin: 0;
   font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--dwc-color-on-surface);
+  font-weight: var(--dwc-font-weight-semibold);
   letter-spacing: -0.5px;
 }
 
 .drawer-logo__tagline {
   font-size: var(--dwc-font-size-xs);
   color: var(--dwc-color-gray-40);
-  font-weight: 500;
+  font-weight: var(--dwc-font-weight-semibold);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -428,11 +271,9 @@ google-chart {
   0%,
   100% {
     transform: scale(1);
-    /* box-shadow: 0 4px 12px var(--dwc-color-gray-75); */
   }
   50% {
     transform: scale(1.05);
-    /* box-shadow: 0 6px 20px var(--dwc-color-gray-70); */
   }
 }
 
@@ -464,15 +305,11 @@ google-chart {
    ======================================== */
 
 .drawer-footer {
-  flex-direction: column;
-  /* padding: var(--dwc-space-m); */
   border-top: 1px solid var(--dwc-color-gray-90);
   gap: 0 !important;
 }
 
 .drawer-footer__user-section {
-  align-items: center;
-  gap: var(--dwc-space-s);
   padding: var(--dwc-space-m);
 }
 
@@ -485,34 +322,15 @@ google-chart {
   align-items: center;
   justify-content: center;
   color: white;
-  font-weight: 600;
-}
-
-.drawer-footer__user-info {
-  flex-direction: column;
-  flex: 1;
+  font-weight: var(--dwc-font-weight-bold);
 }
 
 .drawer-footer__user-name {
   font-size: var(--dwc-font-size-s);
-  font-weight: 600;
-  color: var(--dwc-color-on-surface);
+  font-weight: var(--dwc-font-weight-bold);
 }
 
 .drawer-footer__user-role {
   font-size: var(--dwc-font-size-xs);
   color: var(--dwc-color-gray-40);
-}
-
-.drawer-footer__user-settings {
-  margin-left: auto;
-}
-
-.drawer-footer__quick-actions {
-  gap: var(--dwc-space-xs);
-  margin-bottom: var(--dwc-space-m);
-}
-
-.drawer-footer__action-button {
-  flex: 1;
 }
