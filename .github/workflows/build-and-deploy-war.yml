@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        app: [webforj-howdy, webforj-tictactoe]
+        app: [webforj-howdy, webforj-tictactoe, webforj-dashboard]
 
     steps:
       - name: Checkout Repository

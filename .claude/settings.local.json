@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.webforj.com)",
+      "Bash(mvn compile:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(timeout 60s mvn compile:*)",
+      "Bash(rg:*)",
+      "WebFetch(domain:javadoc.io)",
+      "Bash(timeout 30s mvn compile:*)",
+      "Bash(grep:*)",
+      "Bash(rm:*)",
+      "Bash(claude mcp add:*)",
+      "Bash(claude mcp:*)",
+      "Bash(python3:*)",
+      "WebFetch(domain:mcp.webforj.com)",
+      "Bash(git checkout:*)",
+      "Bash(mvn clean:*)",
+      "mcp__webforj-mcp__webforj-knowledge-base",
+      "Bash(mvn jetty:run:*)"
+    ],
+    "deny": []
+  },
+  "enableAllProjectMcpServers": false
+}
