@@ -93,8 +93,10 @@ public class CryptocurrencyTable extends Composite<Table> {
     if (volumeColumn != null) {
       volumeColumn.setHidden(false);
     }
-    table.setRowHeight(65);
 
+    if (!table.isDestroyed()) {
+      table.setRowHeight(65);
+    }
   }
 
   private void applyResponsiveSettings() {
