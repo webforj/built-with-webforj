@@ -12,7 +12,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
-    <webforj.version>25.01</webforj.version>
+    <webforj.version>25.02</webforj.version>
     <jetty.version>12.0.14</jetty.version>
     <jetty.scan>1</jetty.scan>
     <jetty.port>9965</jetty.port>
