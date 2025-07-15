@@ -1,0 +1,111 @@
+/* Define application theme */
+
+/* :root {
+  --dwc-color-primary-h: 277;
+  --dwc-color-primary-s: 50%;
+} */
+
+/* Artist Avatar Renderer */
+dwc-table::part(artist-avatar-renderer) {
+  display: flex;
+  align-items: center;
+  gap: var(--dwc-space-s);
+  padding: var(--dwc-space-xs) 0;
+}
+
+dwc-table::part(artist-avatar) {
+  width: var(--dwc-size-m);
+  height: var(--dwc-size-m);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dwc-color-on-primary);
+  font-weight: var(--dwc-font-weight-bold);
+  font-size: var(--dwc-font-size-s);
+  flex-shrink: 0;
+  background-color: var(--dwc-color-primary);
+}
+
+dwc-table::part(artist-text) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dwc-space-xs);
+}
+
+dwc-table::part(artist-name) {
+  font-weight: var(--dwc-font-weight-bold);
+  font-size: var(--dwc-font-size-s);
+  line-height: var(--dwc-line-height-s);
+  color: var(--dwc-color-on-surface);
+}
+
+dwc-table::part(artist-year) {
+  font-weight: var(--dwc-font-weight-normal);
+  font-size: var(--dwc-font-size-xs);
+  opacity: 0.6;
+  line-height: var(--dwc-line-height-s);
+  color: var(--dwc-color-on-surface-variant);
+}
+
+/* Artists Table */
+.artists-table {
+  width: 100%;
+  height: 600px;
+  border-collapse: collapse;
+  box-shadow: var(--dwc-shadow-s);
+  border-radius: var(--dwc-border-radius-m);
+  overflow: auto;
+}
+
+/* Layout Components */
+.main-container {
+  max-width: 90%;
+  margin: var(--dwc-space-l) auto;
+  padding: var(--dwc-space-m);
+}
+
+.page-header {
+  margin-bottom: var(--dwc-space-l);
+  text-align: center;
+}
+
+.toolbar {
+  margin-bottom: var(--dwc-space-m);
+  gap: var(--dwc-space-m);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toolbar-left {
+  gap: var(--dwc-space-s);
+}
+
+.table-container {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+/* Add Artist Dialog */
+.add-artist-dialog {
+  border-radius: var(--dwc-border-radius-l);
+  box-shadow: var(--dwc-shadow-l);
+}
+
+.dialog-content {
+  padding: var(--dwc-space-l);
+  gap: var(--dwc-space-l);
+}
+
+.dialog-form {
+  gap: var(--dwc-space-m);
+  flex-grow: 1;
+}
+
+.dialog-buttons {
+  gap: var(--dwc-space-s);
+  justify-content: flex-end;
+  padding-top: var(--dwc-space-m);
+  border-top: 1px solid var(--dwc-color-outline);
+}
+
