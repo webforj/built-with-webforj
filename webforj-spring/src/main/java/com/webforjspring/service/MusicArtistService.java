@@ -207,7 +207,7 @@ public class MusicArtistService {
         if (name == null || name.trim().isEmpty()) {
             return false;
         }
-        return !repository.findByNameContainingIgnoreCase(name.trim()).isEmpty();
+        return !repository.findByNameIgnoreCase(name.trim()).isEmpty();
     }
     
     /**

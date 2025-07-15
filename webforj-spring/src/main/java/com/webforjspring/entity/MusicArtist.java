@@ -3,6 +3,8 @@ package com.webforjspring.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 
 @Entity
 @Table(name = "music_artists")
@@ -25,8 +27,10 @@ public class MusicArtist {
     @Column(name = "country", length = 50)
     private String country;
 
+    @Min(value = 1900, message = "Year must be 1900 or later")
+    @Max(value = 2024, message = "Year must be 2024 or earlier")
     @Column(name = "year_formed")
-    private Integer yearFormed;
+    private Double yearFormed;
 
     @Column(name = "is_active")
     private Boolean isActive = true;
@@ -78,11 +82,11 @@ public class MusicArtist {
         this.country = country;
     }
 
-    public Integer getYearFormed() {
+    public Double getYearFormed() {
         return yearFormed;
     }
 
-    public void setYearFormed(Integer yearFormed) {
+    public void setYearFormed(Double yearFormed) {
         this.yearFormed = yearFormed;
     }
 

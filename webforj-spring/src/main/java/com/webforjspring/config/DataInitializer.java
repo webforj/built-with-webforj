@@ -19,11 +19,14 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Only add sample data if the database is empty
-        if (artistService.getTotalArtistsCount() == 0) {
+        long currentCount = artistService.getTotalArtistsCount();
+        
+        if (currentCount == 0) {
+            System.out.println("📊 Database is empty, initializing sample data...");
             initializeSampleData();
             System.out.println("✅ Sample data initialized successfully!");
         } else {
-            System.out.println("📊 Database already contains data, skipping initialization.");
+            System.out.println("📊 Database already contains " + currentCount + " artists, skipping initialization.");
         }
     }
 
@@ -81,10 +84,9 @@ public class DataInitializer implements CommandLineRunner {
             MusicArtist artist = new MusicArtist(name);
             artist.setGenre(genre);
             artist.setCountry(country);
-            artist.setYearFormed(yearFormed);
+            artist.setYearFormed(Double.valueOf(yearFormed));
             artist.setIsActive(isActive);
             artist.setBiography(biography);
-            
             artistService.createArtist(artist);
             System.out.println("📝 Created artist: " + name);
         } catch (Exception e) {

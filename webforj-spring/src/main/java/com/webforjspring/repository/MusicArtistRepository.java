@@ -25,6 +25,9 @@ public interface MusicArtistRepository extends JpaRepository<MusicArtist, Long> 
     // Find artists by name (case-insensitive)
     List<MusicArtist> findByNameContainingIgnoreCase(String name);
     
+    // Find artist by exact name (case-insensitive)
+    List<MusicArtist> findByNameIgnoreCase(String name);
+    
     // Find artists by genre
     List<MusicArtist> findByGenre(String genre);
     
