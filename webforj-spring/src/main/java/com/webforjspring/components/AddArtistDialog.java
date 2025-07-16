@@ -32,7 +32,6 @@ public class AddArtistDialog extends Composite<Dialog> {
 	private BindingContext<MusicArtist> bindingContext;
 	private MusicArtist artist;
 
-	// Form fields - names must match entity properties for automatic binding
 	private TextField name;
 	private TextField genre;
 	private TextField country;
@@ -40,7 +39,6 @@ public class AddArtistDialog extends Composite<Dialog> {
 	private CheckBox isActive;
 	private TextArea biography;
 
-	// Buttons
 	private Button saveButton;
 	private Button cancelButton;
 
@@ -95,12 +93,7 @@ public class AddArtistDialog extends Composite<Dialog> {
 	}
 
 	private void setupDataBinding() {
-		// Create binding context with automatic binding enabled
-		// The true parameter enables Jakarta validation
 		bindingContext = BindingContext.of(this, MusicArtist.class, true);
-
-		// With automatic binding, field names match property names
-		// Jakarta validation annotations on the entity will be automatically applied
 	}
 
 	private void setupLayout() {

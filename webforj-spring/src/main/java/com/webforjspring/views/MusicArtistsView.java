@@ -11,13 +11,16 @@ import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.layout.flexlayout.FlexWrap;
 import com.webforj.component.table.Table;
 import com.webforj.component.toast.Toast;
+import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforj.router.annotation.Route;
 import com.webforjspring.entity.MusicArtist;
+import com.webforjspring.repository.MusicArtistRepository;
 import com.webforjspring.service.MusicArtistService;
 import com.webforjspring.components.AddArtistDialog;
 import com.webforjspring.components.renderers.ArtistAvatarRenderer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 
 import jakarta.annotation.PostConstruct;
 import java.util.List;
@@ -28,16 +31,20 @@ public class MusicArtistsView extends Composite<FlexLayout> {
     @Autowired
     private MusicArtistService artistService;
 
+    @Autowired
+    private MusicArtistRepository artistRepository;
+
+    private SpringDataRepository<MusicArtist, Long> repository;
+
     // Main layout components
     private FlexLayout container = getBoundComponent();
     private FlexLayout header;
     private FlexLayout toolbar;
     private FlexLayout tableContainer;
-    
+
     // UI Components
     private H1 pageTitle;
     private Button addButton;
-    private Button refreshButton;
     private TextField searchField;
     private Table<MusicArtist> artistTable;
     private AddArtistDialog addArtistDialog;
@@ -61,21 +68,18 @@ public class MusicArtistsView extends Composite<FlexLayout> {
     private void initializeComponents() {
         // Page title
         pageTitle = new H1("Music Artists Management");
-        
+
         // Toolbar buttons
         addButton = new Button("Add New Artist")
                 .setTheme(ButtonTheme.PRIMARY)
                 .setPrefixComponent(FeatherIcon.PLUS.create());
-        
-        refreshButton = new Button("Refresh")
-                .setTheme(ButtonTheme.DEFAULT)
-                .setPrefixComponent(FeatherIcon.REFRESH_CW.create());
-        
+
+
         // Search field
         searchField = new TextField()
                 .setPlaceholder("Search artists...")
                 .setPrefixComponent(FeatherIcon.SEARCH.create());
-        
+
         // Table component
         artistTable = new Table<>();
         setupTableColumns();
@@ -85,36 +89,36 @@ public class MusicArtistsView extends Composite<FlexLayout> {
         // Main container setup
         container.setDirection(FlexDirection.COLUMN);
         container.addClassName("main-container");
-        
+
         // Header section
         header = new FlexLayout();
         header.setDirection(FlexDirection.COLUMN);
         header.addClassName("page-header");
-        
+
         // Toolbar section
         toolbar = new FlexLayout();
         toolbar.setDirection(FlexDirection.ROW);
         toolbar.setWrap(FlexWrap.WRAP);
         toolbar.addClassName("toolbar");
-        
+
         // Left side of toolbar (action buttons)
         FlexLayout leftToolbar = new FlexLayout();
         leftToolbar.setDirection(FlexDirection.ROW);
         leftToolbar.addClassName("toolbar-left");
-        leftToolbar.add(addButton, refreshButton);
-        
+        leftToolbar.add(addButton);
+
         // Right side of toolbar (search)
         FlexLayout rightToolbar = new FlexLayout();
         rightToolbar.setDirection(FlexDirection.ROW);
         rightToolbar.add(searchField);
-        
+
         toolbar.add(leftToolbar, rightToolbar);
-        
+
         // Table container
         tableContainer = new FlexLayout();
         tableContainer.setDirection(FlexDirection.COLUMN);
         tableContainer.addClassName("table-container");
-        
+
         // Add components to layout
         header.add(pageTitle);
         tableContainer.add(artistTable);
@@ -126,13 +130,13 @@ public class MusicArtistsView extends Composite<FlexLayout> {
         artistTable.addColumn("Name", MusicArtist::getName).setHidden(true);
         artistTable.addColumn("Artist", new ArtistAvatarRenderer())
                 .setMinWidth(200.0f);
-        
+
         // Other columns
         artistTable.addColumn("Genre", MusicArtist::getGenre);
         artistTable.addColumn("Country", MusicArtist::getCountry);
         artistTable.addColumn("Year Formed", MusicArtist::getYearFormed);
         artistTable.addColumn("Active", artist -> artist.getIsActive() ? "✓" : "✗");
-        
+
         // Style the table with CSS class
         artistTable.addClassName("artists-table");
         artistTable.setRowHeight(45);
@@ -143,53 +147,55 @@ public class MusicArtistsView extends Composite<FlexLayout> {
         addButton.addClickListener(e -> {
             addArtistDialog.showDialog();
         });
-        
-        // Refresh button click handler
-        refreshButton.addClickListener(e -> {
-            loadData();
-            Toast.show("Data refreshed!");
-        });
-        
+
+
         // Search field handler
-        searchField.addModifyListener(e -> {
+        searchField.onModify(e -> {
             String searchTerm = searchField.getValue();
-            if (searchTerm == null || searchTerm.trim().isEmpty()) {
-                loadData();
-            } else {
-                searchArtists(searchTerm);
+            
+            if (repository == null) {
+                return;
             }
+            
+            if (searchTerm == null || searchTerm.trim().isEmpty()) {
+                // Clear filter - show all artists
+                repository.setFilter((Specification<MusicArtist>) null);
+            } else {
+                // Create specification for multi-field search
+                String term = searchTerm.trim().toLowerCase();
+                Specification<MusicArtist> searchSpec = (root, query, cb) -> 
+                    cb.or(
+                        cb.like(cb.lower(root.get("name")), "%" + term + "%"),
+                        cb.like(cb.lower(root.get("genre")), "%" + term + "%"),
+                        cb.like(cb.lower(root.get("country")), "%" + term + "%")
+                    );
+                
+                repository.setFilter(searchSpec);
+            }
+            repository.commit(); // Refresh the table to apply the filter
         });
     }
 
     private void loadData() {
         try {
-            List<MusicArtist> artists = artistService.getAllArtists();
-            artistTable.setItems(artists);
+            // Create SpringDataRepository wrapper
+            repository = new SpringDataRepository<>(artistRepository);
             
-            // Show count in console for debugging
-            System.out.println("Loaded " + artists.size() + " artists");
+            // Bind repository to table (no filter initially)
+            artistTable.setRepository(repository);
         } catch (Exception e) {
             Toast.show("Error loading artists: " + e.getMessage());
             System.err.println("Error loading artists: " + e.getMessage());
         }
     }
 
-    private void searchArtists(String searchTerm) {
-        try {
-            List<MusicArtist> artists = artistService.searchArtistsByName(searchTerm);
-            artistTable.setItems(artists);
-            
-            // Show search results count
-            System.out.println("Found " + artists.size() + " artists matching '" + searchTerm + "'");
-        } catch (Exception e) {
-            Toast.show("Error searching artists: " + e.getMessage());
-            System.err.println("Error searching artists: " + e.getMessage());
-        }
-    }
-    
+
     private void initializeDialog() {
-        // Initialize add artist dialog with callback to refresh table
-        addArtistDialog = new AddArtistDialog(artistService, this::loadData);
+        addArtistDialog = new AddArtistDialog(artistService, () -> {
+            if (repository != null) {
+                repository.commit(); // Refresh the table after adding
+            }
+        });
         container.add(addArtistDialog);
     }
 }
