@@ -19,9 +19,15 @@ import com.webforjspring.entity.MusicArtist;
 import com.webforjspring.service.MusicArtistService;
 
 /**
- * Dialog component for adding new music artists
+ * Dialog component for adding and editing music artists
  */
-public class AddArtistDialog extends Composite<Dialog> {
+public class ArtistDialog extends Composite<Dialog> {
+
+	public enum Mode {
+		ADD, EDIT
+	}
+
+	private Mode currentMode = Mode.ADD;
 
 	private Dialog self = getBoundComponent();
 
@@ -32,6 +38,7 @@ public class AddArtistDialog extends Composite<Dialog> {
 	private BindingContext<MusicArtist> bindingContext;
 	private MusicArtist artist;
 
+	private H2 title;
 	private TextField name;
 	private TextField genre;
 	private TextField country;
@@ -42,7 +49,7 @@ public class AddArtistDialog extends Composite<Dialog> {
 	private Button saveButton;
 	private Button cancelButton;
 
-	public AddArtistDialog(MusicArtistService artistService, Runnable onSaveCallback) {
+	public ArtistDialog(MusicArtistService artistService, Runnable onSaveCallback) {
 		super();
 		this.artistService = artistService;
 		this.onSaveCallback = onSaveCallback;
@@ -55,7 +62,8 @@ public class AddArtistDialog extends Composite<Dialog> {
 	}
 
 	private void initializeDialog() {
-		self.addToHeader(new H2("Add New Artist"));
+		title = new H2("Add New Artist");
+		self.addToHeader(title);
 		self.addClassName("add-artist-dialog");
 	}
 
@@ -159,11 +167,14 @@ public class AddArtistDialog extends Composite<Dialog> {
 
 			// No manual conversion needed - NumberField handles Integer conversion automatically
 
-			// Save through service
-			artistService.createArtist(artist);
-
-			// Show success message
-			Toast.show("Artist '" + artist.getName() + "' added successfully!", Theme.SUCCESS);
+			// Call appropriate service method based on mode
+			if (currentMode == Mode.ADD) {
+				artistService.createArtist(artist);
+				Toast.show("Artist '" + artist.getName() + "' added successfully!", Theme.SUCCESS);
+			} else {
+				artistService.updateArtist(artist);
+				Toast.show("Artist '" + artist.getName() + "' updated successfully!", Theme.SUCCESS);
+			}
 
 			// Callback to refresh table
 			if (onSaveCallback != null) {
@@ -175,14 +186,30 @@ public class AddArtistDialog extends Composite<Dialog> {
 
 		} catch (Exception ex) {
 			// Show error message
-			Toast.show("Error saving artist: " + ex.getMessage(), Theme.DANGER);
+			String action = currentMode == Mode.ADD ? "saving" : "updating";
+			Toast.show("Error " + action + " artist: " + ex.getMessage(), Theme.DANGER);
+		}
+	}
+
+	private void updateDialogForMode() {
+		if (currentMode == Mode.ADD) {
+			// Update header
+			title.setText("Add New Artist");
+			saveButton.setText("Save Artist");
+		} else {
+			// Update header
+			title.setText("Edit Artist");
+			saveButton.setText("Update Artist");
 		}
 	}
 
 	private void resetForm() {
-		// Create new artist entity with default values
-		artist = new MusicArtist();
-		artist.setIsActive(true); // Set default active state
+		if (currentMode == Mode.ADD) {
+			// Create new artist entity with default values
+			artist = new MusicArtist();
+			artist.setIsActive(true); // Set default active state
+		}
+		// For EDIT mode, we already have the artist set
 
 		// Read the entity data into form fields using binding context
 		bindingContext.read(artist);
@@ -191,7 +218,17 @@ public class AddArtistDialog extends Composite<Dialog> {
 	}
 
 	public void showDialog() {
+		this.currentMode = Mode.ADD;
 		resetForm();
+		updateDialogForMode();
+		self.open();
+	}
+
+	public void showDialog(MusicArtist existingArtist) {
+		this.currentMode = Mode.EDIT;
+		this.artist = existingArtist;
+		bindingContext.read(artist);
+		updateDialogForMode();
 		self.open();
 	}
 }

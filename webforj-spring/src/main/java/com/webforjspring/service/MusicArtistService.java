@@ -123,6 +123,17 @@ public class MusicArtistService {
     // ========== UPDATE OPERATIONS ==========
     
     /**
+     * Update an existing artist (using the entity's ID)
+     * Business logic: Validates data, handles name uniqueness, preserves creation data
+     */
+    public MusicArtist updateArtist(MusicArtist artist) {
+        if (artist == null || artist.getId() == null) {
+            throw new IllegalArgumentException("Artist and ID cannot be null");
+        }
+        return updateArtist(artist.getId(), artist);
+    }
+
+    /**
      * Update an existing artist
      * Business logic: Validates data, handles name uniqueness, preserves creation data
      */

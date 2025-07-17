@@ -1,5 +1,7 @@
 package com.webforjspring.entity;
 
+import com.webforj.data.HasEntityKey;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -8,7 +10,7 @@ import jakarta.validation.constraints.Max;
 
 @Entity
 @Table(name = "music_artists")
-public class MusicArtist {
+public class MusicArtist implements HasEntityKey {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -117,5 +119,10 @@ public class MusicArtist {
                 ", isActive=" + isActive +
                 ", biography='" + biography + '\'' +
                 '}';
+    }
+
+    @Override
+    public Object getEntityKey() {
+        return id;
     }
 }

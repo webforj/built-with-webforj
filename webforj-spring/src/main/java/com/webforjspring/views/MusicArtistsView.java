@@ -1,5 +1,6 @@
 package com.webforjspring.views;
 
+import com.webforj.App;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
@@ -10,20 +11,21 @@ import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.layout.flexlayout.FlexWrap;
 import com.webforj.component.table.Table;
+import com.webforj.component.table.renderer.IconRenderer;
 import com.webforj.component.toast.Toast;
+import com.webforj.data.repository.CollectionRepository;
 import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforj.router.annotation.Route;
 import com.webforjspring.entity.MusicArtist;
 import com.webforjspring.repository.MusicArtistRepository;
 import com.webforjspring.service.MusicArtistService;
-import com.webforjspring.components.AddArtistDialog;
+import com.webforjspring.components.ArtistDialog;
 import com.webforjspring.components.renderers.ArtistAvatarRenderer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 
 import jakarta.annotation.PostConstruct;
-import java.util.List;
 
 @Route("/")
 public class MusicArtistsView extends Composite<FlexLayout> {
@@ -33,6 +35,7 @@ public class MusicArtistsView extends Composite<FlexLayout> {
 
     @Autowired
     private MusicArtistRepository artistRepository;
+    private CollectionRepository<MusicArtist> testRepo;
 
     private SpringDataRepository<MusicArtist, Long> repository;
 
@@ -47,7 +50,7 @@ public class MusicArtistsView extends Composite<FlexLayout> {
     private Button addButton;
     private TextField searchField;
     private Table<MusicArtist> artistTable;
-    private AddArtistDialog addArtistDialog;
+    private ArtistDialog artistDialog;
 
     public MusicArtistsView() {
         // Note: We can't call methods that use artistService here yet
@@ -73,7 +76,6 @@ public class MusicArtistsView extends Composite<FlexLayout> {
         addButton = new Button("Add New Artist")
                 .setTheme(ButtonTheme.PRIMARY)
                 .setPrefixComponent(FeatherIcon.PLUS.create());
-
 
         // Search field
         searchField = new TextField()
@@ -136,8 +138,12 @@ public class MusicArtistsView extends Composite<FlexLayout> {
         artistTable.addColumn("Country", MusicArtist::getCountry);
         artistTable.addColumn("Year Formed", MusicArtist::getYearFormed);
         artistTable.addColumn("Active", artist -> artist.getIsActive() ? "✓" : "✗");
+        artistTable.addColumn("", new IconRenderer<MusicArtist>("edit", "feather", e -> {
+            MusicArtist artist = e.getItem();
+            artistDialog.showDialog(artist);
+        }))
+                .setMinWidth(50.0f);
 
-        // Style the table with CSS class
         artistTable.addClassName("artists-table");
         artistTable.setRowHeight(45);
     }
@@ -145,31 +151,28 @@ public class MusicArtistsView extends Composite<FlexLayout> {
     private void setupEventHandlers() {
         // Add button click handler
         addButton.addClickListener(e -> {
-            addArtistDialog.showDialog();
+            artistDialog.showDialog();
         });
-
 
         // Search field handler
         searchField.onModify(e -> {
             String searchTerm = searchField.getValue();
-            
+
             if (repository == null) {
                 return;
             }
-            
+
             if (searchTerm == null || searchTerm.trim().isEmpty()) {
                 // Clear filter - show all artists
                 repository.setFilter((Specification<MusicArtist>) null);
             } else {
                 // Create specification for multi-field search
                 String term = searchTerm.trim().toLowerCase();
-                Specification<MusicArtist> searchSpec = (root, query, cb) -> 
-                    cb.or(
+                Specification<MusicArtist> searchSpec = (root, query, cb) -> cb.or(
                         cb.like(cb.lower(root.get("name")), "%" + term + "%"),
                         cb.like(cb.lower(root.get("genre")), "%" + term + "%"),
-                        cb.like(cb.lower(root.get("country")), "%" + term + "%")
-                    );
-                
+                        cb.like(cb.lower(root.get("country")), "%" + term + "%"));
+
                 repository.setFilter(searchSpec);
             }
             repository.commit(); // Refresh the table to apply the filter
@@ -180,7 +183,7 @@ public class MusicArtistsView extends Composite<FlexLayout> {
         try {
             // Create SpringDataRepository wrapper
             repository = new SpringDataRepository<>(artistRepository);
-            
+
             // Bind repository to table (no filter initially)
             artistTable.setRepository(repository);
         } catch (Exception e) {
@@ -189,13 +192,12 @@ public class MusicArtistsView extends Composite<FlexLayout> {
         }
     }
 
-
     private void initializeDialog() {
-        addArtistDialog = new AddArtistDialog(artistService, () -> {
+        artistDialog = new ArtistDialog(artistService, () -> {
             if (repository != null) {
                 repository.commit(); // Refresh the table after adding
             }
         });
-        container.add(addArtistDialog);
+        container.add(artistDialog);
     }
 }
