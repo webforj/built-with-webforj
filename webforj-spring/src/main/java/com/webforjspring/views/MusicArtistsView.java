@@ -13,6 +13,7 @@ import com.webforj.component.layout.flexlayout.FlexWrap;
 import com.webforj.component.table.Table;
 import com.webforj.component.table.renderer.IconRenderer;
 import com.webforj.component.toast.Toast;
+import com.webforj.component.Theme;
 import com.webforj.data.repository.CollectionRepository;
 import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforj.router.annotation.Route;
@@ -146,6 +147,7 @@ public class MusicArtistsView extends Composite<FlexLayout> {
 
         artistTable.addClassName("artists-table");
         artistTable.setRowHeight(45);
+        artistTable.setSelectionMode(Table.SelectionMode.SINGLE);
     }
 
     private void setupEventHandlers() {
@@ -191,6 +193,7 @@ public class MusicArtistsView extends Composite<FlexLayout> {
             System.err.println("Error loading artists: " + e.getMessage());
         }
     }
+
 
     private void initializeDialog() {
         artistDialog = new ArtistDialog(artistService, () -> {

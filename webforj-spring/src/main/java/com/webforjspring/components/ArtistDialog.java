@@ -13,6 +13,7 @@ import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.optioninput.CheckBox;
 import com.webforj.component.toast.Toast;
+import com.webforj.component.optiondialog.ConfirmDialog;
 import com.webforj.data.binding.BindingContext;
 import com.webforj.data.validation.server.ValidationResult;
 import com.webforjspring.entity.MusicArtist;
@@ -48,6 +49,7 @@ public class ArtistDialog extends Composite<Dialog> {
 
 	private Button saveButton;
 	private Button cancelButton;
+	private Button deleteButton;
 
 	public ArtistDialog(MusicArtistService artistService, Runnable onSaveCallback) {
 		super();
@@ -98,6 +100,10 @@ public class ArtistDialog extends Composite<Dialog> {
 
 		cancelButton = new Button("Cancel")
 				.setTheme(ButtonTheme.DEFAULT);
+
+		deleteButton = new Button("Delete Artist")
+				.setTheme(ButtonTheme.DANGER)
+				.setVisible(false); // Initially hidden for new artists
 	}
 
 	private void setupDataBinding() {
@@ -127,7 +133,7 @@ public class ArtistDialog extends Composite<Dialog> {
 		buttonBar.setDirection(FlexDirection.ROW);
 		buttonBar.addClassName("dialog-buttons");
 
-		buttonBar.add(cancelButton, saveButton);
+		buttonBar.add(saveButton, deleteButton, cancelButton);
 
 		content.add(form, buttonBar);
 		self.add(content);
@@ -142,6 +148,11 @@ public class ArtistDialog extends Composite<Dialog> {
 		// Cancel button handler
 		cancelButton.addClickListener(e -> {
 			self.close();
+		});
+
+		// Delete button handler
+		deleteButton.addClickListener(e -> {
+			deleteArtist();
 		});
 
 		// Close dialog on escape key
@@ -196,10 +207,47 @@ public class ArtistDialog extends Composite<Dialog> {
 			// Update header
 			title.setText("Add New Artist");
 			saveButton.setText("Save Artist");
+			deleteButton.setVisible(false); // Hide delete button for new artists
 		} else {
 			// Update header
 			title.setText("Edit Artist");
 			saveButton.setText("Update Artist");
+			deleteButton.setVisible(true); // Show delete button for existing artists
+		}
+	}
+
+	private void deleteArtist() {
+		if (currentMode == Mode.EDIT && artist != null) {
+			ConfirmDialog dialog = new ConfirmDialog(
+				"Are you sure you want to delete '" + artist.getName() + "'? This action cannot be undone.",
+				"Delete Artist",
+				ConfirmDialog.OptionType.YES_NO,
+				ConfirmDialog.MessageType.QUESTION
+			);
+			
+			dialog.setTheme(Theme.DANGER);
+			dialog.setButtonTheme(ConfirmDialog.Button.FIRST, ButtonTheme.DANGER);
+			dialog.setButtonTheme(ConfirmDialog.Button.SECOND, ButtonTheme.OUTLINED_GRAY);
+			
+			ConfirmDialog.Result result = dialog.show();
+			
+			if (result == ConfirmDialog.Result.YES) {
+				try {
+					artistService.deleteArtist(artist.getId());
+					Toast.show("Artist '" + artist.getName() + "' deleted successfully!", Theme.SUCCESS);
+					
+					// Callback to refresh table
+					if (onSaveCallback != null) {
+						onSaveCallback.run();
+					}
+					
+					// Close dialog
+					self.close();
+					
+				} catch (Exception ex) {
+					Toast.show("Error deleting artist: " + ex.getMessage(), Theme.DANGER);
+				}
+			}
 		}
 	}
 
