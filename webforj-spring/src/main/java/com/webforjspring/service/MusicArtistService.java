@@ -2,13 +2,13 @@ package com.webforjspring.service;
 
 import com.webforjspring.entity.MusicArtist;
 import com.webforjspring.repository.MusicArtistRepository;
+import com.webforj.data.repository.spring.SpringDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -59,27 +59,13 @@ public class MusicArtistService {
     // ========== READ OPERATIONS ==========
     
     /**
-     * Get all artists
-     */
-    public List<MusicArtist> getAllArtists() {
-        return repository.findAll();
-    }
-    
-    /**
-     * Find artist by ID
-     */
-    public Optional<MusicArtist> getArtistById(Long id) {
-        if (id == null) {
-            return Optional.empty();
-        }
-        return repository.findById(id);
-    }
-    
-    /**
      * Find artist by ID with exception if not found
      */
     private MusicArtist getArtistByIdOrThrow(Long id) {
-        return getArtistById(id)
+        if (id == null) {
+            throw new IllegalArgumentException("Artist ID cannot be null");
+        }
+        return repository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Artist not found with ID: " + id));
     }
     
@@ -161,6 +147,14 @@ public class MusicArtistService {
      */
     public long getTotalArtistsCount() {
         return repository.count();
+    }
+    
+    /**
+     * Get a filterable repository for webforJ table components
+     * This encapsulates the Spring Data repository with webforJ-compatible filtering
+     */
+    public SpringDataRepository<MusicArtist, Long> getFilterableRepository() {
+        return new SpringDataRepository<>(repository);
     }
     
 }

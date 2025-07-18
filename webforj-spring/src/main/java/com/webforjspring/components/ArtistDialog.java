@@ -141,19 +141,13 @@ public class ArtistDialog extends Composite<Dialog> {
 
 	private void setupEventHandlers() {
 		// Save button handler
-		saveButton.addClickListener(e -> {
-			saveArtist();
-		});
+		saveButton.addClickListener(e -> saveArtist());
 
 		// Cancel button handler
-		cancelButton.addClickListener(e -> {
-			self.close();
-		});
+		cancelButton.addClickListener(e -> self.close());
 
 		// Delete button handler
-		deleteButton.addClickListener(e -> {
-			deleteArtist();
-		});
+		deleteButton.addClickListener(e -> deleteArtist());
 
 		// Close dialog on escape key
 		self.addCloseListener(e -> {

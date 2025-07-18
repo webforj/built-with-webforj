@@ -12,11 +12,9 @@ import com.webforj.component.layout.flexlayout.FlexWrap;
 import com.webforj.component.table.Table;
 import com.webforj.component.table.renderer.IconRenderer;
 import com.webforj.component.toast.Toast;
-import com.webforj.data.repository.CollectionRepository;
 import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforj.router.annotation.Route;
 import com.webforjspring.entity.MusicArtist;
-import com.webforjspring.repository.MusicArtistRepository;
 import com.webforjspring.service.MusicArtistService;
 import com.webforjspring.components.ArtistDialog;
 import com.webforjspring.components.renderers.ArtistAvatarRenderer;
@@ -32,8 +30,6 @@ public class MusicArtistsView extends Composite<FlexLayout> {
     @Autowired
     private MusicArtistService artistService;
 
-    @Autowired
-    private MusicArtistRepository artistRepository;
     private SpringDataRepository<MusicArtist, Long> repository;
 
     // Main layout components
@@ -179,8 +175,8 @@ public class MusicArtistsView extends Composite<FlexLayout> {
 
     private void loadData() {
         try {
-            // Create SpringDataRepository wrapper
-            repository = new SpringDataRepository<>(artistRepository);
+            // Get filterable repository from service
+            repository = artistService.getFilterableRepository();
 
             // Bind repository to table (no filter initially)
             artistTable.setRepository(repository);
