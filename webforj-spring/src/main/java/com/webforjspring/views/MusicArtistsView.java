@@ -1,6 +1,5 @@
 package com.webforjspring.views;
 
-import com.webforj.App;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
@@ -13,7 +12,6 @@ import com.webforj.component.layout.flexlayout.FlexWrap;
 import com.webforj.component.table.Table;
 import com.webforj.component.table.renderer.IconRenderer;
 import com.webforj.component.toast.Toast;
-import com.webforj.component.Theme;
 import com.webforj.data.repository.CollectionRepository;
 import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforj.router.annotation.Route;
@@ -36,8 +34,6 @@ public class MusicArtistsView extends Composite<FlexLayout> {
 
     @Autowired
     private MusicArtistRepository artistRepository;
-    private CollectionRepository<MusicArtist> testRepo;
-
     private SpringDataRepository<MusicArtist, Long> repository;
 
     // Main layout components
