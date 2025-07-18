@@ -40,21 +40,6 @@ Spring Boot DevTools is included for automatic application restart:
 
 Your application will automatically restart when files on the classpath change.
 
-
-## Running Integration Tests
-
-To run end-to-end and integration tests:
-
-```bash
-mvn verify
-```
-
-This command runs your integration tests using Spring Boot Test framework. Tests annotated with `@SpringBootTest` will:
-- Start the full Spring application context
-- Run on a random port to avoid conflicts
-- Execute Playwright browser tests against the running application
-- Automatically shut down after tests complete
-
 ## Spring Boot Configuration
 
 Configure your application using `src/main/resources/application.properties`:
@@ -67,28 +52,6 @@ spring.application.name=webforj-spring
 server.port=8080
 
 # Add your custom configurations here
-```
-
-## Building for Production
-
-To create an executable JAR:
-
-```bash
-mvn clean package -Pprod
-java -jar target/webforj-spring-1.0-SNAPSHOT.jar
-```
-
-Or build and run a Docker image:
-
-```bash
-# Build the Docker image
-mvn spring-boot:build-image
-
-# Run the Docker container
-docker run -p 8080:8080 webforj-spring:1.0-SNAPSHOT
-
-# Or run with environment variables
-docker run -p 8080:8080 -e SPRING_PROFILES_ACTIVE=prod webforj-spring:1.0-SNAPSHOT
 ```
 
 ## Learn More
