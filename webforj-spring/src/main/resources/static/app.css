@@ -20,10 +20,15 @@ dwc-table::part(artist-avatar) {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--dwc-color-on-primary);
   font-weight: var(--dwc-font-weight-bold);
   font-size: var(--dwc-font-size-s);
-  flex-shrink: 0;
+  background-color: var(--dwc-color-primary-70);
+  color: var(--dwc-color-primary-text-70);
+}
+
+/* Dark mode: lighter avatar background */
+html[data-app-theme~="dark"] dwc-table::part(artist-avatar),
+html[data-app-theme~="dark-pure"] dwc-table::part(artist-avatar) {
   background-color: var(--dwc-color-primary);
 }
 
@@ -36,22 +41,16 @@ dwc-table::part(artist-text) {
 dwc-table::part(artist-name) {
   font-weight: var(--dwc-font-weight-bold);
   font-size: var(--dwc-font-size-s);
-  line-height: var(--dwc-line-height-s);
-  color: var(--dwc-color-on-surface);
 }
 
 dwc-table::part(artist-year) {
-  font-weight: var(--dwc-font-weight-normal);
   font-size: var(--dwc-font-size-xs);
   opacity: 0.6;
-  line-height: var(--dwc-line-height-s);
-  color: var(--dwc-color-on-surface-variant);
 }
 
 /* Artists Table */
 .artists-table {
-  width: 100%;
-  height: 600px;
+  height: 55svh;
   border-collapse: collapse;
   box-shadow: var(--dwc-shadow-s);
   border-radius: var(--dwc-border-radius-m);
