@@ -81,6 +81,7 @@ public class ArtistDialog extends Composite<Dialog> {
 		self.addToHeader(title);
 		self.addClassName("add-artist-dialog");
 		self.setCancelOnOutsideClick(false);
+		self.setBlurred(true);
 	}
 
 	/**
