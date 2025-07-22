@@ -9,10 +9,10 @@ import com.webforj.annotation.Routify;
 import com.webforj.annotation.StyleSheet;
 
 @SpringBootApplication
-@Routify(packages = "com.webforjspring.views")
+@Routify(packages = "com.webforjcrud.views")
 @StyleSheet("ws://app.css")
 @AppTheme("system")
-@AppProfile(name = "webforj-spring", shortName = "webforj-spring")
+@AppProfile(name = "webforj-spring-crud", shortName = "webforj-spring-crud")
 public class Application extends App {
 
   public static void main(String[] args) {

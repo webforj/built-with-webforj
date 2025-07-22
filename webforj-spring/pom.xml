@@ -8,9 +8,9 @@
     <version>3.5.3</version>
   </parent>
   <groupId>com.webforjspring</groupId>
-  <artifactId>webforj-spring</artifactId>
+  <artifactId>webforj-spring-crud</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>webforj-spring</name>
+  <name>webforj-spring-crud</name>
   <properties>
     <webforj.version>25.02</webforj.version>
     <maven.compiler.target>21</maven.compiler.target>

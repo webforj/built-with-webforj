@@ -46,7 +46,7 @@ Configure your application using `src/main/resources/application.properties`:
 
 ```properties
 # Application name
-spring.application.name=webforj-spring
+spring.application.name=webforj-spring-crud
 
 # Server configuration
 server.port=8080
