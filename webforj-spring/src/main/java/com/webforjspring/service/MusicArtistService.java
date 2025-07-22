@@ -34,23 +34,18 @@ public class MusicArtistService{
 
     /**
      * Updates an existing music artist.
+     * Data binding handles field updates, so we just need to verify existence and save.
      * 
      * @param artist the artist with updated information
      * @return the updated artist
      * @throws IllegalArgumentException if artist is not found
      */
     public MusicArtist updateArtist(MusicArtist artist) {
-        MusicArtist existingArtist = repository.findById(artist.getId())
-            .orElseThrow(() -> new IllegalArgumentException("Artist not found with ID: " + artist.getId()));
+        if (!repository.existsById(artist.getId())) {
+            throw new IllegalArgumentException("Artist not found with ID: " + artist.getId());
+        }
         
-        existingArtist.setName(artist.getName());
-        existingArtist.setGenre(artist.getGenre());
-        existingArtist.setCountry(artist.getCountry());
-        existingArtist.setYearFormed(artist.getYearFormed());
-        existingArtist.setIsActive(artist.getIsActive());
-        existingArtist.setBiography(artist.getBiography());
-        
-        return repository.save(existingArtist);
+        return repository.save(artist);
     }
 
     /**
