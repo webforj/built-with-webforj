@@ -1,4 +1,4 @@
-package com.webforjspring.entity;
+package com.webforjcrud.entity;
 
 import com.webforj.data.HasEntityKey;
 

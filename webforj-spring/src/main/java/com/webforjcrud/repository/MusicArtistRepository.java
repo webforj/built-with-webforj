@@ -1,9 +1,10 @@
-package com.webforjspring.repository;
+package com.webforjcrud.repository;
 
-import com.webforjspring.entity.MusicArtist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import com.webforjcrud.entity.MusicArtist;
 
 /**
  * Repository interface for MusicArtist entities.

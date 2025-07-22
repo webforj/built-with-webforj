@@ -1,7 +1,7 @@
-package com.webforjspring.components.renderers;
+package com.webforjcrud.components.renderers;
 
 import com.webforj.component.table.renderer.Renderer;
-import com.webforjspring.entity.MusicArtist;
+import com.webforjcrud.entity.MusicArtist;
 
 /**
  * Simple avatar renderer for displaying music artists with circular avatars and formatted info.

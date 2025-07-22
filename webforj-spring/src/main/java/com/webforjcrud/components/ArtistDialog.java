@@ -1,4 +1,4 @@
-package com.webforjspring.components;
+package com.webforjcrud.components;
 
 import com.webforj.component.Composite;
 import com.webforj.component.Theme;
@@ -16,8 +16,8 @@ import com.webforj.component.toast.Toast;
 import com.webforj.component.optiondialog.ConfirmDialog;
 import com.webforj.data.binding.BindingContext;
 import com.webforj.data.validation.server.ValidationResult;
-import com.webforjspring.entity.MusicArtist;
-import com.webforjspring.service.MusicArtistService;
+import com.webforjcrud.entity.MusicArtist;
+import com.webforjcrud.service.MusicArtistService;
 
 /**
  * Dialog component for adding and editing music artists.

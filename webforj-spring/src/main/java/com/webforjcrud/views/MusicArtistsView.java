@@ -1,4 +1,4 @@
-package com.webforjspring.views;
+package com.webforjcrud.views;
 
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
@@ -14,10 +14,10 @@ import com.webforj.component.table.Column.PinDirection;
 import com.webforj.component.table.renderer.IconRenderer;
 import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforj.router.annotation.Route;
-import com.webforjspring.entity.MusicArtist;
-import com.webforjspring.service.MusicArtistService;
-import com.webforjspring.components.ArtistDialog;
-import com.webforjspring.components.renderers.ArtistAvatarRenderer;
+import com.webforjcrud.components.ArtistDialog;
+import com.webforjcrud.components.renderers.ArtistAvatarRenderer;
+import com.webforjcrud.entity.MusicArtist;
+import com.webforjcrud.service.MusicArtistService;
 
 import org.springframework.data.jpa.domain.Specification;
 

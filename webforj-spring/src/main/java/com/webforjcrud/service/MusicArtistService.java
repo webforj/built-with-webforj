@@ -1,8 +1,9 @@
-package com.webforjspring.service;
+package com.webforjcrud.service;
 
-import com.webforjspring.entity.MusicArtist;
-import com.webforjspring.repository.MusicArtistRepository;
 import com.webforj.data.repository.spring.SpringDataRepository;
+import com.webforjcrud.entity.MusicArtist;
+import com.webforjcrud.repository.MusicArtistRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
