@@ -10,8 +10,8 @@ import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.layout.flexlayout.FlexWrap;
 import com.webforj.component.table.Table;
+import com.webforj.component.table.Column.PinDirection;
 import com.webforj.component.table.renderer.IconRenderer;
-import com.webforj.component.toast.Toast;
 import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforj.router.annotation.Route;
 import com.webforjspring.entity.MusicArtist;
@@ -19,16 +19,12 @@ import com.webforjspring.service.MusicArtistService;
 import com.webforjspring.components.ArtistDialog;
 import com.webforjspring.components.renderers.ArtistAvatarRenderer;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
-
-import jakarta.annotation.PostConstruct;
 
 @Route("/")
 public class MusicArtistsView extends Composite<FlexLayout> {
 
-    @Autowired
-    private MusicArtistService artistService;
+    private final MusicArtistService artistService;
 
     private SpringDataRepository<MusicArtist, Long> repository;
 
@@ -45,18 +41,12 @@ public class MusicArtistsView extends Composite<FlexLayout> {
     private Table<MusicArtist> artistTable;
     private ArtistDialog artistDialog;
 
-    public MusicArtistsView() {
-        // Note: We can't call methods that use artistService here yet
-        // because @Autowired happens after constructor
+    public MusicArtistsView(MusicArtistService artistService) {
+        this.artistService = artistService;
+        
         initializeComponents();
         setupLayout();
         setupEventHandlers();
-        // We'll move loadData() to @PostConstruct
-    }
-
-    @PostConstruct
-    private void init() {
-        // This runs after @Autowired injection is complete
         initializeDialog();
         loadData();
     }
@@ -135,7 +125,8 @@ public class MusicArtistsView extends Composite<FlexLayout> {
             MusicArtist artist = e.getItem();
             artistDialog.showDialog(artist);
         }))
-                .setMinWidth(50.0f);
+                .setMinWidth(50.0f)
+                .setPinDirection(PinDirection.RIGHT);
 
         artistTable.addClassName("artists-table");
         artistTable.setRowHeight(45);
@@ -160,13 +151,16 @@ public class MusicArtistsView extends Composite<FlexLayout> {
                 // Clear filter - show all artists
                 repository.setFilter((Specification<MusicArtist>) null);
             } else {
-                // Create specification for multi-field search
-                String term = searchTerm.trim().toLowerCase();
+                // Sanitize input to prevent LIKE wildcard injection
+                String term = searchTerm.trim().toLowerCase()
+                    .replace("\\", "\\\\")
+                    .replace("%", "\\%")
+                    .replace("_", "\\_");
+                    
                 Specification<MusicArtist> searchSpec = (root, query, cb) -> cb.or(
                         cb.like(cb.lower(root.get("name")), "%" + term + "%"),
                         cb.like(cb.lower(root.get("genre")), "%" + term + "%"),
                         cb.like(cb.lower(root.get("country")), "%" + term + "%"));
-
                 repository.setFilter(searchSpec);
             }
             repository.commit(); // Refresh the table to apply the filter
@@ -174,16 +168,9 @@ public class MusicArtistsView extends Composite<FlexLayout> {
     }
 
     private void loadData() {
-        try {
-            // Get filterable repository from service
             repository = artistService.getFilterableRepository();
 
-            // Bind repository to table (no filter initially)
             artistTable.setRepository(repository);
-        } catch (Exception e) {
-            Toast.show("Error loading artists: " + e.getMessage());
-            System.err.println("Error loading artists: " + e.getMessage());
-        }
     }
 
 

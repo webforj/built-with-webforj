@@ -50,6 +50,7 @@ dwc-table::part(artist-year) {
 
 /* Artists Table */
 .artists-table {
+  width: 100%;
   height: 55svh;
   border-collapse: collapse;
   box-shadow: var(--dwc-shadow-s);
@@ -59,7 +60,8 @@ dwc-table::part(artist-year) {
 
 /* Layout Components */
 .main-container {
-  max-width: 90%;
+  width: 100%;
+  max-width: 960px;
   margin: var(--dwc-space-l) auto;
   padding: var(--dwc-space-m);
 }
@@ -74,6 +76,13 @@ dwc-table::part(artist-year) {
   gap: var(--dwc-space-m);
   align-items: center;
   justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+  .toolbar {
+    flex-direction: column !important;
+    align-items: start;
+  }
 }
 
 .toolbar-left {
@@ -103,8 +112,13 @@ dwc-table::part(artist-year) {
 
 .dialog-buttons {
   gap: var(--dwc-space-s);
-  justify-content: flex-end;
+  justify-content: space-between;
   padding-top: var(--dwc-space-m);
   border-top: 1px solid var(--dwc-color-outline);
+}
+
+.dialog-buttons-right {
+  display: flex;
+  gap: var(--dwc-space-s);
 }
 

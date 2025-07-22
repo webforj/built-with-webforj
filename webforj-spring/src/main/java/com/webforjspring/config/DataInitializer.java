@@ -22,11 +22,11 @@ public class DataInitializer implements CommandLineRunner {
         long currentCount = artistService.getTotalArtistsCount();
         
         if (currentCount == 0) {
-            System.out.println("📊 Database is empty, initializing sample data...");
+            System.out.println("Database is empty, initializing sample data...");
             initializeSampleData();
-            System.out.println("✅ Sample data initialized successfully!");
+            System.out.println("Sample data initialized successfully!");
         } else {
-            System.out.println("📊 Database already contains " + currentCount + " artists, skipping initialization.");
+            System.out.println("Database already contains " + currentCount + " artists, skipping initialization.");
         }
     }
 
@@ -88,9 +88,9 @@ public class DataInitializer implements CommandLineRunner {
             artist.setIsActive(isActive);
             artist.setBiography(biography);
             artistService.createArtist(artist);
-            System.out.println("📝 Created artist: " + name);
+            System.out.println("Created artist: " + name);
         } catch (Exception e) {
-            System.err.println("❌ Error creating artist " + name + ": " + e.getMessage());
+            System.err.println("Error creating artist " + name + ": " + e.getMessage());
         }
     }
 }

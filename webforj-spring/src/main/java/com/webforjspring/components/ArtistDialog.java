@@ -20,10 +20,15 @@ import com.webforjspring.entity.MusicArtist;
 import com.webforjspring.service.MusicArtistService;
 
 /**
- * Dialog component for adding and editing music artists
+ * Dialog component for adding and editing music artists.
+ * Provides a form interface for creating new artists or editing existing ones
+ * with full data binding and validation support.
  */
 public class ArtistDialog extends Composite<Dialog> {
 
+	/**
+	 * Enum representing the dialog mode
+	 */
 	public enum Mode {
 		ADD, EDIT
 	}
@@ -35,7 +40,6 @@ public class ArtistDialog extends Composite<Dialog> {
 	private final MusicArtistService artistService;
 	private final Runnable onSaveCallback;
 
-	// Data binding context
 	private BindingContext<MusicArtist> bindingContext;
 	private MusicArtist artist;
 
@@ -51,6 +55,12 @@ public class ArtistDialog extends Composite<Dialog> {
 	private Button cancelButton;
 	private Button deleteButton;
 
+	/**
+	 * Constructs a new ArtistDialog.
+	 * 
+	 * @param artistService the service for managing artist data
+	 * @param onSaveCallback callback to execute after successful save/delete operations
+	 */
 	public ArtistDialog(MusicArtistService artistService, Runnable onSaveCallback) {
 		super();
 		this.artistService = artistService;
@@ -63,14 +73,20 @@ public class ArtistDialog extends Composite<Dialog> {
 		setupEventHandlers();
 	}
 
+	/**
+	 * Initializes the dialog properties.
+	 */
 	private void initializeDialog() {
 		title = new H2("Add New Artist");
 		self.addToHeader(title);
 		self.addClassName("add-artist-dialog");
+		self.setCancelOnOutsideClick(false);
 	}
 
+	/**
+	 * Initializes all form components.
+	 */
 	private void initializeComponents() {
-		// Form fields - field names must match entity properties
 		name = new TextField()
 				.setLabel("Artist Name")
 				.setPlaceholder("Enter artist or band name");
@@ -94,7 +110,6 @@ public class ArtistDialog extends Composite<Dialog> {
 				.setPlaceholder("Brief biography (optional)")
 				.setRows(3);
 
-		// Buttons
 		saveButton = new Button("Save Artist")
 				.setTheme(ButtonTheme.PRIMARY);
 
@@ -103,19 +118,24 @@ public class ArtistDialog extends Composite<Dialog> {
 
 		deleteButton = new Button("Delete Artist")
 				.setTheme(ButtonTheme.DANGER)
-				.setVisible(false); // Initially hidden for new artists
+				.setVisible(false);
 	}
 
+	/**
+	 * Sets up data binding context for the form.
+	 */
 	private void setupDataBinding() {
 		bindingContext = BindingContext.of(this, MusicArtist.class, true);
 	}
 
+	/**
+	 * Configures the dialog layout.
+	 */
 	private void setupLayout() {
 		FlexLayout content = new FlexLayout();
 		content.setDirection(FlexDirection.COLUMN);
 		content.addClassName("dialog-content");
 
-		// Form section
 		FlexLayout form = new FlexLayout();
 		form.setDirection(FlexDirection.COLUMN);
 		form.addClassName("dialog-form");
@@ -128,51 +148,42 @@ public class ArtistDialog extends Composite<Dialog> {
 				isActive,
 				biography);
 
-		// Button section
 		FlexLayout buttonBar = new FlexLayout();
 		buttonBar.setDirection(FlexDirection.ROW);
 		buttonBar.addClassName("dialog-buttons");
 
-		buttonBar.add(saveButton, deleteButton, cancelButton);
+		FlexLayout rightButtons = new FlexLayout();
+		rightButtons.setDirection(FlexDirection.ROW);
+		rightButtons.addClassName("dialog-buttons-right");
+		rightButtons.add(saveButton, cancelButton);
+
+		buttonBar.add(deleteButton, rightButtons);
 
 		content.add(form, buttonBar);
 		self.add(content);
 	}
 
+	/**
+	 * Sets up event handlers for dialog components.
+	 */
 	private void setupEventHandlers() {
-		// Save button handler
 		saveButton.addClickListener(e -> saveArtist());
-
-		// Cancel button handler
 		cancelButton.addClickListener(e -> self.close());
-
-		// Delete button handler
 		deleteButton.addClickListener(e -> deleteArtist());
-
-		// Close dialog on escape key
-		self.addCloseListener(e -> {
-			resetForm();
-		});
+		self.addCloseListener(e -> resetForm());
 	}
 
+	/**
+	 * Handles the save operation for both add and edit modes.
+	 */
 	private void saveArtist() {
 		try {
-			// Validate and write form data to entity using binding context
 			ValidationResult validationResult = bindingContext.write(artist);
 
 			if (!validationResult.isValid()) {
-				// Jakarta validation automatically sets field-level errors
-				// The binding context will display errors on each field
-				// Optionally show a general message
-				String errorCount = validationResult.getMessages().size() +
-						(validationResult.getMessages().size() == 1 ? " error" : " errors");
-				Toast.show("Please fix " + errorCount + " before saving", Theme.DANGER);
 				return;
 			}
 
-			// No manual conversion needed - NumberField handles Integer conversion automatically
-
-			// Call appropriate service method based on mode
 			if (currentMode == Mode.ADD) {
 				artistService.createArtist(artist);
 				Toast.show("Artist '" + artist.getName() + "' added successfully!", Theme.SUCCESS);
@@ -181,35 +192,36 @@ public class ArtistDialog extends Composite<Dialog> {
 				Toast.show("Artist '" + artist.getName() + "' updated successfully!", Theme.SUCCESS);
 			}
 
-			// Callback to refresh table
 			if (onSaveCallback != null) {
 				onSaveCallback.run();
 			}
 
-			// Close dialog
 			self.close();
 
 		} catch (Exception ex) {
-			// Show error message
 			String action = currentMode == Mode.ADD ? "saving" : "updating";
 			Toast.show("Error " + action + " artist: " + ex.getMessage(), Theme.DANGER);
 		}
 	}
 
+	/**
+	 * Updates the dialog UI based on the current mode (ADD or EDIT).
+	 */
 	private void updateDialogForMode() {
 		if (currentMode == Mode.ADD) {
-			// Update header
 			title.setText("Add New Artist");
 			saveButton.setText("Save Artist");
-			deleteButton.setVisible(false); // Hide delete button for new artists
+			deleteButton.setVisible(false);
 		} else {
-			// Update header
 			title.setText("Edit Artist");
 			saveButton.setText("Update Artist");
-			deleteButton.setVisible(true); // Show delete button for existing artists
+			deleteButton.setVisible(true);
 		}
 	}
 
+	/**
+	 * Handles the delete operation with confirmation dialog.
+	 */
 	private void deleteArtist() {
 		if (currentMode == Mode.EDIT && artist != null) {
 			ConfirmDialog dialog = new ConfirmDialog(
@@ -230,12 +242,10 @@ public class ArtistDialog extends Composite<Dialog> {
 					artistService.deleteArtist(artist.getId());
 					Toast.show("Artist '" + artist.getName() + "' deleted successfully!", Theme.SUCCESS);
 					
-					// Callback to refresh table
 					if (onSaveCallback != null) {
 						onSaveCallback.run();
 					}
 					
-					// Close dialog
 					self.close();
 					
 				} catch (Exception ex) {
@@ -245,20 +255,21 @@ public class ArtistDialog extends Composite<Dialog> {
 		}
 	}
 
+	/**
+	 * Resets the form fields based on the current mode.
+	 */
 	private void resetForm() {
 		if (currentMode == Mode.ADD) {
-			// Create new artist entity with default values
 			artist = new MusicArtist();
-			artist.setIsActive(true); // Set default active state
+			artist.setIsActive(true);
 		}
-		// For EDIT mode, we already have the artist set
 
-		// Read the entity data into form fields using binding context
 		bindingContext.read(artist);
-
-		// No manual conversion needed - NumberField handles Integer conversion automatically
 	}
 
+	/**
+	 * Shows the dialog in ADD mode for creating a new artist.
+	 */
 	public void showDialog() {
 		this.currentMode = Mode.ADD;
 		resetForm();
@@ -266,6 +277,11 @@ public class ArtistDialog extends Composite<Dialog> {
 		self.open();
 	}
 
+	/**
+	 * Shows the dialog in EDIT mode for modifying an existing artist.
+	 * 
+	 * @param existingArtist the artist to edit
+	 */
 	public void showDialog(MusicArtist existingArtist) {
 		this.currentMode = Mode.EDIT;
 		this.artist = existingArtist;
