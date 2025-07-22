@@ -21,6 +21,10 @@ import com.webforjspring.components.renderers.ArtistAvatarRenderer;
 
 import org.springframework.data.jpa.domain.Specification;
 
+/**
+ * Main view for managing music artists.
+ * Provides a responsive table interface with search, add, edit, and delete functionality.
+ */
 @Route("/")
 public class MusicArtistsView extends Composite<FlexLayout> {
 
@@ -28,19 +32,22 @@ public class MusicArtistsView extends Composite<FlexLayout> {
 
     private SpringDataRepository<MusicArtist, Long> repository;
 
-    // Main layout components
     private FlexLayout container = getBoundComponent();
     private FlexLayout header;
     private FlexLayout toolbar;
     private FlexLayout tableContainer;
 
-    // UI Components
     private H1 pageTitle;
     private Button addButton;
     private TextField searchField;
     private Table<MusicArtist> artistTable;
     private ArtistDialog artistDialog;
 
+    /**
+     * Constructs a new MusicArtistsView with the specified service.
+     * 
+     * @param artistService the service for managing music artists
+     */
     public MusicArtistsView(MusicArtistService artistService) {
         this.artistService = artistService;
         
@@ -51,72 +58,68 @@ public class MusicArtistsView extends Composite<FlexLayout> {
         loadData();
     }
 
+    /**
+     * Initializes all UI components.
+     */
     private void initializeComponents() {
-        // Page title
         pageTitle = new H1("Music Artists Management");
 
-        // Toolbar buttons
         addButton = new Button("Add New Artist")
                 .setTheme(ButtonTheme.PRIMARY)
                 .setPrefixComponent(FeatherIcon.PLUS.create());
 
-        // Search field
         searchField = new TextField()
                 .setPlaceholder("Search artists...")
                 .setPrefixComponent(FeatherIcon.SEARCH.create());
 
-        // Table component
         artistTable = new Table<>();
         setupTableColumns();
     }
 
+    /**
+     * Sets up the overall page layout structure.
+     */
     private void setupLayout() {
-        // Main container setup
         container.setDirection(FlexDirection.COLUMN);
         container.addClassName("main-container");
 
-        // Header section
         header = new FlexLayout();
         header.setDirection(FlexDirection.COLUMN);
         header.addClassName("page-header");
 
-        // Toolbar section
         toolbar = new FlexLayout();
         toolbar.setDirection(FlexDirection.ROW);
         toolbar.setWrap(FlexWrap.WRAP);
         toolbar.addClassName("toolbar");
 
-        // Left side of toolbar (action buttons)
         FlexLayout leftToolbar = new FlexLayout();
         leftToolbar.setDirection(FlexDirection.ROW);
         leftToolbar.addClassName("toolbar-left");
         leftToolbar.add(addButton);
 
-        // Right side of toolbar (search)
         FlexLayout rightToolbar = new FlexLayout();
         rightToolbar.setDirection(FlexDirection.ROW);
         rightToolbar.add(searchField);
 
         toolbar.add(leftToolbar, rightToolbar);
 
-        // Table container
         tableContainer = new FlexLayout();
         tableContainer.setDirection(FlexDirection.COLUMN);
         tableContainer.addClassName("table-container");
 
-        // Add components to layout
         header.add(pageTitle);
         tableContainer.add(artistTable);
         container.add(header, toolbar, tableContainer);
     }
 
+    /**
+     * Configures table columns and appearance.
+     */
     private void setupTableColumns() {
-        // Artist column with beautiful avatar renderer
         artistTable.addColumn("Name", MusicArtist::getName).setHidden(true);
         artistTable.addColumn("Artist", new ArtistAvatarRenderer())
                 .setMinWidth(200.0f);
 
-        // Other columns
         artistTable.addColumn("Genre", MusicArtist::getGenre);
         artistTable.addColumn("Country", MusicArtist::getCountry);
         artistTable.addColumn("Year Formed", MusicArtist::getYearFormed);
@@ -133,13 +136,12 @@ public class MusicArtistsView extends Composite<FlexLayout> {
         artistTable.setSelectionMode(Table.SelectionMode.SINGLE);
     }
 
+    /**
+     * Sets up event handlers for user interactions.
+     */
     private void setupEventHandlers() {
-        // Add button click handler
-        addButton.addClickListener(e -> {
-            artistDialog.showDialog();
-        });
+        addButton.addClickListener(e -> artistDialog.showDialog());
 
-        // Search field handler
         searchField.onModify(e -> {
             String searchTerm = searchField.getValue();
 
@@ -148,10 +150,8 @@ public class MusicArtistsView extends Composite<FlexLayout> {
             }
 
             if (searchTerm == null || searchTerm.trim().isEmpty()) {
-                // Clear filter - show all artists
                 repository.setFilter((Specification<MusicArtist>) null);
             } else {
-                // Sanitize input to prevent LIKE wildcard injection
                 String term = searchTerm.trim().toLowerCase()
                     .replace("\\", "\\\\")
                     .replace("%", "\\%")
@@ -163,21 +163,25 @@ public class MusicArtistsView extends Composite<FlexLayout> {
                         cb.like(cb.lower(root.get("country")), "%" + term + "%"));
                 repository.setFilter(searchSpec);
             }
-            repository.commit(); // Refresh the table to apply the filter
+            repository.commit();
         });
     }
 
+    /**
+     * Loads artist data into the table.
+     */
     private void loadData() {
-            repository = artistService.getFilterableRepository();
-
-            artistTable.setRepository(repository);
+        repository = artistService.getFilterableRepository();
+        artistTable.setRepository(repository);
     }
 
-
+    /**
+     * Initializes the artist add/edit dialog.
+     */
     private void initializeDialog() {
         artistDialog = new ArtistDialog(artistService, () -> {
             if (repository != null) {
-                repository.commit(); // Refresh the table after adding
+                repository.commit();
             }
         });
         container.add(artistDialog);
