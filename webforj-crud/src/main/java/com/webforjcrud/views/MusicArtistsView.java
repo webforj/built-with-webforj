@@ -152,11 +152,8 @@ public class MusicArtistsView extends Composite<FlexLayout> {
             if (searchTerm == null || searchTerm.trim().isEmpty()) {
                 repository.setFilter((Specification<MusicArtist>) null);
             } else {
-                String term = searchTerm.trim().toLowerCase()
-                    .replace("\\", "\\\\")
-                    .replace("%", "\\%")
-                    .replace("_", "\\_");
-                    
+                String term = searchTerm.trim().toLowerCase();
+                
                 Specification<MusicArtist> searchSpec = (root, query, cb) -> cb.or(
                         cb.like(cb.lower(root.get("name")), "%" + term + "%"),
                         cb.like(cb.lower(root.get("genre")), "%" + term + "%"),

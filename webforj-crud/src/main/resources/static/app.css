@@ -1,10 +1,3 @@
-/* Define application theme */
-
-/* :root {
-  --dwc-color-primary-h: 277;
-  --dwc-color-primary-s: 50%;
-} */
-
 /* Artist Avatar Renderer */
 dwc-table::part(artist-avatar-renderer) {
   display: flex;
@@ -60,7 +53,6 @@ dwc-table::part(artist-year) {
 
 /* Layout Components */
 .main-container {
-  width: 100%;
   max-width: 960px;
   margin: var(--dwc-space-l) auto;
   padding: var(--dwc-space-m);
@@ -76,13 +68,6 @@ dwc-table::part(artist-year) {
   gap: var(--dwc-space-m);
   align-items: center;
   justify-content: space-between;
-}
-
-@media (max-width: 600px) {
-  .toolbar {
-    flex-direction: column !important;
-    align-items: start;
-  }
 }
 
 .toolbar-left {

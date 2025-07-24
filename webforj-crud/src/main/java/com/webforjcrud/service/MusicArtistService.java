@@ -1,5 +1,6 @@
 package com.webforjcrud.service;
 
+import com.webforj.component.field.TextField;
 import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforjcrud.entity.MusicArtist;
 import com.webforjcrud.repository.MusicArtistRepository;
@@ -73,7 +74,7 @@ public class MusicArtistService{
     }
     
     /**
-     * Provides a WebforJ-compatible repository wrapper for table filtering.
+     * Provides a webforJ-compatible repository wrapper for table filtering.
      * 
      * @return SpringDataRepository wrapper for the artist repository
      */
