@@ -58,8 +58,9 @@ public class ArtistDialog extends Composite<Dialog> {
 	/**
 	 * Constructs a new ArtistDialog.
 	 * 
-	 * @param artistService the service for managing artist data
-	 * @param onSaveCallback callback to execute after successful save/delete operations
+	 * @param artistService  the service for managing artist data
+	 * @param onSaveCallback callback to execute after successful save/delete
+	 *                       operations
 	 */
 	public ArtistDialog(MusicArtistService artistService, Runnable onSaveCallback) {
 		super();
@@ -226,29 +227,28 @@ public class ArtistDialog extends Composite<Dialog> {
 	private void deleteArtist() {
 		if (currentMode == Mode.EDIT && artist != null) {
 			ConfirmDialog dialog = new ConfirmDialog(
-				"Are you sure you want to delete '" + artist.getName() + "'? This action cannot be undone.",
-				"Delete Artist",
-				ConfirmDialog.OptionType.YES_NO,
-				ConfirmDialog.MessageType.QUESTION
-			);
-			
+					"Are you sure you want to delete '" + artist.getName() + "'? This action cannot be undone.",
+					"Delete Artist",
+					ConfirmDialog.OptionType.YES_NO,
+					ConfirmDialog.MessageType.QUESTION);
+
 			dialog.setTheme(Theme.DANGER);
 			dialog.setButtonTheme(ConfirmDialog.Button.FIRST, ButtonTheme.DANGER);
 			dialog.setButtonTheme(ConfirmDialog.Button.SECOND, ButtonTheme.OUTLINED_GRAY);
-			
+
 			ConfirmDialog.Result result = dialog.show();
-			
+
 			if (result == ConfirmDialog.Result.YES) {
 				try {
 					artistService.deleteArtist(artist.getId());
 					Toast.show("Artist '" + artist.getName() + "' deleted successfully!", Theme.SUCCESS);
-					
+
 					if (onSaveCallback != null) {
 						onSaveCallback.run();
 					}
-					
+
 					self.close();
-					
+
 				} catch (Exception ex) {
 					Toast.show("Error deleting artist: " + ex.getMessage(), Theme.DANGER);
 				}

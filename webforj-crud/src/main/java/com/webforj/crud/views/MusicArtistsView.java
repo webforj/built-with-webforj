@@ -23,154 +23,155 @@ import org.springframework.data.jpa.domain.Specification;
 
 /**
  * Main view for managing music artists.
- * Provides a responsive table interface with search, add, edit, and delete functionality.
+ * Provides a responsive table interface with search, add, edit, and delete
+ * functionality.
  */
 @Route("/")
 public class MusicArtistsView extends Composite<FlexLayout> {
 
-    private final MusicArtistService artistService;
+	private final MusicArtistService artistService;
 
-    private SpringDataRepository<MusicArtist, Long> repository;
+	private SpringDataRepository<MusicArtist, Long> repository;
 
-    private FlexLayout container = getBoundComponent();
-    private FlexLayout header;
-    private FlexLayout toolbar;
-    private FlexLayout tableContainer;
+	private FlexLayout container = getBoundComponent();
+	private FlexLayout header;
+	private FlexLayout toolbar;
+	private FlexLayout tableContainer;
 
-    private H1 pageTitle;
-    private Button addButton;
-    private TextField searchField;
-    private Table<MusicArtist> artistTable;
-    private ArtistDialog artistDialog;
+	private H1 pageTitle;
+	private Button addButton;
+	private TextField searchField;
+	private Table<MusicArtist> artistTable;
+	private ArtistDialog artistDialog;
 
-    /**
-     * Constructs a new MusicArtistsView with the specified service.
-     * 
-     * @param artistService the service for managing music artists
-     */
-    public MusicArtistsView(MusicArtistService artistService) {
-        this.artistService = artistService;
-        
-        initializeComponents();
-        setupLayout();
-        setupEventHandlers();
-        initializeDialog();
-        loadData();
-    }
+	/**
+	 * Constructs a new MusicArtistsView with the specified service.
+	 * 
+	 * @param artistService the service for managing music artists
+	 */
+	public MusicArtistsView(MusicArtistService artistService) {
+		this.artistService = artistService;
 
-    /**
-     * Initializes all UI components.
-     */
-    private void initializeComponents() {
-        pageTitle = new H1("Music Artists Management");
+		initializeComponents();
+		setupLayout();
+		setupEventHandlers();
+		initializeDialog();
+		loadData();
+	}
 
-        addButton = new Button("Add New")
-                .setTheme(ButtonTheme.PRIMARY)
-                .setPrefixComponent(FeatherIcon.PLUS.create());
+	/**
+	 * Initializes all UI components.
+	 */
+	private void initializeComponents() {
+		pageTitle = new H1("Music Artists Management");
 
-        searchField = new TextField()
-                .setPlaceholder("Search artists...")
-                .setPrefixComponent(FeatherIcon.SEARCH.create());
+		addButton = new Button("Add New")
+				.setTheme(ButtonTheme.PRIMARY)
+				.setPrefixComponent(FeatherIcon.PLUS.create());
 
-        artistTable = new Table<>();
-        setupTableColumns();
-    }
+		searchField = new TextField()
+				.setPlaceholder("Search artists...")
+				.setPrefixComponent(FeatherIcon.SEARCH.create());
 
-    /**
-     * Sets up the overall page layout structure.
-     */
-    private void setupLayout() {
-        container.setDirection(FlexDirection.COLUMN);
-        container.addClassName("main-container");
+		artistTable = new Table<>();
+		setupTableColumns();
+	}
 
-        header = new FlexLayout();
-        header.setDirection(FlexDirection.COLUMN);
-        header.addClassName("page-header");
+	/**
+	 * Sets up the overall page layout structure.
+	 */
+	private void setupLayout() {
+		container.setDirection(FlexDirection.COLUMN);
+		container.addClassName("main-container");
 
-        toolbar = new FlexLayout();
-        toolbar.setDirection(FlexDirection.ROW);
-        toolbar.setWrap(FlexWrap.WRAP);
-        toolbar.addClassName("toolbar");
-        toolbar.add(addButton, searchField);
-        
-        tableContainer = new FlexLayout();
-        tableContainer.setDirection(FlexDirection.COLUMN);
-        tableContainer.addClassName("table-container");
+		header = new FlexLayout();
+		header.setDirection(FlexDirection.COLUMN);
+		header.addClassName("page-header");
 
-        header.add(pageTitle);
-        tableContainer.add(artistTable);
-        container.add(header, toolbar, tableContainer);
-    }
+		toolbar = new FlexLayout();
+		toolbar.setDirection(FlexDirection.ROW);
+		toolbar.setWrap(FlexWrap.WRAP);
+		toolbar.addClassName("toolbar");
+		toolbar.add(addButton, searchField);
 
-    /**
-     * Configures table columns and appearance.
-     */
-    private void setupTableColumns() {
-        artistTable.addColumn("Name", MusicArtist::getName).setHidden(true);
-        artistTable.addColumn("Artist", new ArtistAvatarRenderer())
-                .setMinWidth(200.0f);
+		tableContainer = new FlexLayout();
+		tableContainer.setDirection(FlexDirection.COLUMN);
+		tableContainer.addClassName("table-container");
 
-        artistTable.addColumn("Genre", MusicArtist::getGenre);
-        artistTable.addColumn("Country", MusicArtist::getCountry);
-        artistTable.addColumn("Year Formed", MusicArtist::getYearFormed);
-        artistTable.addColumn("Active", artist -> artist.getIsActive() ? "✓" : "✗");
-        artistTable.addColumn("", new IconRenderer<MusicArtist>("edit", "feather", e -> {
-            MusicArtist artist = e.getItem();
-            artistDialog.showDialog(artist);
-        }))
-                .setMinWidth(50.0f)
-                .setPinDirection(PinDirection.RIGHT);
+		header.add(pageTitle);
+		tableContainer.add(artistTable);
+		container.add(header, toolbar, tableContainer);
+	}
 
-        artistTable.addClassName("artists-table");
-        artistTable.setRowHeight(45);
-        artistTable.setSelectionMode(Table.SelectionMode.SINGLE);
-    }
+	/**
+	 * Configures table columns and appearance.
+	 */
+	private void setupTableColumns() {
+		artistTable.addColumn("Name", MusicArtist::getName).setHidden(true);
+		artistTable.addColumn("Artist", new ArtistAvatarRenderer())
+				.setMinWidth(200.0f);
 
-    /**
-     * Sets up event handlers for user interactions.
-     */
-    private void setupEventHandlers() {
-        addButton.addClickListener(e -> artistDialog.showDialog());
+		artistTable.addColumn("Genre", MusicArtist::getGenre);
+		artistTable.addColumn("Country", MusicArtist::getCountry);
+		artistTable.addColumn("Year Formed", MusicArtist::getYearFormed);
+		artistTable.addColumn("Active", artist -> artist.getIsActive() ? "✓" : "✗");
+		artistTable.addColumn("", new IconRenderer<MusicArtist>("edit", "feather", e -> {
+			MusicArtist artist = e.getItem();
+			artistDialog.showDialog(artist);
+		}))
+				.setMinWidth(50.0f)
+				.setPinDirection(PinDirection.RIGHT);
 
-        searchField.onModify(e -> {
-            String searchTerm = searchField.getValue();
+		artistTable.addClassName("artists-table");
+		artistTable.setRowHeight(45);
+		artistTable.setSelectionMode(Table.SelectionMode.SINGLE);
+	}
 
-            if (repository == null) {
-                return;
-            }
+	/**
+	 * Sets up event handlers for user interactions.
+	 */
+	private void setupEventHandlers() {
+		addButton.addClickListener(e -> artistDialog.showDialog());
 
-            if (searchTerm == null || searchTerm.trim().isEmpty()) {
-                repository.setFilter((Specification<MusicArtist>) null);
-            } else {
-                String term = searchTerm.trim().toLowerCase();
-                
-                Specification<MusicArtist> searchSpec = (root, query, cb) -> cb.or(
-                        cb.like(cb.lower(root.get("name")), "%" + term + "%"),
-                        cb.like(cb.lower(root.get("genre")), "%" + term + "%"),
-                        cb.like(cb.lower(root.get("country")), "%" + term + "%"));
-                repository.setFilter(searchSpec);
-            }
-            repository.commit();
-        });
-    }
+		searchField.onModify(e -> {
+			String searchTerm = searchField.getValue();
 
-    /**
-     * Loads artist data into the table.
-     */
-    private void loadData() {
-        repository = artistService.getFilterableRepository();
-        artistTable.setRepository(repository);
-    }
+			if (repository == null) {
+				return;
+			}
 
-    /**
-     * Initializes the artist add/edit dialog.
-     */
-    private void initializeDialog() {
-        artistDialog = new ArtistDialog(artistService, () -> {
-            if (repository != null) {
-                repository.commit();
-            }
-        });
-        container.add(artistDialog);
-    }
+			if (searchTerm == null || searchTerm.trim().isEmpty()) {
+				repository.setFilter((Specification<MusicArtist>) null);
+			} else {
+				String term = searchTerm.trim().toLowerCase();
+
+				Specification<MusicArtist> searchSpec = (root, query, cb) -> cb.or(
+						cb.like(cb.lower(root.get("name")), "%" + term + "%"),
+						cb.like(cb.lower(root.get("genre")), "%" + term + "%"),
+						cb.like(cb.lower(root.get("country")), "%" + term + "%"));
+				repository.setFilter(searchSpec);
+			}
+			repository.commit();
+		});
+	}
+
+	/**
+	 * Loads artist data into the table.
+	 */
+	private void loadData() {
+		repository = artistService.getFilterableRepository();
+		artistTable.setRepository(repository);
+	}
+
+	/**
+	 * Initializes the artist add/edit dialog.
+	 */
+	private void initializeDialog() {
+		artistDialog = new ArtistDialog(artistService, () -> {
+			if (repository != null) {
+				repository.commit();
+			}
+		});
+		container.add(artistDialog);
+	}
 }
