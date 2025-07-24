@@ -1,11 +1,11 @@
-package com.webforjcrud.config;
+package com.webforj.crud.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.webforjcrud.entity.MusicArtist;
-import com.webforjcrud.service.MusicArtistService;
+import com.webforj.crud.entity.MusicArtist;
+import com.webforj.crud.service.MusicArtistService;
 
 /**
  * Data initialization class that adds sample music artists to the database

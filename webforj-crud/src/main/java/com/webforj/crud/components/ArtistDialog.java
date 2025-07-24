@@ -1,4 +1,4 @@
-package com.webforjcrud.components;
+package com.webforj.crud.components;
 
 import com.webforj.component.Composite;
 import com.webforj.component.Theme;
@@ -13,11 +13,11 @@ import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.optioninput.CheckBox;
 import com.webforj.component.toast.Toast;
+import com.webforj.crud.entity.MusicArtist;
+import com.webforj.crud.service.MusicArtistService;
 import com.webforj.component.optiondialog.ConfirmDialog;
 import com.webforj.data.binding.BindingContext;
 import com.webforj.data.validation.server.ValidationResult;
-import com.webforjcrud.entity.MusicArtist;
-import com.webforjcrud.service.MusicArtistService;
 
 /**
  * Dialog component for adding and editing music artists.

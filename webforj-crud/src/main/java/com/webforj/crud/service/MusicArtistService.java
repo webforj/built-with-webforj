@@ -1,9 +1,9 @@
-package com.webforjcrud.service;
+package com.webforj.crud.service;
 
 import com.webforj.component.field.TextField;
+import com.webforj.crud.entity.MusicArtist;
+import com.webforj.crud.repository.MusicArtistRepository;
 import com.webforj.data.repository.spring.SpringDataRepository;
-import com.webforjcrud.entity.MusicArtist;
-import com.webforjcrud.repository.MusicArtistRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

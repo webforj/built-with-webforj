@@ -1,4 +1,4 @@
-package com.webforjcrud.views;
+package com.webforj.crud.views;
 
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
@@ -12,12 +12,12 @@ import com.webforj.component.layout.flexlayout.FlexWrap;
 import com.webforj.component.table.Table;
 import com.webforj.component.table.Column.PinDirection;
 import com.webforj.component.table.renderer.IconRenderer;
+import com.webforj.crud.components.ArtistDialog;
+import com.webforj.crud.components.renderers.ArtistAvatarRenderer;
+import com.webforj.crud.entity.MusicArtist;
+import com.webforj.crud.service.MusicArtistService;
 import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforj.router.annotation.Route;
-import com.webforjcrud.components.ArtistDialog;
-import com.webforjcrud.components.renderers.ArtistAvatarRenderer;
-import com.webforjcrud.entity.MusicArtist;
-import com.webforjcrud.service.MusicArtistService;
 
 import org.springframework.data.jpa.domain.Specification;
 
