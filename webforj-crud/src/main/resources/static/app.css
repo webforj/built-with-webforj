@@ -65,13 +65,8 @@ dwc-table::part(artist-year) {
 
 .toolbar {
   margin-bottom: var(--dwc-space-m);
-  gap: var(--dwc-space-m);
   align-items: center;
   justify-content: space-between;
-}
-
-.toolbar-left {
-  gap: var(--dwc-space-s);
 }
 
 .table-container {

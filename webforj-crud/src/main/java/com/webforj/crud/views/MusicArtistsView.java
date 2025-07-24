@@ -64,7 +64,7 @@ public class MusicArtistsView extends Composite<FlexLayout> {
     private void initializeComponents() {
         pageTitle = new H1("Music Artists Management");
 
-        addButton = new Button("Add New Artist")
+        addButton = new Button("Add New")
                 .setTheme(ButtonTheme.PRIMARY)
                 .setPrefixComponent(FeatherIcon.PLUS.create());
 
@@ -91,18 +91,8 @@ public class MusicArtistsView extends Composite<FlexLayout> {
         toolbar.setDirection(FlexDirection.ROW);
         toolbar.setWrap(FlexWrap.WRAP);
         toolbar.addClassName("toolbar");
-
-        FlexLayout leftToolbar = new FlexLayout();
-        leftToolbar.setDirection(FlexDirection.ROW);
-        leftToolbar.addClassName("toolbar-left");
-        leftToolbar.add(addButton);
-
-        FlexLayout rightToolbar = new FlexLayout();
-        rightToolbar.setDirection(FlexDirection.ROW);
-        rightToolbar.add(searchField);
-
-        toolbar.add(leftToolbar, rightToolbar);
-
+        toolbar.add(addButton, searchField);
+        
         tableContainer = new FlexLayout();
         tableContainer.setDirection(FlexDirection.COLUMN);
         tableContainer.addClassName("table-container");
