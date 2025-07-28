@@ -1,69 +1,89 @@
-# webforj-spring
+# webforJ Spring CRUD Application
 
-A webforJ application powered by Spring Boot. This project combines the power of webforJ framework with Spring Boot's comprehensive ecosystem for building enterprise applications.
+A modern music artist management system built with webforJ and Spring Boot, demonstrating full-stack Java development with a modern web UI.
 
-## Prerequisites
+![webforJ Version](https://img.shields.io/badge/webforJ-25.02-blue)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-green)
+![Java](https://img.shields.io/badge/Java-21-orange)
 
-- Java 21 or newer  
-- Maven 3.9+
+## Overview
 
-## Getting Started
+This app showcases webforJ's UI components integrated with Spring Boot's backend capabilities. The end result is a complete CRUD (Create, Read, Update, Delete) interface for managing music artists with a responsive design.
 
-To run the application in development mode:
+## Features
 
+- **Modern UI**: Gmail-style avatars with artist initials
+- **Full CRUD Operations**: Add, edit, delete, and search music artists
+- **Smart Filtering**: Built-in table filtering with webforJ's `SpringDataRepository`
+- **Data Validation**: Jakarta validation with user-friendly error messages
+- **Responsive Design**: Clean, professional interface that works on all screen sizes
+- **Auto Data Binding**: Automatic form-to-model binding with validation
+- **In-Memory Database**: H2 database with sample data pre-loaded
+
+## Tech stack
+
+- **Frontend**: webforJ 25.02
+- **Backend**: Spring Boot 3.5.3 with Spring Data JPA
+- **Database**: H2 (in-memory)
+- **Build Tool**: Maven
+- **Java Version**: 21
+
+## Getting started
+
+### Prerequisites
+
+- Java 21 or higher
+- Maven 3.6+
+
+### Running the app
+
+1. Clone the repository:
+```bash
+git clone https://github.com/webforj/built-with-webforj/webforj-crud
+cd webforj-crud
+```
+
+2. Run the application:
 ```bash
 mvn spring-boot:run
 ```
 
-Then open [http://localhost:8080](http://localhost:8080) in your browser.
-
-### Spring Boot Features
-
-This project leverages Spring Boot's features:
-
-- **Embedded Server**: No need to deploy WAR files, runs as a standalone JAR
-- **Auto-configuration**: Spring Boot automatically configures your application
-- **DevTools**: Automatic restart when code changes (included by default)
-- **Spring Ecosystem**: Easy integration with Spring Data, etc.
-
-### Hot Reload with DevTools
-
-Spring Boot DevTools is included for automatic application restart:
-
-```xml
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-devtools</artifactId>
-  <optional>true</optional>
-</dependency>
+3. Open your browser and navigate to:
+```
+http://localhost:8080/artists
 ```
 
-Your application will automatically restart when files on the classpath change.
+### H2 database console
 
-## Spring Boot Configuration
+To view the database directly:
+1. Navigate to `http://localhost:8080/h2-console`
+2. Use these connection settings:
+   - JDBC URL: `jdbc:h2:mem:testdb`
+   - Username: `sa`
+   - Password: (leave empty)
 
-Configure your application using `src/main/resources/application.properties`:
+## Project structure
 
-```properties
-# Application name
-spring.application.name=webforj-spring-crud
-
-# Server configuration
-server.port=8080
-
-# Add your custom configurations here
+```
+src/main/java/com/webforj/crud/
+  Application.java           # Main Spring Boot application
+  components/
+    ArtistDialog.java     # Add/Edit dialog component
+    renderers/
+      ArtistAvatarRenderer.java  # Custom table renderer
+  config/
+    DataInitializer.java  # Sample data loader
+  entity/
+    MusicArtist.java      # JPA entity
+  repository/
+    MusicArtistRepository.java  # Spring Data repository
+  service/
+    MusicArtistService.java     # Business logic layer
+  views/
+    MusicArtistsView.java       # Main UI view
 ```
 
 ## Learn More
 
-Explore the webforJ ecosystem through our documentation and examples:
-
-- [Full Documentation](https://docs.webforj.com)
-- [Component Overview](https://docs.webforj.com/docs/components/overview)
-- [Quick Tutorial](https://docs.webforj.com/docs/introduction/tutorial/overview)
-- [Advanced Topics](https://docs.webforj.com/docs/advanced/overview)
-
-### Spring Boot Resources
-
+- [webforJ Documentation](https://docs.webforj.com)
 - [Spring Boot Documentation](https://spring.io/projects/spring-boot)
-- [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/current/reference/html/)

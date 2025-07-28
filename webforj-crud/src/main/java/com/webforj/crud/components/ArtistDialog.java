@@ -10,6 +10,7 @@ import com.webforj.component.field.NumberField;
 import com.webforj.component.field.TextArea;
 import com.webforj.component.html.elements.H2;
 import com.webforj.component.layout.flexlayout.FlexDirection;
+import com.webforj.component.layout.flexlayout.FlexJustifyContent;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.optioninput.CheckBox;
 import com.webforj.component.toast.Toast;
@@ -51,6 +52,7 @@ public class ArtistDialog extends Composite<Dialog> {
 	private CheckBox isActive;
 	private TextArea biography;
 
+	FlexLayout buttonBar;
 	private Button saveButton;
 	private Button cancelButton;
 	private Button deleteButton;
@@ -119,8 +121,7 @@ public class ArtistDialog extends Composite<Dialog> {
 				.setTheme(ButtonTheme.DEFAULT);
 
 		deleteButton = new Button("Delete Artist")
-				.setTheme(ButtonTheme.DANGER)
-				.setVisible(false);
+				.setTheme(ButtonTheme.DANGER);
 	}
 
 	/**
@@ -150,7 +151,7 @@ public class ArtistDialog extends Composite<Dialog> {
 				isActive,
 				biography);
 
-		FlexLayout buttonBar = new FlexLayout();
+		buttonBar = new FlexLayout();
 		buttonBar.setDirection(FlexDirection.ROW);
 		buttonBar.addClassName("dialog-buttons");
 
@@ -214,10 +215,13 @@ public class ArtistDialog extends Composite<Dialog> {
 			title.setText("Add New Artist");
 			saveButton.setText("Save Artist");
 			deleteButton.setVisible(false);
+			buttonBar.setJustifyContent(FlexJustifyContent.END);
+			
 		} else {
 			title.setText("Edit Artist");
 			saveButton.setText("Update Artist");
 			deleteButton.setVisible(true);
+			buttonBar.setJustifyContent(FlexJustifyContent.BETWEEN);
 		}
 	}
 
