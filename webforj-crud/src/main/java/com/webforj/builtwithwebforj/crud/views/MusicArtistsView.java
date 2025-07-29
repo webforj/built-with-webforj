@@ -1,5 +1,9 @@
-package com.webforj.crud.views;
+package com.webforj.builtwithwebforj.crud.views;
 
+import com.webforj.builtwithwebforj.crud.components.ArtistDialog;
+import com.webforj.builtwithwebforj.crud.components.renderers.ArtistAvatarRenderer;
+import com.webforj.builtwithwebforj.crud.entity.MusicArtist;
+import com.webforj.builtwithwebforj.crud.service.MusicArtistService;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
@@ -12,10 +16,6 @@ import com.webforj.component.layout.flexlayout.FlexWrap;
 import com.webforj.component.table.Table;
 import com.webforj.component.table.Column.PinDirection;
 import com.webforj.component.table.renderer.IconRenderer;
-import com.webforj.crud.components.ArtistDialog;
-import com.webforj.crud.components.renderers.ArtistAvatarRenderer;
-import com.webforj.crud.entity.MusicArtist;
-import com.webforj.crud.service.MusicArtistService;
 import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforj.router.annotation.Route;
 
@@ -46,7 +46,7 @@ public class MusicArtistsView extends Composite<FlexLayout> {
 
 	/**
 	 * Constructs a new MusicArtistsView with the specified service.
-	 * 
+	 *
 	 * @param artistService the service for managing music artists
 	 */
 	public MusicArtistsView(MusicArtistService artistService) {

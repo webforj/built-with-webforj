@@ -1,4 +1,4 @@
-package com.webforj.crud.entity;
+package com.webforj.builtwithwebforj.crud.entity;
 
 import com.webforj.data.HasEntityKey;
 
@@ -80,7 +80,7 @@ public class MusicArtist implements HasEntityKey {
 	/**
 	 * Creates a new music artist with the specified name.
 	 * Sets the artist as active by default.
-	 * 
+	 *
 	 * @param name the name of the artist or band
 	 */
 	public MusicArtist(String name) {
@@ -146,7 +146,7 @@ public class MusicArtist implements HasEntityKey {
 
 	/**
 	 * Returns a string representation of the music artist.
-	 * 
+	 *
 	 * @return string representation containing all artist fields
 	 */
 	@Override
@@ -164,7 +164,7 @@ public class MusicArtist implements HasEntityKey {
 
 	/**
 	 * Returns the entity key for WebforJ integration.
-	 * 
+	 *
 	 * @return the unique identifier of this artist
 	 */
 	@Override

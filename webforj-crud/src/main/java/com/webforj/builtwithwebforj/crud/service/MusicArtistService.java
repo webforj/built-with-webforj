@@ -1,8 +1,8 @@
-package com.webforj.crud.service;
+package com.webforj.builtwithwebforj.crud.service;
 
+import com.webforj.builtwithwebforj.crud.entity.MusicArtist;
+import com.webforj.builtwithwebforj.crud.repository.MusicArtistRepository;
 import com.webforj.component.field.TextField;
-import com.webforj.crud.entity.MusicArtist;
-import com.webforj.crud.repository.MusicArtistRepository;
 import com.webforj.data.repository.spring.SpringDataRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class MusicArtistService {
 
 	/**
 	 * Creates a new music artist.
-	 * 
+	 *
 	 * @param artist the artist to create
 	 * @return the saved artist
 	 */
@@ -38,7 +38,7 @@ public class MusicArtistService {
 	 * Updates an existing music artist.
 	 * Data binding handles field updates, so we just need to verify existence and
 	 * save.
-	 * 
+	 *
 	 * @param artist the artist with updated information
 	 * @return the updated artist
 	 * @throws IllegalArgumentException if artist is not found
@@ -53,7 +53,7 @@ public class MusicArtistService {
 
 	/**
 	 * Deletes an artist by ID.
-	 * 
+	 *
 	 * @param id the ID of the artist to delete
 	 * @throws IllegalArgumentException if artist is not found
 	 */
@@ -67,7 +67,7 @@ public class MusicArtistService {
 
 	/**
 	 * Gets the total count of artists in the database.
-	 * 
+	 *
 	 * @return the total number of artists
 	 */
 	public long getTotalArtistsCount() {
@@ -76,7 +76,7 @@ public class MusicArtistService {
 
 	/**
 	 * Provides a webforJ-compatible repository wrapper for table filtering.
-	 * 
+	 *
 	 * @return SpringDataRepository wrapper for the artist repository
 	 */
 	public SpringDataRepository<MusicArtist, Long> getFilterableRepository() {

@@ -1,5 +1,7 @@
-package com.webforj.crud.components;
+package com.webforj.builtwithwebforj.crud.components;
 
+import com.webforj.builtwithwebforj.crud.entity.MusicArtist;
+import com.webforj.builtwithwebforj.crud.service.MusicArtistService;
 import com.webforj.component.Composite;
 import com.webforj.component.Theme;
 import com.webforj.component.button.Button;
@@ -14,8 +16,6 @@ import com.webforj.component.layout.flexlayout.FlexJustifyContent;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.optioninput.CheckBox;
 import com.webforj.component.toast.Toast;
-import com.webforj.crud.entity.MusicArtist;
-import com.webforj.crud.service.MusicArtistService;
 import com.webforj.component.optiondialog.ConfirmDialog;
 import com.webforj.data.binding.BindingContext;
 import com.webforj.data.validation.server.ValidationResult;
@@ -59,7 +59,7 @@ public class ArtistDialog extends Composite<Dialog> {
 
 	/**
 	 * Constructs a new ArtistDialog.
-	 * 
+	 *
 	 * @param artistService  the service for managing artist data
 	 * @param onSaveCallback callback to execute after successful save/delete
 	 *                       operations
@@ -216,7 +216,7 @@ public class ArtistDialog extends Composite<Dialog> {
 			saveButton.setText("Save Artist");
 			deleteButton.setVisible(false);
 			buttonBar.setJustifyContent(FlexJustifyContent.END);
-			
+
 		} else {
 			title.setText("Edit Artist");
 			saveButton.setText("Update Artist");
@@ -284,7 +284,7 @@ public class ArtistDialog extends Composite<Dialog> {
 
 	/**
 	 * Shows the dialog in EDIT mode for modifying an existing artist.
-	 * 
+	 *
 	 * @param existingArtist the artist to edit
 	 */
 	public void showDialog(MusicArtist existingArtist) {

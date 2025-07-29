@@ -1,7 +1,7 @@
-package com.webforj.crud.components.renderers;
+package com.webforj.builtwithwebforj.crud.components.renderers;
 
+import com.webforj.builtwithwebforj.crud.entity.MusicArtist;
 import com.webforj.component.table.renderer.Renderer;
-import com.webforj.crud.entity.MusicArtist;
 
 /**
  * Simple avatar renderer for displaying music artists with circular avatars and
