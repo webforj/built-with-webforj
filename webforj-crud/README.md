@@ -39,8 +39,8 @@ This app showcases webforJ's UI components integrated with Spring Boot's backend
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/webforj/built-with-webforj/webforj-crud
-cd webforj-crud
+git clone https://github.com/webforj/built-with-webforj.git
+cd built-with-webforj/webforj-crud
 ```
 
 2. Run the application:
@@ -50,7 +50,7 @@ mvn spring-boot:run
 
 3. Open your browser and navigate to:
 ```
-http://localhost:8080/artists
+http://localhost:8080
 ```
 
 ### H2 database console
