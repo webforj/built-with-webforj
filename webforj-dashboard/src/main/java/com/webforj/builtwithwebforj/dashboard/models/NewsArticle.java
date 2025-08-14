@@ -1,12 +1,28 @@
 package com.webforj.builtwithwebforj.dashboard.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "news_articles")
 public class NewsArticle {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  
+  @Column(nullable = false)
   private String title;
+  
+  @Column(length = 1000)
   private String description;
+  
   private String source;
   private String timeAgo;
   private String url;
   private String imageUrl;
+
+  public NewsArticle() {
+    // Default constructor required by JPA
+  }
 
   public NewsArticle(String title, String description, String source, String timeAgo, String url) {
     this.title = title;
@@ -23,6 +39,14 @@ public class NewsArticle {
     this.timeAgo = timeAgo;
     this.url = url;
     this.imageUrl = imageUrl;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getTitle() {

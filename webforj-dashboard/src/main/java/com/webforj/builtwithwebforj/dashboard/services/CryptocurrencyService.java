@@ -4,9 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.webforj.builtwithwebforj.dashboard.models.Cryptocurrency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.webforj.builtwithwebforj.dashboard.models.Cryptocurrency;
+import com.webforj.builtwithwebforj.dashboard.repository.CryptocurrencyRepository;
+
+@Service
 public class CryptocurrencyService {
+
+  private final CryptocurrencyRepository repository;
+
+  @Autowired
+  public CryptocurrencyService(CryptocurrencyRepository repository) {
+    this.repository = repository;
+  }
 
   private final String[][] CRYPTO_DATA = {
       { "BTC", "Bitcoin", "107356.60", "2140000000000", "13260000000" },
@@ -53,32 +65,56 @@ public class CryptocurrencyService {
   private Random random = new Random();
 
   public List<Cryptocurrency> generateCryptocurrencies() {
-    List<Cryptocurrency> cryptocurrencies = new ArrayList<>();
+    // Fetch all cryptocurrencies from the database
+    List<Cryptocurrency> cryptocurrencies = repository.findAll();
+    
+    // Convert to detached entities for real-time updates (copy constructor approach)
+    List<Cryptocurrency> detachedCryptos = new ArrayList<>();
+    for (Cryptocurrency crypto : cryptocurrencies) {
+      Cryptocurrency detached = new Cryptocurrency(crypto.getSymbol(), crypto.getName(), 
+                                                  crypto.getCurrentPrice(), crypto.getMarketCap(), 
+                                                  crypto.getVolume24h(), crypto.getRank());
+      // Copy other properties
+      detached.setId(crypto.getId());
+      detached.setHigh24h(crypto.getHigh24h());
+      detached.setLow24h(crypto.getLow24h());
+      detached.setCirculatingSupply(crypto.getCirculatingSupply());
+      detached.setTotalSupply(crypto.getTotalSupply());
+      detached.setPriceChangePercentage24h(crypto.getPriceChangePercentage24h());
+      detached.setPriceChange24h(crypto.getPriceChange24h());
+      
+      // Create new ArrayList for price history to avoid Hibernate proxy issues
+      detached.setPriceHistory(new ArrayList<>(crypto.getPriceHistory()));
+      
+      detachedCryptos.add(detached);
+    }
+    
+    // If database is empty, create some data on the fly (fallback)
+    if (detachedCryptos.isEmpty()) {
+      for (int i = 0; i < Math.min(CRYPTO_DATA.length, 10); i++) {
+        String[] data = CRYPTO_DATA[i];
+        double basePrice = Double.parseDouble(data[2]);
+        double marketCap = Double.parseDouble(data[3]);
+        double volume = Double.parseDouble(data[4]);
 
-    for (int i = 0; i < CRYPTO_DATA.length; i++) {
-      String[] data = CRYPTO_DATA[i];
-      double basePrice = Double.parseDouble(data[2]);
-      double marketCap = Double.parseDouble(data[3]);
-      double volume = Double.parseDouble(data[4]);
+        // Add some initial price variation
+        double initialVariation = 0.95 + (random.nextDouble() * 0.1); // -5% to +5%
+        double currentPrice = basePrice * initialVariation;
 
-      // Add some initial price variation
-      double initialVariation = 0.95 + (random.nextDouble() * 0.1); // -5% to +5%
-      double currentPrice = basePrice * initialVariation;
+        Cryptocurrency crypto = new Cryptocurrency(
+            data[0], // symbol
+            data[1], // name
+            currentPrice,
+            marketCap,
+            volume,
+            i + 1 // rank
+        );
 
-      Cryptocurrency crypto = new Cryptocurrency(
-          data[0], // symbol
-          data[1], // name
-          currentPrice,
-          marketCap,
-          volume,
-          i + 1 // rank
-      );
-
-      // Set additional fields
-      crypto.setHigh24h(currentPrice * (1 + random.nextDouble() * 0.05));
-      crypto.setLow24h(currentPrice * (1 - random.nextDouble() * 0.05));
-      crypto.setCirculatingSupply((long) (marketCap / currentPrice));
-      crypto.setTotalSupply((long) (crypto.getCirculatingSupply() * (1.1 + random.nextLong() * 0.3)));
+        // Set additional fields
+        crypto.setHigh24h(currentPrice * (1 + random.nextDouble() * 0.05));
+        crypto.setLow24h(currentPrice * (1 - random.nextDouble() * 0.05));
+        crypto.setCirculatingSupply((long) (marketCap / currentPrice));
+        crypto.setTotalSupply((long) (crypto.getCirculatingSupply() * (1.1 + random.nextDouble() * 0.3)));
 
       // Generate initial price history
       List<Double> history = new ArrayList<>();
@@ -94,10 +130,11 @@ public class CryptocurrencyService {
       crypto.setPriceChangePercentage24h(change24h);
       crypto.setPriceChange24h(currentPrice - basePrice);
 
-      cryptocurrencies.add(crypto);
+      detachedCryptos.add(crypto);
+    }
     }
 
-    return cryptocurrencies;
+    return detachedCryptos;
   }
 
   public void updatePrices(List<Cryptocurrency> cryptocurrencies) {

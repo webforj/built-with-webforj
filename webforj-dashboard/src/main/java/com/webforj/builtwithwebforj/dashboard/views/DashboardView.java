@@ -21,7 +21,7 @@ import java.util.List;
 @FrameTitle("Cryptocurrency Dashboard")
 public class DashboardView extends Composite<FlexLayout> implements ChartRedrawable {
   private final FlexLayout self = getBoundComponent();
-  private final CryptocurrencyService cryptoService = new CryptocurrencyService();
+  private final CryptocurrencyService cryptoService;
   private final DashboardChartBuilder chartBuilder = new DashboardChartBuilder();
   private CryptocurrencyTable cryptoTable;
   private DashboardToolbar toolbar;
@@ -31,7 +31,8 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
   private DashboardCard card2;
   private DashboardCard card3;
 
-  public DashboardView() {
+  public DashboardView(CryptocurrencyService cryptoService) {
+    this.cryptoService = cryptoService;
     self.addClassName("dashboard-view");
     self.setDirection(FlexDirection.COLUMN);
 
@@ -44,6 +45,7 @@ public class DashboardView extends Composite<FlexLayout> implements ChartRedrawa
     // Generate and set data
     cryptocurrencies = cryptoService.generateCryptocurrencies();
     cryptoTable.setData(cryptocurrencies);
+  
 
     // Create dashboard cards using the new architecture
     card1 = createCard("Global Market Cap", 2875000000000.0, 3.45, GoogleChart.Type.AREA);

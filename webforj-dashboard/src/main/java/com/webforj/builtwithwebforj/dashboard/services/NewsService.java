@@ -3,12 +3,29 @@ package com.webforj.builtwithwebforj.dashboard.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.webforj.builtwithwebforj.dashboard.models.NewsArticle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.webforj.builtwithwebforj.dashboard.models.NewsArticle;
+import com.webforj.builtwithwebforj.dashboard.repository.NewsRepository;
+
+@Service
 public class NewsService {
     
+    private final NewsRepository repository;
+    
+    @Autowired
+    public NewsService(NewsRepository repository) {
+        this.repository = repository;
+    }
+    
     public List<NewsArticle> getMockCryptoNews() {
-        List<NewsArticle> articles = new ArrayList<>();
+        // Try to get news from database first
+        List<NewsArticle> articles = repository.findAll();
+        
+        // If database is empty, return some fallback data
+        if (articles.isEmpty()) {
+            articles = new ArrayList<>();
         
         articles.add(new NewsArticle(
             "Bitcoin Surges Past $50,000 as Institutional Interest Grows",
@@ -81,6 +98,7 @@ public class NewsService {
             "https://example.com/digital-euro",
             "https://images.unsplash.com/photo-1566228015668-4c45dbc4e2f5?w=400&h=250&fit=crop"
         ));
+        }
         
         return articles;
     }

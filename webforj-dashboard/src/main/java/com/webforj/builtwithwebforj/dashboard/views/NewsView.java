@@ -40,7 +40,7 @@ public class NewsView extends Composite<FlexLayout> {
   private static final int POPULAR_ARTICLES_LIMIT = 4;
   private static final int MAIN_ARTICLES_LIMIT = 6;
   private final FlexLayout self = getBoundComponent();
-  private final NewsService newsService = new NewsService();
+  private final NewsService newsService;
   private List<NewsArticle> allArticles;
   private FlexLayout mainContentArea;
   private FlexLayout sidebarArea;
@@ -48,7 +48,8 @@ public class NewsView extends Composite<FlexLayout> {
   private FlexLayout articlesGrid;
   private FlexLayout articlesContainer;
 
-  public NewsView() {
+  public NewsView(NewsService newsService) {
+    this.newsService = newsService;
     self.addClassName("news-view")
         .setDirection(FlexDirection.COLUMN)
         .setSpacing("var(--dwc-space-xl)");

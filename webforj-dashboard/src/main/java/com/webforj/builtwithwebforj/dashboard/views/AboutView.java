@@ -16,7 +16,6 @@ import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.layout.flexlayout.FlexWrap;
 import com.webforj.router.annotation.FrameTitle;
 import com.webforj.router.annotation.Route;
-import com.webforj.component.Component;
 
 @Route(value = "about", outlet = MainLayout.class)
 @StyleSheet("ws://about-view.css")
@@ -217,7 +216,7 @@ public class AboutView extends Composite<FlexLayout> {
   }
 
 
-  private Component createAppCard(String title, String description, String icon, String url) {
+  private Div createAppCard(String title, String description, String icon, String url) {
     Div card = new Div();
     card.addClassName("about-view__card about-view__app-card about-view__card--clickable");
     card.onClick(e -> Page.getCurrent().open(url, "_blank"));
@@ -240,7 +239,7 @@ public class AboutView extends Composite<FlexLayout> {
     return card;
   }
 
-  private Component createContributeCard() {
+  private Div createContributeCard() {
     Div card = new Div();
     card.addClassName("about-view__card about-view__app-card about-view__card--clickable");
     card.onClick(e -> Page.getCurrent().open("https://github.com/webforj/built-with-webforj", "_blank"));
