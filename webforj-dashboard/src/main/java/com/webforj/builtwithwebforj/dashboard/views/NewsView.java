@@ -54,7 +54,7 @@ public class NewsView extends Composite<FlexLayout> {
         .setDirection(FlexDirection.COLUMN)
         .setSpacing("var(--dwc-space-xl)");
 
-    allArticles = newsService.getMockCryptoNews();
+    allArticles = newsService.getAllNews();
     createHeader();
     createHeroSection();
     createToolbar();
@@ -309,7 +309,7 @@ public class NewsView extends Composite<FlexLayout> {
 
   private void refreshNews() {
     // Simulate refreshing news
-    allArticles = newsService.getMockCryptoNews();
+    allArticles = newsService.getAllNews();
     loadContent();
   }
 
