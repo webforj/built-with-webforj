@@ -1,10 +1,103 @@
-/* Define application theme */
+/* Main container */
+.frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--dwc-space-xl);
+  margin: var(--dwc-space-xl);
+  padding-top: var(--dwc-space-xl);
+}
 
-/* :root {
-  --dwc-color-primary-h: 277;
-  --dwc-color-primary-s: 50%;
-} */
+/* Title with enhanced typography */
+h1 {
+  color: var(--dwc-color-primary);
+  font-weight: var(--dwc-font-weight-light);
+  font-size: var(--dwc-font-size-3xl);
+  letter-spacing: var(--dwc-letter-spacing-wide);
+  margin: 0;
+  opacity: var(--dwc-opacity-90);
+}
 
-dwc-app-layout {
-  --dwc-app-layout-header-height: 60px;
+/* Todo container with elevated design */
+.todo--display {
+  min-width: 450px;
+  max-height: 450px;
+  background: var(--dwc-surface-3);
+  box-shadow: var(--dwc-shadow-xl);
+  padding: var(--dwc-space-m);
+  border: var(--dwc-border-width-s) solid var(--dwc-color-default);
+  border-radius: calc(var(--dwc-border-radius) * 2);
+  overflow-y: auto;
+  transition: box-shadow var(--dwc-transition-duration-normal) ease;
+  
+}
+@media (max-width: 480px) {
+  .todo--display {
+    min-width: 90vw;
+  }
+}
+
+.todo--display:hover {
+  box-shadow: var(--dwc-shadow-2xl);
+}
+
+/* Todo items with modern hover effect */
+.item__todo--display {
+  border-bottom: var(--dwc-border-width-s) solid var(--dwc-color-default);
+  background: transparent;
+  padding: var(--dwc-space-m) var(--dwc-space-s);
+  position: relative;
+  transition: all 0.2s ease;
+  margin: var(--dwc-space-xs) 0;
+}
+
+.item__todo--display:hover {
+  background: var(--dwc-surface-2);
+  transform: translateX(var(--dwc-space-xs));
+  /* box-shadow: var(--dwc-shadow-s); */
+}
+
+.item__todo--display:last-child {
+  border-bottom: none !important;
+}
+
+/* Enhanced switch styling */
+dwc-radiobutton[switch] {
+  --dwc-switch-track-color: var(--dwc-surface-3);
+  --dwc-switch-track-color-checked: var(--dwc-color-primary);
+}
+
+/* Text styling for completed items */
+.item__todo--display div[style*="line-through"] {
+  opacity: var(--dwc-opacity-50);
+}
+
+/* Delete button with theme-aware colors */
+.todo-delete-btn {
+  position: absolute;
+  right: var(--dwc-space-s);
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dwc-color-danger);
+  font-size: 22px;
+  font-weight: 300;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.item__todo--display:hover .todo-delete-btn {
+  opacity: 0.8;
+}
+
+.todo-delete-btn:hover {
+  opacity: 1 !important;
+  background: var(--dwc-color-danger-alt);
+  transform: rotate(90deg) scale(1.1);
 }
