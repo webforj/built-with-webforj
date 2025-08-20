@@ -9,7 +9,6 @@
   padding-top: var(--dwc-space-xl);
 }
 
-/* Title with enhanced typography */
 h1 {
   color: var(--dwc-color-primary);
   font-weight: var(--dwc-font-weight-light);
@@ -19,7 +18,6 @@ h1 {
   opacity: var(--dwc-opacity-90);
 }
 
-/* Todo container with elevated design */
 .todo--display {
   min-width: 450px;
   max-height: 450px;
@@ -42,7 +40,6 @@ h1 {
   box-shadow: var(--dwc-shadow-2xl);
 }
 
-/* Todo items with modern hover effect */
 .item__todo--display {
   border-bottom: var(--dwc-border-width-s) solid var(--dwc-color-default);
   background: transparent;
@@ -55,25 +52,17 @@ h1 {
 .item__todo--display:hover {
   background: var(--dwc-surface-2);
   transform: translateX(var(--dwc-space-xs));
-  /* box-shadow: var(--dwc-shadow-s); */
 }
 
 .item__todo--display:last-child {
   border-bottom: none !important;
 }
 
-/* Enhanced switch styling */
-dwc-radiobutton[switch] {
-  --dwc-switch-track-color: var(--dwc-surface-3);
-  --dwc-switch-track-color-checked: var(--dwc-color-primary);
-}
 
-/* Text styling for completed items */
 .item__todo--display div[style*="line-through"] {
   opacity: var(--dwc-opacity-50);
 }
 
-/* Delete button with theme-aware colors */
 .todo-delete-btn {
   position: absolute;
   right: var(--dwc-space-s);
