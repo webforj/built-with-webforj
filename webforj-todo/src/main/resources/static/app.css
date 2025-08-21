@@ -18,26 +18,30 @@ h1 {
   opacity: var(--dwc-opacity-90);
 }
 
-.todo--display {
+.todo-wrapper {
   min-width: 450px;
-  max-height: 450px;
   background: var(--dwc-surface-3);
   box-shadow: var(--dwc-shadow-xl);
-  padding: var(--dwc-space-m);
   border: var(--dwc-border-width-s) solid var(--dwc-color-default);
   border-radius: calc(var(--dwc-border-radius) * 2);
-  overflow-y: auto;
+  overflow: hidden;
   transition: box-shadow var(--dwc-transition-duration-normal) ease;
-  
-}
-@media (max-width: 480px) {
-  .todo--display {
-    min-width: 90vw;
-  }
 }
 
-.todo--display:hover {
+.todo-wrapper:hover {
   box-shadow: var(--dwc-shadow-2xl);
+}
+
+.todo--display {
+  max-height: 450px;
+  padding: var(--dwc-space-m);
+  overflow-y: auto;
+}
+
+@media (max-width: 480px) {
+  .todo-wrapper {
+    min-width: 90vw;
+  }
 }
 
 .item__todo--display {
@@ -75,8 +79,7 @@ h1 {
   align-items: center;
   justify-content: center;
   color: var(--dwc-color-danger);
-  font-size: 22px;
-  font-weight: 300;
+  font-weight: 400;
   border-radius: 50%;
   background: transparent;
 }
@@ -88,5 +91,22 @@ h1 {
 .todo-delete-btn:hover {
   opacity: 1 !important;
   background: var(--dwc-color-danger-alt);
-  transform: rotate(90deg) scale(1.1);
+  transform: rotate(360deg) scale(1.1);
+}
+
+/* Footer styles */
+.todo-footer {
+  padding: var(--dwc-space-s) var(--dwc-space-m);
+  border-top: 1px solid var(--dwc-color-default);
+  background: var(--dwc-surface-2);
+  min-height: 45px;
+}
+
+.todo-footer-count {
+  font-size: var(--dwc-font-size-s);
+  font-weight: var(--dwc-font-weight-normal);
+}
+
+.todo-footer-filters {
+  gap: var(--dwc-space-xs);
 }

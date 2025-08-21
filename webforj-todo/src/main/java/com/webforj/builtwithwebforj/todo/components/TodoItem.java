@@ -37,7 +37,7 @@ public class TodoItem extends Composite<FlexLayout> {
             text.setStyle("text-decoration", "line-through");
         }
         
-        deleteButton.setText("×");
+        deleteButton.setText("✕");
         deleteButton.addClassName("todo-delete-btn");
         
         getBoundComponent().setSpacing("3px")
