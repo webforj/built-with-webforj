@@ -53,8 +53,6 @@ public class TodoItem extends Composite<FlexLayout> {
                 text.setStyle("text-decoration", "unset");
             }
             
-            todo.setCompleted(e.isToggled());
-            
             if (onToggle != null) {
                 onToggle.accept(todo);
             }

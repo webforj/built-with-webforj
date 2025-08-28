@@ -10,7 +10,6 @@ import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.H1;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import java.util.List;
-import java.util.ArrayList;
 
 public class TodoList extends Composite<Div> {
 
@@ -20,8 +19,7 @@ public class TodoList extends Composite<Div> {
     private FlexLayout todoItemsContainer;
     private TodoFooter todoFooter;
     private H1 title = new H1("Todos");
-    private List<Todo> allTodos = new ArrayList<>();
-    private TodoFooter.FilterType currentFilter = TodoFooter.FilterType.ALL;
+    private TodoController.FilterType currentFilter = TodoController.FilterType.ALL;
 
     /**
      * Constructs a new TodoList with the specified controller.
@@ -66,32 +64,23 @@ public class TodoList extends Composite<Div> {
             if (e.getKeyCode().equals(KeypressEvent.Key.ENTER) && !text.getText().isBlank()) {
                 Todo todo = todoController.addNewTodo(text.getText());
                 if (todo != null) {
-                    allTodos.add(todo);
-                    addTodoItem(todo);
                     text.setText("");
-                    updateFooter();
+                    refreshTodoDisplay();
                 }
             }
         });
         
         // Load existing todos
-        allTodos = new ArrayList<>(todoController.getAllTodos());
-        for (Todo todo : allTodos) {
-            addTodoItem(todo);
-        }
-        updateFooter();
+        refreshTodoDisplay();
     }
 
     /**
-     * Adds a todo item to the UI display.
+     * Creates a todo item UI component for display.
      */
-    private void addTodoItem(Todo todo) {
+    private TodoItem createTodoItem(Todo todo) {
         TodoItem item = new TodoItem(todo, this::handleTodoToggle, null);
-        item.setOnDelete(t -> {
-            handleTodoDelete(t);
-            todoItemsContainer.remove(item);
-        });
-        todoItemsContainer.add(item);
+        item.setOnDelete(this::handleTodoDelete);
+        return item;
     }
 
     /**
@@ -99,11 +88,7 @@ public class TodoList extends Composite<Div> {
      */
     private void handleTodoToggle(Todo todo) {
         todoController.toggleTodo(todo.getId());
-        // Update local state to match
-        allTodos.stream()
-            .filter(t -> t.getId().equals(todo.getId()))
-            .findFirst()
-            .ifPresent(t -> t.setCompleted(todo.isCompleted()));
+        refreshTodoDisplay();
     }
 
     /**
@@ -111,16 +96,14 @@ public class TodoList extends Composite<Div> {
      */
     private void handleTodoDelete(Todo todo) {
         todoController.removeTodo(todo.getId());
-        allTodos.removeIf(t -> t.getId().equals(todo.getId()));
-        updateFooter();
-        // Item will be removed from display by the caller
+        refreshTodoDisplay();
     }
     
     /**
      * Updates the footer with current todo count.
      */
     private void updateFooter() {
-        todoFooter.updateItemCount(allTodos.size());
+        todoFooter.updateItemCount(todoController.getTodoCount());
     }
     
     /**
@@ -129,7 +112,18 @@ public class TodoList extends Composite<Div> {
      * @param filterType the new filter type
      */
     private void handleFilterChange(TodoFooter.FilterType filterType) {
-        currentFilter = filterType;
+        // Convert TodoFooter.FilterType to TodoController.FilterType
+        switch (filterType) {
+            case ALL:
+                currentFilter = TodoController.FilterType.ALL;
+                break;
+            case ACTIVE:
+                currentFilter = TodoController.FilterType.ACTIVE;
+                break;
+            case COMPLETED:
+                currentFilter = TodoController.FilterType.COMPLETED;
+                break;
+        }
         refreshTodoDisplay();
     }
     
@@ -140,30 +134,16 @@ public class TodoList extends Composite<Div> {
         // Clear current display
         todoItemsContainer.removeAll();
         
-        // Re-add todos based on filter
-        for (Todo todo : allTodos) {
-            boolean shouldDisplay = false;
-            
-            switch (currentFilter) {
-                case ALL:
-                    shouldDisplay = true;
-                    break;
-                case ACTIVE:
-                    shouldDisplay = !todo.isCompleted();
-                    break;
-                case COMPLETED:
-                    shouldDisplay = todo.isCompleted();
-                    break;
-            }
-            
-            if (shouldDisplay) {
-                TodoItem item = new TodoItem(todo, this::handleTodoToggle, null);
-                item.setOnDelete(t -> {
-                    handleTodoDelete(t);
-                    todoItemsContainer.remove(item);
-                });
-                todoItemsContainer.add(item);
-            }
+        // Get filtered todos from controller
+        List<Todo> todos = todoController.getFilteredTodos(currentFilter);
+        
+        // Add todos to display
+        for (Todo todo : todos) {
+            TodoItem item = createTodoItem(todo);
+            todoItemsContainer.add(item);
         }
+        
+        // Update footer count
+        updateFooter();
     }
 }
