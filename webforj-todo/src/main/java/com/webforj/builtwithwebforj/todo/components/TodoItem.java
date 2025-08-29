@@ -14,37 +14,35 @@ public class TodoItem extends Composite<FlexLayout> {
     private Div text = new Div();
     private Div deleteButton = new Div();
     private Todo todo;
-    private Consumer<Todo> onToggle;
     private Consumer<Todo> onDelete;
 
     /**
      * Constructs a TodoItem with a Todo model and callback functions.
-     * 
+     *
      * @param todo the Todo model
      * @param onToggle callback when todo is toggled
      * @param onDelete callback when todo is deleted
      */
     public TodoItem(Todo todo, Consumer<Todo> onToggle, Consumer<Todo> onDelete) {
         this.todo = todo;
-        this.onToggle = onToggle;
         this.onDelete = onDelete;
-        
+
         // Setup component
         this.text.setText(todo.getTitle());
-        
+
         radioButton.setChecked(todo.isCompleted());
         if (todo.isCompleted()) {
             text.setStyle("text-decoration", "line-through");
         }
-        
+
         deleteButton.setText("✕");
         deleteButton.addClassName("todo-delete-btn");
-        
+
         getBoundComponent().setSpacing("3px")
             .setAlignment(FlexAlignment.CENTER)
             .addClassName("item__todo--display")
             .add(radioButton, text, deleteButton);
-        
+
         // Setup event handlers
         radioButton.onToggle(e -> {
             if (e.isToggled()) {
@@ -52,12 +50,12 @@ public class TodoItem extends Composite<FlexLayout> {
             } else {
                 text.setStyle("text-decoration", "unset");
             }
-            
+
             if (onToggle != null) {
                 onToggle.accept(todo);
             }
         });
-        
+
         // Delete button click handler will be set via setOnDelete()
     }
 

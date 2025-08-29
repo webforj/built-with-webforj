@@ -14,17 +14,14 @@ import com.webforj.router.annotation.Route;
 @Route("/")
 public class TodoView extends Composite<Div> {
 
-    private final TodoController todoController;
-
     /**
      * Constructs a new TodoView with the specified controller.
      * Following proper MVC pattern with controller injection.
-     * 
+     *
      * @param todoController the controller for managing todos
      */
     public TodoView(TodoController todoController) {
-        this.todoController = todoController;
-        
+
         // Create and add the TodoList component with the injected controller
         TodoList todoList = new TodoList(todoController);
         getBoundComponent().add(todoList);
