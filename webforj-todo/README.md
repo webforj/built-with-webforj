@@ -1,106 +1,102 @@
-# webforj-todo
+# webforJ Spring Todo Application
 
-A webforJ application powered by Spring Boot. This project combines the power of webforJ framework with Spring Boot's comprehensive ecosystem for building enterprise applications.
+A modern todo list application built with webforJ and Spring Boot, demonstrating MVC architecture with a clean, responsive UI.
 
-## Prerequisites
+![webforJ Version](https://img.shields.io/badge/webforJ-25.03-blue)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-green)
+![Java](https://img.shields.io/badge/Java-21-orange)
 
-- Java 21 or newer  
-- Maven 3.9+
+## Overview
 
-## Getting Started
+This app showcases webforJ's component-based UI integrated with Spring Boot's backend capabilities following the MVC pattern. The end result is a fully functional todo list application with filtering, persistence, and a clean user interface.
 
-To run the application in development mode:
+## Features
 
+- **Modern UI**: Clean, minimalist design with intuitive controls
+- **Full CRUD Operations**: Add, toggle, and delete todo items
+- **Smart Filtering**: Filter todos by All, Active, or Completed status
+- **Data Persistence**: H2 database with state management
+- **MVC Architecture**: Clean separation of concerns with controller pattern
+- **Responsive Design**: Professional interface that works on all screen sizes
+- **Real-time Updates**: UI updates with state synchronization
+- **Sample Data**: Pre-loaded with example todos for immediate testing
+
+## Tech stack
+
+- **Frontend**: webforJ 25.03
+- **Backend**: Spring Boot 3.5.3 with Spring Data JPA
+- **Database**: H2 (in-memory)
+- **Build Tool**: Maven
+- **Java Version**: 21
+
+## Getting started
+
+### Prerequisites
+
+- Java 17 or 21
+- Maven 3.6+
+
+### Running the app
+
+1. Clone the repository:
+```bash
+git clone https://github.com/webforj/built-with-webforj.git
+cd built-with-webforj/webforj-todo
+```
+
+2. Run the application:
 ```bash
 mvn spring-boot:run
 ```
 
-Then open [http://localhost:8080](http://localhost:8080) in your browser.
-
-### Spring Boot Features
-
-This project leverages Spring Boot's features:
-
-- **Embedded Server**: No need to deploy WAR files, runs as a standalone JAR
-- **Auto-configuration**: Spring Boot automatically configures your application
-- **DevTools**: Automatic restart when code changes (included by default)
-- **Spring Ecosystem**: Easy integration with Spring Data, etc.
-
-### Hot Reload with DevTools
-
-Spring Boot DevTools is included for automatic application restart:
-
-```xml
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-devtools</artifactId>
-  <optional>true</optional>
-</dependency>
+3. Open your browser and navigate to:
+```
+http://localhost:8080
 ```
 
-Your application will automatically restart when files on the classpath change.
+### H2 database console
 
+To view the database directly:
+1. Navigate to `http://localhost:8080/h2-console`
+2. Use these connection settings:
+   - JDBC URL: `jdbc:h2:mem:testdb`
+   - Username: `sa`
+   - Password: (leave empty)
 
-## Running Integration Tests
+## Project structure
 
-To run end-to-end and integration tests:
-
-```bash
-mvn verify
+```
+src/main/java/com/webforj/builtwithwebforj/todo/
+  Application.java           # Main Spring Boot application
+  components/
+    TodoFooter.java         # Footer with filters and count
+    TodoItem.java           # Individual todo item component
+    TodoList.java           # Main todo list container
+  config/
+    DataInitializer.java    # Sample data loader
+  controller/
+    TodoController.java     # MVC controller layer
+  models/
+    Todo.java              # JPA entity
+  repository/
+    TodoRepository.java     # Spring Data repository
+  service/
+    TodoService.java        # Business logic layer
+  views/
+    TodoView.java          # Main UI view
 ```
 
-This command runs your integration tests using Spring Boot Test framework. Tests annotated with `@SpringBootTest` will:
-- Start the full Spring application context
-- Run on a random port to avoid conflicts
-- Execute Playwright browser tests against the running application
-- Automatically shut down after tests complete
+## Architecture
 
-## Spring Boot Configuration
+This application follows the MVC (Model-View-Controller) pattern:
 
-Configure your application using `src/main/resources/application.properties`:
+- **Model**: JPA entities and Spring Data repositories handle data persistence
+- **View**: webforJ components provide the user interface
+- **Controller**: Spring-managed controllers coordinate between view and model
 
-```properties
-# Application name
-spring.application.name=webforj-todo
-
-# Server configuration
-server.port=8080
-
-# Add your custom configurations here
-```
-
-## Building for Production
-
-To create an executable JAR:
-
-```bash
-mvn clean package -Pprod
-java -jar target/webforj-todo-1.0-SNAPSHOT.jar
-```
-
-Or build and run a Docker image:
-
-```bash
-# Build the Docker image
-mvn spring-boot:build-image
-
-# Run the Docker container
-docker run -p 8080:8080 webforj-todo:1.0-SNAPSHOT
-
-# Or run with environment variables
-docker run -p 8080:8080 -e SPRING_PROFILES_ACTIVE=prod webforj-todo:1.0-SNAPSHOT
-```
+For more details on the architecture, see the [MVC Architecture Guide](MVC_ARCHITECTURE_GUIDE.md).
 
 ## Learn More
 
-Explore the webforJ ecosystem through our documentation and examples:
-
-- [Full Documentation](https://docs.webforj.com)
-- [Component Overview](https://docs.webforj.com/docs/components/overview)
-- [Quick Tutorial](https://docs.webforj.com/docs/introduction/tutorial/overview)
-- [Advanced Topics](https://docs.webforj.com/docs/advanced/overview)
-
-### Spring Boot Resources
-
+- [webforJ Documentation](https://docs.webforj.com)
 - [Spring Boot Documentation](https://spring.io/projects/spring-boot)
-- [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/current/reference/html/)
