@@ -1,0 +1,112 @@
+/* Main container */
+.frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--dwc-space-xl);
+  margin: var(--dwc-space-xl);
+  padding-top: var(--dwc-space-xl);
+}
+
+h1 {
+  color: var(--dwc-color-primary);
+  font-weight: var(--dwc-font-weight-light);
+  font-size: var(--dwc-font-size-3xl);
+  letter-spacing: var(--dwc-letter-spacing-wide);
+  margin: 0;
+  opacity: var(--dwc-opacity-90);
+}
+
+.todo-wrapper {
+  min-width: 450px;
+  background: var(--dwc-surface-3);
+  box-shadow: var(--dwc-shadow-xl);
+  border: var(--dwc-border-width-s) solid var(--dwc-color-default);
+  border-radius: calc(var(--dwc-border-radius) * 2);
+  overflow: hidden;
+  transition: box-shadow var(--dwc-transition-duration-normal) ease;
+}
+
+.todo-wrapper:hover {
+  box-shadow: var(--dwc-shadow-2xl);
+}
+
+.todo--display {
+  max-height: 450px;
+  padding: var(--dwc-space-m);
+  overflow-y: auto;
+}
+
+@media (max-width: 480px) {
+  .todo-wrapper {
+    min-width: 90vw;
+  }
+}
+
+.item__todo--display {
+  border-bottom: var(--dwc-border-width-s) solid var(--dwc-color-default);
+  background: transparent;
+  padding: var(--dwc-space-m) var(--dwc-space-s);
+  position: relative;
+  transition: all 0.2s ease;
+  margin: var(--dwc-space-xs) 0;
+}
+
+.item__todo--display:hover {
+  background: var(--dwc-surface-2);
+  transform: translateX(var(--dwc-space-xs));
+}
+
+.item__todo--display:last-child {
+  border-bottom: none !important;
+}
+
+
+.item__todo--display div[style*="line-through"] {
+  opacity: var(--dwc-opacity-50);
+}
+
+.todo-delete-btn {
+  position: absolute;
+  right: var(--dwc-space-s);
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dwc-color-danger);
+  font-weight: 400;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.item__todo--display:hover .todo-delete-btn {
+  opacity: 0.8;
+}
+
+.todo-delete-btn:hover {
+  opacity: 1 !important;
+  background: var(--dwc-color-danger-alt);
+  transform: rotate(360deg) scale(1.1);
+}
+
+/* Footer styles */
+.todo-footer {
+  padding: var(--dwc-space-s) var(--dwc-space-m);
+  border-top: 1px solid var(--dwc-color-default);
+  background: var(--dwc-surface-2);
+  min-height: 45px;
+}
+
+.todo-footer-count {
+  font-size: var(--dwc-font-size-s);
+  font-weight: var(--dwc-font-weight-normal);
+}
+
+.todo-footer-filters {
+  gap: var(--dwc-space-xs);
+}
