@@ -9,7 +9,7 @@ import com.webforj.annotation.Routify;
 import com.webforj.annotation.StyleSheet;
 
 @SpringBootApplication
-@Routify(packages = "com.webforjrest.views")
+@Routify(packages = "com.webforjrest.frontend.views")
 @StyleSheet("ws://app.css")
 @AppTheme("system")
 @AppProfile(name = "webforj-rest", shortName = "webforj-rest")
