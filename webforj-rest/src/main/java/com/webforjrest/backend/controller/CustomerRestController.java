@@ -1,9 +1,9 @@
 package com.webforjrest.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.webforjrest.backend.entity.Customer;
 import com.webforjrest.backend.repository.CustomerRepository;
@@ -35,5 +35,45 @@ public class CustomerRestController {
     @GetMapping("/count")
     public long getCustomerCount() {
         return customerRepository.count();
+    }
+
+    /**
+     * REST API for creating a new customer
+     *
+     * POST http://localhost:8080/api/customers
+     */
+    @PostMapping
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+        Customer savedCustomer = customerRepository.save(customer);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCustomer);
+    }
+
+    /**
+     * REST API for updating an existing customer
+     *
+     * PUT http://localhost:8080/api/customers/{id}
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+        if (!customerRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        customer.setId(id);
+        Customer updatedCustomer = customerRepository.save(customer);
+        return ResponseEntity.ok(updatedCustomer);
+    }
+
+    /**
+     * REST API for deleting a customer
+     *
+     * DELETE http://localhost:8080/api/customers/{id}
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
+        if (!customerRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        customerRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

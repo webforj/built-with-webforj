@@ -1,49 +1,113 @@
 package com.webforjrest.frontend.views;
 
 import com.webforj.component.Composite;
-import com.webforj.component.html.elements.Div;
+import com.webforj.component.button.Button;
+import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.html.elements.H1;
+import com.webforj.component.icons.FeatherIcon;
+import com.webforj.component.layout.flexlayout.FlexDirection;
+import com.webforj.component.layout.flexlayout.FlexLayout;
+import com.webforj.component.table.Table;
+import com.webforj.component.table.Column.PinDirection;
+import com.webforj.component.table.renderer.IconRenderer;
 import com.webforj.router.annotation.Route;
-import com.webforjrest.frontend.components.CustomerTable;
+import com.webforjrest.frontend.components.CustomerDialog;
 import com.webforjrest.frontend.data.RestClientService;
 import com.webforjrest.frontend.models.CustomerModel;
 
 import java.util.List;
 
 /**
- * Customer view that displays customer data in a table.
- * Fetches data from the REST API on initialization.
+ * Main view for managing customers.
+ * Follows the pattern from webforj-crud example.
  */
 @Route("/")
-public class CustomerView extends Composite<Div> {
+public class CustomerView extends Composite<FlexLayout> {
 
-	private final RestClientService restClientService;
-	private final CustomerTable customerTable;
+    private final RestClientService customerService;
 
-	public CustomerView(RestClientService restClientService) {
-		this.restClientService = restClientService;
-		this.customerTable = new CustomerTable();
+    private FlexLayout container = getBoundComponent();
+    private FlexLayout header;
+    private FlexLayout toolbar;
+    private FlexLayout tableContainer;
 
-		getBoundComponent().addClassName("customer-view");
+    private H1 pageTitle;
+    private Button addButton;
+    private Table<CustomerModel> customerTable;
+    private CustomerDialog customerDialog;
 
-		// Navigation
+    public CustomerView(RestClientService customerService) {
+        this.customerService = customerService;
 
-		H1 title = new H1("Customer Management");
-		title.addClassName("view-title");
+        initializeComponents();
+        setupLayout();
+        setupEventHandlers();
+        initializeDialog();
+        loadData();
+    }
 
-		getBoundComponent().add(title, customerTable);
+    private void initializeComponents() {
+        pageTitle = new H1("Customer Management");
 
-		// Load data
-		loadCustomerData();
-	}
+        addButton = new Button("Add New")
+                .setTheme(ButtonTheme.PRIMARY)
+                .setPrefixComponent(FeatherIcon.PLUS.create());
 
-	private void loadCustomerData() {
-		try {
-			List<CustomerModel> customers = restClientService.getAllCustomers();
-			customerTable.loadCustomers(customers);
-		} catch (Exception e) {
-			System.err.println("Error loading customer data: " + e.getMessage());
-			e.printStackTrace();
-		}
-	}
+        customerTable = new Table<>();
+        setupTableColumns();
+    }
+
+    private void setupLayout() {
+        container.setDirection(FlexDirection.COLUMN);
+
+        header = new FlexLayout();
+        header.setDirection(FlexDirection.COLUMN);
+        toolbar = new FlexLayout();
+        toolbar.add(addButton);
+
+        tableContainer = new FlexLayout();
+        tableContainer.setDirection(FlexDirection.COLUMN);
+
+        header.add(pageTitle);
+        tableContainer.add(customerTable);
+        container.add(header, toolbar, tableContainer);
+    }
+
+    private void setupTableColumns() {
+        customerTable.addColumn("ID", CustomerModel::getId).setMinWidth(80);
+        customerTable.addColumn("Name", CustomerModel::getName);
+        customerTable.addColumn("Email", CustomerModel::getEmail);
+        customerTable.addColumn("Company", CustomerModel::getCompany);
+        customerTable.addColumn("Phone", CustomerModel::getPhone);
+
+        customerTable.addColumn("", new IconRenderer<CustomerModel>("edit", "feather", e -> {
+            CustomerModel customer = e.getItem();
+            customerDialog.showDialog(customer);
+        }))
+                .setMinWidth(50.0f)
+                .setPinDirection(PinDirection.RIGHT);
+
+        customerTable.addClassName("customers-table");
+        customerTable.setRowHeight(45);
+		customerTable.setHeight("50dvh");
+    }
+
+    private void setupEventHandlers() {
+        addButton.addClickListener(e -> customerDialog.showDialog());
+    }
+
+    private void loadData() {
+        try {
+            List<CustomerModel> customers = customerService.getAllCustomers();
+            customerTable.setItems(customers);
+        } catch (Exception e) {
+            System.err.println("Error loading customer data: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void initializeDialog() {
+        customerDialog = new CustomerDialog(customerService, this::loadData);
+        container.add(customerDialog);
+    }
 }

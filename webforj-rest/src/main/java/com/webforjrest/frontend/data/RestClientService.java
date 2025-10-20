@@ -54,4 +54,59 @@ public class RestClientService {
         System.out.println("...received count: " + count);
         return count;
     }
+
+    /**
+     * Creates a new customer via the REST API.
+     *
+     * @param customer Customer to create
+     * @return Created customer with ID
+     */
+    public CustomerModel createCustomer(CustomerModel customer) {
+        System.out.println("Creating customer: " + customer.getName());
+
+        CustomerModel created = restClient.post()
+                .uri("/api/customers")
+                .body(customer)
+                .retrieve()
+                .body(CustomerModel.class);
+
+        System.out.println("...customer created with ID: " + created.getId());
+        return created;
+    }
+
+    /**
+     * Updates an existing customer via the REST API.
+     *
+     * @param id Customer ID
+     * @param customer Updated customer data
+     * @return Updated customer
+     */
+    public CustomerModel updateCustomer(Long id, CustomerModel customer) {
+        System.out.println("Updating customer ID: " + id);
+
+        CustomerModel updated = restClient.put()
+                .uri("/api/customers/" + id)
+                .body(customer)
+                .retrieve()
+                .body(CustomerModel.class);
+
+        System.out.println("...customer updated");
+        return updated;
+    }
+
+    /**
+     * Deletes a customer via the REST API.
+     *
+     * @param id Customer ID to delete
+     */
+    public void deleteCustomer(Long id) {
+        System.out.println("Deleting customer ID: " + id);
+
+        restClient.delete()
+                .uri("/api/customers/" + id)
+                .retrieve()
+                .toBodilessEntity();
+
+        System.out.println("...customer deleted");
+    }
 }
