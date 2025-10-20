@@ -1,17 +1,5 @@
 /* Customer View Styles */
-.customer-view {
-  padding: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
 
-.view-title {
-  margin-bottom: 2rem;
-  color: var(--dwc-color-primary);
-}
-
-.customer-table {
-  width: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+dwc-window-content{
+  padding: var(--dwc-space-m) var(--dwc-space-l);
 }
