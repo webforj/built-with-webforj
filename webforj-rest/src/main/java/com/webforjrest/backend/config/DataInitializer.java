@@ -29,6 +29,16 @@ public class DataInitializer implements CommandLineRunner {
         customerRepository.save(new Customer("Fiona Green", "fiona.g@eco.com", "Eco Friendly Co", "555-0108"));
         customerRepository.save(new Customer("George Miller", "george.m@media.com", "Media Group", "555-0109"));
         customerRepository.save(new Customer("Hannah Lee", "hannah.l@design.com", "Design Studio", "555-0110"));
+        customerRepository.save(new Customer("Ian Martinez", "ian.m@cloud.com", "CloudFirst Technologies", "555-0111"));
+        customerRepository.save(new Customer("Julia Roberts", "julia.r@finance.com", "Finance Plus", "555-0112"));
+        customerRepository.save(new Customer("Kevin Nash", "kevin.n@logistics.com", "Logistics Pro", "555-0113"));
+        customerRepository.save(new Customer("Laura Chen", "laura.c@consulting.com", "Chen Consulting", "555-0114"));
+        customerRepository.save(new Customer("Michael Scott", "michael.s@paper.com", "Dunder Mifflin", "555-0115"));
+        customerRepository.save(new Customer("Nina Patel", "nina.p@healthcare.com", "HealthCare Plus", "555-0116"));
+        customerRepository.save(new Customer("Oscar Wilde", "oscar.w@literary.com", "Literary Works Inc", "555-0117"));
+        customerRepository.save(new Customer("Paula Jackson", "paula.j@retail.com", "Retail Solutions", "555-0118"));
+        customerRepository.save(new Customer("Quinn Taylor", "quinn.t@sports.com", "Sports Unlimited", "555-0119"));
+        customerRepository.save(new Customer("Rachel Adams", "rachel.a@education.com", "Education First", "555-0120"));
 
         System.out.println("Sample customer data initialized: " + customerRepository.count() + " customers");
     }
