@@ -1,4 +1,4 @@
-package com.webforjrest.frontend.views;
+package com.webforjrest.views;
 
 import com.webforj.component.Composite;
 import com.webforj.component.html.elements.Anchor;
@@ -8,8 +8,8 @@ import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.navigator.Navigator;
 import com.webforj.component.table.Table;
-import com.webforjrest.frontend.data.PostDelegatingRepository;
-import com.webforjrest.frontend.models.Post;
+import com.webforjrest.service.PostDelegatingRepository;
+import com.webforjrest.model.Post;
 
 /**
  * View for displaying posts from JSONPlaceholder API.

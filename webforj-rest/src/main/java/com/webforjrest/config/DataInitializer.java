@@ -1,11 +1,11 @@
-package com.webforjrest.backend.config;
+package com.webforjrest.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.webforjrest.backend.entity.Customer;
-import com.webforjrest.backend.repository.CustomerRepository;
+import com.webforjrest.entity.Customer;
+import com.webforjrest.repository.CustomerRepository;
 
 @Component
 public class DataInitializer implements CommandLineRunner {

@@ -1,17 +1,28 @@
-package com.webforjrest.frontend.models;
+package com.webforjrest.entity;
 
-public class CustomerModel {
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "customers")
+public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
     private String company;
+
     private String phone;
 
-    public CustomerModel() {
+    public Customer() {
     }
 
-    public CustomerModel(Long id, String name, String email, String company, String phone) {
-        this.id = id;
+    public Customer(String name, String email, String company, String phone) {
         this.name = name;
         this.email = email;
         this.company = company;

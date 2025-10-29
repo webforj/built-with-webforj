@@ -1,4 +1,4 @@
-package com.webforjrest.frontend.views;
+package com.webforjrest.views;
 
 import com.webforj.component.Composite;
 import com.webforj.component.html.elements.Anchor;
@@ -7,8 +7,8 @@ import com.webforj.component.html.elements.Paragraph;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.table.Table;
-import com.webforjrest.frontend.data.RestClientService;
-import com.webforjrest.frontend.models.CustomerModel;
+import com.webforjrest.service.RestClientService;
+import com.webforjrest.entity.Customer;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class CustomerView extends Composite<FlexLayout> {
   private H1 pageTitle;
   private Paragraph description;
   private Anchor docsLink;
-  private Table<CustomerModel> customerTable;
+  private Table<Customer> customerTable;
 
   public CustomerView(RestClientService customerService) {
     this.customerService = customerService;
@@ -42,7 +42,7 @@ public class CustomerView extends Composite<FlexLayout> {
     description = new Paragraph(
         "This example demonstrates how to use webforJ with a Spring Boot REST API backend. " +
         "Here, we simply make a call to the RestClientService to fetch customer data from our backend endpoints, " +
-        "collect that data into a List<CustomerModel>, and then use setItems() to populate the Table component. " +
+        "collect that data into a List<Customer>, and then use setItems() to populate the Table component. " +
         "The backend uses JPA repositories and REST controllers to manage and expose the customer data."
     );
 
@@ -73,11 +73,11 @@ public class CustomerView extends Composite<FlexLayout> {
   }
 
   private void setupTableColumns() {
-    customerTable.addColumn("ID", CustomerModel::getId).setMinWidth(80);
-    customerTable.addColumn("Name", CustomerModel::getName);
-    customerTable.addColumn("Email", CustomerModel::getEmail);
-    customerTable.addColumn("Company", CustomerModel::getCompany);
-    customerTable.addColumn("Phone", CustomerModel::getPhone);
+    customerTable.addColumn("ID", Customer::getId).setMinWidth(80);
+    customerTable.addColumn("Name", Customer::getName);
+    customerTable.addColumn("Email", Customer::getEmail);
+    customerTable.addColumn("Company", Customer::getCompany);
+    customerTable.addColumn("Phone", Customer::getPhone);
 
     customerTable.addClassName("customers-table");
     customerTable.setRowHeight(45);
@@ -86,7 +86,7 @@ public class CustomerView extends Composite<FlexLayout> {
 
   private void loadData() {
     try {
-      List<CustomerModel> customers = customerService.getAllCustomers();
+      List<Customer> customers = customerService.getAllCustomers();
       customerTable.setItems(customers);
     } catch (Exception e) {
       System.err.println("Error loading customer data: " + e.getMessage());

@@ -1,6 +1,6 @@
-package com.webforjrest.frontend.data;
+package com.webforjrest.service;
 
-import com.webforjrest.frontend.models.Post;
+import com.webforjrest.model.Post;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;

@@ -1,7 +1,7 @@
-package com.webforjrest.frontend.data;
+package com.webforjrest.service;
 
 import com.webforj.data.repository.DelegatingRepository;
-import com.webforjrest.frontend.models.Post;
+import com.webforjrest.model.Post;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

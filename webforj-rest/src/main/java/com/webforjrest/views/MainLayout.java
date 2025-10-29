@@ -1,4 +1,4 @@
-package com.webforjrest.frontend.views;
+package com.webforjrest.views;
 
 import com.webforj.component.Composite;
 import com.webforj.component.layout.flexlayout.FlexAlignment;
@@ -8,9 +8,9 @@ import com.webforj.component.tabbedpane.TabbedPane;
 import com.webforj.component.tabbedpane.TabbedPane.Alignment;
 import com.webforj.component.tabbedpane.TabbedPane.Placement;
 import com.webforj.router.annotation.Route;
-import com.webforjrest.frontend.data.JSONPlaceholderService;
-import com.webforjrest.frontend.data.PostDelegatingRepository;
-import com.webforjrest.frontend.data.RestClientService;
+import com.webforjrest.service.JSONPlaceholderService;
+import com.webforjrest.service.PostDelegatingRepository;
+import com.webforjrest.service.RestClientService;
 
 /**
  * Main layout that contains tabs for Customer Management and Posts views.

@@ -1,4 +1,4 @@
-package com.webforjrest.frontend.models;
+package com.webforjrest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
