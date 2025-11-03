@@ -1,106 +1,119 @@
 # webforj-rest
 
-A webforJ application powered by Spring Boot. This project combines the power of webforJ framework with Spring Boot's comprehensive ecosystem for building enterprise applications.
+A webforJ application powered by Spring Boot that shows two approaches for handling paginated data from REST APIs. You'll see how to load all data into memory, and how to fetch data on-demand.
+
+## Overview
+
+This application demonstrates two repository patterns for working with REST APIs in webforJ:
+
+1. **CollectionRepository** - Load all data into memory once, then paginate locally
+2. **DelegatingRepository** - Fetch only the data needed for the current page from the backend
 
 ## Prerequisites
 
-- Java 21 or newer  
+- Java 17 or 21
 - Maven 3.9+
+- webforJ version 25.03 or newer
 
 ## Getting Started
 
 To run the application in development mode:
 
 ```bash
-mvn spring-boot:run
+mvn
 ```
 
 Then open [http://localhost:8080](http://localhost:8080) in your browser.
 
-### Spring Boot Features
+## What You'll Learn
 
-This project leverages Spring Boot's features:
+This application demonstrates the same customer data (100 records) displayed in two tabs, each using a different approach:
 
-- **Embedded Server**: No need to deploy WAR files, runs as a standalone JAR
-- **Auto-configuration**: Spring Boot automatically configures your application
-- **DevTools**: Automatic restart when code changes (included by default)
-- **Spring Ecosystem**: Easy integration with Spring Data, etc.
+### Tab 1: CollectionRepository (In Memory)
 
-### Hot Reload with DevTools
+Fetches all 100 customers from the backend at once, stores them in memory using a [`CollectionRepository`](https://docs.webforj.com/docs/advanced/repository/overview#collection-repository), then provides client-side pagination with a [`Navigator`](https://docs.webforj.com/docs/components/navigator).
 
-Spring Boot DevTools is included for automatic application restart:
+**How it works:**
+```java
+// 1. Fetch all data from REST API
+List<Customer> customers = customerService.getAllCustomers();
 
-```xml
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-devtools</artifactId>
-  <optional>true</optional>
-</dependency>
+// 2. Create CollectionRepository from the list
+CollectionRepository<Customer> repository = new CollectionRepository<>(customers);
+
+// 3. Wire up Table and Navigator
+customerTable.setRepository(repository);
+navigator = new Navigator(repository, 15);
 ```
 
-Your application will automatically restart when files on the classpath change.
+**When to use:**
+- Small to medium datasets
+- Data changes infrequently
+- You need all data for client-side operations (filtering, sorting)
+- Simple setup is a priority
 
+### Tab 2: DelegatingRepository (Lazy Loading)
 
-## Running Integration Tests
+Only fetches 15 customers at a time from the backend as you navigate pages using a [`DelegatingRepository`](https://docs.webforj.com/docs/advanced/repository/delegating-repository).
 
-To run end-to-end and integration tests:
+**How it works:**
+```java
+// Create a DelegatingRepository with three functions
+public class CustomerDelegatingRepository extends DelegatingRepository<Customer, Object> {
+    public CustomerDelegatingRepository(RestClientService service) {
+        super(
+            // Find: Fetch page of data
+            criteria -> service.fetchCustomers(criteria.getLimit(), criteria.getOffset()).stream(),
 
-```bash
-mvn verify
+            // Count: Get total count
+            criteria -> service.getCustomerCount(),
+
+            // Find by key: Fetch single item
+            key -> service.fetchCustomerById((Long) key)
+        );
+    }
+}
 ```
 
-This command runs your integration tests using Spring Boot Test framework. Tests annotated with `@SpringBootTest` will:
-- Start the full Spring application context
-- Run on a random port to avoid conflicts
-- Execute Playwright browser tests against the running application
-- Automatically shut down after tests complete
+**When to use:**
+- Large datasets
+- Data changes frequently
+- Reduce initial load time and memory usage
+- Backend supports pagination
 
-## Spring Boot Configuration
+### Backend Implementation
 
-Configure your application using `src/main/resources/application.properties`:
+The Spring Boot backend provides paginated endpoints:
 
-```properties
-# Application name
-spring.application.name=webforj-rest
+```java
+@RestController
+@RequestMapping("/api/customers")
+public class CustomerRestController {
+    @GetMapping
+    public List<Customer> getAllCustomers() { ... }
 
-# Server configuration
-server.port=8080
+    @GetMapping("/paginated")
+    public List<Customer> getCustomersPaginated(
+        @RequestParam int limit,
+        @RequestParam int offset) { ... }
 
-# Add your custom configurations here
+    @GetMapping("/{id}")
+    public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) { ... }
+
+    @GetMapping("/count")
+    public long getCustomerCount() { ... }
+}
 ```
 
-## Building for Production
+## Key Technologies
 
-To create an executable JAR:
+**webforJ Resources:**
+- [Repository Overview](https://docs.webforj.com/docs/advanced/repository/overview) - Understanding repositories in webforJ
+- [DelegatingRepository Guide](https://docs.webforj.com/docs/advanced/repository/delegating-repository) - Deep dive into lazy loading
+- [Spring Boot Integration](https://docs.webforj.com/docs/integrations/spring/spring-boot) - Using webforJ with Spring Boot
+- [Table Component](https://docs.webforj.com/docs/components/table/overview) - Working with tables
+- [Navigator Component](https://docs.webforj.com/docs/components/navigator) - Adding pagination
 
-```bash
-mvn clean package -Pprod
-java -jar target/webforj-rest-1.0-SNAPSHOT.jar
-```
-
-Or build and run a Docker image:
-
-```bash
-# Build the Docker image
-mvn spring-boot:build-image
-
-# Run the Docker container
-docker run -p 8080:8080 webforj-rest:1.0-SNAPSHOT
-
-# Or run with environment variables
-docker run -p 8080:8080 -e SPRING_PROFILES_ACTIVE=prod webforj-rest:1.0-SNAPSHOT
-```
-
-## Learn More
-
-Explore the webforJ ecosystem through our documentation and examples:
-
-- [Full Documentation](https://docs.webforj.com)
-- [Component Overview](https://docs.webforj.com/docs/components/overview)
-- [Quick Tutorial](https://docs.webforj.com/docs/introduction/tutorial/overview)
-- [Advanced Topics](https://docs.webforj.com/docs/advanced/overview)
-
-### Spring Boot Resources
-
-- [Spring Boot Documentation](https://spring.io/projects/spring-boot)
+**Spring Boot Resources:**
 - [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/current/reference/html/)
+- [Building REST APIs](https://spring.io/guides/gs/rest-service/)
