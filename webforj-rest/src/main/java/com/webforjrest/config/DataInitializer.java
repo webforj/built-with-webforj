@@ -40,6 +40,23 @@ public class DataInitializer implements CommandLineRunner {
         customerRepository.save(new Customer("Quinn Taylor", "quinn.t@sports.com", "Sports Unlimited", "555-0119"));
         customerRepository.save(new Customer("Rachel Adams", "rachel.a@education.com", "Education First", "555-0120"));
 
+        // Generate additional customers to reach 100
+        String[] firstNames = {"Sam", "Taylor", "Morgan", "Jordan", "Casey", "Alex", "Jamie", "Riley", "Avery", "Cameron"};
+        String[] lastNames = {"Anderson", "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Walker", "Hall"};
+        String[] companies = {"Tech Solutions", "Digital Services", "Innovation Labs", "Smart Systems", "Cloud Networks",
+                             "Data Dynamics", "Future Corp", "NextGen Tech", "Alpha Industries", "Beta Solutions"};
+
+        for (int i = 21; i <= 100; i++) {
+            String firstName = firstNames[(i - 21) % firstNames.length];
+            String lastName = lastNames[(i - 21) / firstNames.length % lastNames.length];
+            String name = firstName + " " + lastName + " " + i;
+            String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + i + "@company.com";
+            String company = companies[(i - 21) % companies.length];
+            String phone = String.format("555-%04d", i + 100);
+
+            customerRepository.save(new Customer(name, email, company, phone));
+        }
+
         System.out.println("Sample customer data initialized: " + customerRepository.count() + " customers");
     }
 }

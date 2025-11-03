@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service for consuming REST API endpoints.
@@ -39,11 +40,48 @@ public class RestClientService {
     }
 
     /**
+     * Fetches customers with pagination support.
+     *
+     * @param limit Number of customers to fetch
+     * @param offset Starting index (0-based)
+     * @return List of Customer objects
+     */
+    public List<Customer> fetchCustomers(int limit, int offset) {
+        List<Customer> customers = restClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/api/customers/paginated")
+                        .queryParam("limit", limit)
+                        .queryParam("offset", offset)
+                        .build())
+                .retrieve()
+                .body(new ParameterizedTypeReference<>() {});
+        return customers;
+    }
+
+    /**
+     * Fetches a single customer by ID.
+     *
+     * @param id Customer ID
+     * @return Optional containing the customer if found
+     */
+    public Optional<Customer> fetchCustomerById(Long id) {
+        try {
+            Customer customer = restClient.get()
+                    .uri("/api/customers/" + id)
+                    .retrieve()
+                    .body(Customer.class);
+            return Optional.ofNullable(customer);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    /**
      * Fetches the total count of customers from the REST API.
      *
      * @return Total number of customers
      */
-    public Long getCustomerCount() {
+    public int getCustomerCount() {
         System.out.println("Fetching customer count through REST API...");
 
         Long count = restClient.get()
@@ -52,6 +90,6 @@ public class RestClientService {
                 .body(Long.class);
 
         System.out.println("...received count: " + count);
-        return count;
+        return count != null ? count.intValue() : 0;
     }
 }

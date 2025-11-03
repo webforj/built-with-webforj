@@ -8,27 +8,25 @@ import com.webforj.component.tabbedpane.TabbedPane;
 import com.webforj.component.tabbedpane.TabbedPane.Alignment;
 import com.webforj.component.tabbedpane.TabbedPane.Placement;
 import com.webforj.router.annotation.Route;
-import com.webforjrest.service.JSONPlaceholderService;
-import com.webforjrest.service.PostDelegatingRepository;
+import com.webforjrest.service.CustomerDelegatingRepository;
 import com.webforjrest.service.RestClientService;
 
 /**
- * Main layout that contains tabs for Customer Management and Posts views.
+ * Main layout that contains tabs for Customer Management views.
  */
 @Route("/")
 public class MainLayout extends Composite<FlexLayout> {
 
   private final RestClientService customerService;
-  private final PostDelegatingRepository postRepository;
+  private final CustomerDelegatingRepository customerRepository;
 
   private FlexLayout container = getBoundComponent();
   private TabbedPane tabbedPane;
 
   public MainLayout(RestClientService customerService,
-                    PostDelegatingRepository postRepository,
-                    JSONPlaceholderService jsonPlaceholderService) {
+                    CustomerDelegatingRepository customerRepository) {
     this.customerService = customerService;
-    this.postRepository = postRepository;
+    this.customerRepository = customerRepository;
 
     initializeComponents();
     setupLayout();
@@ -44,15 +42,15 @@ public class MainLayout extends Composite<FlexLayout> {
     tabbedPane.setStyle("max-width", "1400px");
     tabbedPane.setStyle("height", "calc(100vh - 4rem)");
 
-    // Create CustomerView without routing
-    CustomerView customerView = new CustomerView(customerService);
+    // Create CustomerDisplay - loads all data into memory with CollectionRepository
+    CustomerDisplay customerView = new CustomerDisplay(customerService);
 
-    // Create PostsView without routing
-    PostsView postsView = new PostsView(postRepository);
+    // Create CustomerDelegatingDisplay - uses DelegatingRepository for lazy loading
+    CustomerDelegatingDisplay customerDelegatingView = new CustomerDelegatingDisplay(customerRepository);
 
     // Add tabs
-    tabbedPane.addTab("Customer Management", customerView);
-    tabbedPane.addTab("JSONPlaceholder Posts", postsView);
+    tabbedPane.addTab("CollectionRepository (All in Memory)", customerView);
+    tabbedPane.addTab("DelegatingRepository (Lazy Loading)", customerDelegatingView);
   }
 
   private void setupLayout() {
