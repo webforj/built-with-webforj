@@ -88,8 +88,8 @@ public class CustomerDisplay extends Composite<FlexLayout> {
     customerTable.addColumn("Phone", Customer::getPhone);
 
     customerTable.addClassName("customers-table");
-    customerTable.setRowHeight(45);
-    customerTable.setHeight("60dvh");
+    customerTable.setRowHeight(40);
+    customerTable.setHeight("55dvh");
   }
 
   private void loadData() {
@@ -105,6 +105,7 @@ public class CustomerDisplay extends Composite<FlexLayout> {
 
       // Create paginator with 15 items per page
       navigator = new Navigator(repository, 15);
+      navigator.setLayout(Navigator.Layout.PAGES);
 
       // Add table and navigator to the container
       tableContainer.add(customerTable, navigator);

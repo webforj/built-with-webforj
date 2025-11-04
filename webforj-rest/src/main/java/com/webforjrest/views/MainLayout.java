@@ -56,7 +56,6 @@ public class MainLayout extends Composite<FlexLayout> {
   private void setupLayout() {
     container.setDirection(FlexDirection.COLUMN);
     container.setAlignment(FlexAlignment.CENTER);
-    container.setStyle("padding", "2rem");
     container.setStyle("width", "100%");
     container.setStyle("height", "100vh");
     container.setStyle("overflow", "hidden");

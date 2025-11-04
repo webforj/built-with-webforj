@@ -3,3 +3,7 @@
 dwc-window-content{
   padding: var(--dwc-space-m) var(--dwc-space-l);
 }
+
+dwc-navigator{
+  margin: var(--dwc-space-s), 0;
+}

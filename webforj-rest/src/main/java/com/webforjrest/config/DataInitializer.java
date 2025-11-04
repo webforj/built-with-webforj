@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import com.webforjrest.entity.Customer;
 import com.webforjrest.repository.CustomerRepository;
 
+import java.util.Random;
+
 @Component
 public class DataInitializer implements CommandLineRunner {
 
@@ -18,40 +20,32 @@ public class DataInitializer implements CommandLineRunner {
         // Clear existing data
         customerRepository.deleteAll();
 
-        // Add sample customers
-        customerRepository.save(new Customer("John Smith", "john.smith@example.com", "Acme Corp", "555-0101"));
-        customerRepository.save(new Customer("Jane Doe", "jane.doe@techstart.com", "TechStart Inc", "555-0102"));
-        customerRepository.save(new Customer("Bob Johnson", "bob.j@builders.com", "Builders United", "555-0103"));
-        customerRepository.save(new Customer("Alice Williams", "alice.w@innovate.com", "Innovate Solutions", "555-0104"));
-        customerRepository.save(new Customer("Charlie Brown", "charlie.b@global.com", "Global Enterprises", "555-0105"));
-        customerRepository.save(new Customer("Diana Prince", "diana.p@wonder.com", "Wonder Tech", "555-0106"));
-        customerRepository.save(new Customer("Ethan Hunt", "ethan.h@mission.com", "Mission Systems", "555-0107"));
-        customerRepository.save(new Customer("Fiona Green", "fiona.g@eco.com", "Eco Friendly Co", "555-0108"));
-        customerRepository.save(new Customer("George Miller", "george.m@media.com", "Media Group", "555-0109"));
-        customerRepository.save(new Customer("Hannah Lee", "hannah.l@design.com", "Design Studio", "555-0110"));
-        customerRepository.save(new Customer("Ian Martinez", "ian.m@cloud.com", "CloudFirst Technologies", "555-0111"));
-        customerRepository.save(new Customer("Julia Roberts", "julia.r@finance.com", "Finance Plus", "555-0112"));
-        customerRepository.save(new Customer("Kevin Nash", "kevin.n@logistics.com", "Logistics Pro", "555-0113"));
-        customerRepository.save(new Customer("Laura Chen", "laura.c@consulting.com", "Chen Consulting", "555-0114"));
-        customerRepository.save(new Customer("Michael Scott", "michael.s@paper.com", "Dunder Mifflin", "555-0115"));
-        customerRepository.save(new Customer("Nina Patel", "nina.p@healthcare.com", "HealthCare Plus", "555-0116"));
-        customerRepository.save(new Customer("Oscar Wilde", "oscar.w@literary.com", "Literary Works Inc", "555-0117"));
-        customerRepository.save(new Customer("Paula Jackson", "paula.j@retail.com", "Retail Solutions", "555-0118"));
-        customerRepository.save(new Customer("Quinn Taylor", "quinn.t@sports.com", "Sports Unlimited", "555-0119"));
-        customerRepository.save(new Customer("Rachel Adams", "rachel.a@education.com", "Education First", "555-0120"));
-
-        // Generate additional customers to reach 100
-        String[] firstNames = {"Sam", "Taylor", "Morgan", "Jordan", "Casey", "Alex", "Jamie", "Riley", "Avery", "Cameron"};
-        String[] lastNames = {"Anderson", "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Walker", "Hall"};
+        // Generate 100 random customers
+        String[] firstNames = {"Sam", "Taylor", "Morgan", "Jordan", "Casey", "Alex", "Jamie", "Riley", "Avery", "Cameron",
+                              "John", "Jane", "Bob", "Alice", "Charlie", "Diana", "Ethan", "Fiona", "George", "Hannah",
+                              "Michael", "Sarah", "David", "Emma", "Daniel", "Olivia", "Matthew", "Sophia", "Christopher", "Isabella",
+                              "Andrew", "Mia", "Joshua", "Emily", "Ryan", "Abigail", "Nicholas", "Madison", "Tyler", "Elizabeth",
+                              "Brandon", "Ashley", "Jacob", "Samantha", "Kevin", "Jessica", "Kyle", "Rachel", "Nathan", "Victoria"};
+        String[] lastNames = {"Anderson", "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Walker", "Hall",
+                             "Smith", "Doe", "Johnson", "Williams", "Brown", "Prince", "Hunt", "Green", "Miller", "Lee",
+                             "Wilson", "Moore", "Taylor", "Jackson", "White", "Harris", "Martin", "Thomas", "Davis", "Lopez",
+                             "Gonzalez", "Hernandez", "Young", "King", "Wright", "Scott", "Torres", "Nguyen", "Hill", "Flores",
+                             "Adams", "Nelson", "Baker", "Carter", "Mitchell", "Roberts", "Phillips", "Campbell", "Parker", "Evans"};
         String[] companies = {"Tech Solutions", "Digital Services", "Innovation Labs", "Smart Systems", "Cloud Networks",
-                             "Data Dynamics", "Future Corp", "NextGen Tech", "Alpha Industries", "Beta Solutions"};
+                             "Data Dynamics", "Future Corp", "NextGen Tech", "Alpha Industries", "Beta Solutions",
+                             "Acme Corp", "TechStart Inc", "Builders United", "Innovate Solutions", "Global Enterprises",
+                             "Wonder Tech", "Mission Systems", "Eco Friendly Co", "Media Group", "Design Studio",
+                             "Quantum Computing", "Cyber Dynamics", "Peak Performance", "Velocity Systems", "Zenith Labs",
+                             "Apex Solutions", "Horizon Technologies", "Nexus Group", "Pinnacle Corp", "Vertex Innovations"};
 
-        for (int i = 21; i <= 100; i++) {
-            String firstName = firstNames[(i - 21) % firstNames.length];
-            String lastName = lastNames[(i - 21) / firstNames.length % lastNames.length];
-            String name = firstName + " " + lastName + " " + i;
+        Random random = new Random();
+
+        for (int i = 1; i <= 100; i++) {
+            String firstName = firstNames[random.nextInt(firstNames.length)];
+            String lastName = lastNames[random.nextInt(lastNames.length)];
+            String name = firstName + " " + lastName;
             String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + i + "@company.com";
-            String company = companies[(i - 21) % companies.length];
+            String company = companies[random.nextInt(companies.length)];
             String phone = String.format("555-%04d", i + 100);
 
             customerRepository.save(new Customer(name, email, company, phone));

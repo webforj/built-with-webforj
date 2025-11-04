@@ -59,6 +59,7 @@ public class CustomerDelegatingDisplay extends Composite<FlexLayout> {
 
     // Create paginator with 15 items per page
     navigator = new Navigator(customerRepository, 15);
+    navigator.setLayout(Navigator.Layout.PAGES);
   }
 
   private void setupLayout() {
@@ -84,7 +85,7 @@ public class CustomerDelegatingDisplay extends Composite<FlexLayout> {
     customersTable.addColumn("Phone", Customer::getPhone);
 
     customersTable.addClassName("customers-table");
-    customersTable.setRowHeight(45);
-    customersTable.setHeight("60dvh");
+    customersTable.setRowHeight(40);
+    customersTable.setHeight("55dvh");
   }
 }
