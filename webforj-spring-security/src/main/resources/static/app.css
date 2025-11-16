@@ -1,0 +1,176 @@
+/*
+ * Define application theme
+ *
+ * See the documentation for details:
+ * https://docs.webforj.com/docs/styling/overview
+ */
+
+dwc-login {
+  --dwc-dialog-border: 0;
+  --dwc-dialog-border-radius: 16px;
+  --dwc-dialog-height: 100dvh;
+  --dwc-dialog-width: 100%;
+  --dwc-dialog-background: transparent;
+  --dwc-dialog-modal-background: var(--dwc-surface-3);
+  --dwc-dialog-shadow: 0;
+}
+
+dwc-login::part(footer) {
+  background: inherit;
+}
+
+.login-header {
+  width: 100%;
+  text-align: center;
+}
+
+.login-description {
+  font-size: 15px;
+  color: var(--dwc-color-gray);
+  margin: var(--dwc-space-m) 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Email sign in text */
+.email-signin-text {
+  font-size: 14px;
+  color: var(--dwc-color-gray);
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: var(--dwc-space-s);
+}
+
+/* OAuth Container */
+.oauth-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dwc-space-s);
+  margin-top: 0;
+  width: 100%;
+}
+
+/* OAuth Divider */
+.oauth-divider {
+  text-align: center;
+  margin: var(--dwc-space-s) 0;
+  color: var(--dwc-color-gray);
+  font-size: 12px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.oauth-divider::before,
+.oauth-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 30px);
+  height: 1px;
+  background: var(--dwc-color-default);
+}
+
+.oauth-divider::before {
+  left: 0;
+}
+
+.oauth-divider::after {
+  right: 0;
+}
+
+/* Social Login Button */
+.social-login-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--dwc-color-default);
+  border-radius: 8px;
+  background: var(--dwc-color-white);
+  cursor: pointer;
+}
+
+.social-login-button:hover {
+  background: var(--dwc-color-gray-95);
+}
+
+/* User Info in Toolbar */
+.user-info-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 12px;
+}
+
+.toolbar-username {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Avatar Component */
+.avatar-container {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Access Denied Page */
+.access-denied-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.access-denied-icon {
+  font-size: 120px;
+  color: #f59e0b;
+  margin-bottom: 1rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.access-denied-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #f59e0b;
+  margin: 0 0 1rem 0;
+  letter-spacing: 2px;
+}
+
+.access-denied-message {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--dwc-color-gray);
+  margin: 0 0 1rem 0;
+}
+
+.access-denied-submessage {
+  font-size: 16px;
+  color: var(--dwc-color-gray);
+  max-width: 500px;
+  line-height: 1.5;
+}
