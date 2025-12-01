@@ -42,8 +42,12 @@ public class ChatInput extends Composite<Div> {
       }
     });
     textArea.onValueChange(e -> {
-      if (pendingPrediction != null) {
-        pendingPrediction.cancel(false);
+      try {
+        if (pendingPrediction != null) {
+          pendingPrediction.cancel(false);
+        }
+      } finally {
+        pendingPrediction = null;
       }
 
       String input = e.getValue();
