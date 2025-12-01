@@ -23,7 +23,7 @@ public class Application extends App {
     SpringApplication.run(Application.class, args);
   }
 
-  @Bean
+  @Bean(destroyMethod = "shutdown")
   ScheduledExecutorService debouncerExecutor() {
     return Executors.newScheduledThreadPool(2);
   }
