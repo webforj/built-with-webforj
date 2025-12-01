@@ -1,0 +1,43 @@
+/*
+ * Main Layout
+ */
+
+.toolbar::part(control) {
+  justify-content: space-between;
+}
+
+dwc-app-layout::part(header) {
+  background: hsl(0 0% 0% / 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.brand {
+  font-weight: var(--dwc-font-weight-bold);
+  font-size: var(--dwc-font-size-l);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.brand dwc-icon {
+  color: var(--accent);
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+  transition: filter 200ms ease;
+}
+
+.brand:hover dwc-icon {
+  filter: drop-shadow(0 0 12px var(--accent-glow));
+}
+
+.header-button {
+  --dwc-button-border-color: transparent;
+  --dwc-button-background: transparent;
+  --dwc-button-color: var(--text-secondary);
+  transition: all 200ms ease;
+}
+
+.header-button:hover {
+  --dwc-button-background: hsl(0 0% 100% / 0.08);
+  --dwc-button-color: var(--text-primary);
+}

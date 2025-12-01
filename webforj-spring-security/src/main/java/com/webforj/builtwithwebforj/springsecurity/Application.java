@@ -10,6 +10,7 @@ import com.webforj.annotation.StyleSheet;
 
 @SpringBootApplication
 @Routify(packages = "com.webforj.builtwithwebforj.springsecurity.views")
+@StyleSheet("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap")
 @StyleSheet("ws://app.css")
 @AppProfile(name = "webforj-spring-security", shortName = "webforj-spring-security")
 @AppTheme("dark")

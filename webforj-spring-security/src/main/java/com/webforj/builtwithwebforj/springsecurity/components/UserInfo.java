@@ -20,11 +20,12 @@ public class UserInfo extends Composite<Span> {
     if (auth != null && auth.isAuthenticated()) {
       String displayName = extractDisplayName(auth);
       String avatarUrl = extractAvatarUrl(auth);
+      String role = extractRole(auth);
 
       if (displayName != null) {
         container.addClassName("user-info-container");
 
-        Avatar avatar = new Avatar(avatarUrl, displayName);
+        Avatar avatar = new Avatar(avatarUrl, displayName, role);
         container.add(avatar);
 
         Span userSpan = new Span(displayName);
@@ -32,6 +33,15 @@ public class UserInfo extends Composite<Span> {
         container.add(userSpan);
       }
     }
+  }
+
+  private String extractRole(Authentication auth) {
+    if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+      return "ADMIN";
+    } else if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_SUPPORT"))) {
+      return "SUPPORT";
+    }
+    return "USER";
   }
 
   private String extractDisplayName(Authentication auth) {

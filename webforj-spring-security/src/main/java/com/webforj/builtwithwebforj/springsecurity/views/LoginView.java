@@ -1,5 +1,6 @@
 package com.webforj.builtwithwebforj.springsecurity.views;
 
+import com.webforj.annotation.StyleSheet;
 import com.webforj.builtwithwebforj.springsecurity.components.SocialLoginButton;
 import com.webforj.component.Composite;
 import com.webforj.component.Theme;
@@ -17,6 +18,7 @@ import com.webforj.router.security.annotation.AnonymousAccess;
 
 @Route("/signin")
 @AnonymousAccess
+@StyleSheet("ws://login.css")
 public class LoginView extends Composite<Login> implements DidEnterObserver {
   private final Login self = getBoundComponent();
 

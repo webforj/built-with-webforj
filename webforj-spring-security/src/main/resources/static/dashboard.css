@@ -1,0 +1,47 @@
+/*
+ * Dashboard View
+ */
+
+.dashboard-tabs {
+  margin-bottom: var(--dwc-space-l);
+}
+
+.dashboard-tabs::part(tabs-wrapper) {
+  background: transparent;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.dashboard-tabs::part(tab) {
+  color: var(--text-secondary);
+  transition: color 200ms ease;
+}
+
+.dashboard-tabs::part(tab):hover {
+  color: var(--text-primary);
+}
+
+.dashboard-tabs::part(tab-selected) {
+  color: var(--accent);
+}
+
+.tickets-table {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--dwc-border-radius-l);
+  overflow: hidden;
+}
+
+.tickets-table::part(row):hover {
+  background: var(--glass-bg-hover);
+}
+
+.tickets-table::part(header-cell) {
+  background: hsl(0 0% 0% / 0.2);
+  color: var(--text-secondary);
+  font-weight: var(--dwc-font-weight-semibold);
+  text-transform: uppercase;
+  font-size: var(--dwc-font-size-xs);
+  letter-spacing: 0.05em;
+}

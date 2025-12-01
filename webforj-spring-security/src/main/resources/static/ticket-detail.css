@@ -1,0 +1,103 @@
+/*
+ * Ticket Detail View
+ */
+
+.description-text {
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Comments list */
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dwc-space-m);
+}
+
+.no-comments {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Comment card */
+.comment-card {
+  padding: var(--dwc-space-m);
+  background: hsl(0 0% 100% / 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--dwc-border-radius-m);
+}
+
+.comment-card.internal {
+  background: hsl(38 60% 20% / 0.15);
+  border-color: hsl(38 60% 40% / 0.3);
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: var(--dwc-space-s);
+  margin-bottom: var(--dwc-space-s);
+}
+
+.comment-author {
+  font-weight: var(--dwc-font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.comment-timestamp {
+  font-size: var(--dwc-font-size-xs);
+  color: var(--text-tertiary);
+}
+
+.comment-text {
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.internal-badge {
+  font-size: var(--dwc-font-size-xs);
+  font-weight: var(--dwc-font-weight-semibold);
+  color: hsl(38 92% 60%);
+  background: hsl(38 60% 40% / 0.2);
+  padding: var(--dwc-space-2xs) var(--dwc-space-xs);
+  border-radius: var(--dwc-border-radius-s);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* Comment textarea */
+.comment-textarea {
+  width: 100%;
+  min-height: 100px;
+}
+
+/* Metadata card */
+.ticket-metadata {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--dwc-space-l);
+  padding: var(--dwc-space-l);
+  background: hsl(0 0% 100% / 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--dwc-border-radius-l);
+}
+
+.metadata-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dwc-space-2xs);
+}
+
+.metadata-label {
+  font-size: var(--dwc-font-size-xs);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metadata-value {
+  font-weight: var(--dwc-font-weight-medium);
+  color: var(--text-primary);
+}

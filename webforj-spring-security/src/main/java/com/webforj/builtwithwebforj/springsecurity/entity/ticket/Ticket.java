@@ -1,7 +1,10 @@
 package com.webforj.builtwithwebforj.springsecurity.entity.ticket;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.Length;
 
 import com.webforj.builtwithwebforj.springsecurity.entity.Comment;
 import com.webforj.builtwithwebforj.springsecurity.entity.User;
@@ -13,11 +16,8 @@ import java.util.Objects;
 
 /**
  * Support ticket entity.
- *
- * Note: Future enhancements could include:
- * - assignedTo field for ticket assignment to support agents
- * - updatedAt timestamp for tracking last modification
  */
+
 @Entity
 @Table(name = "tickets")
 public class Ticket {
@@ -29,9 +29,13 @@ public class Ticket {
   @Column(nullable = false, unique = true, length = 20)
   private String ticketNumber; // "TKT-001" format
 
+  @NotEmpty(message = "Subject is required")
+  @Length(min = 3, max = 200, message = "Subject must be between 3 and 200 characters")
   @Column(nullable = false, length = 200)
   private String subject;
 
+  @NotEmpty(message = "Description is required")
+  @Length(min = 10, max = 2000, message = "Description must be between 10 and 2000 characters")
   @Column(nullable = false, length = 2000)
   private String description;
 
@@ -39,10 +43,12 @@ public class Ticket {
   @Column(nullable = false, length = 20)
   private TicketStatus status = TicketStatus.OPEN;
 
+  @NotNull(message = "Please select a ticket type")
   @Enumerated(EnumType.STRING)
   @Column(nullable = false, length = 20)
   private TicketType type;
 
+  @NotNull(message = "Please select a priority")
   @Enumerated(EnumType.STRING)
   @Column(nullable = false, length = 20)
   private TicketPriority priority;

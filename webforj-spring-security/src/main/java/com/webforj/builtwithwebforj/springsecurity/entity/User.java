@@ -1,6 +1,9 @@
 package com.webforj.builtwithwebforj.springsecurity.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,15 +20,22 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @NotEmpty(message = "Username is required")
+  @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
   @Column(nullable = false, unique = true, length = 50)
   private String username;
 
+  @Size(min = 6, message = "Password must be at least 6 characters")
   @Column(nullable = false)
   private String password; // BCrypt hashed
 
+  @NotEmpty(message = "Display name is required")
+  @Size(min = 2, max = 100, message = "Display name must be between 2 and 100 characters")
   @Column(nullable = false, length = 100)
   private String displayName;
 
+  @Email(message = "Email must be valid")
+  @Size(max = 100, message = "Email must be 100 characters or less")
   @Column(length = 100)
   private String email;
 
