@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --dwc-color-primary-h: 265;
+  --dwc-color-primary-s: 85%;
+  --dwc-font-family: "Inter", sans-serif;
+  --dwc-font-size: 16px;
+  --dwc-font-line-height: 1.6;
+}
+
+html[data-app-theme~="dark"],
+html[data-app-theme~="dark-pure"] {
+  --dwc-color-default-s: 3%;
+}
+
+dwc-window-content {
+  background-color: var(--dwc-surface-0);
+  background-image: radial-gradient(
+      ellipse at 0% 0%,
+      hsl(var(--dwc-color-primary-h) var(--dwc-color-primary-s) 50% / 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      hsl(var(--dwc-color-primary-h) var(--dwc-color-primary-s) 60% / 0.12) 0%,
+      transparent 50%
+    );
+}
+
+.chat-input-wrapper {
+  position: relative;
+  background: hsl(
+    var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.1
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid
+    hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.2);
+  border-radius: 16px;
+  padding: var(--dwc-space-s);
+  padding-right: 56px;
+  box-shadow: 0 8px 32px
+    hsl(var(--dwc-color-primary-h) var(--dwc-color-primary-s) 20% / 0.1);
+  transition: all 0.3s ease;
+}
+
+.chat-input-wrapper:focus-within {
+  border-color: hsl(
+    var(--dwc-color-primary-h) var(--dwc-color-primary-s) 50% / 0.5
+  );
+  box-shadow: 0 8px 32px
+    hsl(var(--dwc-color-primary-h) var(--dwc-color-primary-s) 50% / 0.2);
+}
+
+.chat-input-textarea {
+  width: 100%;
+  --dwc-input-background: transparent;
+  --dwc-input-hover-background: transparent;
+  --dwc-input-border-width: 0;
+  --dwc-input-focus-ring: none;
+}
+
+.chat-input-textarea::part(input) {
+  min-height: 60px;
+  max-height: 200px;
+  padding: var(--dwc-space-s);
+  resize: none;
+}
+
+.chat-input-textarea::part(label) {
+  display: none;
+}
+
+.chat-input-button {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  padding: 0;
+  --dwc-border-radius: 50%;
+}
+
+.chat-input-button::part(button) {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-input-button::part(label) {
+  display: none;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
