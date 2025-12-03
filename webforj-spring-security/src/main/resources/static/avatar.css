@@ -15,18 +15,18 @@
 
 /* Role-based ring colors */
 .avatar-user {
-  border-color: hsl(230 85% 60%);
-  box-shadow: 0 0 8px hsl(230 85% 60% / 0.3);
+  border-color: hsl(var(--dwc-color-info-h) var(--dwc-color-info-s) 50%);
+  box-shadow: 0 0 8px hsl(var(--dwc-color-info-h) var(--dwc-color-info-s) 50% / 0.3);
 }
 
 .avatar-support {
-  border-color: hsl(38 92% 50%);
-  box-shadow: 0 0 8px hsl(38 92% 50% / 0.3);
+  border-color: hsl(var(--dwc-color-warning-h) var(--dwc-color-warning-s) 50%);
+  box-shadow: 0 0 8px hsl(var(--dwc-color-warning-h) var(--dwc-color-warning-s) 50% / 0.3);
 }
 
 .avatar-admin {
-  border-color: hsl(280 70% 60%);
-  box-shadow: 0 0 8px hsl(280 70% 60% / 0.3);
+  border-color: hsl(var(--dwc-color-primary-h) 70% 55%);
+  box-shadow: 0 0 8px hsl(var(--dwc-color-primary-h) 70% 55% / 0.3);
 }
 
 .avatar-image {
@@ -45,5 +45,5 @@
 .toolbar-username {
   font-size: var(--dwc-font-size-s);
   font-weight: var(--dwc-font-weight-medium);
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
 }

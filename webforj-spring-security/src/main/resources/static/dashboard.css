@@ -12,16 +12,16 @@
 }
 
 .dashboard-tabs::part(tab) {
-  color: var(--text-secondary);
+  color: var(--dwc-color-on-default-text-light);
   transition: color 200ms ease;
 }
 
 .dashboard-tabs::part(tab):hover {
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
 }
 
 .dashboard-tabs::part(tab-selected) {
-  color: var(--accent);
+  color: var(--dwc-color-primary);
 }
 
 .tickets-table {
@@ -38,8 +38,8 @@
 }
 
 .tickets-table::part(header-cell) {
-  background: hsl(0 0% 0% / 0.2);
-  color: var(--text-secondary);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 10% / 0.2);
+  color: var(--dwc-color-on-default-text-light);
   font-weight: var(--dwc-font-weight-semibold);
   text-transform: uppercase;
   font-size: var(--dwc-font-size-xs);

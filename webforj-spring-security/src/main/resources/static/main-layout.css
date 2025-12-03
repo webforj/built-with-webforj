@@ -7,7 +7,7 @@
 }
 
 dwc-app-layout::part(header) {
-  background: hsl(0 0% 0% / 0.3);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 10% / 0.3);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
@@ -16,28 +16,28 @@ dwc-app-layout::part(header) {
 .brand {
   font-weight: var(--dwc-font-weight-bold);
   font-size: var(--dwc-font-size-l);
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
   letter-spacing: -0.01em;
 }
 
 .brand dwc-icon {
-  color: var(--accent);
-  filter: drop-shadow(0 0 8px var(--accent-glow));
+  color: hsl(var(--dwc-color-primary-h) 80% 55%);
+  filter: drop-shadow(0 0 8px hsl(var(--dwc-color-primary-h) 80% 55% / 0.5));
   transition: filter 200ms ease;
 }
 
 .brand:hover dwc-icon {
-  filter: drop-shadow(0 0 12px var(--accent-glow));
+  filter: drop-shadow(0 0 12px hsl(var(--dwc-color-primary-h) 80% 55% / 0.6));
 }
 
 .header-button {
   --dwc-button-border-color: transparent;
   --dwc-button-background: transparent;
-  --dwc-button-color: var(--text-secondary);
+  --dwc-button-color: var(--dwc-color-on-default-text-light);
   transition: all 200ms ease;
 }
 
 .header-button:hover {
-  --dwc-button-background: hsl(0 0% 100% / 0.08);
-  --dwc-button-color: var(--text-primary);
+  --dwc-button-background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.1);
+  --dwc-button-color: var(--dwc-color-on-default-text);
 }

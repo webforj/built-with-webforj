@@ -22,7 +22,7 @@ dwc-login::part(footer) {
 }
 
 .login-description {
-  color: var(--text-secondary);
+  color: var(--dwc-color-on-default-text-light);
   font-size: var(--dwc-font-size-s);
   margin: 0;
 }
@@ -41,25 +41,25 @@ dwc-login::part(footer) {
   gap: var(--dwc-space-s);
   width: 100%;
   padding: var(--dwc-space-s) var(--dwc-space-m);
-  background: hsl(0 0% 100% / 0.05);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.05);
   border: 1px solid var(--border-default);
   border-radius: var(--dwc-border-radius-m);
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
   font-weight: var(--dwc-font-weight-medium);
   cursor: pointer;
   transition: background 150ms ease, border-color 150ms ease;
 }
 
 .social-login-button:hover {
-  background: hsl(0 0% 100% / 0.08);
-  border-color: hsl(0 0% 100% / 0.2);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.1);
+  border-color: var(--border-default);
 }
 
 .oauth-divider {
   display: flex;
   align-items: center;
   gap: var(--dwc-space-m);
-  color: var(--text-tertiary);
+  color: var(--dwc-color-default-50);
   font-size: var(--dwc-font-size-xs);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -75,7 +75,7 @@ dwc-login::part(footer) {
 }
 
 .email-signin-text {
-  color: var(--text-secondary);
+  color: var(--dwc-color-on-default-text-light);
   font-size: var(--dwc-font-size-s);
   text-align: center;
   margin-bottom: var(--dwc-space-s);

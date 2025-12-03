@@ -14,7 +14,7 @@
 
 .access-denied-icon {
   font-size: 80px;
-  color: var(--color-warning);
+  color: var(--dwc-color-warning-text);
   margin-bottom: var(--dwc-space-l);
   opacity: 0.9;
 }
@@ -22,20 +22,20 @@
 .access-denied-title {
   font-size: var(--dwc-font-size-2xl);
   font-weight: var(--dwc-font-weight-bold);
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
   margin: 0 0 var(--dwc-space-s);
   letter-spacing: 0.05em;
 }
 
 .access-denied-message {
   font-size: var(--dwc-font-size-l);
-  color: var(--text-secondary);
+  color: var(--dwc-color-on-default-text-light);
   margin: 0 0 var(--dwc-space-xs);
 }
 
 .access-denied-submessage {
   font-size: var(--dwc-font-size-m);
-  color: var(--text-tertiary);
+  color: var(--dwc-color-default-50);
   max-width: 400px;
   line-height: 1.5;
 }

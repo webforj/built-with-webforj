@@ -173,7 +173,6 @@ public class CreateTicketView extends Composite<Div> {
     description = new TextArea();
     description.setLabel("Description");
     description.setPlaceholder("Provide detailed information about your request...");
-    description.setStyle("min-height", "150px");
     formContainer.add(description);
 
     // Buttons

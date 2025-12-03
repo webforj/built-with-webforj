@@ -3,7 +3,7 @@
  */
 
 .description-text {
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
   line-height: 1.6;
   margin: 0;
 }
@@ -16,21 +16,21 @@
 }
 
 .no-comments {
-  color: var(--text-secondary);
+  color: var(--dwc-color-on-default-text-light);
   font-style: italic;
 }
 
 /* Comment card */
 .comment-card {
   padding: var(--dwc-space-m);
-  background: hsl(0 0% 100% / 0.03);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.03);
   border: 1px solid var(--border-subtle);
   border-radius: var(--dwc-border-radius-m);
 }
 
 .comment-card.internal {
-  background: hsl(38 60% 20% / 0.15);
-  border-color: hsl(38 60% 40% / 0.3);
+  background: hsl(var(--dwc-color-warning-h) 60% 50% / 0.1);
+  border-color: hsl(var(--dwc-color-warning-h) 60% 50% / 0.25);
 }
 
 .comment-header {
@@ -42,16 +42,16 @@
 
 .comment-author {
   font-weight: var(--dwc-font-weight-semibold);
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
 }
 
 .comment-timestamp {
   font-size: var(--dwc-font-size-xs);
-  color: var(--text-tertiary);
+  color: var(--dwc-color-default-50);
 }
 
 .comment-text {
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
   line-height: 1.5;
   margin: 0;
 }
@@ -59,8 +59,8 @@
 .internal-badge {
   font-size: var(--dwc-font-size-xs);
   font-weight: var(--dwc-font-weight-semibold);
-  color: hsl(38 92% 60%);
-  background: hsl(38 60% 40% / 0.2);
+  color: var(--dwc-color-warning-text);
+  background: hsl(var(--dwc-color-warning-h) 60% 50% / 0.15);
   padding: var(--dwc-space-2xs) var(--dwc-space-xs);
   border-radius: var(--dwc-border-radius-s);
   text-transform: uppercase;
@@ -79,7 +79,7 @@
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: var(--dwc-space-l);
   padding: var(--dwc-space-l);
-  background: hsl(0 0% 100% / 0.03);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.03);
   border: 1px solid var(--border-subtle);
   border-radius: var(--dwc-border-radius-l);
 }
@@ -92,12 +92,12 @@
 
 .metadata-label {
   font-size: var(--dwc-font-size-xs);
-  color: var(--text-tertiary);
+  color: var(--dwc-color-default-50);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .metadata-value {
   font-weight: var(--dwc-font-weight-medium);
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
 }

@@ -60,8 +60,18 @@ public class UserInfo extends Composite<Span> {
         return githubLogin;
       }
 
-      // Fallback to the default name
-      return oauth2User.getName();
+      // Try email
+      String email = oauth2User.getAttribute("email");
+      if (email != null) {
+        return email.split("@")[0];
+      }
+
+      // Fallback to the default name (safely)
+      try {
+        return oauth2User.getName();
+      } catch (Exception e) {
+        return "User";
+      }
     } else {
       // For form login users
       return auth.getName();

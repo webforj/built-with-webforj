@@ -1,6 +1,6 @@
 /*
  * Global Design System
- * Modern glassmorphism aesthetic
+ * Modern glassmorphism aesthetic with light/dark theme support
  */
 
 :root {
@@ -8,70 +8,188 @@
   --dwc-font-family: 'Inter', system-ui, sans-serif;
   --dwc-font-size: var(--dwc-font-size-m);
 
+  /* Theme color definitions */
+  --dwc-color-primary-h: 323;
+  --dwc-color-primary-s: 82%;
+  --dwc-color-primary-c: 50;
+  --dwc-color-info-h: 143;
+  --dwc-color-info-s: 82%;
+  --dwc-color-info-c: 30;
+  --dwc-color-success-h: 90;
+  --dwc-color-success-s: 82%;
+  --dwc-color-success-c: 30;
+  --dwc-color-danger-h: 345;
+  --dwc-color-danger-s: 82%;
+  --dwc-color-danger-c: 50;
+  --dwc-color-warning-h: 15;
+  --dwc-color-warning-s: 82%;
+  --dwc-color-warning-c: 45;
+  --dwc-color-default-h: var(--dwc-color-primary-h);
+  --dwc-color-default-s: 10%;
+  --dwc-color-default-c: 50;
+  --dwc-color-primary-dark: var(--dwc-color-primary-30);
+  --dwc-color-on-primary-text-dark: var(--dwc-color-primary-text-30);
+  --dwc-color-primary: var(--dwc-color-primary-35);
+  --dwc-color-on-primary-text: var(--dwc-color-primary-text-35);
+  --dwc-color-primary-light: var(--dwc-color-primary-40);
+  --dwc-color-on-primary-text-light: var(--dwc-color-primary-text-40);
+  --dwc-color-info-dark: var(--dwc-color-info-30);
+  --dwc-color-on-info-text-dark: var(--dwc-color-info-text-30);
+  --dwc-color-info: var(--dwc-color-info-35);
+  --dwc-color-on-info-text: var(--dwc-color-info-text-35);
+  --dwc-color-info-light: var(--dwc-color-info-40);
+  --dwc-color-on-info-text-light: var(--dwc-color-info-text-40);
+  --dwc-color-success-dark: var(--dwc-color-success-30);
+  --dwc-color-on-success-text-dark: var(--dwc-color-success-text-30);
+  --dwc-color-success: var(--dwc-color-success-35);
+  --dwc-color-on-success-text: var(--dwc-color-success-text-35);
+  --dwc-color-success-light: var(--dwc-color-success-40);
+  --dwc-color-on-success-text-light: var(--dwc-color-success-text-40);
+  --dwc-color-danger-dark: var(--dwc-color-danger-30);
+  --dwc-color-on-danger-text-dark: var(--dwc-color-danger-text-30);
+  --dwc-color-danger: var(--dwc-color-danger-35);
+  --dwc-color-on-danger-text: var(--dwc-color-danger-text-35);
+  --dwc-color-danger-light: var(--dwc-color-danger-40);
+  --dwc-color-on-danger-text-light: var(--dwc-color-danger-text-40);
+  --dwc-color-warning-dark: var(--dwc-color-warning-30);
+  --dwc-color-on-warning-text-dark: var(--dwc-color-warning-text-30);
+  --dwc-color-warning: var(--dwc-color-warning-35);
+  --dwc-color-on-warning-text: var(--dwc-color-warning-text-35);
+  --dwc-color-warning-light: var(--dwc-color-warning-40);
+  --dwc-color-on-warning-text-light: var(--dwc-color-warning-text-40);
+  --dwc-color-default-dark: var(--dwc-color-default-85);
+  --dwc-color-on-default-text-dark: var(--dwc-color-default-text-85);
+  --dwc-color-default: var(--dwc-color-default-90);
+  --dwc-color-on-default-text: var(--dwc-color-default-text-90);
+  --dwc-color-default-light: var(--dwc-color-default-95);
+  --dwc-color-on-default-text-light: var(--dwc-color-default-text-95);
+  --dwc-color-primary-text-dark: var(--dwc-color-primary-25);
+  --dwc-color-primary-text: var(--dwc-color-primary-30);
+  --dwc-color-primary-text-light: var(--dwc-color-primary-35);
+  --dwc-color-info-text-dark: var(--dwc-color-info-15);
+  --dwc-color-info-text: var(--dwc-color-info-20);
+  --dwc-color-info-text-light: var(--dwc-color-info-25);
+  --dwc-color-success-text-dark: var(--dwc-color-success-15);
+  --dwc-color-success-text: var(--dwc-color-success-20);
+  --dwc-color-success-text-light: var(--dwc-color-success-25);
+  --dwc-color-danger-text-dark: var(--dwc-color-danger-35);
+  --dwc-color-danger-text: var(--dwc-color-danger-40);
+  --dwc-color-danger-text-light: var(--dwc-color-danger-45);
+  --dwc-color-warning-text-dark: var(--dwc-color-warning-30);
+  --dwc-color-warning-text: var(--dwc-color-warning-35);
+  --dwc-color-warning-text-light: var(--dwc-color-warning-40);
+  --dwc-color-default-text-dark: var(--dwc-color-default-35);
+  --dwc-color-default-text: var(--dwc-color-default-40);
+  --dwc-color-default-text-light: var(--dwc-color-default-45);
+
   /* Flat surfaces */
   --dwc-surface-1: var(--dwc-color-default);
   --dwc-surface-2: var(--dwc-color-default);
   --dwc-surface-3: var(--dwc-color-default);
 
-  /* Accent color - vibrant blue with purple tint */
-  --accent: hsl(230 85% 60%);
-  --accent-hover: hsl(230 85% 52%);
-  --accent-subtle: hsl(230 85% 60% / 0.15);
-  --accent-glow: hsl(230 85% 60% / 0.4);
+  /* Borders - theme-aware */
+  --border-subtle: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.15);
+  --border-default: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.25);
+  --border-glow: hsl(var(--dwc-color-info-h) var(--dwc-color-info-s) 60% / 0.3);
 
-  /* Semantic colors */
-  --color-success: hsl(160 84% 39%);
-  --color-warning: hsl(38 92% 50%);
-  --color-danger: hsl(0 72% 51%);
-  --color-info: hsl(218 80% 55%);
-
-  /* Text colors */
-  --text-primary: hsl(0 0% 98%);
-  --text-secondary: hsl(0 0% 68%);
-  --text-tertiary: hsl(0 0% 48%);
-
-  /* Borders */
-  --border-subtle: hsl(0 0% 100% / 0.06);
-  --border-default: hsl(0 0% 100% / 0.1);
-  --border-glow: hsl(230 85% 60% / 0.3);
-
-  /* Glass effect */
-  --glass-bg: hsl(0 0% 100% / 0.03);
-  --glass-bg-hover: hsl(0 0% 100% / 0.06);
+  /* Glass effect - light mode */
+  --glass-bg: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 95% / 0.8);
+  --glass-bg-hover: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 92% / 0.85);
   --glass-blur: blur(20px);
 
-  /* Gradient background - more vibrant */
+  /* Gradient background - light mode with primary color tints */
   --app-gradient:
-    radial-gradient(ellipse 100% 80% at 50% -30%, hsl(230 70% 20% / 0.7), transparent 60%),
-    radial-gradient(ellipse 80% 60% at 100% 100%, hsl(280 50% 15% / 0.5), transparent 50%),
-    radial-gradient(ellipse 60% 40% at 0% 80%, hsl(200 60% 12% / 0.4), transparent 40%);
+    linear-gradient(to bottom, hsl(var(--dwc-color-primary-h) 20% 96%) 0%, transparent 35%),
+    linear-gradient(to top, hsl(var(--dwc-color-primary-h) 60% 85% / 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 45% at 20% 100%, hsl(var(--dwc-color-primary-h) 70% 80% / 0.3) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 100%, hsl(var(--dwc-color-primary-h) 80% 75% / 0.3) 0%, transparent 60%);
+  --app-bg: hsl(var(--dwc-color-primary-h) 15% 96%);
 }
 
-/* Animated background */
+/* Dark theme overrides */
+html[data-app-theme~='dark'],
+html[data-app-theme~='dark-pure'] {
+  --dwc-color-primary-text-dark: var(--dwc-color-primary-25);
+  --dwc-color-primary-text: var(--dwc-color-primary-30);
+  --dwc-color-primary-text-light: var(--dwc-color-primary-35);
+  --dwc-color-info-text-dark: var(--dwc-color-info-50);
+  --dwc-color-info-text: var(--dwc-color-info-55);
+  --dwc-color-info-text-light: var(--dwc-color-info-60);
+  --dwc-color-success-text-dark: var(--dwc-color-success-50);
+  --dwc-color-success-text: var(--dwc-color-success-55);
+  --dwc-color-success-text-light: var(--dwc-color-success-60);
+  --dwc-color-danger-text-dark: var(--dwc-color-danger-25);
+  --dwc-color-danger-text: var(--dwc-color-danger-30);
+  --dwc-color-danger-text-light: var(--dwc-color-danger-35);
+  --dwc-color-warning-text-dark: var(--dwc-color-warning-30);
+  --dwc-color-warning-text: var(--dwc-color-warning-35);
+  --dwc-color-warning-text-light: var(--dwc-color-warning-40);
+  --dwc-color-default-text-dark: var(--dwc-color-default-30);
+  --dwc-color-default-text: var(--dwc-color-default-35);
+  --dwc-color-default-text-light: var(--dwc-color-default-40);
+  --dwc-color-default-s: 3%;
+
+  /* Borders - dark mode */
+  --border-subtle: hsl(0 0% 100% / 0.1);
+  --border-default: hsl(0 0% 100% / 0.15);
+
+  /* Glass effect - dark mode */
+  --glass-bg: hsl(var(--dwc-color-primary-h) 20% 15% / 0.8);
+  --glass-bg-hover: hsl(var(--dwc-color-primary-h) 20% 18% / 0.85);
+
+  /* Gradient background - dark mode */
+  --app-gradient:
+    linear-gradient(to bottom, hsl(var(--dwc-color-primary-h) 20% 6%) 0%, transparent 35%),
+    linear-gradient(to top, hsl(var(--dwc-color-primary-h) 60% 35% / 0.6) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 45% at 20% 100%, hsl(var(--dwc-color-primary-h) 70% 45% / 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 100%, hsl(var(--dwc-color-primary-h) 80% 50% / 0.5) 0%, transparent 60%);
+  --app-bg: hsl(var(--dwc-color-primary-h) 15% 6%);
+}
+
+html[data-app-theme~='dark-pure'] {
+  --dwc-color-primary-text-dark: var(--dwc-color-primary-20);
+  --dwc-color-primary-text: var(--dwc-color-primary-25);
+  --dwc-color-primary-text-light: var(--dwc-color-primary-30);
+  --dwc-color-info-text-dark: var(--dwc-color-info-50);
+  --dwc-color-info-text: var(--dwc-color-info-55);
+  --dwc-color-info-text-light: var(--dwc-color-info-60);
+  --dwc-color-success-text-dark: var(--dwc-color-success-50);
+  --dwc-color-success-text: var(--dwc-color-success-55);
+  --dwc-color-success-text-light: var(--dwc-color-success-60);
+  --dwc-color-danger-text-dark: var(--dwc-color-danger-20);
+  --dwc-color-danger-text: var(--dwc-color-danger-25);
+  --dwc-color-danger-text-light: var(--dwc-color-danger-30);
+  --dwc-color-warning-text-dark: var(--dwc-color-warning-25);
+  --dwc-color-warning-text: var(--dwc-color-warning-30);
+  --dwc-color-warning-text-light: var(--dwc-color-warning-35);
+  --dwc-color-default-text-dark: var(--dwc-color-default-25);
+  --dwc-color-default-text: var(--dwc-color-default-30);
+  --dwc-color-default-text-light: var(--dwc-color-default-35);
+  --dwc-color-default-s: 3%;
+}
+
+/* Animated background - subtle shift for the color bands */
 @keyframes gradient-shift {
   0%, 100% {
-    background-position: 0% 0%, 100% 100%, 0% 80%;
+    background-position: 0% 0%, 0% 100%, 20% 100%, 80% 100%;
   }
-  33% {
-    background-position: 50% -20%, 80% 100%, 20% 90%;
-  }
-  66% {
-    background-position: 20% 10%, 100% 80%, 0% 70%;
+  50% {
+    background-position: 0% 0%, 0% 100%, 25% 100%, 75% 100%;
   }
 }
 
 /* Background */
 html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
-  background-color: hsl(230 15% 8%);
+  background-color: var(--app-bg);
   background-image: var(--app-gradient);
   background-attachment: fixed;
-  background-size: 200% 200%, 200% 200%, 200% 200%;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
   animation: gradient-shift 20s ease-in-out infinite;
 }
 
 /* View container */
 .view-container {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: var(--dwc-space-xl) var(--dwc-space-l);
 }
@@ -86,7 +204,7 @@ html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
   font-weight: var(--dwc-font-weight-semibold);
   margin: 0;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, var(--text-primary) 0%, hsl(230 60% 75%) 50%, var(--text-primary) 100%);
+  background: linear-gradient(135deg, var(--dwc-color-on-default-text) 0%, hsl(var(--dwc-color-info-h) 60% 55%) 50%, var(--dwc-color-on-default-text) 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -94,11 +212,11 @@ html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
 }
 
 .page-subtitle {
-  color: var(--text-secondary);
+  color: var(--dwc-color-on-default-text-light);
   margin: var(--dwc-space-xs) 0 0;
 }
 
-/* Card - glassmorphism with micro-interactions */
+/* Card - glassmorphism */
 .card {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
@@ -106,16 +224,16 @@ html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
   border: 1px solid var(--border-subtle);
   border-radius: var(--dwc-border-radius-l);
   padding: var(--dwc-space-l);
+}
+
+/* Only apply hover effects to explicitly interactive cards */
+.card.interactive {
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card:hover {
+.card.interactive:hover {
   background: var(--glass-bg-hover);
   border-color: var(--border-default);
-}
-
-/* Only apply lift effect to cards that are clickable/interactive, not form containers */
-.card.interactive:hover {
   transform: scale(1.01) translateY(-2px);
   box-shadow: 0 8px 32px hsl(0 0% 0% / 0.2);
 }
@@ -129,7 +247,7 @@ html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
   font-size: var(--dwc-font-size-l);
   font-weight: var(--dwc-font-weight-semibold);
   margin: 0 0 var(--dwc-space-m);
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
 }
 
 /* Status badges - modern pill style */
@@ -172,26 +290,26 @@ html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
 }
 
 .status-badge.open {
-  background: hsl(230 85% 60% / 0.15);
-  color: hsl(230 85% 70%);
-  box-shadow: 0 0 12px hsl(230 85% 60% / 0.2);
+  background: hsl(var(--dwc-color-info-h) var(--dwc-color-info-s) 50% / 0.15);
+  color: var(--dwc-color-info-text);
+  box-shadow: 0 0 12px hsl(var(--dwc-color-info-h) var(--dwc-color-info-s) 50% / 0.2);
 }
 
 .status-badge.in-progress {
-  background: hsl(38 92% 50% / 0.15);
-  color: hsl(38 92% 65%);
-  box-shadow: 0 0 12px hsl(38 92% 50% / 0.2);
+  background: hsl(var(--dwc-color-warning-h) var(--dwc-color-warning-s) 50% / 0.15);
+  color: var(--dwc-color-warning-text);
+  box-shadow: 0 0 12px hsl(var(--dwc-color-warning-h) var(--dwc-color-warning-s) 50% / 0.2);
 }
 
 .status-badge.resolved {
-  background: hsl(160 84% 39% / 0.15);
-  color: hsl(160 84% 55%);
-  box-shadow: 0 0 12px hsl(160 84% 39% / 0.2);
+  background: hsl(var(--dwc-color-success-h) var(--dwc-color-success-s) 40% / 0.15);
+  color: var(--dwc-color-success-text);
+  box-shadow: 0 0 12px hsl(var(--dwc-color-success-h) var(--dwc-color-success-s) 40% / 0.2);
 }
 
 .status-badge.closed {
-  background: hsl(0 0% 50% / 0.12);
-  color: hsl(0 0% 55%);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.12);
+  color: var(--dwc-color-on-default-text-light);
 }
 
 /* Type badges - modern pill style */
@@ -207,27 +325,27 @@ html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
 }
 
 .type-badge.bug {
-  background: hsl(0 72% 51% / 0.12);
-  border-color: hsl(0 72% 51% / 0.25);
-  color: hsl(0 72% 68%);
+  background: hsl(var(--dwc-color-danger-h) var(--dwc-color-danger-s) 50% / 0.12);
+  border-color: hsl(var(--dwc-color-danger-h) var(--dwc-color-danger-s) 50% / 0.25);
+  color: var(--dwc-color-danger-text);
 }
 
 .type-badge.feature-request {
-  background: hsl(160 84% 39% / 0.12);
-  border-color: hsl(160 84% 39% / 0.25);
-  color: hsl(160 84% 55%);
+  background: hsl(var(--dwc-color-success-h) var(--dwc-color-success-s) 40% / 0.12);
+  border-color: hsl(var(--dwc-color-success-h) var(--dwc-color-success-s) 40% / 0.25);
+  color: var(--dwc-color-success-text);
 }
 
 .type-badge.question {
-  background: hsl(230 85% 60% / 0.12);
-  border-color: hsl(230 85% 60% / 0.25);
-  color: hsl(230 85% 70%);
+  background: hsl(var(--dwc-color-info-h) var(--dwc-color-info-s) 50% / 0.12);
+  border-color: hsl(var(--dwc-color-info-h) var(--dwc-color-info-s) 50% / 0.25);
+  color: var(--dwc-color-info-text);
 }
 
 .type-badge.other {
-  background: hsl(0 0% 50% / 0.1);
-  border-color: hsl(0 0% 50% / 0.2);
-  color: hsl(0 0% 60%);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.1);
+  border-color: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.2);
+  color: var(--dwc-color-on-default-text-light);
 }
 
 /* Priority labels */
@@ -235,10 +353,10 @@ html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
   font-weight: var(--dwc-font-weight-medium);
 }
 
-.priority-label.low { color: var(--text-secondary); }
-.priority-label.medium { color: hsl(218 80% 65%); }
-.priority-label.high { color: hsl(38 92% 60%); }
-.priority-label.urgent { color: hsl(0 72% 60%); }
+.priority-label.low { color: var(--dwc-color-on-default-text-light); }
+.priority-label.medium { color: var(--dwc-color-info-text); }
+.priority-label.high { color: var(--dwc-color-warning-text); }
+.priority-label.urgent { color: var(--dwc-color-danger-text); }
 
 /* Table styling */
 dwc-table::part(type-badge) {
@@ -274,18 +392,18 @@ dwc-table::part(type-badge) {
 
 .empty-state-icon dwc-icon {
   font-size: 48px;
-  color: var(--text-tertiary);
+  color: var(--dwc-color-default-50);
 }
 
 .empty-state-title {
   font-size: var(--dwc-font-size-xl);
   font-weight: var(--dwc-font-weight-semibold);
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
   margin: 0;
 }
 
 .empty-state-message {
-  color: var(--text-secondary);
+  color: var(--dwc-color-on-default-text-light);
   font-size: var(--dwc-font-size-m);
   margin: 0 0 var(--dwc-space-m);
   max-width: 300px;
@@ -302,90 +420,23 @@ dwc-table::part(type-badge) {
   display: inline-block;
   font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
   font-size: var(--dwc-font-size-s);
-  color: var(--text-secondary);
-  background: hsl(0 0% 100% / 0.05);
+  color: var(--dwc-color-on-default-text-light);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.08);
   padding: var(--dwc-space-2xs) var(--dwc-space-s);
   border-radius: var(--dwc-border-radius-s);
   letter-spacing: 0.02em;
   margin-bottom: var(--dwc-space-xs);
 }
 
-/* Primary button */
-dwc-button[theme~="primary"] {
-  --dwc-button-background: var(--accent);
-  --dwc-button-hover-background: var(--accent-hover);
-}
-
 /* Back button styling */
 .back-button {
   --dwc-button-background: transparent;
-  --dwc-button-color: var(--text-secondary);
+  --dwc-button-color: var(--dwc-color-on-default-text-light);
   margin-bottom: var(--dwc-space-m);
 }
 
 .back-button:hover {
-  --dwc-button-color: var(--text-primary);
-}
-
-/* Skeleton loading states */
-@keyframes skeleton-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    hsl(0 0% 100% / 0.03) 0%,
-    hsl(0 0% 100% / 0.08) 50%,
-    hsl(0 0% 100% / 0.03) 100%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-shimmer 1.5s ease-in-out infinite;
-  border-radius: var(--dwc-border-radius-s);
-}
-
-.skeleton-text {
-  height: 1em;
-  margin-bottom: var(--dwc-space-xs);
-}
-
-.skeleton-text:last-child {
-  width: 60%;
-}
-
-.skeleton-title {
-  height: 1.5em;
-  width: 40%;
-  margin-bottom: var(--dwc-space-m);
-}
-
-.skeleton-card {
-  height: 120px;
-  border-radius: var(--dwc-border-radius-l);
-}
-
-.skeleton-row {
-  display: flex;
-  gap: var(--dwc-space-m);
-  padding: var(--dwc-space-m) 0;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.skeleton-cell {
-  height: 1em;
-  flex: 1;
-}
-
-.skeleton-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  flex-shrink: 0;
+  --dwc-button-color: var(--dwc-color-on-default-text);
 }
 
 /* Frosted glass input fields */
@@ -419,23 +470,23 @@ dwc-field:focus-within::part(input-wrapper),
 dwc-textarea:focus-within::part(input-wrapper),
 dwc-choicebox:focus-within::part(input-wrapper) {
   background: var(--glass-bg-hover);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px hsl(230 85% 60% / 0.15);
+  border-color: var(--dwc-color-primary);
+  box-shadow: 0 0 0 3px hsl(var(--dwc-color-primary-h) var(--dwc-color-primary-s) 50% / 0.15);
 }
 
 dwc-field::part(label),
 dwc-textarea::part(label),
 dwc-choicebox::part(label) {
-  color: var(--text-secondary);
+  color: var(--dwc-color-on-default-text-light);
   font-weight: var(--dwc-font-weight-medium);
 }
 
 dwc-field::part(input-wrapper),
 dwc-textarea::part(input-wrapper) {
-  color: var(--text-primary);
+  color: var(--dwc-color-on-default-text);
 }
 
 dwc-field::part(input)::placeholder,
 dwc-textarea::part(input)::placeholder {
-  color: var(--text-tertiary);
+  color: var(--dwc-color-default-50);
 }
