@@ -173,6 +173,7 @@ public class CreateTicketView extends Composite<Div> {
     description = new TextArea();
     description.setLabel("Description");
     description.setPlaceholder("Provide detailed information about your request...");
+    description.addClassName("create-ticket-description");
     formContainer.add(description);
 
     // Buttons

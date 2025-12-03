@@ -17,3 +17,7 @@
   --dwc-button-background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.08);
   --dwc-button-color: var(--dwc-color-on-default-text);
 }
+
+.create-ticket-description::part(input) {
+  min-height: 200px;
+}

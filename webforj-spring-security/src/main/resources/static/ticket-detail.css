@@ -70,7 +70,10 @@
 /* Comment textarea */
 .comment-textarea {
   width: 100%;
-  min-height: 100px;
+}
+
+.comment-textarea::part(input) {
+  min-height: 200px;
 }
 
 /* Metadata card */
