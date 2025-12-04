@@ -8,7 +8,6 @@ import com.webforj.annotation.StyleSheet;
 import com.webforj.builtwithwebforj.dashboard.components.DrawerFooter;
 import com.webforj.builtwithwebforj.dashboard.components.DrawerLogo;
 import com.webforj.builtwithwebforj.dashboard.utils.charts.ChartRedrawable;
-import com.webforj.component.Component;
 import com.webforj.component.Composite;
 import com.webforj.component.html.elements.H1;
 import com.webforj.component.html.elements.Div;
@@ -165,8 +164,8 @@ public class MainLayout extends Composite<AppLayout> {
   }
 
   private void onNavigate(NavigateEvent ev) {
-    Set<Component> components = ev.getContext().getAllComponents();
-    Component view = components.stream().filter(c -> c.getClass().getSimpleName().endsWith("View")).findFirst()
+    Set<com.webforj.component.Component> components = ev.getContext().getAllComponents();
+    com.webforj.component.Component view = components.stream().filter(c -> c.getClass().getSimpleName().endsWith("View")).findFirst()
         .orElse(null);
 
     if (view != null) {
