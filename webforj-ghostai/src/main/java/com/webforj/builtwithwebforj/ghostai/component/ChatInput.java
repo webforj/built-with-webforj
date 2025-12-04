@@ -1,6 +1,6 @@
 package com.webforj.builtwithwebforj.ghostai.component;
 
-import com.webforj.Debouncer;
+import com.webforj.Environment;
 import com.webforj.builtwithwebforj.ghostai.service.PredictionService;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
@@ -10,6 +10,9 @@ import com.webforj.component.field.TextArea;
 import com.webforj.component.html.elements.Div;
 import com.webforj.component.icons.DwcIcon;
 import com.webforj.component.icons.FeatherIcon;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 public class ChatInput extends Composite<Div> {
@@ -21,12 +24,12 @@ public class ChatInput extends Composite<Div> {
   private final Div self = getBoundComponent();
   private final TextArea textArea = new TextArea();
   private final Button actionButton = new Button();
-  private final Debouncer debounce = new Debouncer(0.25f);
+  private ScheduledFuture<?> pendingPrediction;
   private State state = State.IDLE;
   private Consumer<String> sendHandler;
   private Consumer<Void> stopHandler;
 
-  public ChatInput(PredictionService predictionService) {
+  public ChatInput(PredictionService predictionService, ScheduledExecutorService debouncer) {
     Div wrapper = new Div();
     wrapper.addClassName("chat-input-wrapper");
 
@@ -39,19 +42,26 @@ public class ChatInput extends Composite<Div> {
       }
     });
     textArea.onValueChange(e -> {
+      try {
+        if (pendingPrediction != null) {
+          pendingPrediction.cancel(false);
+        }
+      } finally {
+        pendingPrediction = null;
+      }
+
       String input = e.getValue();
       if (input == null || input.trim().length() < 10 || state != State.IDLE) {
-        debounce.cancel();
         textArea.setPredictedText("");
         return;
       }
 
-      debounce.run(() -> {
+      pendingPrediction = debouncer.schedule(() -> Environment.runLater(() -> {
         String prediction = predictionService.predict(input);
         if (prediction != null && !prediction.isEmpty()) {
           textArea.setPredictedText(prediction);
         }
-      });
+      }), 250, TimeUnit.MILLISECONDS);
     });
 
     actionButton.setTheme(ButtonTheme.PRIMARY);
