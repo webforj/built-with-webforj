@@ -12,7 +12,6 @@ import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.markdown.MarkdownViewer;
 import com.webforj.router.annotation.Route;
-import java.util.concurrent.ScheduledExecutorService;
 import reactor.core.Disposable;
 
 @Route("/")
@@ -28,8 +27,7 @@ public class ChatView extends Composite<FlexLayout> {
   private Disposable currentSubscription;
   private boolean firstChunkReceived;
 
-  public ChatView(ChatService chatService, PredictionService predictionService,
-      ScheduledExecutorService debouncerExecutor) {
+  public ChatView(ChatService chatService, PredictionService predictionService) {
     this.chatService = chatService;
 
     self.setDirection(FlexDirection.COLUMN)
@@ -46,7 +44,7 @@ public class ChatView extends Composite<FlexLayout> {
     contentArea.setItemGrow(1, welcomeMessage);
     contentArea.setItemGrow(1, markdownViewer);
 
-    chatInput = new ChatInput(predictionService, debouncerExecutor);
+    chatInput = new ChatInput(predictionService);
     chatInput.onSend(this::handleSend).onStop(this::handleStop);
 
     self.add(header, contentArea, chatInput, new ChatFooter());

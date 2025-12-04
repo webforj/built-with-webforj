@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;500;600&display=swap');
+
+:root {
+  --dwc-font-family: "Geist", system-ui, sans-serif;
+  --dwc-font-size: var(--dwc-font-size-l);
+}
+
+dwc-window-center {
+  overflow: auto !important;
+}
+
+.focus-tracker {
+  min-height: 100dvh;
+  padding: var(--dwc-space-3xl);
+  box-sizing: border-box;
+}
+
+.focus-tracker__title {
+  margin: 0 0 var(--dwc-space-xs) 0;
+  font-weight: 600;
+  color: var(--dwc-color-primary-text);
+}
+
+.focus-tracker__subtitle {
+  margin: 0 0 var(--dwc-space-3xl) 0;
+}
+
+.focus-tracker__timer-row {
+  gap: var(--dwc-space-xl);
+}
+
+.focus-tracker__display {
+  font-size: clamp(3rem, 15vw, 5rem);
+  font-weight: 200;
+  font-family: var(--dwc-font-family-mono);
+  letter-spacing: -0.05em;
+  text-align: center;
+}
+
+.focus-tracker__status {
+  margin: var(--dwc-space-m) 0 var(--dwc-space-3xl) 0;
+  opacity: 0.7;
+}
+
+.focus-tracker__buttons {
+  gap: var(--dwc-space-m);
+}
+
+.focus-tracker__hint {
+  margin-top: var(--dwc-space-3xl);
+  font-size: var(--dwc-font-size-s);
+  opacity: 0.5;
+  text-align: center;
+}
