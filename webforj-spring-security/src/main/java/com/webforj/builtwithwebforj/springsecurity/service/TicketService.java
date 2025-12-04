@@ -40,15 +40,6 @@ public class TicketService {
   }
 
   /**
-   * Get ticket by ticket number.
-   */
-  @Transactional(readOnly = true)
-  public Ticket getTicketByNumber(String ticketNumber) {
-    return ticketRepository.findByTicketNumber(ticketNumber)
-        .orElseThrow(() -> new RuntimeException("Ticket not found: " + ticketNumber));
-  }
-
-  /**
    * Get all tickets for a specific user.
    */
   @Transactional(readOnly = true)
@@ -62,14 +53,6 @@ public class TicketService {
   @Transactional(readOnly = true)
   public List<Ticket> getAllTickets() {
     return ticketRepository.findAllByOrderByCreatedAtDesc();
-  }
-
-  /**
-   * Get tickets by status.
-   */
-  @Transactional(readOnly = true)
-  public List<Ticket> getTicketsByStatus(TicketStatus status) {
-    return ticketRepository.findByStatusOrderByCreatedAtDesc(status);
   }
 
   /**

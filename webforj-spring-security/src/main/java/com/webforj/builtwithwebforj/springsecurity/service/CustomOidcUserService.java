@@ -55,12 +55,10 @@ public class CustomOidcUserService extends OidcUserService {
       user.setPassword(UUID.randomUUID().toString());
       user.addRole("USER");
       user = userRepository.save(user);
-      System.out.println("Created new OIDC user: " + userEmail + " with role USER");
     } else if (name != null && !name.equals(user.getDisplayName())) {
       // Update display name if changed
       user.setDisplayName(name);
       user = userRepository.save(user);
-      System.out.println("Updated OIDC user display name: " + userEmail);
     }
 
     // Build authorities from database roles
@@ -69,14 +67,9 @@ public class CustomOidcUserService extends OidcUserService {
       authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
     }
 
-    String registrationId = userRequest.getClientRegistration().getRegistrationId();
-    System.out.println("OIDC login - Provider: " + registrationId +
-        ", db_username: " + userEmail +
-        ", authorities: " + authorities +
-        ", user roles from DB: " + user.getRoles());
-
     // Return OidcUser with merged authorities
     // Use "email" as the name attribute since that's what we use as username in the database
+    // Note: For OIDC, email is reliably available from the ID token
     return new DefaultOidcUser(
         authorities,
         oidcUser.getIdToken(),

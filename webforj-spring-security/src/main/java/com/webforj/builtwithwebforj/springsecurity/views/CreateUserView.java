@@ -11,8 +11,8 @@ import com.webforj.component.field.PasswordField;
 import com.webforj.component.field.TextField;
 import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.H1;
-import com.webforj.component.html.elements.H3;
 import com.webforj.component.html.elements.Paragraph;
+import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.optioninput.CheckBox;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
@@ -71,7 +71,8 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
   private boolean isEditMode = false;
 
   public CreateUserView() {
-    container.addClassName("create-user-view");
+    container.addClassName("view-container");
+    container.addClassName("form-view");
   }
 
   @Override
@@ -105,8 +106,28 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
   private void setupContent() {
     container.removeAll();
 
-    H1 title = new H1(isEditMode ? "Edit User: " + user.getUsername() : "Create New User");
-    container.add(title);
+    // Back button
+    Button backButton = new Button("Back");
+    backButton.setPrefixComponent(TablerIcon.create("arrow-left"));
+    backButton.setTheme(ButtonTheme.DEFAULT);
+    backButton.addClassName("back-button");
+    backButton.onClick(e -> Router.getCurrent().navigate(AdminUsersView.class));
+    container.add(backButton);
+
+    // Page header
+    Div header = new Div();
+    header.addClassName("page-header");
+
+    H1 title = new H1(isEditMode ? "Edit User" : "Create New User");
+    title.addClassName("page-title");
+
+    Paragraph subtitle = new Paragraph(isEditMode
+        ? "Update user details and permissions"
+        : "Add a new user to the system");
+    subtitle.addClassName("page-subtitle");
+
+    header.add(title, subtitle);
+    container.add(header);
 
     // Create form
     createForm();
@@ -147,66 +168,67 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
   }
 
   private void createForm() {
+    Div formCard = new Div();
+    formCard.addClassName("card");
+
     FlexLayout formContainer = new FlexLayout();
     formContainer.setDirection(FlexDirection.COLUMN)
-        .setSpacing("1.5rem");
-    formContainer.addClassName("create-user-form-container");
+        .setSpacing("var(--dwc-space-l)");
 
     // Username field
-    FlexLayout usernameGroup = createFormGroup("Username", "");
     username = new TextField();
+    username.setLabel("Username");
     username.setPlaceholder("Enter username (lowercase, no spaces)");
-    username.addClassName("create-user-field");
-    usernameGroup.add(username);
-    formContainer.add(usernameGroup);
+    formContainer.add(username);
 
     // Password field (only in create mode)
     if (!isEditMode) {
-      FlexLayout passwordGroup = createFormGroup("Password", "");
       password = new PasswordField();
+      password.setLabel("Password");
       password.setPlaceholder("Enter password (min 6 characters)");
-      password.addClassName("create-user-field");
-      passwordGroup.add(password);
-      formContainer.add(passwordGroup);
+      formContainer.add(password);
     }
 
     // Display Name field
-    FlexLayout displayNameGroup = createFormGroup("Display Name", "");
     displayName = new TextField();
+    displayName.setLabel("Display Name");
     displayName.setPlaceholder("Enter full name");
-    displayName.addClassName("create-user-field");
-    displayNameGroup.add(displayName);
-    formContainer.add(displayNameGroup);
+    formContainer.add(displayName);
 
     // Email field
-    FlexLayout emailGroup = createFormGroup("Email", "(Optional)");
     email = new TextField();
+    email.setLabel("Email (Optional)");
     email.setPlaceholder("Enter email address");
-    email.addClassName("create-user-field");
-    emailGroup.add(email);
-    formContainer.add(emailGroup);
+    formContainer.add(email);
 
     // Roles section
-    FlexLayout rolesGroup = createFormGroup("Roles", "Select at least one role");
-    FlexLayout rolesContainer = FlexLayout.create()
-        .vertical()
-        .build();
-    rolesContainer.setSpacing("0.5rem");
+    Div rolesSection = new Div();
+    rolesSection.setStyle("margin-top", "var(--dwc-space-s)");
+
+    Paragraph rolesLabel = new Paragraph("Roles");
+    rolesLabel.setStyle("font-weight", "var(--dwc-font-weight-medium)");
+    rolesLabel.setStyle("color", "var(--dwc-color-on-default-text-light)");
+    rolesLabel.setStyle("margin-bottom", "var(--dwc-space-s)");
+
+    FlexLayout rolesContainer = FlexLayout.create().vertical().build();
+    rolesContainer.setSpacing("var(--dwc-space-xs)");
 
     userRoleCheckbox = new CheckBox("USER - Can create and manage own tickets");
-    userRoleCheckbox.setValue(true); // Default to USER role
+    userRoleCheckbox.setValue(true);
     supportRoleCheckbox = new CheckBox("SUPPORT - Can view and manage all tickets");
-    adminRoleCheckbox = new CheckBox("ADMIN - Full system access including user management");
+    adminRoleCheckbox = new CheckBox("ADMIN - Full system access");
 
     rolesContainer.add(userRoleCheckbox, supportRoleCheckbox, adminRoleCheckbox);
-    rolesGroup.add(rolesContainer);
-    formContainer.add(rolesGroup);
+    rolesSection.add(rolesLabel, rolesContainer);
+    formContainer.add(rolesSection);
 
     // Buttons
     FlexLayout buttonLayout = FlexLayout.create()
         .horizontal()
         .justify().between()
         .build();
+    buttonLayout.addClassName("button-group");
+    buttonLayout.setStyle("margin-top", "var(--dwc-space-m)");
 
     // Delete button on left (only in edit mode)
     if (isEditMode) {
@@ -215,21 +237,19 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
       deleteButton.onClick(e -> handleDelete());
       buttonLayout.add(deleteButton);
     } else {
-      // Empty div to maintain spacing when no delete button
       buttonLayout.add(new Div());
     }
 
     // Cancel and Submit on right
-    FlexLayout rightButtons = FlexLayout.create()
-        .horizontal()
-        .build();
-    rightButtons.setSpacing("0.5rem");
+    FlexLayout rightButtons = FlexLayout.create().horizontal().build();
+    rightButtons.setSpacing("var(--dwc-space-s)");
 
     cancelButton = new Button("Cancel");
     cancelButton.setTheme(ButtonTheme.DEFAULT);
     cancelButton.onClick(e -> handleCancel());
 
     submitButton = new Button(isEditMode ? "Save Changes" : "Create User");
+    submitButton.setPrefixComponent(TablerIcon.create(isEditMode ? "device-floppy" : "user-plus"));
     submitButton.setTheme(ButtonTheme.PRIMARY);
     submitButton.onClick(e -> handleSubmit());
 
@@ -237,26 +257,8 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
     buttonLayout.add(rightButtons);
     formContainer.add(buttonLayout);
 
-    container.add(formContainer);
-  }
-
-  private FlexLayout createFormGroup(String labelText, String helpText) {
-    FlexLayout group = FlexLayout.create()
-        .vertical()
-        .build();
-    group.setSpacing("0.5rem");
-
-    H3 label = new H3(labelText);
-    label.addClassName("form-group-label");
-    group.add(label);
-
-    if (!helpText.isEmpty()) {
-      Paragraph help = new Paragraph(helpText);
-      help.addClassName("form-group-help");
-      group.add(help);
-    }
-
-    return group;
+    formCard.add(formContainer);
+    container.add(formCard);
   }
 
   private void handleCancel() {

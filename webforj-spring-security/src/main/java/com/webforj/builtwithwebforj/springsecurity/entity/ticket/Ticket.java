@@ -6,12 +6,9 @@ import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
-import com.webforj.builtwithwebforj.springsecurity.entity.Comment;
 import com.webforj.builtwithwebforj.springsecurity.entity.User;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -61,10 +58,6 @@ public class Ticket {
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
 
-  @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
-  @OrderBy("createdAt ASC")
-  private List<Comment> comments = new ArrayList<>();
-
   public Ticket() {
   }
 
@@ -76,12 +69,6 @@ public class Ticket {
     this.type = type;
     this.priority = priority;
     this.createdBy = createdBy;
-  }
-
-  // Helper method to add comment
-  public void addComment(Comment comment) {
-    comments.add(comment);
-    comment.setTicket(this);
   }
 
   // Getters and Setters
@@ -156,14 +143,6 @@ public class Ticket {
 
   public void setCreatedAt(LocalDateTime createdAt) {
     this.createdAt = createdAt;
-  }
-
-  public List<Comment> getComments() {
-    return comments;
-  }
-
-  public void setComments(List<Comment> comments) {
-    this.comments = comments;
   }
 
   @Override

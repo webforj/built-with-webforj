@@ -36,15 +36,20 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     // Extract user info from OAuth2 provider
     String email = oauth2User.getAttribute("email");
     String name = oauth2User.getAttribute("name");
+    String login = oauth2User.getAttribute("login"); // GitHub-specific
 
     // Handle case where email might not be provided (GitHub can hide emails)
     if (email == null || email.isBlank()) {
-      String login = oauth2User.getAttribute("login");
       if (login != null) {
-        email = login + "@oauth.user";
+        email = login + "@github.user";
       } else {
         email = "oauth_" + UUID.randomUUID().toString().substring(0, 8) + "@oauth.user";
       }
+    }
+
+    // For GitHub, prefer the login (username) for display if name is not set
+    if (name == null || name.isBlank()) {
+      name = login != null ? login : email.split("@")[0];
     }
 
     // Find or create user in database
@@ -57,16 +62,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
       user = new User();
       user.setUsername(userEmail);
       user.setEmail(userEmail);
-      user.setDisplayName(name != null ? name : userEmail.split("@")[0]);
+      user.setDisplayName(name);
       user.setPassword(UUID.randomUUID().toString());
       user.addRole("USER");
       user = userRepository.save(user);
-      System.out.println("Created new OAuth2 user: " + userEmail + " with role USER");
     } else if (name != null && !name.equals(user.getDisplayName())) {
       // Update display name if changed
       user.setDisplayName(name);
       user = userRepository.save(user);
-      System.out.println("Updated OAuth2 user display name: " + userEmail);
     }
 
     // Build authorities from database roles
@@ -80,12 +83,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     Map<String, Object> attributes = new HashMap<>(oauth2User.getAttributes());
     // Ensure email attribute is set to what we use as username
     attributes.put("email", userEmail);
-
-    String registrationId = userRequest.getClientRegistration().getRegistrationId();
-    System.out.println("OAuth2 login - Provider: " + registrationId +
-        ", email/username: " + userEmail +
-        ", authorities: " + authorities +
-        ", user roles from DB: " + user.getRoles());
 
     // Return OAuth2User with merged authorities, using email as the name attribute
     return new DefaultOAuth2User(

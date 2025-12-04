@@ -9,22 +9,12 @@ import com.webforj.component.html.elements.Img;
 public class Avatar extends Composite<Div> {
 
   private final Div container = getBoundComponent();
-  private String imageUrl;
-  private String name;
-  private String role;
 
   public Avatar(String imageUrl, String name) {
     this(imageUrl, name, null);
   }
 
   public Avatar(String imageUrl, String name, String role) {
-    this.imageUrl = imageUrl;
-    this.name = name;
-    this.role = role;
-    setupAvatar();
-  }
-
-  private void setupAvatar() {
     container.addClassName("avatar-container");
 
     // Add role-based ring class

@@ -57,36 +57,16 @@ public class Comment {
     this.id = id;
   }
 
-  public Ticket getTicket() {
-    return ticket;
-  }
-
-  public void setTicket(Ticket ticket) {
-    this.ticket = ticket;
-  }
-
   public String getText() {
     return text;
-  }
-
-  public void setText(String text) {
-    this.text = text;
   }
 
   public String getAuthor() {
     return author;
   }
 
-  public void setAuthor(String author) {
-    this.author = author;
-  }
-
   public boolean isInternal() {
     return isInternal;
-  }
-
-  public void setInternal(boolean internal) {
-    isInternal = internal;
   }
 
   public LocalDateTime getCreatedAt() {

@@ -322,17 +322,4 @@ public class TicketDetailView extends Composite<Div> implements DidEnterObserver
       Toast.show("Error updating ticket status: " + e.getMessage(), Theme.DANGER);
     }
   }
-
-  private void handleCloseTicket() {
-    try {
-      ticketService.updateTicketStatus(ticketId, TicketStatus.CLOSED);
-      Toast.show("Ticket closed successfully", Theme.SUCCESS);
-
-      // Refresh the view
-      ticket = ticketService.getTicketById(ticketId);
-      setupContent();
-    } catch (Exception e) {
-      Toast.show("Error closing ticket: " + e.getMessage(), Theme.DANGER);
-    }
-  }
 }

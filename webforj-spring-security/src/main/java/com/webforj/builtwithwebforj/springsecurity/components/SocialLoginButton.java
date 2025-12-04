@@ -40,14 +40,8 @@ public class SocialLoginButton extends Composite<NativeButton> {
   }
 
   private final NativeButton button = getBoundComponent();
-  private final Provider provider;
 
   public SocialLoginButton(Provider provider) {
-    this.provider = provider;
-    setupButton();
-  }
-
-  private void setupButton() {
     button.addClassName("social-login-button");
     button.addClassName("social-login-" + provider.name().toLowerCase());
 
@@ -62,9 +56,5 @@ public class SocialLoginButton extends Composite<NativeButton> {
     button.onClick(e -> {
       Page.getCurrent().open(provider.getAuthUrl(), "_self");
     });
-  }
-
-  public Provider getProvider() {
-    return provider;
   }
 }
