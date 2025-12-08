@@ -203,7 +203,7 @@ html[data-app-theme~='dark-pure'] .page-title {
 
 /* Card */
 .card {
-  background: var(--dwc-surface-2);
+  background: var(--dwc-surface-3);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-subtle);
@@ -426,9 +426,9 @@ dwc-table::part(type-badge) {
 /* Ticket number styling */
 .ticket-number {
   display: inline-block;
+  width: fit-content;
   font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
   font-size: var(--dwc-font-size-s);
-  color: var(--dwc-color-on-default-text-light);
   background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.08);
   padding: var(--dwc-space-2xs) var(--dwc-space-s);
   border-radius: var(--dwc-border-radius-s);

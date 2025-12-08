@@ -1,6 +1,7 @@
 package com.webforj.builtwithwebforj.springsecurity.views;
 
 import com.webforj.annotation.StyleSheet;
+import com.webforj.builtwithwebforj.springsecurity.components.PageHeader;
 import com.webforj.builtwithwebforj.springsecurity.entity.User;
 import com.webforj.builtwithwebforj.springsecurity.renderers.user.EmailLinkRenderer;
 import com.webforj.builtwithwebforj.springsecurity.renderers.user.RolesChipRenderer;
@@ -10,10 +11,7 @@ import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.html.elements.Div;
-import com.webforj.component.html.elements.H1;
-import com.webforj.component.html.elements.Paragraph;
 import com.webforj.component.icons.TablerIcon;
-import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.table.Table;
 import com.webforj.router.Router;
 import com.webforj.router.annotation.FrameTitle;
@@ -55,31 +53,17 @@ public class AdminUsersView extends Composite<Div> {
   private void setupContent() {
     container.addClassName("view-container");
 
-    // Page header
-    FlexLayout header = FlexLayout.create()
-        .horizontal()
-        .justify().between()
-        .align().center()
-        .build();
-    header.addClassName("page-header");
-
-    // Title section
-    Div titleSection = new Div();
-    H1 title = new H1("User Management");
-    title.addClassName("page-title");
-
-    Paragraph subtitle = new Paragraph("Manage system users and their roles");
-    subtitle.addClassName("page-subtitle");
-
-    titleSection.add(title, subtitle);
-    header.add(titleSection);
-
+    // Page header with action button
     Button createButton = new Button("New User");
     createButton.setPrefixComponent(TablerIcon.create("user-plus"));
     createButton.setTheme(ButtonTheme.PRIMARY);
     createButton.onClick(e -> Router.getCurrent().navigate(CreateUserView.class));
-    header.add(createButton);
 
+    PageHeader header = new PageHeader(
+        "User Management",
+        "Manage system users and their roles",
+        createButton
+    );
     container.add(header);
 
     // Load and display users table

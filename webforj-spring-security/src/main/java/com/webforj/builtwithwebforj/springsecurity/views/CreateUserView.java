@@ -1,6 +1,7 @@
 package com.webforj.builtwithwebforj.springsecurity.views;
 
 import com.webforj.annotation.StyleSheet;
+import com.webforj.builtwithwebforj.springsecurity.components.PageHeader;
 import com.webforj.builtwithwebforj.springsecurity.entity.User;
 import com.webforj.builtwithwebforj.springsecurity.repository.UserRepository;
 import com.webforj.component.Composite;
@@ -115,18 +116,11 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
     container.add(backButton);
 
     // Page header
-    Div header = new Div();
-    header.addClassName("page-header");
-
-    H1 title = new H1(isEditMode ? "Edit User" : "Create New User");
-    title.addClassName("page-title");
-
-    Paragraph subtitle = new Paragraph(isEditMode
+    String titleText = isEditMode ? "Edit User" : "Create New User";
+    String subtitleText = isEditMode
         ? "Update user details and permissions"
-        : "Add a new user to the system");
-    subtitle.addClassName("page-subtitle");
-
-    header.add(title, subtitle);
+        : "Add a new user to the system";
+    PageHeader header = new PageHeader(titleText, subtitleText);
     container.add(header);
 
     // Create form

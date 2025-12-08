@@ -2,6 +2,7 @@ package com.webforj.builtwithwebforj.springsecurity.views;
 
 import com.webforj.annotation.StyleSheet;
 import com.webforj.builtwithwebforj.springsecurity.components.CommentCard;
+import com.webforj.builtwithwebforj.springsecurity.components.PageHeader;
 import com.webforj.builtwithwebforj.springsecurity.components.TicketMetadataCard;
 import com.webforj.builtwithwebforj.springsecurity.entity.Comment;
 import com.webforj.builtwithwebforj.springsecurity.entity.ticket.Ticket;
@@ -19,6 +20,7 @@ import com.webforj.component.html.elements.H2;
 import com.webforj.component.html.elements.Paragraph;
 import com.webforj.component.html.elements.Span;
 import com.webforj.component.icons.TablerIcon;
+import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.list.ChoiceBox;
 import com.webforj.component.toast.Toast;
@@ -118,29 +120,14 @@ public class TicketDetailView extends Composite<Div> implements DidEnterObserver
     backButton.onClick(e -> Router.getCurrent().navigate(DashboardView.class));
     container.add(backButton);
 
-    // Page header
-    FlexLayout header = FlexLayout.create()
-        .horizontal()
-        .justify().between()
-        .align().start()
-        .build();
-    header.addClassName("page-header");
-
-    // Title section
-    Div titleSection = new Div();
-
+    // Page header with ticket number prefix
     Span ticketNumber = new Span(ticket.getTicketNumber());
     ticketNumber.addClassName("ticket-number");
-    titleSection.add(ticketNumber);
-
-    H1 title = new H1(ticket.getSubject());
-    title.addClassName("page-title");
-    titleSection.add(title);
-
-    header.add(titleSection);
 
     // Status dropdown (for owner, support, or admin)
     boolean isOwner = ticket.getCreatedBy().getUsername().equals(username);
+    PageHeader header;
+
     if (isOwner || isSupport || isAdmin) {
       ChoiceBox statusDropdown = new ChoiceBox();
       statusDropdown.setLabel("Status");
@@ -155,8 +142,13 @@ public class TicketDetailView extends Composite<Div> implements DidEnterObserver
         handleStatusChange(newStatus);
       });
 
-      header.add(statusDropdown);
+      header = new PageHeader(ticket.getSubject(), null, statusDropdown);
+    } else {
+      header = new PageHeader(ticket.getSubject(), null);
     }
+
+    header.withPrefixContent(ticketNumber)
+        .withAlignment(FlexAlignment.START);
 
     container.add(header);
 

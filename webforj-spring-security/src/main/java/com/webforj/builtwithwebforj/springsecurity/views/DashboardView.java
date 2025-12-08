@@ -1,6 +1,8 @@
 package com.webforj.builtwithwebforj.springsecurity.views;
 
 import com.webforj.annotation.StyleSheet;
+import com.webforj.builtwithwebforj.springsecurity.components.EmptyState;
+import com.webforj.builtwithwebforj.springsecurity.components.PageHeader;
 import com.webforj.builtwithwebforj.springsecurity.entity.User;
 import com.webforj.builtwithwebforj.springsecurity.entity.ticket.Ticket;
 import com.webforj.builtwithwebforj.springsecurity.renderers.ticket.PriorityRenderer;
@@ -13,10 +15,7 @@ import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.html.elements.Div;
-import com.webforj.component.html.elements.H1;
-import com.webforj.component.html.elements.Paragraph;
 import com.webforj.component.icons.TablerIcon;
-import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.table.Table;
 import com.webforj.component.tabbedpane.TabbedPane;
 import com.webforj.router.Router;
@@ -57,6 +56,7 @@ public class DashboardView extends Composite<Div> {
   private boolean isAdmin;
   private Div ticketsContainer;
   private TabbedPane tabbedPane;
+  private PageHeader pageHeader;
   private boolean showMyTicketsOnly = false;
 
   public DashboardView() {
@@ -85,38 +85,21 @@ public class DashboardView extends Composite<Div> {
     container.addClassName("view-container");
 
     // Page header
-    FlexLayout header = FlexLayout.create()
-        .horizontal()
-        .justify().between()
-        .align().center()
-        .build();
-    header.addClassName("page-header");
-
-    // Title section
-    Div titleSection = new Div();
     String titleText = isSupport ? "Support Queue" : "Tickets";
-    H1 title = new H1(titleText);
-    title.addClassName("page-title");
-    titleSection.add(title);
+    String subtitleText = (!isSupport && !isAdmin) ? "Manage and track your support requests" : null;
 
-    if (!isSupport && !isAdmin) {
-      Paragraph subtitle = new Paragraph("Manage and track your support requests");
-      subtitle.addClassName("page-subtitle");
-      titleSection.add(subtitle);
-    }
-
-    header.add(titleSection);
-
-    // Create button
+    // Create button (for non-support users or admins)
     if (!isSupport || isAdmin) {
       Button createButton = new Button("New Ticket");
       createButton.setPrefixComponent(TablerIcon.create("plus"));
       createButton.setTheme(ButtonTheme.PRIMARY);
       createButton.onClick(e -> Router.getCurrent().navigate(CreateTicketView.class));
-      header.add(createButton);
+      pageHeader = new PageHeader(titleText, subtitleText, createButton);
+    } else {
+      pageHeader = new PageHeader(titleText, subtitleText);
     }
 
-    container.add(header);
+    container.add(pageHeader);
 
     // Tabs for regular users
     if (!isSupport && !isAdmin) {
@@ -147,23 +130,8 @@ public class DashboardView extends Composite<Div> {
 
   private void refreshTickets() {
     // Update title
-    String titleText;
-    if (showMyTicketsOnly) {
-      titleText = "My Tickets";
-    } else {
-      titleText = "All Tickets";
-    }
-
-    // Find and update the H1 title
-    container.getComponents().stream()
-        .filter(c -> c instanceof FlexLayout)
-        .findFirst()
-        .ifPresent(header -> {
-          ((FlexLayout) header).getComponents().stream()
-              .filter(c -> c instanceof H1)
-              .findFirst()
-              .ifPresent(h1 -> ((H1) h1).setText(titleText));
-        });
+    String titleText = showMyTicketsOnly ? "My Tickets" : "All Tickets";
+    pageHeader.setTitle(titleText);
 
     // Reload tickets
     loadTickets();
@@ -186,35 +154,20 @@ public class DashboardView extends Composite<Div> {
     }
 
     if (tickets.isEmpty()) {
-      Div emptyState = new Div();
-      emptyState.addClassName("empty-state");
+      String title = showMyTicketsOnly ? "No tickets yet" : "No tickets found";
+      String message = showMyTicketsOnly
+          ? "Create your first support ticket to get started"
+          : "There are no tickets in the system";
 
-      // Large icon illustration
-      Div iconWrapper = new Div();
-      iconWrapper.addClassName("empty-state-icon");
-      iconWrapper.add(TablerIcon.create("ticket-off"));
-      emptyState.add(iconWrapper);
-
-      H1 emptyTitle = new H1(showMyTicketsOnly ? "No tickets yet" : "No tickets found");
-      emptyTitle.addClassName("empty-state-title");
-      emptyState.add(emptyTitle);
-
-      Paragraph emptyMessage = new Paragraph(
-          showMyTicketsOnly
-            ? "Create your first support ticket to get started"
-            : "There are no tickets in the system");
-      emptyMessage.addClassName("empty-state-message");
-      emptyState.add(emptyMessage);
-
+      Button actionButton = null;
       if (showMyTicketsOnly && (!isSupport || isAdmin)) {
-        Button createFirstTicket = new Button("Create Your First Ticket");
-        createFirstTicket.setPrefixComponent(TablerIcon.create("plus"));
-        createFirstTicket.setTheme(ButtonTheme.PRIMARY);
-        createFirstTicket.onClick(e -> Router.getCurrent().navigate(CreateTicketView.class));
-        emptyState.add(createFirstTicket);
+        actionButton = new Button("Create Your First Ticket");
+        actionButton.setPrefixComponent(TablerIcon.create("plus"));
+        actionButton.setTheme(ButtonTheme.PRIMARY);
+        actionButton.onClick(e -> Router.getCurrent().navigate(CreateTicketView.class));
       }
 
-      ticketsContainer.add(emptyState);
+      ticketsContainer.add(new EmptyState("ticket-off", title, message, actionButton));
       return;
     }
 

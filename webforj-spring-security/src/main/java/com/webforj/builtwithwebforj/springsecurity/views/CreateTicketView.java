@@ -1,6 +1,7 @@
 package com.webforj.builtwithwebforj.springsecurity.views;
 
 import com.webforj.annotation.StyleSheet;
+import com.webforj.builtwithwebforj.springsecurity.components.PageHeader;
 import com.webforj.builtwithwebforj.springsecurity.entity.User;
 import com.webforj.builtwithwebforj.springsecurity.entity.ticket.Ticket;
 import com.webforj.builtwithwebforj.springsecurity.entity.ticket.TicketPriority;
@@ -102,16 +103,7 @@ public class CreateTicketView extends Composite<Div> {
     container.add(backButton);
 
     // Page header
-    Div header = new Div();
-    header.addClassName("page-header");
-
-    H1 title = new H1("Create New Ticket");
-    title.addClassName("page-title");
-
-    Paragraph subtitle = new Paragraph("Submit a new support request");
-    subtitle.addClassName("page-subtitle");
-
-    header.add(title, subtitle);
+    PageHeader header = new PageHeader("Create New Ticket", "Submit a new support request");
     container.add(header);
 
     // Create form
