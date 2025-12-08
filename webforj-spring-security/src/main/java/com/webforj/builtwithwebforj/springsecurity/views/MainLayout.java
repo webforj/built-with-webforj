@@ -54,6 +54,13 @@ public class MainLayout extends Composite<AppLayout> {
         .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
 
     if (isAdmin) {
+      Button dashboardButton = new Button("Dashboard");
+      dashboardButton.setPrefixComponent(TablerIcon.create("dashboard"));
+      dashboardButton.setTheme(ButtonTheme.DEFAULT);
+      dashboardButton.addClassName("header-button");
+      dashboardButton.onClick(e -> Router.getCurrent().navigate(DashboardView.class));
+      controls.add(dashboardButton);
+
       Button adminButton = new Button("Users");
       adminButton.setPrefixComponent(TablerIcon.create("users"));
       adminButton.setTheme(ButtonTheme.DEFAULT);

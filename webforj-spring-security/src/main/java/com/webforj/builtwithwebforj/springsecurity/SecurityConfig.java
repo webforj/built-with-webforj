@@ -47,6 +47,7 @@ public class SecurityConfig {
             .tokenValiditySeconds(86400)) // 24 hours
         .oauth2Login(oauth2 -> oauth2
             .loginPage("/signin")
+            .defaultSuccessUrl("/", true)
             .userInfoEndpoint(userInfo -> userInfo
                 .userService(customOAuth2UserService)
                 .oidcUserService(customOidcUserService)))

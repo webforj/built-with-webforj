@@ -25,16 +25,16 @@
 }
 
 .tickets-table {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: var(--dwc-surface-2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--dwc-border-radius-l);
   overflow: hidden;
 }
 
 .tickets-table::part(row):hover {
-  background: var(--glass-bg-hover);
+  background: var(--dwc-surface-3);
 }
 
 .tickets-table::part(header-cell) {

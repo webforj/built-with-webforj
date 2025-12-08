@@ -250,7 +250,6 @@ public class TicketDetailView extends Composite<Div> implements DidEnterObserver
         .justify().end()
         .build();
     buttonLayout.addClassName("button-group");
-    buttonLayout.setStyle("margin-top", "var(--dwc-space-m)");
 
     if (isSupport || isAdmin) {
       Button internalNoteButton = new Button("Internal Note");

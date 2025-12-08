@@ -2,6 +2,9 @@ package com.webforj.builtwithwebforj.springsecurity.views;
 
 import com.webforj.annotation.StyleSheet;
 import com.webforj.builtwithwebforj.springsecurity.entity.User;
+import com.webforj.builtwithwebforj.springsecurity.renderers.user.EmailLinkRenderer;
+import com.webforj.builtwithwebforj.springsecurity.renderers.user.RolesChipRenderer;
+import com.webforj.builtwithwebforj.springsecurity.renderers.user.UserAvatarRenderer;
 import com.webforj.builtwithwebforj.springsecurity.repository.UserRepository;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
@@ -89,26 +92,30 @@ public class AdminUsersView extends Composite<Div> {
     // Create table
     Table<User> table = new Table<>();
     table.addClassName("users-table");
-    table.setHeight("calc(100dvh - 280px)");
 
-    // Add columns
+    // Hidden columns for renderer data access
+    table.addColumn("displayName", User::getDisplayName).setHidden(true);
+
+    // Username column with avatar
     table.addColumn("username", User::getUsername)
-        .setLabel("Username");
+        .setLabel("User")
+        .setRenderer(new UserAvatarRenderer());
 
-    table.addColumn("displayName", User::getDisplayName)
-        .setLabel("Display Name");
-
+    // Email column with mailto: link
     table.addColumn("email", User::getEmail)
-        .setLabel("Email");
+        .setLabel("Email")
+        .setRenderer(new EmailLinkRenderer());
 
+    // Roles column with chips
     table.addColumn("roles", user -> user.getRoles().stream()
         .map(role -> role.replace("ROLE_", ""))
         .collect(Collectors.joining(", ")))
-        .setLabel("Roles");
+        .setLabel("Roles")
+        .setRenderer(new RolesChipRenderer());
 
     // Set table data
     table.setItems(users);
-    table.setColumnsToAutoSize();
+    table.setColumnsToAutoFit();
 
     // Handle row clicks to navigate to edit view
     table.onItemClick(event -> {

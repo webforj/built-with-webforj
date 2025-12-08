@@ -1,4 +1,4 @@
-package com.webforj.builtwithwebforj.springsecurity.renderers;
+package com.webforj.builtwithwebforj.springsecurity.renderers.ticket;
 
 import com.webforj.builtwithwebforj.springsecurity.entity.ticket.Ticket;
 import com.webforj.component.table.renderer.Renderer;

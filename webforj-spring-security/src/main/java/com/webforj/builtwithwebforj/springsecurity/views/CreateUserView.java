@@ -203,12 +203,10 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
 
     // Roles section
     Div rolesSection = new Div();
-    rolesSection.setStyle("margin-top", "var(--dwc-space-s)");
+    rolesSection.addClassName("form-section");
 
     Paragraph rolesLabel = new Paragraph("Roles");
-    rolesLabel.setStyle("font-weight", "var(--dwc-font-weight-medium)");
-    rolesLabel.setStyle("color", "var(--dwc-color-on-default-text-light)");
-    rolesLabel.setStyle("margin-bottom", "var(--dwc-space-s)");
+    rolesLabel.addClassName("form-label");
 
     FlexLayout rolesContainer = FlexLayout.create().vertical().build();
     rolesContainer.setSpacing("var(--dwc-space-xs)");
@@ -228,7 +226,6 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
         .justify().between()
         .build();
     buttonLayout.addClassName("button-group");
-    buttonLayout.setStyle("margin-top", "var(--dwc-space-m)");
 
     // Delete button on left (only in edit mode)
     if (isEditMode) {

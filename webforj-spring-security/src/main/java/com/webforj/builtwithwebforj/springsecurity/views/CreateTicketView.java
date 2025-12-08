@@ -157,14 +157,14 @@ public class CreateTicketView extends Composite<Div> {
     for (TicketType t : TicketType.values()) {
       type.add(t, t.getDisplayName());
     }
-    type.setStyle("flex", "1");
+    type.addClassName("flex-1");
 
     priority = new ChoiceBox();
     priority.setLabel("Priority");
     for (TicketPriority p : TicketPriority.values()) {
       priority.add(p, p.getDisplayName());
     }
-    priority.setStyle("flex", "1");
+    priority.addClassName("flex-1");
 
     row.add(type, priority);
     formContainer.add(row);
@@ -182,7 +182,6 @@ public class CreateTicketView extends Composite<Div> {
         .justify().end()
         .build();
     buttonLayout.addClassName("button-group");
-    buttonLayout.setStyle("margin-top", "var(--dwc-space-m)");
 
     cancelButton = new Button("Cancel");
     cancelButton.setTheme(ButtonTheme.DEFAULT);

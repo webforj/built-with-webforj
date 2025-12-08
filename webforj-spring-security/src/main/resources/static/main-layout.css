@@ -7,7 +7,7 @@
 }
 
 dwc-app-layout::part(header) {
-  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 10% / 0.3);
+  background: var(--dwc-surface-1);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
@@ -18,6 +18,7 @@ dwc-app-layout::part(header) {
   font-size: var(--dwc-font-size-l);
   color: var(--dwc-color-on-default-text);
   letter-spacing: -0.01em;
+  cursor: pointer;
 }
 
 .brand dwc-icon {

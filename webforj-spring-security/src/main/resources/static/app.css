@@ -1,14 +1,24 @@
 /*
  * Global Design System
- * Modern glassmorphism aesthetic with light/dark theme support
+ * Clean, modern aesthetic with light/dark theme support
+ * Light mode uses webforJ defaults; dark mode has custom styling
  */
 
 :root {
-  /* Typography */
+  /* Typography - applies to both themes */
   --dwc-font-family: 'Inter', system-ui, sans-serif;
   --dwc-font-size: var(--dwc-font-size-m);
 
-  /* Theme color definitions */
+  /* Borders - light mode (neutral) */
+  --border-subtle: hsl(220 10% 50% / 0.12);
+  --border-default: hsl(220 10% 50% / 0.2);
+  --border-glow: hsl(var(--dwc-color-primary-h) var(--dwc-color-primary-s) 60% / 0.3);
+}
+
+/* Dark theme - all custom color and background overrides */
+html[data-app-theme~='dark'],
+html[data-app-theme~='dark-pure'] {
+  /* Custom color palette for dark mode */
   --dwc-color-primary-h: 323;
   --dwc-color-primary-s: 82%;
   --dwc-color-primary-c: 50;
@@ -25,92 +35,58 @@
   --dwc-color-warning-s: 82%;
   --dwc-color-warning-c: 45;
   --dwc-color-default-h: var(--dwc-color-primary-h);
-  --dwc-color-default-s: 10%;
+  --dwc-color-default-s: 3%;
   --dwc-color-default-c: 50;
+
+  /* Primary color variants */
   --dwc-color-primary-dark: var(--dwc-color-primary-30);
   --dwc-color-on-primary-text-dark: var(--dwc-color-primary-text-30);
   --dwc-color-primary: var(--dwc-color-primary-35);
   --dwc-color-on-primary-text: var(--dwc-color-primary-text-35);
   --dwc-color-primary-light: var(--dwc-color-primary-40);
   --dwc-color-on-primary-text-light: var(--dwc-color-primary-text-40);
+
+  /* Info color variants */
   --dwc-color-info-dark: var(--dwc-color-info-30);
   --dwc-color-on-info-text-dark: var(--dwc-color-info-text-30);
   --dwc-color-info: var(--dwc-color-info-35);
   --dwc-color-on-info-text: var(--dwc-color-info-text-35);
   --dwc-color-info-light: var(--dwc-color-info-40);
   --dwc-color-on-info-text-light: var(--dwc-color-info-text-40);
+
+  /* Success color variants */
   --dwc-color-success-dark: var(--dwc-color-success-30);
   --dwc-color-on-success-text-dark: var(--dwc-color-success-text-30);
   --dwc-color-success: var(--dwc-color-success-35);
   --dwc-color-on-success-text: var(--dwc-color-success-text-35);
   --dwc-color-success-light: var(--dwc-color-success-40);
   --dwc-color-on-success-text-light: var(--dwc-color-success-text-40);
+
+  /* Danger color variants */
   --dwc-color-danger-dark: var(--dwc-color-danger-30);
   --dwc-color-on-danger-text-dark: var(--dwc-color-danger-text-30);
   --dwc-color-danger: var(--dwc-color-danger-35);
   --dwc-color-on-danger-text: var(--dwc-color-danger-text-35);
   --dwc-color-danger-light: var(--dwc-color-danger-40);
   --dwc-color-on-danger-text-light: var(--dwc-color-danger-text-40);
+
+  /* Warning color variants */
   --dwc-color-warning-dark: var(--dwc-color-warning-30);
   --dwc-color-on-warning-text-dark: var(--dwc-color-warning-text-30);
   --dwc-color-warning: var(--dwc-color-warning-35);
   --dwc-color-on-warning-text: var(--dwc-color-warning-text-35);
   --dwc-color-warning-light: var(--dwc-color-warning-40);
   --dwc-color-on-warning-text-light: var(--dwc-color-warning-text-40);
+
+  /* Default color variants */
   --dwc-color-default-dark: var(--dwc-color-default-85);
   --dwc-color-on-default-text-dark: var(--dwc-color-default-text-85);
   --dwc-color-default: var(--dwc-color-default-90);
   --dwc-color-on-default-text: var(--dwc-color-default-text-90);
   --dwc-color-default-light: var(--dwc-color-default-95);
   --dwc-color-on-default-text-light: var(--dwc-color-default-text-95);
-  --dwc-color-primary-text-dark: var(--dwc-color-primary-25);
-  --dwc-color-primary-text: var(--dwc-color-primary-30);
-  --dwc-color-primary-text-light: var(--dwc-color-primary-35);
-  --dwc-color-info-text-dark: var(--dwc-color-info-15);
-  --dwc-color-info-text: var(--dwc-color-info-20);
-  --dwc-color-info-text-light: var(--dwc-color-info-25);
-  --dwc-color-success-text-dark: var(--dwc-color-success-15);
-  --dwc-color-success-text: var(--dwc-color-success-20);
-  --dwc-color-success-text-light: var(--dwc-color-success-25);
-  --dwc-color-danger-text-dark: var(--dwc-color-danger-35);
-  --dwc-color-danger-text: var(--dwc-color-danger-40);
-  --dwc-color-danger-text-light: var(--dwc-color-danger-45);
-  --dwc-color-warning-text-dark: var(--dwc-color-warning-30);
-  --dwc-color-warning-text: var(--dwc-color-warning-35);
-  --dwc-color-warning-text-light: var(--dwc-color-warning-40);
-  --dwc-color-default-text-dark: var(--dwc-color-default-35);
-  --dwc-color-default-text: var(--dwc-color-default-40);
-  --dwc-color-default-text-light: var(--dwc-color-default-45);
 
-  /* Flat surfaces */
-  --dwc-surface-1: var(--dwc-color-default);
-  --dwc-surface-2: var(--dwc-color-default);
-  --dwc-surface-3: var(--dwc-color-default);
-
-  /* Borders - theme-aware */
-  --border-subtle: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.15);
-  --border-default: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.25);
-  --border-glow: hsl(var(--dwc-color-info-h) var(--dwc-color-info-s) 60% / 0.3);
-
-  /* Glass effect - light mode */
-  --glass-bg: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 95% / 0.8);
-  --glass-bg-hover: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 92% / 0.85);
-  --glass-blur: blur(20px);
-
-  /* Gradient background - light mode with primary color tints */
-  --app-gradient:
-    linear-gradient(to bottom, hsl(var(--dwc-color-primary-h) 20% 96%) 0%, transparent 35%),
-    linear-gradient(to top, hsl(var(--dwc-color-primary-h) 60% 85% / 0.4) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 45% at 20% 100%, hsl(var(--dwc-color-primary-h) 70% 80% / 0.3) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 80% 100%, hsl(var(--dwc-color-primary-h) 80% 75% / 0.3) 0%, transparent 60%),
-    linear-gradient(hsl(var(--dwc-color-primary-h) 15% 96% / 0.85), hsl(var(--dwc-color-primary-h) 15% 96% / 0.85)),
-    url('https://i.ibb.co/d0NfvJnw/wall-4-light.png');
-  --app-bg: hsl(var(--dwc-color-primary-h) 15% 96%);
-}
-
-/* Dark theme overrides */
-html[data-app-theme~='dark'],
-html[data-app-theme~='dark-pure'] {
+  /* Text colors for dark mode */
   --dwc-color-primary-text-dark: var(--dwc-color-primary-25);
   --dwc-color-primary-text: var(--dwc-color-primary-30);
   --dwc-color-primary-text-light: var(--dwc-color-primary-35);
@@ -129,37 +105,25 @@ html[data-app-theme~='dark-pure'] {
   --dwc-color-default-text-dark: var(--dwc-color-default-30);
   --dwc-color-default-text: var(--dwc-color-default-35);
   --dwc-color-default-text-light: var(--dwc-color-default-40);
-  --dwc-color-default-s: 3%;
 
   /* Borders - dark mode */
   --border-subtle: hsl(0 0% 100% / 0.1);
-  --border-default: hsl(0 0% 100% / 0.15);
+  --border-default: hsl(0 0% 100% / 0.18);
 
-  /* Glass effect - dark mode */
-  --glass-bg: hsl(var(--dwc-color-primary-h) 20% 15% / 0.8);
-  --glass-bg-hover: hsl(var(--dwc-color-primary-h) 20% 18% / 0.85);
-
-  /* Gradient background - dark mode */
+  /* Gradient background - dark mode only */
   --app-gradient:
-    linear-gradient(to bottom, hsl(var(--dwc-color-primary-h) 20% 6%) 0%, transparent 35%),
+    linear-gradient(to bottom, hsl(var(--dwc-color-primary-h) 25% 6%) 0%, transparent 30%),
     linear-gradient(to top, hsl(var(--dwc-color-primary-h) 60% 35% / 0.6) 0%, transparent 50%),
     radial-gradient(ellipse 60% 45% at 20% 100%, hsl(var(--dwc-color-primary-h) 70% 45% / 0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 80% 100%, hsl(var(--dwc-color-primary-h) 80% 50% / 0.5) 0%, transparent 60%),
-    linear-gradient(hsl(var(--dwc-color-primary-h) 15% 6% / 0.85), hsl(var(--dwc-color-primary-h) 15% 6% / 0.85)),
-    url('https://i.ibb.co/d0NfvJnw/wall-4-light.png');
+    radial-gradient(ellipse 70% 50% at 80% 100%, hsl(var(--dwc-color-primary-h) 80% 50% / 0.5) 0%, transparent 60%);
   --app-bg: hsl(var(--dwc-color-primary-h) 15% 6%);
 }
 
+/* Dark pure theme - even darker variant */
 html[data-app-theme~='dark-pure'] {
   --dwc-color-primary-text-dark: var(--dwc-color-primary-20);
   --dwc-color-primary-text: var(--dwc-color-primary-25);
   --dwc-color-primary-text-light: var(--dwc-color-primary-30);
-  --dwc-color-info-text-dark: var(--dwc-color-info-50);
-  --dwc-color-info-text: var(--dwc-color-info-55);
-  --dwc-color-info-text-light: var(--dwc-color-info-60);
-  --dwc-color-success-text-dark: var(--dwc-color-success-50);
-  --dwc-color-success-text: var(--dwc-color-success-55);
-  --dwc-color-success-text-light: var(--dwc-color-success-60);
   --dwc-color-danger-text-dark: var(--dwc-color-danger-20);
   --dwc-color-danger-text: var(--dwc-color-danger-25);
   --dwc-color-danger-text-light: var(--dwc-color-danger-30);
@@ -169,10 +133,9 @@ html[data-app-theme~='dark-pure'] {
   --dwc-color-default-text-dark: var(--dwc-color-default-25);
   --dwc-color-default-text: var(--dwc-color-default-30);
   --dwc-color-default-text-light: var(--dwc-color-default-35);
-  --dwc-color-default-s: 3%;
 }
 
-/* Animated background - subtle shift for the color bands */
+/* Animated background - subtle shift for the color bands (dark mode only) */
 @keyframes gradient-shift {
   0%, 100% {
     background-position: 0% 0%, 0% 100%, 20% 100%, 80% 100%;
@@ -182,12 +145,19 @@ html[data-app-theme~='dark-pure'] {
   }
 }
 
-/* Background */
-html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
+/* Background - dark mode only */
+html[data-app-theme~='dark'] body,
+html[data-app-theme~='dark'] dwc-app,
+html[data-app-theme~='dark'] dwc-app-layout,
+html[data-app-theme~='dark'] dwc-app-layout::part(content),
+html[data-app-theme~='dark-pure'] body,
+html[data-app-theme~='dark-pure'] dwc-app,
+html[data-app-theme~='dark-pure'] dwc-app-layout,
+html[data-app-theme~='dark-pure'] dwc-app-layout::part(content) {
   background-color: var(--app-bg);
   background-image: var(--app-gradient);
   background-attachment: fixed;
-  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, auto;
+  background-size: 100% 100%;
   animation: gradient-shift 20s ease-in-out infinite;
 }
 
@@ -208,6 +178,17 @@ html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
   font-weight: var(--dwc-font-weight-semibold);
   margin: 0;
   letter-spacing: -0.02em;
+  /* Light mode: use blue (220) for the gradient accent */
+  background: linear-gradient(135deg, var(--dwc-color-on-default-text) 0%, hsl(220 60% 50%) 50%, var(--dwc-color-on-default-text) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Dark mode: use the custom info color (green/teal) for page titles */
+html[data-app-theme~='dark'] .page-title,
+html[data-app-theme~='dark-pure'] .page-title {
   background: linear-gradient(135deg, var(--dwc-color-on-default-text) 0%, hsl(var(--dwc-color-info-h) 60% 55%) 50%, var(--dwc-color-on-default-text) 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
@@ -220,11 +201,11 @@ html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
   margin: var(--dwc-space-xs) 0 0;
 }
 
-/* Card - glassmorphism */
+/* Card */
 .card {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: var(--dwc-surface-2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--dwc-border-radius-l);
   padding: var(--dwc-space-l);
@@ -236,7 +217,7 @@ html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
 }
 
 .card.interactive:hover {
-  background: var(--glass-bg-hover);
+  background: var(--dwc-surface-3);
   border-color: var(--border-default);
   transform: scale(1.01) translateY(-2px);
   box-shadow: 0 8px 32px hsl(0 0% 0% / 0.2);
@@ -363,6 +344,10 @@ html, body, dwc-app, dwc-app-layout, dwc-app-layout::part(content) {
 .priority-label.urgent { color: var(--dwc-color-danger-text); }
 
 /* Table styling */
+dwc-table {
+  --dwc-table-background: var(--dwc-surface-1);
+}
+
 dwc-table::part(type-badge) {
   display: inline-flex;
   align-items: center;
@@ -388,7 +373,9 @@ dwc-table::part(type-badge) {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--glass-bg);
+  background: var(--dwc-surface-2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-subtle);
   border-radius: 50%;
   margin-bottom: var(--dwc-space-m);
@@ -417,6 +404,23 @@ dwc-table::part(type-badge) {
 .button-group {
   display: flex;
   gap: var(--dwc-space-s);
+  margin-top: var(--dwc-space-m);
+}
+
+/* Flex utility */
+.flex-1 {
+  flex: 1;
+}
+
+/* Form section styling */
+.form-section {
+  margin-top: var(--dwc-space-s);
+}
+
+.form-label {
+  font-weight: var(--dwc-font-weight-medium);
+  color: var(--dwc-color-on-default-text-light);
+  margin-bottom: var(--dwc-space-s);
 }
 
 /* Ticket number styling */
@@ -441,56 +445,4 @@ dwc-table::part(type-badge) {
 
 .back-button:hover {
   --dwc-button-color: var(--dwc-color-on-default-text);
-}
-
-/* Frosted glass input fields */
-dwc-field::part(control),
-dwc-textarea::part(control),
-dwc-choicebox::part(control) {
-  background: transparent;
-  border-color: transparent;
-  transition: all 200ms ease;
-}
-
-dwc-field::part(input-wrapper),
-dwc-textarea::part(input-wrapper),
-dwc-choicebox::part(input-wrapper) {
-  background: var(--glass-bg);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--dwc-border-radius-m);
-  transition: all 200ms ease;
-}
-
-dwc-field::part(input-wrapper):hover,
-dwc-textarea::part(input-wrapper):hover,
-dwc-choicebox::part(input-wrapper):hover {
-  background: var(--glass-bg-hover);
-  border-color: var(--border-default);
-}
-
-dwc-field:focus-within::part(input-wrapper),
-dwc-textarea:focus-within::part(input-wrapper),
-dwc-choicebox:focus-within::part(input-wrapper) {
-  background: var(--glass-bg-hover);
-  border-color: var(--dwc-color-primary);
-  box-shadow: 0 0 0 3px hsl(var(--dwc-color-primary-h) var(--dwc-color-primary-s) 50% / 0.15);
-}
-
-dwc-field::part(label),
-dwc-textarea::part(label),
-dwc-choicebox::part(label) {
-  color: var(--dwc-color-on-default-text-light);
-  font-weight: var(--dwc-font-weight-medium);
-}
-
-dwc-field::part(input-wrapper),
-dwc-textarea::part(input-wrapper) {
-  color: var(--dwc-color-on-default-text);
-}
-
-dwc-field::part(input)::placeholder,
-dwc-textarea::part(input)::placeholder {
-  color: var(--dwc-color-default-50);
 }

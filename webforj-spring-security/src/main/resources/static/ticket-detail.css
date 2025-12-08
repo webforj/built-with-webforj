@@ -29,8 +29,8 @@
 }
 
 .comment-card.internal {
-  background: hsl(var(--dwc-color-warning-h) 60% 50% / 0.1);
-  border-color: hsl(var(--dwc-color-warning-h) 60% 50% / 0.25);
+  background: hsl(var(--dwc-color-info-h) 60% 50% / 0.1);
+  border-color: hsl(var(--dwc-color-info-h) 60% 50% / 0.25);
 }
 
 .comment-author {
@@ -52,8 +52,8 @@
 .internal-badge {
   font-size: var(--dwc-font-size-xs);
   font-weight: var(--dwc-font-weight-semibold);
-  color: var(--dwc-color-warning-text);
-  background: hsl(var(--dwc-color-warning-h) 60% 50% / 0.15);
+  color: var(--dwc-color-info-text);
+  background: hsl(var(--dwc-color-info-h) 60% 50% / 0.15);
   padding: var(--dwc-space-2xs) var(--dwc-space-xs);
   border-radius: var(--dwc-border-radius-s);
   text-transform: uppercase;
