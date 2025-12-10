@@ -1,0 +1,1832 @@
+[
+  {
+    "name": "Action",
+    "description": "A genre focused on high-paced, thrilling narratives that emphasize physical feats, danger, and adventure.",
+    "notes": "Common in novels, comics, and films.",
+    "details": "Action literature often involves heroes, villains, and intense conflicts, ranging from espionage to survival stories."
+  },
+  {
+    "name": "Adventure",
+    "description": "A genre featuring action-packed journeys, exploration, and survival.",
+    "notes": "Often involves a hero overcoming obstacles in exotic or dangerous settings.",
+    "details": "Adventure literature can be historical, fantasy-based, or set in real-world locations."
+  },
+  {
+    "name": "Afrofuturism",
+    "description": "A genre that explores African and African diasporic cultures in speculative settings, often blending science fiction, fantasy, and history.",
+    "notes": "Incorporates themes of racial identity, heritage, and future possibilities for Black communities.",
+    "details": "Afrofuturism reimagines the past and future through a lens that centers Black culture, technology, and empowerment."
+  },
+  {
+    "name": "Alien Civilizations",
+    "description": "Works that explore the possibility of intelligent alien civilizations, their cultures, technologies, and interactions with humanity.",
+    "notes": "Commonly found in speculative and science fiction genres.",
+    "details": "Books in this genre often address questions about humanity's place in the universe and the potential consequences of contact with alien species."
+  },
+  {
+    "name": "Alien Invasion",
+    "description": "A subgenre of science fiction that centers around the concept of extraterrestrial beings invading Earth.",
+    "notes": "Typically involves themes of survival, resistance, and the clash of civilizations.",
+    "details": "Popular examples include H.G. Wells' 'The War of the Worlds' and films like 'Independence Day.'"
+  },
+  {
+    "name": "Alien contact",
+    "description": "A genre that explores the interaction between humans and extraterrestrial beings, often addressing themes of communication, conflict, or cooperation.",
+    "notes": "These stories typically reflect humanity's curiosity and fear of the unknown, imagining what might happen if aliens visited Earth.",
+    "details": "Famous works include 'Contact' by Carl Sagan and 'The War of the Worlds' by H.G. Wells."
+  },
+  {
+    "name": "Allegorical Fiction",
+    "description": "Stories that use symbolism to convey deeper moral, political, or spiritual messages.",
+    "notes": "Often features characters and events that represent abstract concepts.",
+    "details": "Allegorical fiction conveys layered meanings, inviting readers to interpret themes beyond the surface narrative."
+  },
+  {
+    "name": "Almanac",
+    "description": "A book or compilation of statistical data, useful information, and predictions, often organized by calendar year.",
+    "notes": "Typically includes weather forecasts, planting dates, astronomical data, and other seasonal guides.",
+    "details": "Almanacs can be a mix of practical and educational content, with some offering advice for farmers, sailors, or other specialized professions."
+  },
+  {
+    "name": "Alternate History",
+    "description": "A genre that explores historical events with altered outcomes, often leading to vastly different worlds.",
+    "notes": "Also known as uchronia, it speculates on 'what if' scenarios.",
+    "details": "Alternate history reimagines past events, exploring how small changes could have drastically shifted global history."
+  },
+  {
+    "name": "Ancient Rome",
+    "description": "Works centered on the history, culture, and impact of Ancient Rome, including political systems, military conquests, and daily life.",
+    "notes": "Includes both historical fiction and scholarly works.",
+    "details": "This genre often delves into the lives of Roman emperors, gladiators, and philosophers, with notable works like 'I, Claudius' by Robert Graves."
+  },
+  {
+    "name": "Anthology",
+    "description": "A collection of works, often focused on a specific theme, genre, or author, that includes a variety of different forms of writing such as short stories, poems, or essays.",
+    "notes": "Anthologies are usually curated to represent the diversity of a particular subject or genre, making them an important resource for readers and researchers.",
+    "details": "Notable anthologies include 'The Norton Anthology of English Literature' and 'The Penguin Anthology of Twentieth-Century American Poetry.'"
+  },
+  {
+    "name": "Anthropology",
+    "description": "Books studying human societies, cultures, and evolutionary development.",
+    "notes": "Includes cultural anthropology, archaeology, and ethnography.",
+    "details": "Anthropology books explore human history, traditions, and social behaviors across different civilizations."
+  },
+  {
+    "name": "Apocalyptic",
+    "description": "Fiction that explores the end of civilization, often caused by natural disasters, war, or other catastrophic events.",
+    "notes": "Can overlap with post-apocalyptic works, focusing on the immediate collapse of society.",
+    "details": "Examples include novels like Cormac McCarthy's 'The Road' and Stephen King's 'The Stand.'"
+  },
+  {
+    "name": "Archaeology",
+    "description": "Literature that examines the study of past human societies through excavation, analysis, and interpretation of artifacts.",
+    "notes": "Includes both academic texts and popular explorations of archaeological discoveries.",
+    "details": "Works in this genre often focus on significant archaeological digs, ancient civilizations, and the interpretation of material culture."
+  },
+  {
+    "name": "Art",
+    "description": "Books that focus on the visual and performing arts, including painting, sculpture, architecture, music, and dance.",
+    "notes": "Can range from theoretical analyses to biographical works on artists.",
+    "details": "Art books often explore the history of art, techniques used by artists, and the cultural impact of various art movements."
+  },
+  {
+    "name": "Art & Design",
+    "description": "Books focused on visual arts, design principles, and artistic movements.",
+    "notes": "Includes books on painting, architecture, and digital design.",
+    "details": "Art and design books examine creative expression, artistic techniques, and influential works throughout history."
+  },
+  {
+    "name": "Art History",
+    "description": "A genre that examines the history and development of art across different periods, regions, and styles, providing analysis and context to artistic works.",
+    "notes": "Art history literature discusses the evolution of visual art and the cultural, political, and social contexts surrounding art movements and individual artists.",
+    "details": "Key works include 'The Story of Art' by E.H. Gombrich and 'Art Through the Ages' by Helen Gardner."
+  },
+  {
+    "name": "Artificial Intelligence",
+    "description": "A genre focused on the development of AI and its implications, both positive and negative, for society.",
+    "notes": "Explores the science and ethics of creating intelligent machines.",
+    "details": "Books in this genre can be speculative fiction, exploring futuristic AI, or non-fiction, discussing current advancements and ethical dilemmas."
+  },
+  {
+    "name": "Astronomy",
+    "description": "Scientific works and literature on celestial objects, space exploration, and cosmology.",
+    "notes": "Includes research papers, textbooks, and popular science books.",
+    "details": "Astronomy books discuss topics such as black holes, planetary science, and the origins of the universe."
+  },
+  {
+    "name": "Autobiographical Fiction",
+    "description": "A genre that combines elements of autobiography and fiction, often drawing heavily from the author's own life while using fictionalized events or characters.",
+    "notes": "This genre blurs the lines between the author's real life and creative imagination.",
+    "details": "Examples include 'The Bell Jar' by Sylvia Plath and 'On the Road' by Jack Kerouac."
+  },
+  {
+    "name": "Autobiography",
+    "description": "A self-written account of a person's life.",
+    "notes": "Differs from memoirs in that it typically covers the author’s entire life.",
+    "details": "Autobiographies offer insight into personal experiences, achievements, and historical events."
+  },
+  {
+    "name": "Automotive & Transportation",
+    "description": "Books about cars, trains, aviation, and public transportation systems.",
+    "notes": "Includes histories of major automobile companies and advancements in transportation technology.",
+    "details": "These books cover vehicle engineering, transportation logistics, and the cultural significance of travel methods."
+  },
+  {
+    "name": "Aviation & Aerospace",
+    "description": "Books about flight history, aircraft technology, and space exploration.",
+    "notes": "Includes biographies of pilots, aerodynamics principles, and commercial aviation.",
+    "details": "Aviation books explore air travel innovations, astronaut training, and the future of interstellar exploration."
+  },
+  {
+    "name": "Bildungsroman",
+    "description": "A genre that focuses on the psychological and moral growth of a character, often from childhood to adulthood.",
+    "notes": "This genre often involves the protagonist's struggles with identity, society, and self-discovery.",
+    "details": "Notable works include 'David Copperfield' by Charles Dickens and 'The Catcher in the Rye' by J.D. Salinger."
+  },
+  {
+    "name": "Biography",
+    "description": "A detailed account of a person’s life, typically based on factual information.",
+    "notes": "Can be an autobiography (written by the subject) or a biography (written by someone else).",
+    "details": "Biographies provide insight into significant individuals, their accomplishments, and their impact on the world."
+  },
+  {
+    "name": "Biology",
+    "description": "Literature dedicated to the study of living organisms, including their structure, function, growth, and evolution.",
+    "notes": "This genre often overlaps with scientific works and natural history.",
+    "details": "Books in this genre include research-driven texts, educational materials, and popular science books, focusing on areas like genetics, ecology, and evolution."
+  },
+  {
+    "name": "Biopunk",
+    "description": "A subgenre of science fiction focusing on genetic engineering, biotechnology, and biohacking.",
+    "notes": "Often explores themes of human enhancement, corporate control, and ethical dilemmas.",
+    "details": "Biopunk presents dystopian futures where biological manipulation and genetic experiments alter human evolution."
+  },
+  {
+    "name": "Biopunk & Genetic Engineering",
+    "description": "Books focusing on biotechnology, genetic manipulation, and biohacking.",
+    "notes": "Includes themes of corporate control, transhumanism, and ethical dilemmas in science.",
+    "details": "Biopunk books explore the intersection of science, society, and human identity through biological advancements."
+  },
+  {
+    "name": "Biotechnology",
+    "description": "A genre focusing on the application of biology and technology to create new products and processes, particularly in the fields of healthcare, agriculture, and environmental management.",
+    "notes": "Blends scientific research with ethical, social, and political discussions about its use.",
+    "details": "Works in this genre often explore advancements in genetic engineering, stem cell research, and bioinformatics, and the ethical implications of biotechnology."
+  },
+  {
+    "name": "Bizarro Fiction",
+    "description": "A genre that embraces the absurd, surreal, and grotesque, often pushing the limits of traditional storytelling.",
+    "notes": "Highly experimental, incorporating elements of satire, horror, and fantasy.",
+    "details": "Bizarro fiction aims to surprise and challenge readers with unconventional narratives, bizarre characters, and surreal worlds."
+  },
+  {
+    "name": "Boating & Nautical Studies",
+    "description": "Books covering maritime history, sailing techniques, and naval warfare.",
+    "notes": "Includes guides to yacht navigation, shipbuilding, and accounts of famous sea voyages.",
+    "details": "Nautical books explore the ocean’s role in history, survival at sea, and marine exploration."
+  },
+  {
+    "name": "Business & Finance",
+    "description": "Books focusing on economics, management, entrepreneurship, and investment strategies.",
+    "notes": "Includes corporate history, self-improvement for professionals, and financial advice.",
+    "details": "This genre provides guidance on career growth, leadership, and financial literacy for individuals and businesses."
+  },
+  {
+    "name": "Campus Novel",
+    "description": "Literary fiction set in academic institutions, often exploring intellectual and social dynamics.",
+    "notes": "Common themes include rivalry, ambition, and philosophical debates.",
+    "details": "Campus novels examine the lives of students, professors, and the influence of academia on personal growth."
+  },
+  {
+    "name": "Celebrity & Pop Culture",
+    "description": "Books analyzing entertainment industries, famous personalities, and social media trends.",
+    "notes": "Includes memoirs of celebrities, critiques of pop culture phenomena, and history of film and television.",
+    "details": "Pop culture books examine the impact of music, movies, and internet culture on society."
+  },
+  {
+    "name": "Children's Literature",
+    "description": "Books, stories, and poems specifically written for children, often designed to entertain, educate, or impart moral lessons.",
+    "notes": "Includes various subgenres such as picture books, fairy tales, young adult fiction, and educational literature.",
+    "details": "Children's literature can range from simple stories for early readers to complex narratives for older children and teenagers. It often features imaginative storytelling, colorful illustrations, and themes of adventure, friendship, and personal growth."
+  },
+  {
+    "name": "Christian Fiction",
+    "description": "Fiction that incorporates Christian themes, values, and messages.",
+    "notes": "May include biblical allegories, faith-based struggles, or redemption arcs.",
+    "details": "Christian fiction is written to inspire or reinforce religious beliefs while delivering compelling narratives."
+  },
+  {
+    "name": "Christmas",
+    "description": "A genre of literature that centers on themes of Christmas, often focusing on holiday traditions, family gatherings, and the spirit of generosity.",
+    "notes": "Christmas stories are frequently heartwarming, with a focus on themes of redemption, kindness, and love.",
+    "details": "Classic examples include 'A Christmas Carol' by Charles Dickens and 'The Polar Express' by Chris Van Allsburg."
+  },
+  {
+    "name": "Classic",
+    "description": "Books that have stood the test of time and are considered masterpieces of literature.",
+    "notes": "Often included in the canon of Western or world literature.",
+    "details": "This genre includes works such as 'Moby-Dick' by Herman Melville, 'Pride and Prejudice' by Jane Austen, and 'Crime and Punishment' by Fyodor Dostoevsky."
+  },
+  {
+    "name": "Classical Studies",
+    "description": "Academic works focused on the literature, philosophy, history, and culture of ancient civilizations.",
+    "notes": "Covers Greek, Roman, and other classical traditions.",
+    "details": "Includes translations, analyses, and critiques of ancient texts and their impact on modern thought."
+  },
+  {
+    "name": "Cli-Fi (Climate Fiction)",
+    "description": "A subgenre of speculative fiction focusing on climate change and its effects on society.",
+    "notes": "Can be dystopian, utopian, or grounded in near-future realism.",
+    "details": "Cli-fi explores themes of environmental destruction, survival, and humanity's responsibility to the planet."
+  },
+  {
+    "name": "Cognitive Science",
+    "description": "Interdisciplinary works exploring human thought, perception, and intelligence.",
+    "notes": "Combines psychology, neuroscience, linguistics, and artificial intelligence.",
+    "details": "Cognitive science literature examines how the mind processes information, learns, and makes decisions."
+  },
+  {
+    "name": "Comedy",
+    "description": "A genre that aims to entertain and amuse through humor and satire.",
+    "notes": "Includes comedic novels, plays, and essays.",
+    "details": "Comedy explores social norms, absurdity, and human relationships in a lighthearted manner."
+  },
+  {
+    "name": "Coming-of-Age",
+    "description": "A literary genre that focuses on the emotional and psychological growth of the protagonist from youth to adulthood.",
+    "notes": "Often revolves around themes of identity, self-discovery, and transition.",
+    "details": "Examples include novels like 'The Catcher in the Rye' and 'To Kill a Mockingbird.'"
+  },
+  {
+    "name": "Coming-of-Age Fiction",
+    "description": "Stories that follow a character’s transition from youth to adulthood, often exploring personal growth.",
+    "notes": "Common themes include self-discovery, loss of innocence, and emotional development.",
+    "details": "Coming-of-age fiction often portrays protagonists learning life lessons through trials and experiences."
+  },
+  {
+    "name": "Computer Science",
+    "description": "Publications focused on computing technology, programming, and theoretical aspects of information processing.",
+    "notes": "Includes textbooks, research papers, and practical guides.",
+    "details": "Topics covered range from algorithms and artificial intelligence to cybersecurity and software engineering."
+  },
+  {
+    "name": "Conspiracy Theories",
+    "description": "Books exploring controversial and hidden aspects of historical and modern events.",
+    "notes": "Includes government cover-ups, secret societies, and alternative interpretations of history.",
+    "details": "Conspiracy books analyze the psychology behind belief in hidden truths and provide evidence for and against various theories."
+  },
+  {
+    "name": "Cookbooks & Food Writing",
+    "description": "Books about cooking techniques, recipes, and the cultural significance of food.",
+    "notes": "Includes cookbooks, culinary memoirs, and food history.",
+    "details": "This genre combines practical cooking guidance with storytelling, cultural history, and gastronomy."
+  },
+  {
+    "name": "Correspondence",
+    "description": "A genre focused on letters, emails, or other forms of personal communication, offering insight into the lives, thoughts, and relationships of the authors.",
+    "notes": "Works in this genre are often collections of letters between historical figures, writers, or family members, providing a unique window into personal histories.",
+    "details": "Key works include 'The Letters of Vincent van Gogh' and 'The Selected Letters of T.S. Eliot.'"
+  },
+  {
+    "name": "Cosmology",
+    "description": "Scientific and philosophical literature on the origins and structure of the universe.",
+    "notes": "Often overlaps with astronomy and physics.",
+    "details": "Cosmology books explore concepts like the Big Bang, dark matter, and the nature of space-time."
+  },
+  {
+    "name": "Cozy Mystery",
+    "description": "A subgenre of crime fiction featuring amateur sleuths, small-town settings, and minimal graphic violence.",
+    "notes": "Often involves a quirky detective, a close-knit community, and a lighthearted tone.",
+    "details": "Cozy mysteries emphasize clever puzzles and engaging characters rather than intense suspense or violence."
+  },
+  {
+    "name": "Crime",
+    "description": "A genre that revolves around criminal activities, law enforcement, and justice.",
+    "notes": "Includes detective fiction, thrillers, and courtroom dramas.",
+    "details": "Crime fiction explores motives, investigations, and consequences of illegal acts."
+  },
+  {
+    "name": "Crime Fiction",
+    "description": "A genre that revolves around criminal activities, investigations, and justice.",
+    "notes": "Includes detective stories, legal thrillers, and psychological crime novels.",
+    "details": "Crime fiction explores law enforcement, criminal psychology, and moral dilemmas."
+  },
+  {
+    "name": "Cryptography & Cybersecurity",
+    "description": "Books on digital security, encryption, and data protection.",
+    "notes": "Includes hacking ethics, cybersecurity strategies, and information security.",
+    "details": "These books cover cryptographic methods, cyber threats, and measures to protect digital assets."
+  },
+  {
+    "name": "Cultural",
+    "description": "Literature that explores cultural practices, values, and expressions across different societies.",
+    "notes": "Can include studies of art, music, traditions, and customs.",
+    "details": "Cultural works may examine how culture influences individuals and communities, often incorporating anthropology, history, and sociology."
+  },
+  {
+    "name": "Cultural Criticism",
+    "description": "Analyzes cultural phenomena, societal trends, and the role of culture in shaping human experience.",
+    "notes": "Often overlaps with social criticism and can be interdisciplinary.",
+    "details": "Cultural criticism may focus on mass media, art, music, literature, or political ideologies."
+  },
+  {
+    "name": "Cultural Studies",
+    "description": "Interdisciplinary studies of culture, examining how culture influences and is influenced by other aspects of society, such as politics, history, and economics.",
+    "notes": "Encompasses the study of race, gender, media, and global cultural dynamics.",
+    "details": "Works in this genre analyze cultural artifacts, social behaviors, and norms, often providing critiques of existing social structures."
+  },
+  {
+    "name": "Cyberpunk",
+    "description": "A science fiction subgenre featuring high-tech, low-life settings, often involving dystopian futures.",
+    "notes": "Themes include cybernetics, hacking, corporate control, and societal decay.",
+    "details": "Cyberpunk stories frequently depict oppressive mega-corporations, artificial intelligence, and antihero protagonists navigating urban decay."
+  },
+  {
+    "name": "DIY & Crafts",
+    "description": "Books providing guides and tutorials for creative projects and home improvement.",
+    "notes": "Includes woodworking, knitting, and handmade crafts.",
+    "details": "DIY books offer step-by-step instructions for artistic and practical skills, from home decor to fashion design."
+  },
+  {
+    "name": "Dark Academia",
+    "description": "A literary subgenre that explores themes of academic obsession, mystery, and intellectual elitism.",
+    "notes": "Often features prestigious universities, secret societies, and morally ambiguous characters.",
+    "details": "Dark Academia novels delve into gothic settings, philosophical dilemmas, and the consequences of intellectual pursuits."
+  },
+  {
+    "name": "Dark Fantasy",
+    "description": "A fantasy subgenre incorporating horror elements, supernatural themes, and ominous atmospheres.",
+    "notes": "Often features antiheroes, grim settings, and morally ambiguous choices.",
+    "details": "Dark fantasy explores the darker side of magic, myth, and human nature, often bordering on horror."
+  },
+  {
+    "name": "Deism",
+    "description": "A philosophical belief in a creator who does not intervene in the universe, focusing on reason and observation of the natural world as sources of knowledge about God.",
+    "notes": "Deism rejects organized religion and supernatural events but holds that human beings can understand God's existence through logic and the natural world.",
+    "details": "Key works include those by Thomas Paine, such as 'The Age of Reason,' and discussions in Enlightenment philosophy."
+  },
+  {
+    "name": "Detective",
+    "description": "Fiction that focuses on the investigation of crimes, typically by a professional or amateur detective.",
+    "notes": "Commonly features mystery, suspense, and a search for the truth.",
+    "details": "Famous examples include Sherlock Holmes stories by Arthur Conan Doyle and modern works like those by Agatha Christie."
+  },
+  {
+    "name": "Detective Fiction",
+    "description": "A genre focused on crime-solving, often featuring a detective protagonist.",
+    "notes": "Includes classic whodunits, noir, and hardboiled fiction.",
+    "details": "Detective fiction emphasizes logical deduction, suspense, and uncovering hidden truths."
+  },
+  {
+    "name": "DevOps",
+    "description": "A genre related to the practice of combining software development (Dev) and IT operations (Ops), with a focus on automation, collaboration, and monitoring throughout the lifecycle of applications.",
+    "notes": "Books in this genre are often technical and target IT professionals and developers.",
+    "details": "Key works include 'The Phoenix Project' by Gene Kim and 'Accelerate' by Nicole Forsgren."
+  },
+  {
+    "name": "Dialogue",
+    "description": "A literary form consisting of conversations between characters, often used to develop themes, reveal character traits, and move the plot forward.",
+    "notes": "Common in plays and philosophical texts.",
+    "details": "Dialogue-driven works can range from ancient dialogues like Plato's 'Republic' to modern novels with significant conversational content."
+  },
+  {
+    "name": "Dieselpunk",
+    "description": "A genre inspired by the aesthetics and technology of the early-to-mid 20th century, particularly the interwar period.",
+    "notes": "Blends industrial and wartime themes with speculative, retro-futuristic elements.",
+    "details": "Dieselpunk stories often feature noir influences, advanced machinery, and alternate histories shaped by early 20th-century technology."
+  },
+  {
+    "name": "Documentary",
+    "description": "Nonfiction works that present factual accounts of real events, people, and places.",
+    "notes": "Can take the form of books, films, or long-form journalism.",
+    "details": "Documentary literature often combines investigative research with storytelling techniques."
+  },
+  {
+    "name": "Documentary Fiction",
+    "description": "A genre combining factual events with fictional narrative to tell a story based on real-life incidents.",
+    "notes": "Blends storytelling with historical or factual content.",
+    "details": "Works in this genre often provide insight into real-world events while using fictional elements to make the story more engaging."
+  },
+  {
+    "name": "Domestic Thriller",
+    "description": "Thrillers centered around family secrets, betrayals, and personal relationships.",
+    "notes": "Often set in suburban neighborhoods or intimate communities.",
+    "details": "Domestic thrillers explore psychological tension, deception, and the dark side of everyday life."
+  },
+  {
+    "name": "Drama",
+    "description": "A genre focused on realistic or emotional storytelling, often adapted into plays or screenplays.",
+    "notes": "Includes tragedies, comedies, and melodramas.",
+    "details": "Drama explores the complexities of human relationships and emotions, frequently presented in a structured narrative format."
+  },
+  {
+    "name": "Drug Culture",
+    "description": "Works that explore the societal, cultural, and personal impacts of drug use, addiction, and the drug trade.",
+    "notes": "Can be both fictional and non-fictional, often aiming to critique drug policy, addiction, or the effects of drugs on individuals and communities.",
+    "details": "Books in this genre might include personal memoirs, investigative reports, or fictional narratives that depict the consequences of drug abuse."
+  },
+  {
+    "name": "Dystopian",
+    "description": "A genre that presents a vision of a dark, oppressive society, often resulting from political or technological failures, where personal freedom and autonomy are heavily restricted.",
+    "notes": "Dystopian fiction is often used as a critique of contemporary society, highlighting the dangers of authoritarianism, surveillance, or environmental collapse.",
+    "details": "Famous examples include '1984' by George Orwell and 'Brave New World' by Aldous Huxley."
+  },
+  {
+    "name": "Dystopian & Post-Apocalyptic",
+    "description": "Books exploring future societies, often in states of collapse or oppression.",
+    "notes": "Includes themes of authoritarianism, survival, and environmental catastrophe.",
+    "details": "Dystopian books critique societal trends by imagining extreme outcomes and exploring human resilience."
+  },
+  {
+    "name": "Dystopian Fiction",
+    "description": "A subgenre of speculative fiction depicting oppressive societies and bleak futures.",
+    "notes": "Often serves as a critique of political or social systems.",
+    "details": "Dystopian fiction warns about totalitarianism, environmental destruction, and loss of freedom."
+  },
+  {
+    "name": "Ecofiction",
+    "description": "Books that explore environmental themes, ecological crises, and humanity’s relationship with nature.",
+    "notes": "Can be speculative, realistic, or dystopian in approach.",
+    "details": "Ecofiction examines climate change, conservation, and the ethical responsibilities of humans toward the planet."
+  },
+  {
+    "name": "Economics",
+    "description": "Books discussing financial systems, markets, and economic theories.",
+    "notes": "Includes macroeconomics, microeconomics, and behavioral economics.",
+    "details": "Economics books analyze supply and demand, financial policies, and economic trends affecting global and local economies."
+  },
+  {
+    "name": "Education",
+    "description": "Books about teaching methods, learning theories, and academic research.",
+    "notes": "Includes pedagogical studies, classroom strategies, and curriculum development.",
+    "details": "Education books provide insights into effective teaching practices, student engagement, and the evolution of learning systems."
+  },
+  {
+    "name": "Educational",
+    "description": "Works designed to instruct and educate readers on various subjects.",
+    "notes": "Includes textbooks, workbooks, and instructional guides.",
+    "details": "Educational literature is used in schools, universities, and self-learning environments."
+  },
+  {
+    "name": "Engineering",
+    "description": "A genre of nonfiction and technical writing that focuses on the application of scientific principles to design and build machines, structures, and systems.",
+    "notes": "Engineering literature includes practical guides, textbooks, and case studies that explore various fields like civil, mechanical, and electrical engineering.",
+    "details": "Books like 'The Art of Electronics' by Paul Horowitz and 'Engineering Mechanics' by J.L. Meriam are significant in this genre."
+  },
+  {
+    "name": "Engineering & Technology",
+    "description": "Books focused on engineering principles, innovations, and applied sciences.",
+    "notes": "Includes fields such as mechanical, electrical, and civil engineering.",
+    "details": "This genre covers the design, development, and implementation of technologies across industries."
+  },
+  {
+    "name": "Environment",
+    "description": "A genre that focuses on the natural environment, environmental conservation, and the impact of human activities on ecosystems.",
+    "notes": "Books in this genre may focus on climate change, deforestation, pollution, and sustainability, offering critiques or solutions.",
+    "details": "Examples include 'The Sixth Extinction' by Elizabeth Kolbert and 'The Hidden Life of Trees' by Peter Wohlleben."
+  },
+  {
+    "name": "Environmental Science",
+    "description": "Scientific literature focused on the study of ecosystems, climate change, and human impact on nature.",
+    "notes": "Includes research papers, conservation studies, and educational books.",
+    "details": "Environmental science literature discusses topics like sustainability, biodiversity, and pollution control."
+  },
+  {
+    "name": "Environmental Studies",
+    "description": "Books analyzing the relationship between humans and the natural world.",
+    "notes": "Includes climate change, conservation efforts, and ecological studies.",
+    "details": "Environmental books examine sustainability, biodiversity, and the impact of human activities on the planet."
+  },
+  {
+    "name": "Environmentalism",
+    "description": "A genre that focuses on the relationship between humans and the environment, exploring the impact of human activity on the planet.",
+    "notes": "Environmental books may advocate for sustainability, conservation, and eco-friendly living.",
+    "details": "Books like 'Silent Spring' by Rachel Carson and 'The Uninhabitable Earth' by David Wallace-Wells explore these themes."
+  },
+  {
+    "name": "Epic",
+    "description": "A genre of long narrative poems, often centered around heroic deeds and grand themes.",
+    "notes": "Traditionally, epics focus on the adventures of a hero and the consequences of their actions.",
+    "details": "Classical examples include 'The Iliad,' 'The Odyssey,' and 'Beowulf.' Modern epics may take the form of novels."
+  },
+  {
+    "name": "Epic Fantasy",
+    "description": "A subgenre of fantasy that typically features large-scale, complex worlds, and grand narratives with epic quests and battles between good and evil.",
+    "notes": "Often set in imaginary realms with complex political systems and mythologies.",
+    "details": "Notable works include 'The Lord of the Rings' by J.R.R. Tolkien and George R.R. Martin's 'A Song of Ice and Fire' series."
+  },
+  {
+    "name": "Epistolary Fiction",
+    "description": "Stories told through letters, diary entries, or other documents.",
+    "notes": "Popularized by classic works like 'Dracula' and 'The Color Purple.'",
+    "details": "Epistolary fiction provides intimate perspectives and alternative narrative structures."
+  },
+  {
+    "name": "Espionage & Intelligence",
+    "description": "Books covering the world of spies, intelligence agencies, and covert operations.",
+    "notes": "Includes histories of espionage organizations, biographies of spies, and analysis of intelligence tactics.",
+    "details": "These books explore the role of espionage in global politics, technological advancements in intelligence gathering, and real-world spy missions."
+  },
+  {
+    "name": "Essay",
+    "description": "A short piece of writing on a particular subject, expressing the author's personal views or arguments.",
+    "notes": "Can range from reflective and personal to argumentative and analytical.",
+    "details": "Essays are a versatile form used in both literary and academic contexts, including works by writers like Michel de Montaigne and Virginia Woolf."
+  },
+  {
+    "name": "Essays",
+    "description": "A collection of short literary works exploring various topics, opinions, or arguments.",
+    "notes": "Includes personal essays, critical essays, and philosophical essays.",
+    "details": "Essays provide insights into a writer’s perspective, often blending research, reflection, and argumentation."
+  },
+  {
+    "name": "Ethics",
+    "description": "A genre that explores questions about what is morally right or wrong, addressing issues of responsibility, justice, and human conduct.",
+    "notes": "Ethics is often interwoven with philosophical or legal discourse, exploring how ethical principles should guide behavior.",
+    "details": "Notable works include 'Nicomachean Ethics' by Aristotle and 'The Moral Landscape' by Sam Harris."
+  },
+  {
+    "name": "Ethics & Morality",
+    "description": "Books discussing ethical theories, moral philosophy, and human values.",
+    "notes": "Includes topics like applied ethics, ethical dilemmas, and philosophical debates.",
+    "details": "Ethics books explore right and wrong, personal responsibility, and societal values through different perspectives."
+  },
+  {
+    "name": "Evolution",
+    "description": "Books that focus on the scientific theory of evolution, the process by which organisms change over time through natural selection.",
+    "notes": "Combines biology, genetics, and paleontology.",
+    "details": "Books in this genre explain the mechanisms of evolution, its evidence in fossils, and its application to human development."
+  },
+  {
+    "name": "Evolutionary Biology",
+    "description": "Books focusing on the study of evolution in living organisms, including the genetic, ecological, and physiological mechanisms that drive evolutionary changes.",
+    "notes": "This genre is often a blend of science, history, and philosophy.",
+    "details": "Evolutionary biology books explore topics like natural selection, adaptation, and evolutionary theory, with seminal works from Charles Darwin and modern researchers."
+  },
+  {
+    "name": "Existential Fiction",
+    "description": "A genre that explores themes of existentialism, absurdity, and the search for meaning.",
+    "notes": "Often features protagonists struggling with identity, purpose, and free will.",
+    "details": "Existential fiction challenges philosophical and moral questions, frequently with introspective or bleak narratives."
+  },
+  {
+    "name": "Experimental & Avant-Garde",
+    "description": "Books pushing the boundaries of traditional storytelling and structure.",
+    "notes": "Includes nonlinear narratives, abstract prose, and literary innovations.",
+    "details": "Experimental books challenge conventional literary forms through unique narrative styles, typography, and reader interaction."
+  },
+  {
+    "name": "Experimental Fiction",
+    "description": "Fiction that breaks traditional storytelling rules, using unconventional structures and styles.",
+    "notes": "May include nonlinear narratives, fragmented storytelling, and unique formatting.",
+    "details": "Experimental fiction challenges conventional literature, pushing creative boundaries to create new reading experiences."
+  },
+  {
+    "name": "Fairy Tales",
+    "description": "Traditional stories featuring magical elements, folklore, and moral lessons.",
+    "notes": "Often passed down through oral tradition.",
+    "details": "Fairy tales convey cultural values and themes of good vs. evil."
+  },
+  {
+    "name": "Fantasy",
+    "description": "A genre that features magical, mythical, or supernatural elements.",
+    "notes": "Includes high fantasy, low fantasy, urban fantasy, and dark fantasy.",
+    "details": "Fantasy often involves imaginary worlds, magical creatures, and heroic quests, drawing from mythology and folklore."
+  },
+  {
+    "name": "Fashion & Beauty",
+    "description": "Books discussing the evolution of fashion, beauty standards, and personal style.",
+    "notes": "Includes biographies of designers, makeup tutorials, and cultural studies of clothing trends.",
+    "details": "Fashion books explore haute couture, sustainable fashion, and historical costume design."
+  },
+  {
+    "name": "Feminism",
+    "description": "A genre that explores feminist ideas, movements, and the advocacy for women's rights and gender equality.",
+    "notes": "Feminist literature covers a wide range of topics from the history of women's struggles to personal empowerment and critiques of gender norms.",
+    "details": "Key works include 'The Second Sex' by Simone de Beauvoir and 'The Feminine Mystique' by Betty Friedan."
+  },
+  {
+    "name": "Feminist Science Fiction",
+    "description": "Science fiction that explores feminist themes, gender roles, and societal structures.",
+    "notes": "Often challenges patriarchal norms and imagines alternative gender dynamics.",
+    "details": "Feminist sci-fi critiques social hierarchies, examines power structures, and envisions new possibilities for gender equality."
+  },
+  {
+    "name": "Fiction",
+    "description": "Literary works created from the imagination, not presented as fact.",
+    "notes": "Includes various subgenres such as literary fiction, historical fiction, and science fiction.",
+    "details": "Fiction encompasses storytelling through novels, short stories, and novellas. It may be based on real-life events but remains a product of creative storytelling."
+  },
+  {
+    "name": "First Contact",
+    "description": "A genre that deals with the first interaction between humans and extraterrestrial civilizations, exploring themes of communication, misunderstanding, and cultural exchange.",
+    "notes": "First contact stories often delve into the complexities of language, society, and human identity when encountering alien species.",
+    "details": "Key works include 'The Three-Body Problem' by Liu Cixin and 'Childhood's End' by Arthur C. Clarke."
+  },
+  {
+    "name": "Folklore & Oral Traditions",
+    "description": "Books documenting the myths, legends, and cultural stories passed down through generations.",
+    "notes": "Includes fairy tales, fables, and indigenous storytelling traditions.",
+    "details": "These books examine how folklore shapes national identities, preserves history, and teaches moral lessons."
+  },
+  {
+    "name": "Food & Culinary Arts",
+    "description": "Books focused on cooking techniques, culinary history, and food science.",
+    "notes": "Includes cookbooks, restaurant industry insights, and nutritional studies.",
+    "details": "Food books explore world cuisines, famous chefs, and the chemistry of flavors."
+  },
+  {
+    "name": "Futurism",
+    "description": "A genre that explores themes of technology, progress, and the future of humanity.",
+    "notes": "Often overlaps with science fiction and speculative fiction.",
+    "details": "Futurism analyzes possible societal, scientific, and technological advancements and their implications."
+  },
+  {
+    "name": "Gamelit",
+    "description": "A genre where characters interact with or are trapped inside a game-like world.",
+    "notes": "Often includes RPG mechanics, leveling systems, and in-game quests.",
+    "details": "Gamelit blends fantasy or science fiction with video game structures, sometimes featuring protagonists aware of the system."
+  },
+  {
+    "name": "Genealogy & Family History",
+    "description": "Books focused on tracing ancestry and historical family records.",
+    "notes": "Includes guides to genealogical research and case studies of family histories.",
+    "details": "These books provide insights into personal heritage, lineage tracking, and historical migrations."
+  },
+  {
+    "name": "Geology",
+    "description": "Scientific works focused on the study of Earth's structure, materials, and processes.",
+    "notes": "Includes textbooks, research papers, and field guides.",
+    "details": "Geology literature discusses topics like plate tectonics, rock formations, and natural disasters."
+  },
+  {
+    "name": "Gothic",
+    "description": "A genre that combines elements of horror, mystery, and romance, often set in dark, eerie environments and exploring themes of madness, death, and the supernatural.",
+    "notes": "Gothic fiction often features gloomy settings like castles or mansions and characters who face emotional or psychological challenges.",
+    "details": "Notable works include 'Frankenstein' by Mary Shelley and 'Dracula' by Bram Stoker."
+  },
+  {
+    "name": "Gothic Fiction",
+    "description": "A genre that combines horror, romance, and mystery, often set in eerie or decaying locations.",
+    "notes": "Features dark, atmospheric settings and psychological or supernatural elements.",
+    "details": "Gothic fiction explores themes of madness, the supernatural, and human fears, frequently in haunted mansions or desolate landscapes."
+  },
+  {
+    "name": "Graphic Novels & Comics",
+    "description": "A visual storytelling format combining artwork and narrative text.",
+    "notes": "Includes superhero comics, manga, and independent graphic novels.",
+    "details": "Graphic novels and comics present stories through illustrated panels, offering diverse genres and themes."
+  },
+  {
+    "name": "Grimdark",
+    "description": "A subgenre of speculative fiction known for its dark, cynical tone and morally ambiguous characters.",
+    "notes": "Popular in fantasy and science fiction, often portraying brutal, war-torn worlds.",
+    "details": "Grimdark stories emphasize survival, political intrigue, and the harsh realities of power struggles."
+  },
+  {
+    "name": "Grimdark Fantasy",
+    "description": "A subgenre of fantasy that emphasizes moral ambiguity, dark themes, and brutal realism.",
+    "notes": "Often features antiheroes, political intrigue, and cynical worldviews.",
+    "details": "Grimdark books reject traditional notions of heroism, showcasing worlds where power and survival come at great cost."
+  },
+  {
+    "name": "Hard Science Fiction",
+    "description": "Books with a strong emphasis on scientific accuracy and technical detail.",
+    "notes": "Includes realistic space travel, AI development, and future technologies.",
+    "details": "Hard sci-fi explores theoretical physics, advanced robotics, and extraterrestrial exploration with scientific rigor."
+  },
+  {
+    "name": "Hardboiled",
+    "description": "A genre of crime fiction known for its tough, cynical protagonists, often private detectives, who navigate a corrupt and dangerous world.",
+    "notes": "Hardboiled stories are characterized by their gritty realism, strong moral ambiguity, and fast-paced narrative.",
+    "details": "Key works include 'The Big Sleep' by Raymond Chandler and 'The Maltese Falcon' by Dashiell Hammett."
+  },
+  {
+    "name": "Hardboiled Detective",
+    "description": "A subgenre of crime fiction featuring tough, cynical detectives and gritty, urban settings.",
+    "notes": "Popularized by authors like Raymond Chandler and Dashiell Hammett.",
+    "details": "Hardboiled detective stories often explore corruption, moral ambiguity, and the darker side of society."
+  },
+  {
+    "name": "High Fantasy",
+    "description": "A subgenre of fantasy that features elaborate world-building, magic, mythical creatures, and epic storylines.",
+    "notes": "High fantasy often contrasts with low fantasy, which is set in the real world or a world very similar to it.",
+    "details": "Famous works in this genre include 'The Lord of the Rings' by J.R.R. Tolkien and 'A Song of Ice and Fire' by George R.R. Martin."
+  },
+  {
+    "name": "Historical",
+    "description": "A genre that focuses on historical events, figures, or periods, often blending fact with fiction to provide insight into the past.",
+    "notes": "Historical novels are set in a specific historical context and may explore the impact of significant events on individuals and societies.",
+    "details": "Notable works include 'War and Peace' by Leo Tolstoy and 'The Book Thief' by Markus Zusak."
+  },
+  {
+    "name": "Historical Drama",
+    "description": "Plays or novels set in the past, often focusing on real historical events or figures.",
+    "notes": "Historical dramas tend to blend fact with creative interpretation.",
+    "details": "Famous examples include Shakespeare's historical plays, such as 'Julius Caesar' and 'Henry V.'"
+  },
+  {
+    "name": "Historical Fiction",
+    "description": "A genre that reconstructs past events, often featuring fictional characters interacting with historical figures.",
+    "notes": "Can be highly researched and based on real historical events or take creative liberties.",
+    "details": "Historical fiction provides insight into different eras and cultures while maintaining engaging narratives."
+  },
+  {
+    "name": "Historical Mystery",
+    "description": "Mystery novels set in historical periods, often incorporating real events and figures.",
+    "notes": "Blends detective fiction with historical accuracy.",
+    "details": "Historical mysteries offer richly detailed settings, often showcasing the challenges of solving crimes in pre-modern times."
+  },
+  {
+    "name": "History",
+    "description": "Works that document and analyze past events, civilizations, and historical figures.",
+    "notes": "Can be academic, popular history, or historical narrative.",
+    "details": "History books provide context, interpretation, and understanding of human development over time."
+  },
+  {
+    "name": "Holiday",
+    "description": "Works that focus on holidays, celebrations, and seasonal traditions, often revolving around festive or family-oriented themes.",
+    "notes": "Can be found across fiction and non-fiction genres.",
+    "details": "Holiday-themed books often include stories set during specific holidays, like Christmas, Halloween, or Thanksgiving, and can include both serious and lighthearted themes."
+  },
+  {
+    "name": "Holiday Fiction",
+    "description": "Stories set around specific holidays or celebrations, typically light-hearted, with themes of family, love, and joy.",
+    "notes": "Common in Christmas stories, but also includes tales centered around other holidays like New Year's and Easter.",
+    "details": "Holiday fiction often evokes a sense of nostalgia and warmth, making it a popular genre for seasonal reading and gift-giving."
+  },
+  {
+    "name": "Hopepunk",
+    "description": "A literary movement that embraces optimism, resilience, and resistance against oppressive systems.",
+    "notes": "Contrasts with grimdark by portraying characters who fight for hope and change.",
+    "details": "Hopepunk focuses on themes of community, kindness, and perseverance, even in dark and challenging worlds."
+  },
+  {
+    "name": "Horror",
+    "description": "A genre designed to evoke fear, dread, or shock in the reader.",
+    "notes": "Includes supernatural horror, psychological horror, and gothic horror.",
+    "details": "Horror stories frequently explore themes of death, the unknown, and psychological terror, often incorporating monsters, ghosts, or disturbing events."
+  },
+  {
+    "name": "Horror & Supernatural",
+    "description": "Books centered on fear, the unknown, and supernatural entities.",
+    "notes": "Includes ghost stories, gothic horror, and cosmic horror.",
+    "details": "Horror books explore psychological terror, paranormal phenomena, and dark folklore."
+  },
+  {
+    "name": "Human Survival",
+    "description": "A genre that explores the survival of humans in extreme circumstances, often involving apocalyptic scenarios or significant threats to civilization.",
+    "notes": "This genre emphasizes human resilience, adaptability, and the instinct to survive in the face of overwhelming odds.",
+    "details": "Books like 'The Road' by Cormac McCarthy and 'The Postman' by David Brin fall within this category."
+  },
+  {
+    "name": "Humanism",
+    "description": "Works centered on human values, ethics, and intellectual progress.",
+    "notes": "Often associated with philosophy, literature, and social sciences.",
+    "details": "Humanist literature promotes critical thinking, secularism, and the importance of human dignity."
+  },
+  {
+    "name": "Humor",
+    "description": "A genre that uses wit, comedy, and satire to entertain readers.",
+    "notes": "Includes comic novels, essays, and joke books.",
+    "details": "Humor literature provides lighthearted or critical commentary on life and society."
+  },
+  {
+    "name": "Humor & Satire",
+    "description": "A genre that uses wit, irony, or exaggeration to entertain or critique society.",
+    "notes": "Includes comedic essays, parodies, and satirical fiction.",
+    "details": "Humor books aim to amuse readers, often highlighting absurdities in life, culture, and politics."
+  },
+  {
+    "name": "Industrial Novel",
+    "description": "A genre focused on the industrial revolution and the effects of industrialization on society, often exploring themes of class, labor, and economic change.",
+    "notes": "Industrial novels often depict the hardships of workers in factories or mines and the challenges of adapting to rapid technological and social transformations.",
+    "details": "Notable works include 'Hard Times' by Charles Dickens and 'The Jungle' by Upton Sinclair."
+  },
+  {
+    "name": "Inspirational",
+    "description": "Works that aim to uplift, motivate, and encourage the reader, often emphasizing positive change and self-improvement.",
+    "notes": "Common in self-help and religious genres, but also found in fiction and memoirs.",
+    "details": "Books in this genre often include motivational speeches, stories of personal triumph, and messages of hope."
+  },
+  {
+    "name": "Inspirational Fiction",
+    "description": "Stories designed to uplift and encourage readers, often with themes of faith, perseverance, and hope.",
+    "notes": "Commonly found in Christian fiction, but can extend to other religious or secular themes.",
+    "details": "Inspirational fiction focuses on personal growth, redemption, and overcoming adversity."
+  },
+  {
+    "name": "Instructional",
+    "description": "Books or articles designed to teach or provide guidance on a particular topic or skill.",
+    "notes": "Often includes step-by-step instructions or explanations.",
+    "details": "Examples include textbooks, self-help books, and manuals for acquiring new skills or knowledge."
+  },
+  {
+    "name": "Invasion Fiction",
+    "description": "A genre where the central plot revolves around the invasion of Earth by aliens or foreign entities, exploring the conflict between invaders and human defenders.",
+    "notes": "The genre often incorporates themes of survival, war, and human resilience in the face of overwhelming forces.",
+    "details": "Examples include 'The War of the Worlds' by H.G. Wells and 'The 5th Wave' by Rick Yancey."
+  },
+  {
+    "name": "Island Fiction",
+    "description": "A genre focusing on stories set on islands, often emphasizing isolation, survival, and adventure.",
+    "notes": "Common in classic adventure literature and modern survival stories.",
+    "details": "Island fiction explores human resilience, nature’s dangers, and the psychological impact of isolation."
+  },
+  {
+    "name": "Journalism",
+    "description": "Nonfiction reporting on current events, politics, and social issues.",
+    "notes": "Can be investigative, opinion-based, or feature writing.",
+    "details": "Journalism informs the public through newspapers, magazines, and digital media."
+  },
+  {
+    "name": "LGBTQ+ Fiction",
+    "description": "Fiction that focuses on LGBTQ+ characters, relationships, and experiences.",
+    "notes": "Covers a range of genres, from romance to historical fiction and speculative fiction.",
+    "details": "LGBTQ+ fiction provides representation and explores identity, love, and struggles within diverse narratives."
+  },
+  {
+    "name": "Language",
+    "description": "A genre that explores the study of language, its structure, evolution, and use in communication.",
+    "notes": "Books in this genre often include linguistic theory, grammar, syntax, and the development of languages over time.",
+    "details": "Key works include 'The Language Instinct' by Steven Pinker and 'Reflections on Language' by Noam Chomsky."
+  },
+  {
+    "name": "Legal Studies",
+    "description": "Books covering law, legal principles, and judicial systems.",
+    "notes": "Includes constitutional law, criminal law, and legal philosophy.",
+    "details": "Legal studies books examine the development of laws, landmark cases, and the role of legal institutions in society."
+  },
+  {
+    "name": "Legal Thriller",
+    "description": "Books that focus on legal battles, courtroom drama, and justice.",
+    "notes": "Often written by lawyers or legal experts, featuring high-stakes cases and ethical dilemmas.",
+    "details": "Legal thrillers explore themes of corruption, moral ambiguity, and the complexities of the legal system."
+  },
+  {
+    "name": "Letters",
+    "description": "A genre consisting of correspondence between individuals, often published as a collection or edited volume.",
+    "notes": "Letters offer insight into personal thoughts, historical events, and intellectual debates.",
+    "details": "Examples include 'The Letters of Virginia Woolf' and 'The Collected Letters of John Keats.'"
+  },
+  {
+    "name": "Linguistics",
+    "description": "Books on the study of language, its structure, and its evolution.",
+    "notes": "Includes topics like phonetics, semantics, and language acquisition.",
+    "details": "Linguistics books explore how languages develop, change, and influence human communication."
+  },
+  {
+    "name": "LitRPG",
+    "description": "A subgenre of Gamelit where role-playing game mechanics are explicitly part of the story.",
+    "notes": "Characters progress through levels, acquire skills, and follow game-based progression rules.",
+    "details": "LitRPG stories often incorporate stats, abilities, and structured challenges within a virtual or fantasy world."
+  },
+  {
+    "name": "Literary Criticism",
+    "description": "Analysis and evaluation of literary works, examining themes, structure, and meaning.",
+    "notes": "Can be academic or informal in tone.",
+    "details": "Literary criticism includes works that engage with specific authors, genres, or literary movements, often offering deep interpretations."
+  },
+  {
+    "name": "Literary Fiction",
+    "description": "A genre that emphasizes character development, style, and thematic depth.",
+    "notes": "Often contrasts with genre fiction, focusing more on literary merit than plot.",
+    "details": "Literary fiction explores human experiences, emotions, and social themes."
+  },
+  {
+    "name": "Literary Nonsense",
+    "description": "A genre characterized by its absurdity and playful disregard for conventional logic, often with whimsical language and situations.",
+    "notes": "This genre often defies interpretation and encourages readers to embrace the illogical.",
+    "details": "Famous examples include 'The Hunting of the Snark' by Lewis Carroll and works by Edward Lear."
+  },
+  {
+    "name": "Literature",
+    "description": "A broad genre encompassing any written work, particularly those with artistic or intellectual value.",
+    "notes": "Literature can include fiction, poetry, plays, and essays, and it is often distinguished by its focus on style and substance.",
+    "details": "Notable works include 'Moby-Dick' by Herman Melville and 'To Kill a Mockingbird' by Harper Lee."
+  },
+  {
+    "name": "Magical Realism",
+    "description": "Books combining realistic settings with magical or surreal elements.",
+    "notes": "Popularized by authors like Gabriel García Márquez and Haruki Murakami.",
+    "details": "Magical realism books explore themes of identity, fate, and cultural heritage through a blend of reality and fantasy."
+  },
+  {
+    "name": "Mars",
+    "description": "A genre that focuses on the planet Mars, often exploring human colonization, interplanetary travel, and the potential for life on Mars.",
+    "notes": "Works in this genre combine elements of science fiction with a specific focus on Mars, often imagining future exploration or colonization.",
+    "details": "Notable works include 'The Martian' by Andy Weir and 'Red Mars' by Kim Stanley Robinson."
+  },
+  {
+    "name": "Mathematical Fiction",
+    "description": "A genre that blends mathematical concepts, puzzles, and theories into fictional narratives, often exploring the relationship between mathematics and reality.",
+    "notes": "This genre may include philosophical or speculative themes and is aimed at readers with a strong interest in math and abstract concepts.",
+    "details": "Notable works include 'Flatland' by Edwin A. Abbott and 'The Man Who Knew Infinity' by Robert Kanigel."
+  },
+  {
+    "name": "Mathematics",
+    "description": "Publications covering mathematical theories, principles, and applications.",
+    "notes": "Includes research papers, textbooks, and popular math books.",
+    "details": "Mathematical literature ranges from pure theory to applied fields like statistics and cryptography."
+  },
+  {
+    "name": "Medicine & Health",
+    "description": "Books on medical science, healthcare practices, and wellness.",
+    "notes": "Includes topics such as public health, alternative medicine, and medical ethics.",
+    "details": "Medical and health books provide insights into disease prevention, treatment methods, and advancements in medical research."
+  },
+  {
+    "name": "Memoir",
+    "description": "A personal narrative that focuses on specific experiences or themes in the author’s life.",
+    "notes": "More focused than an autobiography, often thematic.",
+    "details": "Memoirs provide personal insight, reflection, and storytelling through real-life events."
+  },
+  {
+    "name": "Metafiction",
+    "description": "A literary technique or genre where the narrative self-consciously addresses its own fictional nature.",
+    "notes": "Often breaks the fourth wall, acknowledges the author, or plays with storytelling conventions.",
+    "details": "Metafictional works challenge readers' expectations, sometimes incorporating unreliable narrators or unconventional formats."
+  },
+  {
+    "name": "Metaphysics & New Age",
+    "description": "Books on spiritual enlightenment, consciousness, and alternative healing.",
+    "notes": "Includes self-help, energy healing, and law of attraction.",
+    "details": "New Age books discuss meditation, astrology, and theories about the universe beyond the physical realm."
+  },
+  {
+    "name": "Microservices",
+    "description": "A software engineering genre focused on developing and deploying applications as a collection of loosely coupled, independently deployable services.",
+    "notes": "Primarily a technical field in software architecture and development.",
+    "details": "Books in this genre cover principles, design patterns, implementation, and challenges in building microservice-based systems."
+  },
+  {
+    "name": "Military & War",
+    "description": "Books analyzing military history, strategy, and warfare.",
+    "notes": "Includes accounts of historical battles, biographies of military leaders, and tactical studies.",
+    "details": "Military books provide historical context, strategic insights, and personal narratives of soldiers and leaders."
+  },
+  {
+    "name": "Military Fiction",
+    "description": "Works of fiction that center on the military, often exploring themes of combat, leadership, and war.",
+    "notes": "Includes both historical and contemporary settings, often with an emphasis on realistic depictions of warfare.",
+    "details": "Notable examples include 'All Quiet on the Western Front' by Erich Maria Remarque and modern works like 'The Hunt for Red October' by Tom Clancy."
+  },
+  {
+    "name": "Military Science Fiction",
+    "description": "A subgenre of sci-fi that focuses on military conflict in futuristic or space-based settings.",
+    "notes": "Often includes detailed battle tactics, advanced weaponry, and political strategy.",
+    "details": "Military sci-fi examines the ethics of war, futuristic technology in combat, and the lives of soldiers in space-based conflicts."
+  },
+  {
+    "name": "Modernist",
+    "description": "A genre of literature that emerged in the early 20th century, characterized by a break from traditional forms and an exploration of new styles.",
+    "notes": "Often emphasizes individual subjectivity, fragmented narratives, and experimental techniques.",
+    "details": "Examples include works by James Joyce, T.S. Eliot, and Virginia Woolf, who focused on modern life's complexity and alienation."
+  },
+  {
+    "name": "Moral Tales",
+    "description": "A genre that imparts moral lessons through storytelling, often with allegorical elements or clear distinctions between good and evil.",
+    "notes": "These tales are designed to teach readers ethical behavior or the consequences of moral choices.",
+    "details": "Examples include Aesop's Fables and 'The Canterbury Tales' by Geoffrey Chaucer."
+  },
+  {
+    "name": "Music",
+    "description": "Books about music theory, history, and performance.",
+    "notes": "Includes biographies of musicians, studies of different music genres, and composition techniques.",
+    "details": "Music books explore the cultural impact of music, famous compositions, and the science behind sound and harmony."
+  },
+  {
+    "name": "Mystery",
+    "description": "A genre focused on solving crimes, uncovering secrets, or unraveling complex situations.",
+    "notes": "Includes detective fiction, police procedurals, and cozy mysteries.",
+    "details": "Mystery novels often feature an investigator or detective working to solve a puzzle, typically a crime. They emphasize suspense and logical deduction."
+  },
+  {
+    "name": "Mythology",
+    "description": "Works that explore the myths, legends, and folklore of various cultures, often focusing on gods, heroes, and supernatural events.",
+    "notes": "Mythology books can be historical accounts, fictional adaptations, or modern reinterpretations.",
+    "details": "This genre includes retellings of traditional myths, analyses of mythological themes, and modern stories inspired by mythological elements."
+  },
+  {
+    "name": "Mythology & Folklore",
+    "description": "Books exploring myths, legends, and traditional storytelling from different cultures.",
+    "notes": "Includes Greek, Norse, and indigenous mythology.",
+    "details": "Mythology books examine the symbolic meanings, cultural significance, and narrative structures of ancient myths and folktales."
+  },
+  {
+    "name": "Mythopoeia",
+    "description": "Books that create entirely new mythologies, often drawing from folklore and legend.",
+    "notes": "Includes works by J.R.R. Tolkien, C.S. Lewis, and contemporary fantasy authors.",
+    "details": "Mythopoeic fiction establishes deep lore, constructed languages, and expansive worldbuilding."
+  },
+  {
+    "name": "Natural History",
+    "description": "The study of organisms and the environment, often presented in an accessible narrative format.",
+    "notes": "Includes both scientific analysis and descriptive writing.",
+    "details": "Natural history works often cover biology, geology, and environmental science, blending factual details with observational writing."
+  },
+  {
+    "name": "Nature",
+    "description": "Literature focused on the natural world, including observations of wildlife, landscapes, and ecosystems.",
+    "notes": "Often includes personal reflections, scientific observations, and philosophical insights.",
+    "details": "Nature writing can range from field guides to poetic reflections on the environment and humanity’s relationship with it."
+  },
+  {
+    "name": "Nature Writing",
+    "description": "Literary works that explore the natural world, ecology, and human relationships with nature.",
+    "notes": "Often blends scientific observation with poetic or philosophical reflection.",
+    "details": "Nature writing celebrates landscapes, wildlife, and environmental concerns."
+  },
+  {
+    "name": "Neo-Noir",
+    "description": "A modern take on classic noir fiction, featuring crime, corruption, and antiheroes.",
+    "notes": "Maintains noir aesthetics but updates themes for contemporary audiences.",
+    "details": "Neo-noir books often include existential crises, unreliable narrators, and morally gray characters."
+  },
+  {
+    "name": "New Weird",
+    "description": "A genre that blends speculative fiction, horror, and surrealism, rejecting traditional tropes.",
+    "notes": "Similar to weird fiction but modernized with fresh themes and styles.",
+    "details": "New Weird fiction explores bizarre, unsettling worlds with unconventional narratives and unpredictable outcomes."
+  },
+  {
+    "name": "Noir",
+    "description": "A genre known for its dark, cynical tone, featuring crime, mystery, and morally ambiguous characters.",
+    "notes": "Popular in hardboiled detective stories.",
+    "details": "Noir explores urban corruption, fatalism, and flawed protagonists."
+  },
+  {
+    "name": "Noir Fiction",
+    "description": "A genre characterized by dark, cynical narratives, morally ambiguous characters, and crime-driven plots.",
+    "notes": "Common in detective stories, often featuring hardboiled protagonists and femme fatales.",
+    "details": "Noir fiction explores the darker sides of human nature, corruption, and justice through a gritty, often fatalistic lens."
+  },
+  {
+    "name": "Non-Fiction",
+    "description": "Literary works based on facts, real events, and real people.",
+    "notes": "Includes biographies, memoirs, self-help books, and academic texts.",
+    "details": "Non-fiction books provide information, analysis, or real-world experiences. They can be educational or exploratory, covering a wide range of topics."
+  },
+  {
+    "name": "Nonfiction",
+    "description": "A genre encompassing books based on facts, real events, and actual people, as opposed to fictional works.",
+    "notes": "Nonfiction includes biographies, memoirs, history, self-help, and scientific texts.",
+    "details": "Books like 'Sapiens' by Yuval Noah Harari and 'Becoming' by Michelle Obama are examples of nonfiction."
+  },
+  {
+    "name": "Nonsense",
+    "description": "A genre that focuses on absurdity, illogical narratives, and playful language, often defying conventional meaning.",
+    "notes": "It can be seen in poetry, fiction, and theatre.",
+    "details": "Notable works in this genre include 'Alice's Adventures in Wonderland' by Lewis Carroll and Edward Lear's poetry."
+  },
+  {
+    "name": "Nonsense Verse",
+    "description": "Poetry or verse that plays with language in a whimsical or absurd way, often without clear meaning.",
+    "notes": "Emphasizes wordplay, rhyme, and humor over logical sense.",
+    "details": "Examples include works by Edward Lear and Lewis Carroll, known for their use of nonsensical words and quirky characters."
+  },
+  {
+    "name": "Novel",
+    "description": "A long, fictional narrative that explores complex themes and character development.",
+    "notes": "Novels are one of the most popular and widely-read genres, with a broad range of subgenres.",
+    "details": "Novels can span many themes, from romance and mystery to social commentary and science fiction."
+  },
+  {
+    "name": "Occult & Paranormal",
+    "description": "Books exploring supernatural, mystical, and esoteric topics.",
+    "notes": "Includes witchcraft, ghost stories, and UFO phenomena.",
+    "details": "Occult books discuss hidden knowledge, unexplained events, and mystical traditions across cultures."
+  },
+  {
+    "name": "Painting",
+    "description": "A genre focused on the art of painting, including both practical guides and theoretical discussions on artistic techniques, history, and appreciation.",
+    "notes": "Books in this genre may explore famous painters, art movements, or the philosophy behind visual arts.",
+    "details": "Important works include 'The Story of Art' by E.H. Gombrich and 'The Lives of the Artists' by Giorgio Vasari."
+  },
+  {
+    "name": "Pamphlet",
+    "description": "A genre of short, unbound publications that are typically focused on a specific issue, idea, or argument, often with a political or social purpose.",
+    "notes": "Pamphlets are used for spreading information or advocating for change, often distributed cheaply and widely.",
+    "details": "Historical examples include political pamphlets like 'Common Sense' by Thomas Paine and 'The Communist Manifesto' by Karl Marx."
+  },
+  {
+    "name": "Philosophical",
+    "description": "Works that explore fundamental questions about existence, knowledge, ethics, and the nature of reality.",
+    "notes": "Often engages with abstract thinking and logic.",
+    "details": "Philosophical literature includes both historical and modern texts, from ancient philosophers like Aristotle to contemporary works."
+  },
+  {
+    "name": "Philosophical Essay",
+    "description": "A genre of nonfiction writing that explores philosophical ideas and concepts through reasoned arguments and analysis.",
+    "notes": "Philosophical essays aim to engage with fundamental questions about existence, morality, knowledge, and society.",
+    "details": "Well-known works include 'Meditations' by Marcus Aurelius and 'A Theory of Justice' by John Rawls."
+  },
+  {
+    "name": "Philosophical Essays",
+    "description": "Essays that explore fundamental questions about existence, knowledge, and ethics.",
+    "notes": "Can be analytical, speculative, or argumentative.",
+    "details": "Philosophical essays provide critical thinking and discussions on major philosophical concepts."
+  },
+  {
+    "name": "Philosophical Fiction",
+    "description": "Books that explore deep philosophical questions through narrative storytelling.",
+    "notes": "Often examines existential themes, morality, and the human condition.",
+    "details": "Philosophical fiction can blend genres, using allegory and character-driven stories to present complex ideas."
+  },
+  {
+    "name": "Philosophical Novel",
+    "description": "A genre that combines narrative storytelling with philosophical exploration, often tackling deep questions about existence, ethics, and the nature of reality.",
+    "notes": "Philosophical novels blend fiction with philosophical discourse, using characters and events to illustrate abstract ideas.",
+    "details": "Important examples include 'The Unbearable Lightness of Being' by Milan Kundera and 'Thus Spoke Zarathustra' by Friedrich Nietzsche."
+  },
+  {
+    "name": "Philosophy",
+    "description": "Books exploring fundamental questions about existence, knowledge, ethics, and reason.",
+    "notes": "Includes works by classical, modern, and contemporary philosophers.",
+    "details": "Philosophy books discuss concepts like morality, consciousness, free will, and the nature of reality, often through logical arguments and critical thinking."
+  },
+  {
+    "name": "Philosophy of Science",
+    "description": "The study of the foundations, methods, and implications of the sciences.",
+    "notes": "Combines aspects of philosophy, science, and epistemology.",
+    "details": "Works in this genre explore topics like scientific reasoning, the nature of scientific laws, and the relationship between science and society."
+  },
+  {
+    "name": "Physics",
+    "description": "Scientific works focusing on the principles of matter, energy, and the universe.",
+    "notes": "Includes theoretical and experimental research.",
+    "details": "Physics literature covers topics such as relativity, quantum mechanics, and cosmology."
+  },
+  {
+    "name": "Picaresque",
+    "description": "A genre that depicts the adventures of a roguish, often lower-class protagonist who encounters various social strata and survives through wit and resourcefulness.",
+    "notes": "Picaresque novels tend to have episodic plots, with each chapter presenting a new adventure or misadventure.",
+    "details": "Famous examples include 'Don Quixote' by Miguel de Cervantes and 'The Adventures of Huckleberry Finn' by Mark Twain."
+  },
+  {
+    "name": "Picture Book",
+    "description": "Books targeted at young children, often with illustrations that tell the story or support the text.",
+    "notes": "Typically written for early readers or pre-readers.",
+    "details": "Picture books include both stories and educational content, often with simple language and large, engaging illustrations."
+  },
+  {
+    "name": "Picture Books",
+    "description": "Illustrated books intended for young readers, often with simple storytelling.",
+    "notes": "Aimed at early childhood literacy and entertainment.",
+    "details": "Picture books help children develop reading skills and imagination through visual storytelling."
+  },
+  {
+    "name": "Pirate Fiction",
+    "description": "Fictional works set around pirates, their adventures, and their pursuit of treasure, often blending adventure and romance.",
+    "notes": "Can include both historical fiction and fantasy elements.",
+    "details": "Popularized by works like 'Treasure Island' by Robert Louis Stevenson, this genre often explores themes of freedom, rebellion, and the quest for fortune."
+  },
+  {
+    "name": "Poetry",
+    "description": "A literary form that uses rhythmic and expressive language to convey emotions, ideas, or narratives.",
+    "notes": "Includes free verse, sonnets, haikus, and epic poetry.",
+    "details": "Poetry often emphasizes language, imagery, and structure to evoke deep emotions and contemplation."
+  },
+  {
+    "name": "Political",
+    "description": "Works that explore political systems, ideologies, and struggles, often reflecting on power dynamics and societal structures.",
+    "notes": "Political works can be fictional or nonfictional.",
+    "details": "This genre can include political fiction, political essays, and works examining the lives and impact of political leaders."
+  },
+  {
+    "name": "Political Allegory",
+    "description": "A genre in which characters, events, and settings represent broader political ideas or movements.",
+    "notes": "Often used to critique political systems or explore complex societal issues.",
+    "details": "Famous examples include George Orwell's 'Animal Farm,' which allegorically critiques totalitarianism."
+  },
+  {
+    "name": "Political Commentary",
+    "description": "A genre that provides analysis, critique, and interpretation of political events, ideologies, and policies.",
+    "notes": "Political commentary can take the form of opinion articles, essays, and books that address contemporary political issues and propose solutions or insights.",
+    "details": "Important works include 'The Prince' by Niccolò Machiavelli and 'The Road to Serfdom' by Friedrich Hayek."
+  },
+  {
+    "name": "Political Essay",
+    "description": "Essays that explore political issues, ideologies, and movements, offering analysis, critiques, or advocacy.",
+    "notes": "Political essays can influence public opinion, policy decisions, or offer insight into political theory.",
+    "details": "These essays often address contemporary issues such as governance, inequality, civil rights, and the role of the state."
+  },
+  {
+    "name": "Political Essays",
+    "description": "Essays that analyze and critique political systems, policies, and ideologies.",
+    "notes": "Can be historical or contemporary in focus.",
+    "details": "Political essays influence public opinion and policy debates."
+  },
+  {
+    "name": "Political Fiction",
+    "description": "A genre that explores political themes, ideologies, and power struggles.",
+    "notes": "Often uses allegory, satire, or dystopian settings.",
+    "details": "Political fiction critiques governance, policies, and social structures through narrative."
+  },
+  {
+    "name": "Political Pamphlets",
+    "description": "Short publications advocating political ideas, policies, or reforms.",
+    "notes": "Historically significant in revolutions and ideological movements.",
+    "details": "Political pamphlets often serve as propaganda, manifestos, or calls to action."
+  },
+  {
+    "name": "Political Philosophy",
+    "description": "The genre that studies the nature of political authority, justice, rights, and the ideal structure of societies and governments.",
+    "notes": "Involves the exploration of ideas related to democracy, liberty, equality, and authority.",
+    "details": "Key works include 'The Republic' by Plato, 'The Social Contract' by Rousseau, and 'A Theory of Justice' by John Rawls."
+  },
+  {
+    "name": "Political Satire",
+    "description": "A genre that humorously critiques political systems, leaders, and ideologies.",
+    "notes": "Uses irony, sarcasm, and exaggeration to expose flaws in governance.",
+    "details": "Political satire is found in literature, cartoons, and journalism."
+  },
+  {
+    "name": "Political Science",
+    "description": "Books analyzing government systems, political ideologies, and public policy.",
+    "notes": "Includes books on democracy, authoritarianism, political history, and international relations.",
+    "details": "Political science books explore governance, diplomacy, political movements, and power structures across different societies."
+  },
+  {
+    "name": "Political Theory",
+    "description": "Academic and philosophical writings that examine political ideas, governance, and societal organization.",
+    "notes": "Influential political theorists include Plato, Machiavelli, Marx, and Rawls.",
+    "details": "Political theory explores concepts like democracy, justice, power, and human rights."
+  },
+  {
+    "name": "Political Thriller",
+    "description": "Thrillers that revolve around government conspiracies, espionage, and high-stakes political conflicts.",
+    "notes": "Often feature journalists, intelligence officers, or politicians as protagonists.",
+    "details": "These books explore the dark side of power, political intrigue, and the consequences of global events."
+  },
+  {
+    "name": "Popular Science",
+    "description": "Nonfiction works that make scientific concepts accessible to general readers.",
+    "notes": "Covers various fields such as physics, biology, and psychology.",
+    "details": "Popular science books often explain complex topics in engaging, narrative-driven formats."
+  },
+  {
+    "name": "Portal Fantasy",
+    "description": "Fantasy stories where characters travel from the real world into a magical or alternate realm.",
+    "notes": "Commonly features protagonists who are outsiders learning the rules of a new world.",
+    "details": "Portal fantasy includes classics like 'The Chronicles of Narnia' and 'Alice’s Adventures in Wonderland.'"
+  },
+  {
+    "name": "Post-apocalyptic",
+    "description": "Works that are set in a world after a major catastrophe, typically exploring survival, rebuilding, or the consequences of humanity's downfall.",
+    "notes": "Often overlaps with dystopian fiction, but focuses more on the aftermath of societal collapse.",
+    "details": "Classic examples include 'The Road' by Cormac McCarthy and 'The Handmaid's Tale' by Margaret Atwood."
+  },
+  {
+    "name": "Programming",
+    "description": "Publications that focus on coding, software development, and computer science.",
+    "notes": "Includes tutorials, textbooks, and documentation.",
+    "details": "Programming books teach coding languages, algorithms, and software engineering principles."
+  },
+  {
+    "name": "Prose",
+    "description": "Written or spoken language in its ordinary form, without metrical structure.",
+    "notes": "Includes fiction and nonfiction in various styles and formats.",
+    "details": "Prose is the most common form of writing, used in novels, essays, journalism, and scientific works."
+  },
+  {
+    "name": "Psychological Fiction",
+    "description": "Fiction that focuses on the inner workings of the mind, exploring emotions, consciousness, and personal conflict.",
+    "notes": "Often delves into characters' mental states, perceptions, and motivations.",
+    "details": "This genre includes works like those of Dostoevsky and modern psychological thrillers."
+  },
+  {
+    "name": "Psychological Horror",
+    "description": "Horror stories that emphasize mental instability, paranoia, and deep-seated fears.",
+    "notes": "Often features unreliable narrators, mind games, and ambiguous reality.",
+    "details": "Psychological horror creates terror through suspense, eerie atmosphere, and the human psyche."
+  },
+  {
+    "name": "Psychological Thriller",
+    "description": "A thriller subgenre that focuses on the mental and emotional state of its characters.",
+    "notes": "Often features unreliable narrators, mind games, and deep psychological conflict.",
+    "details": "Psychological thrillers blend suspense, deception, and psychological depth to create tension and unpredictability."
+  },
+  {
+    "name": "Psychology",
+    "description": "Books focused on human behavior, emotions, and cognitive processes.",
+    "notes": "Includes clinical psychology, cognitive psychology, and self-improvement.",
+    "details": "Psychology books explore the workings of the mind, mental health, personality, and decision-making processes."
+  },
+  {
+    "name": "Pulp Fiction",
+    "description": "A genre of fast-paced, action-packed stories originally published in inexpensive pulp magazines.",
+    "notes": "Common in detective, adventure, and sci-fi stories from the early to mid-20th century.",
+    "details": "Pulp fiction emphasizes sensational plots, larger-than-life characters, and dramatic storytelling."
+  },
+  {
+    "name": "Quantum Mechanics",
+    "description": "The branch of physics dealing with the behavior of matter and energy at atomic and subatomic levels.",
+    "notes": "Includes both theoretical discussions and practical applications.",
+    "details": "This genre includes works that explain quantum theories, the uncertainty principle, quantum computing, and quantum entanglement."
+  },
+  {
+    "name": "Quantum Physics",
+    "description": "Books focused on the principles and theories of quantum mechanics, exploring the behavior of particles on a subatomic level.",
+    "notes": "Quantum physics is often considered one of the most complex and paradoxical fields of study.",
+    "details": "Books in this genre might explain quantum theory, its philosophical implications, or speculative fiction that draws from quantum ideas."
+  },
+  {
+    "name": "Realism",
+    "description": "A literary movement that portrays life accurately, without romanticization or idealization.",
+    "notes": "Focuses on everyday experiences and social conditions.",
+    "details": "Realist literature often examines middle-class or working-class struggles, using detailed and objective storytelling."
+  },
+  {
+    "name": "Realist Fiction",
+    "description": "A genre that portrays life in a detailed, accurate manner, focusing on ordinary characters and situations, often with an emphasis on social and moral issues.",
+    "notes": "Realist fiction avoids romanticization or exaggeration, offering a candid depiction of human experiences.",
+    "details": "Important works include 'Madame Bovary' by Gustave Flaubert and 'Middlemarch' by George Eliot."
+  },
+  {
+    "name": "Realistic Fiction",
+    "description": "Stories that depict plausible events and relatable characters in everyday settings.",
+    "notes": "Emphasizes authenticity and real-world issues.",
+    "details": "Realistic fiction explores human emotions, social interactions, and contemporary life."
+  },
+  {
+    "name": "Religion",
+    "description": "Works that delve into various aspects of religion, including theology, rituals, spiritual beliefs, and the influence of religion on society.",
+    "notes": "Includes both doctrinal works and more secular critiques of religion.",
+    "details": "Religion books can range from holy scriptures and religious philosophy to books exploring the role of religion in human history."
+  },
+  {
+    "name": "Revenge Fiction",
+    "description": "Books centered around themes of vengeance, justice, and personal retribution.",
+    "notes": "Often features tragic or morally complex protagonists.",
+    "details": "Revenge fiction explores the emotional and ethical consequences of pursuing justice outside of legal systems."
+  },
+  {
+    "name": "Revolutionary Fiction",
+    "description": "Literature that explores themes of rebellion, revolution, and political change.",
+    "notes": "Often set against the backdrop of historical or speculative revolutions.",
+    "details": "Works in this genre might focus on revolutionary movements, the oppression of the masses, or the rise of new political ideologies."
+  },
+  {
+    "name": "Revolutionary Writing",
+    "description": "Works that advocate for political or social change, often tied to revolutionary movements.",
+    "notes": "Includes manifestos, pamphlets, and historical accounts.",
+    "details": "Revolutionary writing influences uprisings, reforms, and ideological shifts."
+  },
+  {
+    "name": "Robotics",
+    "description": "Publications related to the study and development of robots and automation.",
+    "notes": "Includes engineering, AI, and applications in industry and daily life.",
+    "details": "Robotics literature covers mechanics, programming, and ethical implications of AI-driven automation."
+  },
+  {
+    "name": "Romance",
+    "description": "A genre that focuses on romantic relationships and emotional connections.",
+    "notes": "Subgenres include contemporary romance, historical romance, and paranormal romance.",
+    "details": "Romance novels emphasize love, relationships, and emotional growth, often following a structured formula leading to a satisfying conclusion."
+  },
+  {
+    "name": "Romantic Suspense",
+    "description": "A hybrid genre combining elements of romance and suspense, often involving danger and intrigue.",
+    "notes": "Frequently features strong protagonists, high-stakes situations, and emotional intensity.",
+    "details": "Romantic suspense blends mystery or thriller elements with passionate relationships, keeping readers engaged on multiple levels."
+  },
+  {
+    "name": "Satire",
+    "description": "A genre that humorously criticizes societal flaws, politics, or cultural norms.",
+    "notes": "Uses irony, exaggeration, and parody.",
+    "details": "Satire highlights human folly and institutional failures, often through comedic storytelling."
+  },
+  {
+    "name": "Satire & Humor",
+    "description": "Books using wit and exaggeration to critique society and human nature.",
+    "notes": "Includes political satire, parody, and comedic essays.",
+    "details": "Humor books use irony and absurdity to explore serious topics in an entertaining way."
+  },
+  {
+    "name": "Satirical Fiction",
+    "description": "Fiction that uses humor, irony, and exaggeration to critique society, politics, or culture.",
+    "notes": "Can be lighthearted or dark, depending on the subject matter.",
+    "details": "Satirical fiction exposes human folly, often in absurd or exaggerated ways, to provoke thought and reflection."
+  },
+  {
+    "name": "Science",
+    "description": "Nonfiction and educational works that explore scientific discoveries, theories, and research.",
+    "notes": "Includes topics such as physics, biology, chemistry, and astronomy.",
+    "details": "Science literature can be academic (textbooks, research papers) or popular (books aimed at general audiences)."
+  },
+  {
+    "name": "Science & Nature",
+    "description": "Books focused on scientific discoveries, natural phenomena, and technological advancements.",
+    "notes": "Includes topics such as astrophysics, environmental science, and medicine.",
+    "details": "This genre aims to educate and engage readers with accessible or in-depth scientific knowledge."
+  },
+  {
+    "name": "Science Fantasy",
+    "description": "A blend of science fiction and fantasy, where elements of both genres coexist.",
+    "notes": "Often features advanced technology alongside magical or supernatural elements.",
+    "details": "Examples include works like 'Star Wars' and the 'Dune' series by Frank Herbert."
+  },
+  {
+    "name": "Science Fiction",
+    "description": "A speculative fiction genre exploring futuristic, scientific, or technological themes.",
+    "notes": "Often involves space travel, time travel, artificial intelligence, and dystopian settings.",
+    "details": "Science fiction examines the impact of scientific advancements on humanity and society, blending imaginative concepts with scientific reasoning."
+  },
+  {
+    "name": "Scientific Works",
+    "description": "Publications that present scientific research, theories, and discoveries.",
+    "notes": "Includes journal articles, textbooks, and research papers.",
+    "details": "Scientific works contribute to academic knowledge, advancing fields such as physics, biology, and engineering."
+  },
+  {
+    "name": "Sea Story",
+    "description": "A genre centered on maritime adventures, naval warfare, and life at sea.",
+    "notes": "Includes both fiction and nonfiction accounts of sailors, pirates, and naval battles.",
+    "details": "Sea stories often depict survival, exploration, and human resilience against the forces of nature."
+  },
+  {
+    "name": "Self-Help",
+    "description": "A genre focused on personal development, motivation, and guidance.",
+    "notes": "Topics include mental well-being, financial success, and productivity.",
+    "details": "Self-help books aim to provide strategies for improving various aspects of life, often offering practical exercises and inspirational content."
+  },
+  {
+    "name": "Sentimental Fiction",
+    "description": "A genre focused on evoking emotional responses from the reader, often centered around themes of love, loss, and moral lessons.",
+    "notes": "Typically features idealized characters and situations designed to appeal to the reader’s emotions.",
+    "details": "Classic examples include works by authors like Jane Austen and the works of Charles Dickens."
+  },
+  {
+    "name": "Short Stories",
+    "description": "A form of fiction that tells a complete story within a short length, typically under 10,000 words.",
+    "notes": "Common in literary magazines and anthologies.",
+    "details": "Short stories often focus on a single moment, character, or theme with concise storytelling."
+  },
+  {
+    "name": "Short Story",
+    "description": "A genre focusing on short works of fiction, typically under 20,000 words, which aim to focus on a specific theme or character.",
+    "notes": "Short stories are usually more concise than novels, often leaving much to interpretation or focusing on a pivotal moment in a character's life.",
+    "details": "Famous collections include 'The Complete Short Stories of Ernest Hemingway' and 'The Stories of John Cheever.'"
+  },
+  {
+    "name": "Short Story Collection",
+    "description": "A genre where multiple short stories by an author are collected in one volume.",
+    "notes": "Short stories in a collection often explore a range of themes or a single recurring motif.",
+    "details": "Famous collections include 'Dubliners' by James Joyce and 'Interpreter of Maladies' by Jhumpa Lahiri."
+  },
+  {
+    "name": "Silkpunk",
+    "description": "A genre blending Asian-inspired aesthetics and ancient technology with speculative fiction.",
+    "notes": "Coined by author Ken Liu to describe his own works.",
+    "details": "Silkpunk features airships, organic technology, and martial arts within fantastical worlds."
+  },
+  {
+    "name": "Skepticism",
+    "description": "A genre that involves questioning accepted beliefs, particularly in areas like religion, science, and philosophy, promoting doubt and critical thinking.",
+    "notes": "Skeptical works often challenge traditional notions of truth, reality, or authority and encourage readers to question the status quo.",
+    "details": "Notable works include 'The Demon-Haunted World' by Carl Sagan and 'The God Delusion' by Richard Dawkins."
+  },
+  {
+    "name": "Slipstream",
+    "description": "A genre that blends literary fiction with speculative elements, often creating a surreal or unsettling effect.",
+    "notes": "Defies traditional genre boundaries, merging realism with the fantastic.",
+    "details": "Slipstream fiction challenges perceptions of reality, leaving readers with a sense of cognitive dissonance."
+  },
+  {
+    "name": "Slipstream Fiction",
+    "description": "A genre that blends literary fiction with speculative elements, often creating an uncanny effect.",
+    "notes": "Blurred lines between reality and the surreal.",
+    "details": "Slipstream books challenge conventional narratives, presenting the familiar in strange and unpredictable ways."
+  },
+  {
+    "name": "Social Commentary",
+    "description": "A genre that critiques social structures, issues, and cultural norms.",
+    "notes": "Often found in essays, literature, and journalism.",
+    "details": "Social commentary raises awareness of injustices, advocating for change through analysis and critique."
+  },
+  {
+    "name": "Social Criticism",
+    "description": "Works that analyze, critique, and challenge social structures, norms, and issues.",
+    "notes": "May be presented in essays, books, or journalistic pieces.",
+    "details": "Social criticism explores topics such as inequality, cultural shifts, and political movements."
+  },
+  {
+    "name": "Social Fiction",
+    "description": "A genre that addresses societal issues, inequalities, and human experiences within specific cultural or historical contexts.",
+    "notes": "Social fiction often explores themes of justice, discrimination, and human rights, with a focus on character-driven narratives that reflect broader social movements.",
+    "details": "Works like 'To Kill a Mockingbird' by Harper Lee and 'The Grapes of Wrath' by John Steinbeck exemplify this genre."
+  },
+  {
+    "name": "Social History",
+    "description": "Explores the history of societies and the lives of common people, focusing on social structures and cultural norms.",
+    "notes": "Often overlaps with sociology and anthropology.",
+    "details": "Books in this genre examine how communities function, evolve, and how various groups have lived across different historical periods."
+  },
+  {
+    "name": "Social Novel",
+    "description": "A novel that addresses social issues, often focusing on the struggles of individuals within a larger societal context.",
+    "notes": "Can deal with themes like poverty, class struggles, and injustice.",
+    "details": "Famous examples include works like Charles Dickens' 'Oliver Twist' and Upton Sinclair's 'The Jungle.'"
+  },
+  {
+    "name": "Social Satire",
+    "description": "Humorous and critical works that mock societal norms, politics, or culture.",
+    "notes": "Satire often uses irony and exaggeration.",
+    "details": "Famous examples include works like Jonathan Swift's 'Gulliver's Travels' and George Orwell's '1984.'"
+  },
+  {
+    "name": "Social Science",
+    "description": "The study of society and human behavior, encompassing various disciplines like sociology, economics, and anthropology.",
+    "notes": "Works in this genre can be empirical, theoretical, or practical.",
+    "details": "Social science books range from academic research to popular books that explain societal trends and issues."
+  },
+  {
+    "name": "Sociology",
+    "description": "Books examining human society, social relationships, and cultural phenomena.",
+    "notes": "Includes studies on social behavior, institutions, and group dynamics.",
+    "details": "Sociology books analyze social structures, inequalities, and the impact of institutions on individual and collective behavior."
+  },
+  {
+    "name": "Soft Science Fiction",
+    "description": "Science fiction that focuses on social sciences, psychology, and philosophy rather than hard technology.",
+    "notes": "Less emphasis on scientific accuracy, more on speculative ideas and human experiences.",
+    "details": "Soft sci-fi often explores sociology, ethics, and cultural evolution in futuristic or alternative settings."
+  },
+  {
+    "name": "Software Engineering",
+    "description": "Publications focusing on the principles and practices of software development.",
+    "notes": "Includes programming methodologies, system design, and best practices.",
+    "details": "Software engineering literature guides developers in building, maintaining, and optimizing software systems."
+  },
+  {
+    "name": "Solarpunk",
+    "description": "A speculative genre that envisions optimistic futures with sustainable technology and ecological harmony.",
+    "notes": "Thematically opposed to cyberpunk, focusing on solutions to environmental and social issues.",
+    "details": "Solarpunk promotes green energy, social cooperation, and futuristic societies that prioritize ecological balance."
+  },
+  {
+    "name": "Southern Gothic",
+    "description": "A subgenre of Gothic fiction set in the American South, often featuring decay, grotesque characters, and social issues.",
+    "notes": "Explores themes of racial tension, poverty, and moral corruption.",
+    "details": "Southern Gothic literature blends horror, satire, and psychological complexity, often exposing societal flaws."
+  },
+  {
+    "name": "Space & Astronomy",
+    "description": "Books exploring the universe, celestial bodies, and space exploration.",
+    "notes": "Includes astrophysics, cosmology, and space missions.",
+    "details": "Space and astronomy books delve into black holes, planetary science, and the future of space travel."
+  },
+  {
+    "name": "Space Exploration",
+    "description": "Works that focus on the exploration of space, including the history of space missions, theoretical discussions, and speculative fiction about life beyond Earth.",
+    "notes": "Can include both non-fiction and science fiction.",
+    "details": "Space exploration books can include astronaut biographies, scientific research on space, and fictional works like those of Arthur C. Clarke and Isaac Asimov."
+  },
+  {
+    "name": "Space Opera",
+    "description": "A subgenre of science fiction characterized by epic adventures, large-scale conflicts, and advanced spacefaring civilizations.",
+    "notes": "Typically features heroic characters, intergalactic battles, and complex political intrigue.",
+    "details": "Space opera blends action, drama, and imaginative world-building, often with a sweeping, grandiose narrative."
+  },
+  {
+    "name": "Speculative Fiction",
+    "description": "A broad genre encompassing science fiction, fantasy, and alternative history.",
+    "notes": "Imagines worlds different from reality through futuristic, supernatural, or hypothetical scenarios.",
+    "details": "Speculative fiction challenges reality, exploring new possibilities and ideas."
+  },
+  {
+    "name": "Spirituality & Religion",
+    "description": "A genre focusing on religious beliefs, spiritual growth, and philosophical reflections.",
+    "notes": "Includes sacred texts, self-discovery books, and theological discussions.",
+    "details": "Books in this genre explore spiritual traditions, practices, and personal growth through religious or philosophical lenses."
+  },
+  {
+    "name": "Splatterpunk",
+    "description": "A horror subgenre that emphasizes extreme violence, gore, and graphic imagery.",
+    "notes": "Known for its shocking and unfiltered portrayal of horror elements.",
+    "details": "Splatterpunk stories push boundaries with disturbing content, often exploring the darkest aspects of human nature."
+  },
+  {
+    "name": "Sports",
+    "description": "A genre that revolves around sports, whether through fiction, nonfiction, or biographies of athletes and teams.",
+    "notes": "Sports books may cover inspirational stories, game analysis, or the cultural impact of sports.",
+    "details": "Notable works include 'Friday Night Lights' by H.G. Bissinger and 'Open' by Andre Agassi."
+  },
+  {
+    "name": "Sports & Recreation",
+    "description": "Books about sports history, training techniques, and athletic achievements.",
+    "notes": "Includes autobiographies of athletes, guides to fitness, and analysis of sports psychology.",
+    "details": "Sports books provide insights into competition, team dynamics, and physical conditioning for various activities."
+  },
+  {
+    "name": "Spy Fiction",
+    "description": "A genre that involves espionage, intelligence agents, and covert operations, often set during times of political tension or warfare.",
+    "notes": "Spy fiction typically features secret agents, covert missions, and high-stakes action, with a focus on intrigue and deception.",
+    "details": "Famous works include 'The Spy Who Came in from the Cold' by John le Carré and 'Casino Royale' by Ian Fleming."
+  },
+  {
+    "name": "Steampunk",
+    "description": "A subgenre of speculative fiction set in a world inspired by Victorian-era technology, often featuring steam-powered machinery.",
+    "notes": "Blends historical settings with advanced, retro-futuristic inventions.",
+    "details": "Steampunk aesthetics include gears, airships, and alternate histories where steam technology reigns supreme."
+  },
+  {
+    "name": "Steampunk & Gaslamp Fantasy",
+    "description": "Books blending Victorian aesthetics with advanced technology and fantasy.",
+    "notes": "Includes stories set in anachronistic, steam-powered worlds.",
+    "details": "Steampunk books explore alternative technologies, airships, and retro-futuristic inventions."
+  },
+  {
+    "name": "Supernatural",
+    "description": "A genre that explores phenomena beyond the natural world, including ghosts, spirits, and other supernatural entities or events.",
+    "notes": "Supernatural fiction often blends horror, mystery, and fantasy, creating an atmosphere of fear or wonder in the face of unexplained occurrences.",
+    "details": "Famous works include 'The Haunting of Hill House' by Shirley Jackson and 'The Shining' by Stephen King."
+  },
+  {
+    "name": "Supernatural Horror",
+    "description": "Horror fiction that incorporates ghosts, demons, or other paranormal elements.",
+    "notes": "Often involves hauntings, possessions, and unexplained phenomena.",
+    "details": "Supernatural horror builds fear through eerie atmospheres, psychological tension, and interactions with the unknown."
+  },
+  {
+    "name": "Survival & Disaster Preparedness",
+    "description": "Books providing knowledge on surviving in extreme situations and preparing for emergencies.",
+    "notes": "Includes wilderness survival, urban disaster preparedness, and self-sufficiency.",
+    "details": "Survival books offer guidance on food storage, shelter building, emergency first aid, and strategies for coping with natural disasters."
+  },
+  {
+    "name": "Survival Fiction",
+    "description": "A genre that focuses on characters facing extreme circumstances where they must survive in hostile environments, often isolated from civilization.",
+    "notes": "The genre frequently explores themes of resilience, self-sufficiency, and human ingenuity.",
+    "details": "Well-known examples include 'The Martian' by Andy Weir and 'Hatchet' by Gary Paulsen."
+  },
+  {
+    "name": "Suspense",
+    "description": "A genre that creates tension, excitement, and anticipation, often involving mysteries or high-stakes situations.",
+    "notes": "Common in thrillers, crime fiction, and horror.",
+    "details": "Suspense literature keeps readers engaged with plot twists, cliffhangers, and psychological tension."
+  },
+  {
+    "name": "Thriller",
+    "description": "A fast-paced genre that builds tension, suspense, and excitement.",
+    "notes": "Includes psychological thrillers, espionage thrillers, and legal thrillers.",
+    "details": "Thrillers often feature high stakes, unexpected twists, and protagonists facing danger or moral dilemmas."
+  },
+  {
+    "name": "Time Travel",
+    "description": "A genre of speculative fiction that explores the concept of traveling through time, whether to the past or the future.",
+    "notes": "Time travel stories often deal with paradoxes, alternate realities, and the consequences of changing the past.",
+    "details": "Popular examples include 'The Time Machine' by H.G. Wells and 'Doctor Who' TV series."
+  },
+  {
+    "name": "Time Travel Fiction",
+    "description": "Stories that explore the effects and paradoxes of time travel.",
+    "notes": "Can be science fiction-based or involve mystical elements.",
+    "details": "Time travel fiction examines causality, destiny, and the philosophical implications of altering history."
+  },
+  {
+    "name": "Tragedy",
+    "description": "A genre that depicts human suffering, loss, and often ends in catastrophe.",
+    "notes": "Rooted in classical literature and drama.",
+    "details": "Tragedies explore themes of fate, morality, and personal downfall."
+  },
+  {
+    "name": "Travel",
+    "description": "A genre focused on the exploration and description of different regions, cultures, and experiences encountered during travel.",
+    "notes": "Travel literature often includes both personal narratives and objective accounts, offering insights into the author's journeys and the places they visit.",
+    "details": "Notable works include 'In Patagonia' by Bruce Chatwin and 'The Road to Oxiana' by Robert Byron."
+  },
+  {
+    "name": "Travel & Adventure",
+    "description": "Books about exploration, cultural experiences, and travel guides.",
+    "notes": "Includes memoirs of explorers, travel journalism, and city guides.",
+    "details": "Travel books provide insights into different cultures, adventure sports, and unique destinations around the world."
+  },
+  {
+    "name": "Travel Literature",
+    "description": "A genre that documents experiences of travel, exploration, and adventure.",
+    "notes": "Includes memoirs, guidebooks, and historical accounts.",
+    "details": "Travel literature captures cultural insights, landscapes, and personal reflections on journeys."
+  },
+  {
+    "name": "Travel Narrative",
+    "description": "A type of literature in which the author recounts their travels and the experiences they had during their journey.",
+    "notes": "Often mixed with cultural exploration and reflections on the places visited.",
+    "details": "Travel narratives can include both factual descriptions and personal reflections, offering insights into the writer's experiences in foreign lands."
+  },
+  {
+    "name": "Travel Writing",
+    "description": "Works that describe the experiences of an individual or group traveling to new or foreign places.",
+    "notes": "Includes both personal reflection and factual descriptions of places, cultures, and customs.",
+    "details": "Travel writing can range from travelogues to adventure narratives and can include elements of history, geography, and cultural critique."
+  },
+  {
+    "name": "Travelogue",
+    "description": "Books or writings that describe the author's travel experiences, often including cultural, historical, and geographical details.",
+    "notes": "Commonly includes personal reflections on the places visited.",
+    "details": "Travelogues often explore exotic or foreign destinations, but can also include journeys of self-discovery."
+  },
+  {
+    "name": "True Crime",
+    "description": "A genre that explores real-life crimes, criminal psychology, and investigative journalism.",
+    "notes": "Often features detailed accounts of criminal cases and forensic analysis.",
+    "details": "True crime books provide insights into real cases, exploring criminal behavior, law enforcement procedures, and justice system complexities."
+  },
+  {
+    "name": "Unfinished Novel",
+    "description": "A genre consisting of works that were left incomplete by the author, often due to external circumstances like death or writer's block.",
+    "notes": "These works can sometimes be finished posthumously by other writers or editors.",
+    "details": "Unfinished novels may offer insight into the author's creative process and can be seen as a form of literary puzzle for readers and scholars."
+  },
+  {
+    "name": "Urban Fantasy",
+    "description": "Fantasy set in a modern or urban setting, often featuring magical elements coexisting with the real world.",
+    "notes": "Often includes supernatural beings, secret societies, and hidden magic.",
+    "details": "Urban fantasy blends contemporary life with mythological creatures, magic, and supernatural mysteries."
+  },
+  {
+    "name": "Urban Studies",
+    "description": "Books about city planning, architecture, and urban sociology.",
+    "notes": "Includes studies on smart cities, urban policy, and community development.",
+    "details": "Urban studies books explore the social, economic, and environmental aspects of city life."
+  },
+  {
+    "name": "Utopian Fiction",
+    "description": "Books that depict idealized societies, often exploring philosophical and political ideas.",
+    "notes": "Contrasts with dystopian fiction by presenting optimistic visions of the future.",
+    "details": "Utopian fiction offers speculative solutions to social problems, imagining harmonious and progressive societies."
+  },
+  {
+    "name": "War",
+    "description": "A genre that explores themes of conflict, particularly military and combat situations, and their impact on individuals, societies, and nations.",
+    "notes": "War literature often highlights the psychological and moral challenges faced by soldiers and civilians, as well as the broader consequences of war.",
+    "details": "Notable works include 'All Quiet on the Western Front' by Erich Maria Remarque and 'The Things They Carried' by Tim O'Brien."
+  },
+  {
+    "name": "War Fiction",
+    "description": "A genre that focuses on war and its impact on individuals and societies.",
+    "notes": "Covers historical and modern conflicts, often featuring soldiers, civilians, and political consequences.",
+    "details": "Explores the brutality of war, psychological trauma, heroism, and moral dilemmas faced in combat."
+  },
+  {
+    "name": "War Novel",
+    "description": "A genre that focuses on the experience of war, typically exploring the emotional and psychological effects of combat on soldiers and civilians.",
+    "notes": "War novels often address themes of heroism, trauma, and the moral implications of violence and conflict.",
+    "details": "Examples include 'All Quiet on the Western Front' by Erich Maria Remarque and 'A Farewell to Arms' by Ernest Hemingway."
+  },
+  {
+    "name": "Weird Fiction",
+    "description": "A genre that blends horror, fantasy, and science fiction with surreal and unexplainable elements.",
+    "notes": "Popularized by writers like H.P. Lovecraft, focusing on cosmic horror and the unknown.",
+    "details": "Weird fiction often challenges reality, featuring otherworldly entities, psychological terror, and existential dread."
+  },
+  {
+    "name": "Western",
+    "description": "Books set in the American frontier, featuring cowboys, outlaws, and lawmen.",
+    "notes": "Includes classic Western novels, historical accounts, and revisionist Westerns.",
+    "details": "Western books capture the rugged individualism, conflicts, and landscapes of the Old West."
+  },
+  {
+    "name": "Wildlife",
+    "description": "Books that focus on animals, ecosystems, and conservation efforts.",
+    "notes": "Includes nature writing, field guides, and ecological studies.",
+    "details": "Wildlife literature educates readers about biodiversity, endangered species, and human impact on nature."
+  },
+  {
+    "name": "Wine & Spirits",
+    "description": "Books about wine-making, brewing, and mixology.",
+    "notes": "Includes guides to wine tasting, whiskey history, and cocktail recipes.",
+    "details": "These books cover the science of fermentation, vineyard management, and the art of pairing drinks with food."
+  },
+  {
+    "name": "Witchcraft & Paganism",
+    "description": "Books exploring Wicca, pagan rituals, and magical practices.",
+    "notes": "Includes historical texts, modern spell books, and religious studies.",
+    "details": "These books discuss the history of witchcraft, spiritual traditions, and practices such as herbal magic and divination."
+  },
+  {
+    "name": "Writing",
+    "description": "Books about the craft of writing, including guidance on style, technique, and the business of writing.",
+    "notes": "Includes instructional materials for aspiring writers and reflections by authors on their own writing processes.",
+    "details": "Notable examples include 'On Writing' by Stephen King and 'Bird by Bird' by Anne Lamott."
+  },
+  {
+    "name": "Young Adult",
+    "description": "Books specifically written for young readers, typically between the ages of 12 and 18.",
+    "notes": "Deals with themes of personal growth, relationships, and challenges faced by adolescents.",
+    "details": "Genres within young adult literature include fantasy, romance, and realistic fiction, with notable examples like 'The Hunger Games' and 'Harry Potter.'"
+  },
+  {
+    "name": "Young Adult (YA)",
+    "description": "A genre targeting teenage audiences, typically featuring coming-of-age themes.",
+    "notes": "Includes dystopian, fantasy, contemporary, and romance subgenres.",
+    "details": "YA fiction often explores themes of identity, self-discovery, and social issues while maintaining an engaging, accessible narrative style."
+  },
+  {
+    "name": "Young Adult Fiction",
+    "description": "A genre targeting a teenage audience, often dealing with themes of growing up, self-discovery, and coming-of-age.",
+    "notes": "Although initially aimed at adolescents, many young adult novels are enjoyed by adults as well.",
+    "details": "Popular works in this genre include 'The Hunger Games' by Suzanne Collins and 'The Fault in Our Stars' by John Green."
+  }
+]
