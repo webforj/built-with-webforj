@@ -5,6 +5,7 @@ import com.webforj.builtwithwebforj.springsecurity.service.CustomOidcUserService
 import com.webforj.builtwithwebforj.springsecurity.service.CustomUserDetailsService;
 import com.webforj.builtwithwebforj.springsecurity.views.AccessDenyView;
 import com.webforj.builtwithwebforj.springsecurity.views.LoginView;
+import com.webforj.spring.security.WebforjAuthenticationSuccessHandler;
 import com.webforj.spring.security.WebforjSecurityConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +36,9 @@ public class SecurityConfig {
   @Autowired
   private CustomOidcUserService customOidcUserService;
 
+  @Autowired
+  private WebforjAuthenticationSuccessHandler successHandler;
+
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http
@@ -47,7 +51,7 @@ public class SecurityConfig {
             .tokenValiditySeconds(86400)) // 24 hours
         .oauth2Login(oauth2 -> oauth2
             .loginPage("/signin")
-            .defaultSuccessUrl("/", true)
+            .successHandler(successHandler)
             .userInfoEndpoint(userInfo -> userInfo
                 .userService(customOAuth2UserService)
                 .oidcUserService(customOidcUserService)))
