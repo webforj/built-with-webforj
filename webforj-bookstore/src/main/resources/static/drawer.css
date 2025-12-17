@@ -1,0 +1,74 @@
+/* Base Drawer Styles */
+.bookstore-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+}
+
+.bookstore-drawer:not([opened]) {
+    display: none;
+}
+
+.bookstore-drawer::part(control) {
+    height: 80vh;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Common Drawer Layout */
+.drawer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    height: 100%;
+}
+
+.drawer-button-bar {
+    display: flex;
+    gap: 10px;
+}
+
+/* Genre Management specific */
+.genre-main-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    height: 100%;
+}
+
+.genre-add-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.genre-list-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
+    gap: 10px;
+}
+
+.genre-list-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #eee;
+    padding: 5px;
+}
+
+.genre-name-label {
+    flex-grow: 1;
+}
+
+/* Book Form specific */
+.book-genres-box {
+    height: 150px;
+}
