@@ -16,6 +16,18 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * A drawer component for managing genres in the bookstore application.
+ * <p>
+ * This component allows users to:
+ * <ul>
+ * <li>View a list of all existing genres.</li>
+ * <li>Search for genres by name.</li>
+ * <li>Add new genres.</li>
+ * <li>Delete existing genres.</li>
+ * </ul>
+ * </p>
+ */
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @StyleSheet("ws://drawer.css")
@@ -26,6 +38,11 @@ public class GenreManagementDrawer extends BaseDrawer {
     private TextField newGenreField;
     private TextField searchField;
 
+    /**
+     * Constructs the GenreManagementDrawer with the specified genre service.
+     *
+     * @param genreService the service used for managing genre data
+     */
     public GenreManagementDrawer(GenreService genreService) {
         super();
         this.genreService = genreService;
@@ -35,6 +52,15 @@ public class GenreManagementDrawer extends BaseDrawer {
         // self.close() handled by BaseDrawer
     }
 
+    /**
+     * Creates and configures the main layout for the genre management drawer.
+     * <p>
+     * The layout includes a search field, an input field for new genres,
+     * an add button, and a scrollable list of existing genres.
+     * </p>
+     *
+     * @return the configured FlexLayout containing all UI elements
+     */
     private FlexLayout createLayout() {
         FlexLayout mainLayout = new FlexLayout();
         mainLayout.setDirection(FlexDirection.COLUMN);
@@ -74,6 +100,13 @@ public class GenreManagementDrawer extends BaseDrawer {
         return mainLayout;
     }
 
+    /**
+     * Opens the drawer and refreshes the genre list.
+     * <p>
+     * Clears the search field and ensures the list displays the most up-to-date
+     * data from the service before showing the drawer to the user.
+     * </p>
+     */
     @Override
     public void open() {
         if (searchField != null) {
@@ -83,6 +116,14 @@ public class GenreManagementDrawer extends BaseDrawer {
         super.open();
     }
 
+    /**
+     * Refreshes the list of genres displayed in the drawer.
+     * <p>
+     * If a search term is present in the search field, the list is filtered
+     * to show only matching genres. Otherwise, all genres are displayed
+     * sorted alphabetically.
+     * </p>
+     */
     private void refreshList() {
         listContainer.removeAll();
         String searchTerm = searchField != null ? searchField.getText() : "";
@@ -111,6 +152,14 @@ public class GenreManagementDrawer extends BaseDrawer {
         }
     }
 
+    /**
+     * Adds a new genre using the name entered in the new genre text field.
+     * <p>
+     * The method trims whitespace from the input. If the name is valid (not empty),
+     * a new genre is created and saved via the service. The field is then cleared
+     * and the list is refreshed.
+     * </p>
+     */
     private void addGenre() {
         String name = newGenreField.getText().trim();
         if (!name.isEmpty()) {
@@ -122,6 +171,14 @@ public class GenreManagementDrawer extends BaseDrawer {
         }
     }
 
+    /**
+     * Deletes the specified genre.
+     * <p>
+     * Removes the genre via the service and refreshes the displayed list.
+     * </p>
+     *
+     * @param genre the genre to delete
+     */
     private void deleteGenre(Genre genre) {
         genreService.deleteGenre(genre.getId());
         refreshList();

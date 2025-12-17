@@ -8,7 +8,6 @@ import lombok.*;
 /**
  * Genre entity representing a book genre.
  * 
- * @author webforJ Bookstore
  */
 @Entity
 @Table(name = "genres")

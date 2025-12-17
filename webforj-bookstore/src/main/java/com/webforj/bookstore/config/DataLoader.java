@@ -24,7 +24,6 @@ import java.util.List;
  * Data loader that initializes the database with sample data from JSON files.
  * Runs automatically on application startup.
  * 
- * @author webforJ Bookstore
  */
 @Component
 @RequiredArgsConstructor

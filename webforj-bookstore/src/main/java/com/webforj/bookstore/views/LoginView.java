@@ -17,7 +17,6 @@ import com.webforj.router.security.annotation.AnonymousAccess;
  * logout messages.
  * </p>
  * 
- * @author webforJ Bookstore
  */
 @Route("/signin")
 @AnonymousAccess

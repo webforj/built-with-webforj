@@ -13,7 +13,6 @@ import java.util.Optional;
  * Repository interface for Book entities.
  * Spring Data JPA will automatically implement this interface.
  * 
- * @author webforJ Bookstore
  */
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

@@ -18,7 +18,6 @@ import com.webforj.router.annotation.Route;
  * The main application layout, providing navigation and structure for the
  * application.
  * 
- * @author webforJ Bookstore
  */
 @Route
 public class MainLayout extends Composite<AppLayout> {

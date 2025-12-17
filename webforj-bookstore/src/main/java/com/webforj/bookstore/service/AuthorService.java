@@ -12,7 +12,6 @@ import java.util.Optional;
 /**
  * Service class for managing authors.
  * 
- * @author webforJ Bookstore
  */
 @Service
 @RequiredArgsConstructor

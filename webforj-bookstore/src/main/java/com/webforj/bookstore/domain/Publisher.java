@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * Publisher entity representing a book publisher.
  * 
- * @author webforJ Bookstore
  */
 @Entity
 @Table(name = "publishers")

@@ -1,6 +1,7 @@
 package com.webforj.bookstore.components;
 
 import com.webforj.component.Composite;
+import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Component;
 import com.webforj.component.drawer.Drawer;
 import com.webforj.component.drawer.Drawer.Placement;
@@ -9,9 +10,8 @@ import com.webforj.component.drawer.Drawer.Placement;
  * A base class for drawers in the application, ensuring consistent behavior and
  * styling.
  * 
- * @author webforJ Bookstore
  */
-@com.webforj.annotation.StyleSheet("ws://drawer.css")
+@StyleSheet("ws://drawer.css")
 public abstract class BaseDrawer extends Composite<Drawer> {
 
     private Drawer self = getBoundComponent();

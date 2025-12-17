@@ -29,7 +29,6 @@ import jakarta.persistence.criteria.JoinType;
  * Relies on {@link BookFormDrawer} for creating and updating books.
  * </p>
  * 
- * @author webforJ Bookstore
  */
 @Route(value = "/", outlet = MainLayout.class)
 @FrameTitle("Inventory")

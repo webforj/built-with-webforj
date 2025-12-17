@@ -30,7 +30,6 @@ import org.springframework.stereotype.Component;
  * with fields for title, author, publisher, publication date, ISBN, and genres.
  * </p>
  * 
- * @author webforJ Bookstore
  */
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

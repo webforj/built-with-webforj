@@ -12,7 +12,6 @@ import jakarta.annotation.security.RolesAllowed;
 /**
  * View for managing users, restricted to administrators.
  * 
- * @author webforJ Bookstore
  */
 @Route(value = "/management", outlet = MainLayout.class)
 @FrameTitle("User Management")

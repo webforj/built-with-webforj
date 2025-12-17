@@ -10,7 +10,6 @@ import java.util.Optional;
 /**
  * Repository interface for Publisher entities.
  * 
- * @author webforJ Bookstore
  */
 @Repository
 public interface PublisherRepository extends JpaRepository<Publisher, String> {

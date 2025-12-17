@@ -10,7 +10,6 @@ import java.util.Optional;
 /**
  * Repository interface for Genre entities.
  * 
- * @author webforJ Bookstore
  */
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, String> {

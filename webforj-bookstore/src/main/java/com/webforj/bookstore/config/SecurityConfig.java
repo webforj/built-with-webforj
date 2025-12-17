@@ -28,7 +28,6 @@ import com.webforj.spring.security.WebforjSecurityConfigurer;
  * purposes.
  * </p>
  *
- * @author webforJ Bookstore
  */
 @Configuration
 @EnableWebSecurity

@@ -9,7 +9,6 @@ import com.webforj.router.annotation.Route;
  * View displayed when a user attempts to access a protected resource without
  * sufficient permissions.
  * 
- * @author webforJ Bookstore
  */
 @Route(value = "/access-denied", outlet = MainLayout.class)
 public class AccessDenyView extends Composite<Div> {

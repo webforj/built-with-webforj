@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * Book entity representing a book in the bookstore.
  * 
- * @author webforJ Bookstore
  */
 @Entity
 @Table(name = "books")

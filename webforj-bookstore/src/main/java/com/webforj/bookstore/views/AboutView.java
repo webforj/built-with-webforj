@@ -8,7 +8,6 @@ import com.webforj.router.annotation.Route;
 /**
  * View used to display information about the application.
  * 
- * @author webforJ Bookstore
  */
 @Route(value = "/About", outlet = MainLayout.class)
 @StyleSheet("ws://about.css")
