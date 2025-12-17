@@ -16,17 +16,34 @@ import java.util.Optional;
 public interface GenreRepository extends JpaRepository<Genre, String> {
 
     /**
-     * Find genre by name (case-insensitive).
+     * Finds a genre by its name, ignoring case.
+     * 
+     * @param name the name to search for
+     * @return an Optional containing the genre if found, or empty otherwise
      */
     Optional<Genre> findByNameIgnoreCase(String name);
 
     /**
-     * Find genres by name containing text (case-insensitive).
+     * Finds genres whose name contains the specified text, ignoring case.
+     * 
+     * @param name the name fragment to search for
+     * @return a list of matching genres
      */
     List<Genre> findByNameContainingIgnoreCase(String name);
 
     /**
-     * Find all genres ordered by name.
+     * Finds genres whose name contains the specified text, ignoring case, and
+     * orders them by name.
+     * 
+     * @param name the name fragment to search for
+     * @return a list of matching genres, sorted by name
+     */
+    List<Genre> findByNameContainingIgnoreCaseOrderByNameAsc(String name);
+
+    /**
+     * Retrieves all genres ordered by name in ascending order.
+     * 
+     * @return a list of all genres, sorted by name
      */
     List<Genre> findAllByOrderByNameAsc();
 }

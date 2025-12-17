@@ -15,47 +15,73 @@ import java.util.Optional;
  * 
  * @author webforJ Bookstore
  */
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
 @Repository
-public interface BookRepository extends JpaRepository<Book, String> {
+public interface BookRepository extends JpaRepository<Book, String>, JpaSpecificationExecutor<Book> {
 
     /**
-     * Find books by title (exact match, case-sensitive).
+     * Finds books by their exact title.
+     * 
+     * @param title the title to search for (case-sensitive)
+     * @return a list of books matching the title
      */
     List<Book> findByTitle(String title);
 
     /**
-     * Find books by title containing text (case-insensitive).
+     * Finds books whose title contains the specified text, ignoring case.
+     * 
+     * @param title the title fragment to search for
+     * @return a list of books with matching titles
      */
     List<Book> findByTitleContainingIgnoreCase(String title);
 
     /**
-     * Find book by ISBN.
+     * Finds a book by its ISBN.
+     * 
+     * @param isbn the ISBN to search for
+     * @return an Optional containing the book if found, or empty otherwise
      */
     Optional<Book> findByIsbn(String isbn);
 
     /**
-     * Find books by author (case-insensitive).
+     * Finds books by author name containing the specified text, ignoring case.
+     * 
+     * @param author the author name fragment to search for
+     * @return a list of books matching the author
      */
     List<Book> findByAuthorContainingIgnoreCase(String author);
 
     /**
-     * Find books by publisher (case-insensitive).
+     * Finds books by publisher name containing the specified text, ignoring case.
+     * 
+     * @param publisher the publisher name fragment to search for
+     * @return a list of books matching the publisher
      */
     List<Book> findByPublisherContainingIgnoreCase(String publisher);
 
     /**
-     * Find books by genre (requires custom query for collection).
+     * Finds books containing a specific genre, ignoring case.
+     * 
+     * @param genre the genre to search for
+     * @return a list of books containing the genre
      */
     @Query("SELECT DISTINCT b FROM Book b JOIN b.genres g WHERE LOWER(g) LIKE LOWER(CONCAT('%', :genre, '%'))")
     List<Book> findByGenreContainingIgnoreCase(@Param("genre") String genre);
 
     /**
-     * Find all books ordered by title.
+     * Retrieves all books ordered by title in ascending order.
+     * 
+     * @return a list of all books, sorted by title
      */
     List<Book> findAllByOrderByTitleAsc();
 
     /**
-     * Full-text search across title, author, and publisher.
+     * Performs a full-text search across title, author, and publisher fields.
+     * 
+     * @param searchTerm the text to search for
+     * @return a list of books matching the search term in title, author, or
+     *         publisher
      */
     @Query("SELECT b FROM Book b WHERE " +
             "LOWER(b.title) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +

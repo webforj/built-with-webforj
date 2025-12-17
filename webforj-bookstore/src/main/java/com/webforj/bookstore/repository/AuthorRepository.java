@@ -17,17 +17,26 @@ import java.util.List;
 public interface AuthorRepository extends JpaRepository<Author, String> {
 
     /**
-     * Find authors by name (case-insensitive).
+     * Finds authors whose name contains the specified text, ignoring case.
+     * 
+     * @param name the name fragment to search for
+     * @return a list of matching authors
      */
     List<Author> findByNameContainingIgnoreCase(String name);
 
     /**
-     * Find authors by nationality.
+     * Finds authors by nationality, ignoring case.
+     * 
+     * @param nationality the nationality to search for
+     * @return a list of matching authors
      */
     List<Author> findByNationalityIgnoreCase(String nationality);
 
     /**
-     * Full-text search across name, penName, and fullName.
+     * Performs a full-text search across author's name, pen name, and full name.
+     * 
+     * @param searchTerm the text to search for
+     * @return a list of authors matching the search term
      */
     @Query("SELECT a FROM Author a WHERE " +
             "LOWER(a.name) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
@@ -36,7 +45,9 @@ public interface AuthorRepository extends JpaRepository<Author, String> {
     List<Author> searchAuthors(@Param("searchTerm") String searchTerm);
 
     /**
-     * Find all authors ordered by name.
+     * Retrieves all authors ordered by name in ascending order.
+     * 
+     * @return a list of all authors, sorted by name
      */
     List<Author> findAllByOrderByNameAsc();
 }

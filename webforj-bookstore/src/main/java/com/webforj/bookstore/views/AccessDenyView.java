@@ -5,10 +5,19 @@ import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.Paragraph;
 import com.webforj.router.annotation.Route;
 
+/**
+ * View displayed when a user attempts to access a protected resource without
+ * sufficient permissions.
+ * 
+ * @author webforJ Bookstore
+ */
 @Route(value = "/access-denied", outlet = MainLayout.class)
 public class AccessDenyView extends Composite<Div> {
     private final Div self = getBoundComponent();
 
+    /**
+     * Constructs the AccessDenyView with a humorous message.
+     */
     public AccessDenyView() {
         Paragraph message = new Paragraph("Oops! This area is VIP only.");
         Paragraph subMessage = new Paragraph(

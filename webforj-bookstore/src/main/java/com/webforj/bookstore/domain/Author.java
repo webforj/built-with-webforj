@@ -24,24 +24,32 @@ import java.util.List;
 @ToString
 public class Author implements HasEntityKey {
 
+    /** Unique identifier for the author. */
     @Id
     private String id;
 
+    /** The name of the author. */
     @Column
     private String name;
 
+    /** The pen name of the author, if any. */
     private String penName;
 
+    /** The full name of the author. */
     private String fullName;
 
+    /** The birth date of the author. */
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
+    /** The death date of the author, if deceased. */
     @Column(name = "date_of_death")
     private LocalDate dateOfDeath;
 
+    /** The nationality of the author. */
     private String nationality;
 
+    /** A description or biography of the author. */
     @Column(length = 2000)
     private String description;
 

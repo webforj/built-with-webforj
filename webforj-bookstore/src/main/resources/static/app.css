@@ -1,11 +1,4 @@
-/*
- * Define application theme
- *
- * See the documentation for details:
- * https://docs.webforj.com/docs/styling/overview
- */
-
-/* :root {
-  --dwc-color-primary-h: 277;
-  --dwc-color-primary-s: 50%;
-} */
+dwc-app-nav-item {
+  font-size: 1.2rem;
+  --dwc-app-nav-item-height: 50px;
+}

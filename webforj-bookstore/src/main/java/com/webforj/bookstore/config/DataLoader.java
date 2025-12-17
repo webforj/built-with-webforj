@@ -66,6 +66,11 @@ public class DataLoader implements CommandLineRunner {
                 bookRepository.count());
     }
 
+    /**
+     * Loads genres from the JSON resource if the repository is empty.
+     * 
+     * @throws IOException if an I/O error occurs reading the resource
+     */
     private void loadGenres() throws IOException {
         if (genreRepository.count() == 0) {
             log.info("Loading genres from JSON...");
@@ -84,6 +89,11 @@ public class DataLoader implements CommandLineRunner {
         }
     }
 
+    /**
+     * Loads publishers from the JSON resource if the repository is empty.
+     * 
+     * @throws IOException if an I/O error occurs reading the resource
+     */
     private void loadPublishers() throws IOException {
         if (publisherRepository.count() == 0) {
             log.info("Loading publishers from JSON...");
@@ -102,6 +112,11 @@ public class DataLoader implements CommandLineRunner {
         }
     }
 
+    /**
+     * Loads authors from the JSON resource if the repository is empty.
+     * 
+     * @throws IOException if an I/O error occurs reading the resource
+     */
     private void loadAuthors() throws IOException {
         if (authorRepository.count() == 0) {
             log.info("Loading authors from JSON...");
@@ -120,6 +135,11 @@ public class DataLoader implements CommandLineRunner {
         }
     }
 
+    /**
+     * Loads books from the JSON resource if the repository is empty.
+     * 
+     * @throws IOException if an I/O error occurs reading the resource
+     */
     private void loadBooks() throws IOException {
         if (bookRepository.count() == 0) {
             log.info("Loading books from JSON...");

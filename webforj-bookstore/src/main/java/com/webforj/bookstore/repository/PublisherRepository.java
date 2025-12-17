@@ -16,17 +16,25 @@ import java.util.Optional;
 public interface PublisherRepository extends JpaRepository<Publisher, String> {
 
     /**
-     * Find publisher by name (case-insensitive).
+     * Finds a publisher by its name, ignoring case.
+     * 
+     * @param name the name to search for
+     * @return an Optional containing the publisher if found, or empty otherwise
      */
     Optional<Publisher> findByNameIgnoreCase(String name);
 
     /**
-     * Find publishers by name containing text (case-insensitive).
+     * Finds publishers whose name contains the specified text, ignoring case.
+     * 
+     * @param name the name fragment to search for
+     * @return a list of matching publishers
      */
     List<Publisher> findByNameContainingIgnoreCase(String name);
 
     /**
-     * Find all publishers ordered by name.
+     * Retrieves all publishers ordered by name in ascending order.
+     * 
+     * @return a list of all publishers, sorted by name
      */
     List<Publisher> findAllByOrderByNameAsc();
 }
