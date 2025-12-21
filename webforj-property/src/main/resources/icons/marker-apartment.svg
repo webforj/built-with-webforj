@@ -1,0 +1,12 @@
+<svg width="32" height="40" viewBox="0 0 32 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pin shape -->
+  <path d="M16 0C7.163 0 0 7.163 0 16c0 12 16 24 16 24s16-12 16-24c0-8.837-7.163-16-16-16z" fill="#7c3aed"/>
+  <circle cx="16" cy="16" r="12" fill="white"/>
+  <!-- Building icon -->
+  <rect x="10" y="8" width="12" height="16" fill="#7c3aed"/>
+  <rect x="12" y="10" width="3" height="3" fill="white"/>
+  <rect x="17" y="10" width="3" height="3" fill="white"/>
+  <rect x="12" y="15" width="3" height="3" fill="white"/>
+  <rect x="17" y="15" width="3" height="3" fill="white"/>
+  <rect x="14" y="20" width="4" height="4" fill="white"/>
+</svg>
