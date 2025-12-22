@@ -9,7 +9,7 @@ import com.webforj.builtwithwebforj.springsecurity.renderers.ticket.PriorityRend
 import com.webforj.builtwithwebforj.springsecurity.renderers.ticket.StatusBadgeRenderer;
 import com.webforj.builtwithwebforj.springsecurity.renderers.ticket.TicketNumberRenderer;
 import com.webforj.builtwithwebforj.springsecurity.renderers.ticket.TypeBadgeRenderer;
-import com.webforj.builtwithwebforj.springsecurity.repository.UserRepository;
+import com.webforj.builtwithwebforj.springsecurity.service.UserService;
 import com.webforj.builtwithwebforj.springsecurity.service.TicketService;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
@@ -48,7 +48,7 @@ public class DashboardView extends Composite<Div> {
   private TicketService ticketService;
 
   @Autowired
-  private UserRepository userRepository;
+  private UserService userService;
 
   private final Div container = getBoundComponent();
   private String username;
@@ -145,8 +145,7 @@ public class DashboardView extends Composite<Div> {
     List<Ticket> tickets;
     if (showMyTicketsOnly) {
       // Load only user's tickets
-      User currentUser = userRepository.findByUsername(username)
-          .orElseThrow(() -> new RuntimeException("User not found: " + username));
+      User currentUser = userService.getRequiredUserByUsername(username);
       tickets = ticketService.getTicketsByUser(currentUser);
     } else {
       // Load all tickets

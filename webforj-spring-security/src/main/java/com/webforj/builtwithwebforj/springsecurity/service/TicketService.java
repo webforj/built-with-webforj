@@ -65,13 +65,6 @@ public class TicketService {
   }
 
   /**
-   * Update ticket.
-   */
-  public Ticket updateTicket(Ticket ticket) {
-    return ticketRepository.save(ticket);
-  }
-
-  /**
    * Check if user owns the ticket.
    */
   @Transactional(readOnly = true)

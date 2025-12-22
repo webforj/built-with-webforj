@@ -22,7 +22,6 @@
 .access-denied-title {
   font-size: var(--dwc-font-size-2xl);
   font-weight: var(--dwc-font-weight-bold);
-  color: var(--dwc-color-on-default-text);
   margin: 0 0 var(--dwc-space-s);
   letter-spacing: 0.05em;
 }

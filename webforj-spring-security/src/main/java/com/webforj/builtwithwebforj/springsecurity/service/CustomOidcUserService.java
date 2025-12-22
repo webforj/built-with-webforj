@@ -15,8 +15,32 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 
 /**
- * Custom OidcUserService for OpenID Connect providers (like Google).
- * Creates/updates users in the database and assigns proper authorities from database roles.
+ * Custom OidcUserService for OpenID Connect providers (e.g., Google).
+ *
+ * This service is called when a user authenticates via OIDC (OpenID Connect).
+ * OIDC is an identity layer on top of OAuth2 that provides standardized user info.
+ *
+ * Key differences from OAuth2 (CustomOAuth2UserService):
+ * - OIDC provides an ID token with verified claims (email, name, etc.)
+ * - Email is typically more reliable in OIDC than plain OAuth2
+ * - User info comes from both ID token and UserInfo endpoint
+ *
+ * Key responsibilities:
+ * 1. Extract user information from OIDC ID token and UserInfo
+ * 2. Create a new user in our database on first login (auto-registration)
+ * 3. Update user display name if it changed at the provider
+ * 4. Merge OIDC authorities with database roles
+ * 5. Ensure consistent username (email) for database lookups
+ *
+ * Google-specific notes:
+ * - Google always provides email (required scope)
+ * - Full name is available via getFullName()
+ * - Profile picture available via getPicture() (used in UI)
+ *
+ * Why we use email as the principal name:
+ * - Provides a consistent identifier across OIDC and form login
+ * - Allows looking up the user in our database via auth.getName()
+ * - OIDC email claims are verified by the provider
  */
 @Service
 public class CustomOidcUserService extends OidcUserService {
@@ -29,52 +53,54 @@ public class CustomOidcUserService extends OidcUserService {
 
   @Override
   public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
+    // 1. Load user info from OIDC provider (Google, etc.)
+    //    This includes both ID token claims and UserInfo endpoint data
     OidcUser oidcUser = super.loadUser(userRequest);
 
-    // Extract user info from OIDC provider
-    String email = oidcUser.getEmail();
-    String name = oidcUser.getFullName();
+    // 2. Extract user attributes from OIDC claims
+    String email = oidcUser.getEmail();        // From ID token or UserInfo
+    String name = oidcUser.getFullName();      // From ID token or UserInfo
 
-    // Handle case where email might not be provided
+    // 3. Handle missing email (rare for OIDC, but possible)
     if (email == null || email.isBlank()) {
+      // Fall back to subject identifier (unique per provider)
       String subject = oidcUser.getSubject();
       email = "oidc_" + subject.substring(0, Math.min(8, subject.length())) + "@oauth.user";
     }
 
-    // Find or create user in database
+    // 4. Find existing user or create new one (auto-registration)
     final String userEmail = email;
     User user = userRepository.findByEmail(userEmail)
         .orElseGet(() -> userRepository.findByUsername(userEmail).orElse(null));
 
     if (user == null) {
-      // Create new user
+      // First-time login: create new user with USER role
       user = new User();
       user.setUsername(userEmail);
       user.setEmail(userEmail);
       user.setDisplayName(name != null ? name : userEmail.split("@")[0]);
-      user.setPassword(UUID.randomUUID().toString());
+      user.setPassword(UUID.randomUUID().toString()); // Random password (won't be used for OIDC)
       user.addRole("USER");
       user = userRepository.save(user);
     } else if (name != null && !name.equals(user.getDisplayName())) {
-      // Update display name if changed
+      // Returning user: update display name if changed at provider
       user.setDisplayName(name);
       user = userRepository.save(user);
     }
 
-    // Build authorities from database roles
+    // 5. Merge authorities: OIDC scopes + database roles
     Set<GrantedAuthority> authorities = new HashSet<>(oidcUser.getAuthorities());
     for (String role : user.getRoles()) {
       authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
     }
 
-    // Return OidcUser with merged authorities
-    // Use "email" as the name attribute since that's what we use as username in the database
-    // Note: For OIDC, email is reliably available from the ID token
+    // 6. Return OidcUser with merged authorities and email as principal name
+    //    Unlike OAuth2, OIDC preserves the ID token and UserInfo for later access
     return new DefaultOidcUser(
         authorities,
-        oidcUser.getIdToken(),
-        oidcUser.getUserInfo(),
-        "email"
+        oidcUser.getIdToken(),    // Preserve ID token (contains verified claims)
+        oidcUser.getUserInfo(),   // Preserve UserInfo (additional profile data)
+        "email"                    // Use email as the name attribute for auth.getName()
     );
   }
 }

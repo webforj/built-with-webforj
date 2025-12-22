@@ -1,9 +1,0 @@
-/*
- * Admin Users View
- */
-
-.users-table {
-  border-radius: var(--dwc-border-radius-l);
-  overflow: hidden;
-  height: calc(-280px + 80dvh);
-}

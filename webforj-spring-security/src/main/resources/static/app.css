@@ -212,12 +212,6 @@ html[data-app-theme~='dark-pure'] dwc-app-layout::part(content) {
   font-weight: var(--dwc-font-weight-semibold);
   margin: 0;
   letter-spacing: -0.02em;
-  /* Light mode: use blue (220) for the gradient accent */
-  background: linear-gradient(135deg, var(--dwc-color-on-default-text) 0%, hsl(220 60% 50%) 50%, var(--dwc-color-on-default-text) 100%);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 /* Dark mode: use the custom info color (green/teal) for page titles */
@@ -233,40 +227,6 @@ html[data-app-theme~='dark-pure'] .page-title {
 .page-subtitle {
   color: var(--dwc-color-on-default-text-light);
   margin: var(--dwc-space-xs) 0 0;
-}
-
-/* Card */
-.card {
-  background: var(--dwc-surface-3);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--dwc-border-radius-l);
-  padding: var(--dwc-space-l);
-}
-
-/* Only apply hover effects to explicitly interactive cards */
-.card.interactive {
-  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card.interactive:hover {
-  background: var(--dwc-surface-3);
-  border-color: var(--border-default);
-  transform: scale(1.01) translateY(-2px);
-  box-shadow: 0 8px 32px hsl(0 0% 0% / 0.2);
-}
-
-/* Section spacing */
-.section {
-  margin-top: var(--dwc-space-xl);
-}
-
-.section-title {
-  font-size: var(--dwc-font-size-l);
-  font-weight: var(--dwc-font-weight-semibold);
-  margin: 0 0 var(--dwc-space-m);
-  color: var(--dwc-color-on-default-text);
 }
 
 /* Status badges - modern pill style */

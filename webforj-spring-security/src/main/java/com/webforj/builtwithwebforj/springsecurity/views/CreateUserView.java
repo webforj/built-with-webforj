@@ -3,7 +3,7 @@ package com.webforj.builtwithwebforj.springsecurity.views;
 import com.webforj.annotation.StyleSheet;
 import com.webforj.builtwithwebforj.springsecurity.components.PageHeader;
 import com.webforj.builtwithwebforj.springsecurity.entity.User;
-import com.webforj.builtwithwebforj.springsecurity.repository.UserRepository;
+import com.webforj.builtwithwebforj.springsecurity.service.UserService;
 import com.webforj.component.Composite;
 import com.webforj.component.Theme;
 import com.webforj.component.button.Button;
@@ -31,7 +31,6 @@ import com.webforj.router.observer.DidEnterObserver;
 import jakarta.annotation.security.RolesAllowed;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
 
@@ -46,10 +45,7 @@ import java.util.HashSet;
 public class CreateUserView extends Composite<Div> implements DidEnterObserver {
 
   @Autowired
-  private UserRepository userRepository;
-
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+  private UserService userService;
 
   private final Div container = getBoundComponent();
 
@@ -84,7 +80,7 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
           isEditMode = true;
           try {
             userId = Long.parseLong(id);
-            user = userRepository.findById(userId).orElse(null);
+            user = userService.getUserById(userId).orElse(null);
             if (user == null) {
               container.add(new H1("Error: User not found"));
               return;
@@ -287,35 +283,21 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
     try {
       if (isEditMode) {
         // Update existing user (password remains unchanged)
-        // Check if username changed and if new username already exists
-        User existingUser = userRepository.findById(userId).orElse(null);
-        if (existingUser != null && !existingUser.getUsername().equals(user.getUsername())) {
-          if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            Toast.show("Username already exists. Please choose a different username.", Theme.DANGER);
-            return;
-          }
-        }
-
-        userRepository.save(user);
+        // UserService.updateUser() handles username uniqueness validation
+        userService.updateUser(user);
         Toast.show("User updated successfully!", Theme.SUCCESS);
       } else {
         // Create new user
-        // Check if username already exists
-        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-          Toast.show("Username already exists. Please choose a different username.", Theme.DANGER);
-          return;
-        }
-
-        // Hash the password before saving
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
-
-        userRepository.save(user);
+        // UserService.createUser() handles password encoding and username uniqueness
+        userService.createUser(user);
         Toast.show("User " + user.getUsername() + " created successfully!", Theme.SUCCESS);
       }
 
       // Navigate back to users list
       Router.getCurrent().navigate(AdminUsersView.class);
+    } catch (IllegalArgumentException e) {
+      // Username already exists
+      Toast.show(e.getMessage(), Theme.DANGER);
     } catch (Exception e) {
       Toast.show("Error saving user: " + e.getMessage(), Theme.DANGER);
     }
@@ -334,7 +316,7 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
     confirmButton.setTheme(ButtonTheme.DANGER);
     confirmButton.onClick(e -> {
       try {
-        userRepository.delete(user);
+        userService.deleteUser(user);
         confirmDialog.close();
         Toast.show("User deleted successfully", Theme.SUCCESS);
         Router.getCurrent().navigate(AdminUsersView.class);

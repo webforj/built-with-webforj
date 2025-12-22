@@ -6,7 +6,7 @@ import com.webforj.builtwithwebforj.springsecurity.entity.User;
 import com.webforj.builtwithwebforj.springsecurity.renderers.user.EmailLinkRenderer;
 import com.webforj.builtwithwebforj.springsecurity.renderers.user.RolesChipRenderer;
 import com.webforj.builtwithwebforj.springsecurity.renderers.user.UserAvatarRenderer;
-import com.webforj.builtwithwebforj.springsecurity.repository.UserRepository;
+import com.webforj.builtwithwebforj.springsecurity.service.UserService;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 public class AdminUsersView extends Composite<Div> {
 
   @Autowired
-  private UserRepository userRepository;
+  private UserService userService;
 
   private final Div container = getBoundComponent();
 
@@ -71,11 +71,11 @@ public class AdminUsersView extends Composite<Div> {
   }
 
   private void loadUsers() {
-    List<User> users = userRepository.findAll();
+    List<User> users = userService.getAllUsers();
 
     // Create table
     Table<User> table = new Table<>();
-    table.addClassName("users-table");
+    table.setStyle("height", "calc(-280px + 80dvh)");
 
     // Hidden columns for renderer data access
     table.addColumn("displayName", User::getDisplayName).setHidden(true);

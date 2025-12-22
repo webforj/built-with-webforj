@@ -7,7 +7,7 @@ import com.webforj.builtwithwebforj.springsecurity.entity.ticket.Ticket;
 import com.webforj.builtwithwebforj.springsecurity.entity.ticket.TicketPriority;
 import com.webforj.builtwithwebforj.springsecurity.entity.ticket.TicketStatus;
 import com.webforj.builtwithwebforj.springsecurity.entity.ticket.TicketType;
-import com.webforj.builtwithwebforj.springsecurity.repository.UserRepository;
+import com.webforj.builtwithwebforj.springsecurity.service.UserService;
 import com.webforj.builtwithwebforj.springsecurity.service.TicketService;
 import com.webforj.component.Composite;
 import com.webforj.component.Theme;
@@ -50,7 +50,7 @@ public class CreateTicketView extends Composite<Div> {
   private TicketService ticketService;
 
   @Autowired
-  private UserRepository userRepository;
+  private UserService userService;
 
   private final Div container = getBoundComponent();
   private String username;
@@ -206,8 +206,7 @@ public class CreateTicketView extends Composite<Div> {
     }
 
     // Set the fields that aren't in the form
-    User currentUser = userRepository.findByUsername(username)
-        .orElseThrow(() -> new RuntimeException("User not found: " + username));
+    User currentUser = userService.getRequiredUserByUsername(username);
     ticket.setCreatedBy(currentUser);
     ticket.setStatus(TicketStatus.OPEN);
 

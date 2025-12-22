@@ -63,6 +63,10 @@ dwc-login::part(footer) {
   border-color: var(--border-default);
 }
 
+.social-login-icon {
+  flex-shrink: 0;
+}
+
 .oauth-divider {
   display: flex;
   align-items: center;

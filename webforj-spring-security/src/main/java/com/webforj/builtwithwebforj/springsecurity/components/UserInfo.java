@@ -1,10 +1,14 @@
 package com.webforj.builtwithwebforj.springsecurity.components;
 
 import com.webforj.component.Composite;
+import com.webforj.component.avatar.Avatar;
+import com.webforj.component.avatar.AvatarExpanse;
+import com.webforj.component.html.elements.Img;
 import com.webforj.component.html.elements.Span;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+
 
 public class UserInfo extends Composite<Span> {
 
@@ -25,7 +29,7 @@ public class UserInfo extends Composite<Span> {
       if (displayName != null) {
         container.addClassName("user-info-container");
 
-        Avatar avatar = new Avatar(avatarUrl, displayName, role);
+        Avatar avatar = createAvatar(displayName, avatarUrl, role);
         container.add(avatar);
 
         Span userSpan = new Span(displayName);
@@ -104,5 +108,32 @@ public class UserInfo extends Composite<Span> {
     }
 
     return null;
+  }
+
+  private Avatar createAvatar(String displayName, String avatarUrl, String role) {
+    Avatar avatar = new Avatar(displayName);
+    avatar.setExpanse(AvatarExpanse.SMALL);
+    avatar.addClassName("toolbar-avatar");
+
+    // Add role-based styling class
+    if (role != null) {
+      if (role.contains("ADMIN")) {
+        avatar.addClassName("avatar-admin");
+      } else if (role.contains("SUPPORT")) {
+        avatar.addClassName("avatar-support");
+      } else {
+        avatar.addClassName("avatar-user");
+      }
+    }
+
+    // Add image if URL is provided
+    if (avatarUrl != null && !avatarUrl.isEmpty()) {
+      Img avatarImg = new Img(avatarUrl);
+      avatarImg.setAttribute("referrerpolicy", "no-referrer");
+      avatarImg.setAttribute("loading", "lazy");
+      avatar.add(avatarImg);
+    }
+
+    return avatar;
   }
 }
