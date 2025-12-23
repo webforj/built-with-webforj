@@ -212,6 +212,12 @@ html[data-app-theme~='dark-pure'] dwc-app-layout::part(content) {
   font-weight: var(--dwc-font-weight-semibold);
   margin: 0;
   letter-spacing: -0.02em;
+  /* Light mode: use blue (220) for the gradient accent */
+  background: linear-gradient(135deg, var(--dwc-color-on-default-text) 0%, hsl(220 60% 50%) 50%, var(--dwc-color-on-default-text) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Dark mode: use the custom info color (green/teal) for page titles */
@@ -229,6 +235,28 @@ html[data-app-theme~='dark-pure'] .page-title {
   margin: var(--dwc-space-xs) 0 0;
 }
 
+/* Card */
+.card {
+  background: var(--dwc-surface-3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--dwc-border-radius-l);
+  padding: var(--dwc-space-l);
+}
+
+/* Section spacing */
+.section {
+  margin-top: var(--dwc-space-xl);
+}
+
+.section-title {
+  font-size: var(--dwc-font-size-l);
+  font-weight: var(--dwc-font-weight-semibold);
+  margin: 0 0 var(--dwc-space-m);
+  color: var(--dwc-color-on-default-text);
+}
+
 /* Status badges - modern pill style */
 .status-badge {
   display: inline-flex;
@@ -240,7 +268,6 @@ html[data-app-theme~='dark-pure'] .page-title {
   font-weight: var(--dwc-font-weight-semibold);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  transition: all 200ms ease;
   width: fit-content;
 }
 
@@ -251,21 +278,6 @@ html[data-app-theme~='dark-pure'] .page-title {
   border-radius: 50%;
   background: currentColor;
   flex-shrink: 0;
-}
-
-@keyframes status-pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(0.85);
-  }
-}
-
-.status-dot.pulse {
-  animation: status-pulse 1.5s ease-in-out infinite;
 }
 
 .status-badge.open {
@@ -422,11 +434,9 @@ dwc-table::part(type-badge) {
   display: inline-block;
   width: fit-content;
   font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
-  font-size: var(--dwc-font-size-s);
-  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.08);
   padding: var(--dwc-space-2xs) var(--dwc-space-s);
   border-radius: var(--dwc-border-radius-s);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   margin-bottom: var(--dwc-space-xs);
 }
 

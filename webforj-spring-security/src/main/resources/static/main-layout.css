@@ -16,19 +16,11 @@ dwc-app-layout::part(header) {
 .brand {
   font-weight: var(--dwc-font-weight-bold);
   font-size: var(--dwc-font-size-l);
-  color: var(--dwc-color-on-default-text);
-  letter-spacing: -0.01em;
   cursor: pointer;
 }
 
 .brand dwc-icon {
   color: hsl(var(--dwc-color-primary-h) 80% 55%);
-  filter: drop-shadow(0 0 8px hsl(var(--dwc-color-primary-h) 80% 55% / 0.5));
-  transition: filter 200ms ease;
-}
-
-.brand:hover dwc-icon {
-  filter: drop-shadow(0 0 12px hsl(var(--dwc-color-primary-h) 80% 55% / 0.6));
 }
 
 .header-button {
@@ -47,12 +39,7 @@ dwc-app-layout::part(header) {
 /*
  * Toolbar Avatar (using webforJ dwc-avatar)
  */
-
-.toolbar-avatar {
-  --dwc-avatar-border: 2px solid transparent;
-  transition: box-shadow 200ms ease;
-}
-
+ 
 /* Role-based ring colors */
 .toolbar-avatar.avatar-user {
   --dwc-avatar-border: 2px solid hsl(var(--dwc-color-info-h) var(--dwc-color-info-s) 50%);

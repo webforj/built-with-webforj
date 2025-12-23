@@ -1,13 +1,3 @@
-/*
- * Ticket Detail View
- */
-
-.description-text {
-  color: var(--dwc-color-on-default-text);
-  line-height: 1.6;
-  margin: 0;
-}
-
 /* Comments list */
 .comments-list {
   display: flex;
@@ -35,18 +25,11 @@
 
 .comment-author {
   font-weight: var(--dwc-font-weight-semibold);
-  color: var(--dwc-color-on-default-text);
 }
 
 .comment-timestamp {
   font-size: var(--dwc-font-size-xs);
   color: var(--dwc-color-default-50);
-}
-
-.comment-text {
-  color: var(--dwc-color-on-default-text);
-  line-height: 1.5;
-  margin: 0;
 }
 
 .internal-badge {
