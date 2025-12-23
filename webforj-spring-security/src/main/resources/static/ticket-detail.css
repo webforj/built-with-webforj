@@ -1,0 +1,82 @@
+/* Comments list */
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dwc-space-m);
+}
+
+.no-comments {
+  color: var(--dwc-color-on-default-text-light);
+  font-style: italic;
+}
+
+/* Comment card */
+.comment-card {
+  padding: var(--dwc-space-m);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--dwc-border-radius-m);
+}
+
+.comment-card.internal {
+  background: hsl(var(--dwc-color-info-h) 60% 50% / 0.1);
+  border-color: hsl(var(--dwc-color-info-h) 60% 50% / 0.25);
+}
+
+.comment-author {
+  font-weight: var(--dwc-font-weight-semibold);
+}
+
+.comment-timestamp {
+  font-size: var(--dwc-font-size-xs);
+  color: var(--dwc-color-default-50);
+}
+
+.internal-badge {
+  font-size: var(--dwc-font-size-xs);
+  font-weight: var(--dwc-font-weight-semibold);
+  color: var(--dwc-color-info-text);
+  background: hsl(var(--dwc-color-info-h) 60% 50% / 0.15);
+  padding: var(--dwc-space-2xs) var(--dwc-space-xs);
+  border-radius: var(--dwc-border-radius-s);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* Comment textarea */
+.comment-textarea {
+  width: 100%;
+}
+
+.comment-textarea::part(input) {
+  min-height: 200px;
+}
+
+/* Metadata card */
+.ticket-metadata {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--dwc-space-l);
+  padding: var(--dwc-space-l);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--dwc-border-radius-l);
+}
+
+.metadata-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dwc-space-2xs);
+}
+
+.metadata-label {
+  font-size: var(--dwc-font-size-xs);
+  color: var(--dwc-color-default-50);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metadata-value {
+  font-weight: var(--dwc-font-weight-medium);
+  color: var(--dwc-color-on-default-text);
+}

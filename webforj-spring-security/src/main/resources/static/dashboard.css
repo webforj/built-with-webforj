@@ -1,0 +1,30 @@
+/*
+ * Dashboard View
+ */
+
+.dashboard-tabs {
+  margin-bottom: var(--dwc-space-l);
+}
+
+.dashboard-tabs::part(tabs-wrapper) {
+  background: transparent;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.dashboard-tabs::part(tab) {
+  color: var(--dwc-color-on-default-text-light);
+  transition: color 200ms ease;
+}
+
+.dashboard-tabs::part(tab):hover {
+  color: var(--dwc-color-on-default-text);
+}
+
+.dashboard-tabs::part(tab-selected) {
+  color: var(--dwc-color-primary);
+}
+
+.tickets-table {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--dwc-border-radius-l);
+}
