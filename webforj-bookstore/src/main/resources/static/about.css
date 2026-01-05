@@ -9,16 +9,16 @@
 
 .floating-icon {
     animation: float 6s ease-in-out infinite;
-    color: var(--bn-primary-color, #007bff);
-    filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.15));
+    color: hsl(var(--dwc-color-primary-h) var(--dwc-color-primary-s) 50%);
+    filter: drop-shadow(0 20px 20px hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 0% / 0.15));
     z-index: 1;
 }
 
 .about-text {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--dwc-font-family);
     font-size: 2.5rem;
     font-weight: 300;
-    color: var(--bn-primary-color, #007bff);
+    color: hsl(var(--dwc-color-primary-h) var(--dwc-color-primary-s) 50%);
     letter-spacing: 2px;
 
     position: absolute;

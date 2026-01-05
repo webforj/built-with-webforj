@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Service class for managing genres.
@@ -21,41 +20,12 @@ public class GenreService {
     private final GenreRepository genreRepository;
 
     /**
-     * Retrieves all genres.
-     * 
-     * @return a list of all genres
-     */
-    public List<Genre> getAllGenres() {
-        return genreRepository.findAll();
-    }
-
-    /**
      * Retrieves all genres sorted by name alphabetically.
      * 
      * @return a list of genres sorted by name
      */
     public List<Genre> getAllGenresSorted() {
         return genreRepository.findAllByOrderByNameAsc();
-    }
-
-    /**
-     * Retrieves a genre by its unique ID.
-     * 
-     * @param id the ID of the genre
-     * @return an Optional containing the genre if found, or empty otherwise
-     */
-    public Optional<Genre> getGenreById(String id) {
-        return genreRepository.findById(id);
-    }
-
-    /**
-     * Retrieves a genre by its name.
-     * 
-     * @param name the name of the genre
-     * @return an Optional containing the genre if found, or empty otherwise
-     */
-    public Optional<Genre> getGenreByName(String name) {
-        return genreRepository.findByNameIgnoreCase(name);
     }
 
     /**
@@ -90,14 +60,5 @@ public class GenreService {
     @Transactional
     public void deleteGenre(String id) {
         genreRepository.deleteById(id);
-    }
-
-    /**
-     * Returns the total count of genres.
-     * 
-     * @return the number of genres
-     */
-    public long count() {
-        return genreRepository.count();
     }
 }

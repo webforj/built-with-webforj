@@ -6,9 +6,9 @@ body {
 
 .main-container {
     height: 100%;
-    padding: 1rem;
+    padding: var(--dwc-space-m);
     box-sizing: border-box;
-    gap: 1rem;
+    gap: var(--dwc-space-m);
     overflow: hidden;
 }
 
@@ -25,5 +25,3 @@ body {
     height: 100%;
     flex: 1;
 }
-
-/* Drawer styles moved to drawer.css */

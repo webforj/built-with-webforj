@@ -14,38 +14,38 @@
 
 .bookstore-drawer::part(control) {
     height: 80vh;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: var(--dwc-border-radius-l);
+    border-top-right-radius: var(--dwc-border-radius-l);
+    box-shadow: 0 -4px 10px hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 0% / 0.1);
 }
 
 /* Common Drawer Layout */
 .drawer-content {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 20px;
+    gap: var(--dwc-space-m);
+    padding: var(--dwc-space-l);
     height: 100%;
 }
 
 .drawer-button-bar {
     display: flex;
-    gap: 10px;
+    gap: var(--dwc-space-s);
 }
 
 /* Genre Management specific */
 .genre-main-layout {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 20px;
+    gap: var(--dwc-space-m);
+    padding: var(--dwc-space-l);
     height: 100%;
 }
 
 .genre-add-section {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--dwc-space-s);
 }
 
 .genre-list-container {
@@ -53,15 +53,15 @@
     flex-direction: column;
     flex-grow: 1;
     overflow-y: auto;
-    gap: 10px;
+    gap: var(--dwc-space-s);
 }
 
 .genre-list-row {
     display: flex;
     align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid #eee;
-    padding: 5px;
+    gap: var(--dwc-space-s);
+    border-bottom: 1px solid hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.15);
+    padding: var(--dwc-space-xs);
 }
 
 .genre-name-label {

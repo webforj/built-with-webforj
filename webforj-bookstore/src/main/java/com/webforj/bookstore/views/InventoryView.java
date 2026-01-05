@@ -1,14 +1,15 @@
 package com.webforj.bookstore.views;
 
 import com.webforj.bookstore.domain.Book;
-import com.webforj.bookstore.components.BookFormDrawer;
-import com.webforj.bookstore.components.GenreManagementDrawer;
+import com.webforj.bookstore.components.InventoryDrawer;
 import com.webforj.bookstore.service.BookService;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.field.TextField;
+
 import com.webforj.component.icons.FeatherIcon;
+import com.webforj.component.loading.Loading;
 
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
@@ -26,7 +27,7 @@ import jakarta.persistence.criteria.JoinType;
  * The main inventory view for managing books.
  * <p>
  * Displays a table of books with options to search, add, and edit entries.
- * Relies on {@link BookFormDrawer} for creating and updating books.
+ * Uses {@link InventoryDrawer} for creating/updating books and managing genres.
  * </p>
  * 
  */
@@ -47,21 +48,19 @@ public class InventoryView extends Composite<FlexLayout> {
   private Button manageGenresButton;
   private TextField searchField;
   private Table<Book> bookTable;
-  private BookFormDrawer bookDrawer;
-  private GenreManagementDrawer genreDrawer;
+  private InventoryDrawer inventoryDrawer;
+  private Loading loading = new Loading("Loading genres...");
 
   /**
    * Constructs the InventoryView and initializes its components and data.
    * 
-   * @param bookService the service to manage books
-   * @param bookDrawer  the book form drawer component
-   * @param genreDrawer the genre management drawer component
+   * @param bookService     the service to manage books
+   * @param inventoryDrawer the unified drawer component for books and genres
    */
 
-  public InventoryView(BookService bookService, BookFormDrawer bookDrawer, GenreManagementDrawer genreDrawer) {
+  public InventoryView(BookService bookService, InventoryDrawer inventoryDrawer) {
     this.bookService = bookService;
-    this.bookDrawer = bookDrawer;
-    this.genreDrawer = genreDrawer;
+    this.inventoryDrawer = inventoryDrawer;
 
     initializeComponents();
     setupLayout();
@@ -88,7 +87,7 @@ public class InventoryView extends Composite<FlexLayout> {
     bookTable = new Table<>();
     setupTableColumns();
 
-    bookDrawer.setOnSave(book -> {
+    inventoryDrawer.setOnSave(book -> {
       bookService.saveBook(book);
       repository.commit();
     });
@@ -113,7 +112,7 @@ public class InventoryView extends Composite<FlexLayout> {
     tableContainer.addClassName("table-container");
     tableContainer.add(bookTable);
 
-    self.add(toolbar, tableContainer, bookDrawer, genreDrawer);
+    self.add(toolbar, tableContainer, inventoryDrawer, loading);
   }
 
   /**
@@ -137,10 +136,16 @@ public class InventoryView extends Composite<FlexLayout> {
    * search input.
    */
   private void setupEventHandlers() {
-    addButton.addClickListener(e -> bookDrawer.open(null));
-    manageGenresButton.addClickListener(e -> genreDrawer.open());
+    addButton.addClickListener(e -> inventoryDrawer.openBookForm(null));
+    manageGenresButton.addClickListener(e -> {
+      loading.open();
+      // Simulate slight delay to ensure loading is visible if operations are fast
+      // or to allow UI update before blocking operation
+      inventoryDrawer.openGenreManagement();
+      loading.close();
+    });
 
-    bookTable.addItemClickListener(e -> bookDrawer.open(e.getItem()));
+    bookTable.addItemClickListener(e -> inventoryDrawer.openBookForm(e.getItem()));
 
     searchField.onModify(e -> {
       String searchTerm = searchField.getValue();
@@ -176,4 +181,5 @@ public class InventoryView extends Composite<FlexLayout> {
     bookTable.setRepository(repository);
     App.console().log(repository.size());
   }
+
 }

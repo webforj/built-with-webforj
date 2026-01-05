@@ -1,3 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --dwc-color-primary-h: 210;
+  --dwc-color-primary-s: 100%;
+  --dwc-font-family: "Inter", sans-serif;
+  --dwc-font-size: 16px;
+}
+
 dwc-app-nav-item {
   font-size: 1.2rem;
   --dwc-app-nav-item-height: 50px;
