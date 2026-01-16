@@ -49,7 +49,6 @@ public class CommentCard extends Composite<Div> {
 
     // Comment text
     Paragraph text = new Paragraph(comment.getText());
-    text.addClassName("comment-text");
 
     container.add(text);
   }

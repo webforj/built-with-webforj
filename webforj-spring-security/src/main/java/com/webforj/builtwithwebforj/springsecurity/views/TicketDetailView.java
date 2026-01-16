@@ -178,7 +178,6 @@ public class TicketDetailView extends Composite<Div> implements DidEnterObserver
     descriptionBox.addClassName("card");
 
     Paragraph description = new Paragraph(ticket.getDescription());
-    description.addClassName("description-text");
     descriptionBox.add(description);
 
     section.add(heading, descriptionBox);
