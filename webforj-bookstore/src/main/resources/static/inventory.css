@@ -21,10 +21,34 @@ body {
     flex: 1;
 }
 
-.no-results-message {
+/* Empty State Styling */
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 400px;
+}
+
+.empty-state-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--dwc-space-m);
     text-align: center;
-    padding: 20px;
-    color: var(--dwc-color-gray-500);
+}
+
+.empty-state-icon {
+    font-size: 5rem;
+    color: var(--dwc-color-text);
+    opacity: 0.3;
+}
+
+.empty-state-text {
+    font-size: 1.25rem;
+    color: var(--dwc-color-text);
+    opacity: 0.6;
 }
 
 .toolbar {

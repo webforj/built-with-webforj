@@ -65,7 +65,7 @@ public class MainLayout extends Composite<AppLayout> {
     Div separator = new Div();
     separator.setStyle("width", "1px");
     separator.setStyle("height", "var(--dwc-size-l)");
-    separator.setStyle("border-left", "1px solid var(--dwc-border-color-default)");
+    separator.setStyle("border-left", "1px solid var(--dwc-color-default)");
     separator.setStyle("margin", "0 var(--dwc-space-m)");
     logoutContainer.add(separator);
 

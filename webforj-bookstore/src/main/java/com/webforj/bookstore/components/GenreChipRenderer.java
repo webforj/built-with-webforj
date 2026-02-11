@@ -40,44 +40,29 @@ public class GenreChipRenderer {
                         g_val = Integer.parseInt(parts[1].trim());
                         b = Integer.parseInt(parts[2].trim());
                     }
+                } else if (baseColor.startsWith("#")) {
+                    // Handle hex color format (#RRGGBB)
+                    String hex = baseColor.substring(1);
+                    if (hex.length() == 6) {
+                        r = Integer.parseInt(hex.substring(0, 2), 16);
+                        g_val = Integer.parseInt(hex.substring(2, 4), 16);
+                        b = Integer.parseInt(hex.substring(4, 6), 16);
+                    }
                 }
-            } catch (
-
-            Exception e) {
+            } catch (Exception e) {
                 // Keep defaults
             }
 
-            // Create brighter gradient for better dark mode visibility
-            String gradient = String.format(
-                    "linear-gradient(to bottom, rgba(%d,%d,%d,0.35), rgba(%d,%d,%d,0.5))",
-                    r, g_val, b, r, g_val, b);
+            // Create vibrant circle color
+            String circleColor = String.format("rgb(%d, %d, %d)", r, g_val, b);
 
-            // Calculate perceived luminance to determine text color contrast
-            // Using WCAG formula: L = 0.299*R + 0.587*G + 0.114*B
-            // Average the gradient's two opacity levels for calculation
-            double avgOpacity = 0.425; // average of 0.35 and 0.5
-            double perceivedLuminance = (0.299 * r + 0.587 * g_val + 0.114 * b) * avgOpacity;
-
-            // Blend the genre color with white or black for harmonious text
-            String textColor;
-            if (perceivedLuminance > 70) {
-                int textR = Math.max(0, (int) (r * 0.3));
-                int textG = Math.max(0, (int) (g_val * 0.3));
-                int textB = Math.max(0, (int) (b * 0.3));
-                textColor = String.format("rgba(%d, %d, %d, 0.9)", textR, textG, textB);
-            } else {
-                int textR = Math.min(255, r + (int) ((255 - r) * 0.8));
-                int textG = Math.min(255, g_val + (int) ((255 - g_val) * 0.8));
-                int textB = Math.min(255, b + (int) ((255 - b) * 0.8));
-                textColor = String.format("rgba(%d, %d, %d, 0.95)", textR, textG, textB);
-            }
-
-            // Brighter border with higher opacity
-            String borderColor = String.format("rgba(%d,%d,%d,0.5)", r, g_val, b);
-
+            // Chip with small colored circle prefix - default background, centered text
             html.append(String.format(
-                    "<span class='genre-chip' style='background: %s; color: %s; border: 1px solid %s; border-radius: 9999px; padding: 2px 10px;'>%s</span>",
-                    gradient, textColor, borderColor, genreName));
+                    "<span class='genre-chip' style='display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 2px 10px; border-radius: 9999px; background: transparent; border: 1px solid var(--dwc-border-color-default); color: var(--dwc-color-text);'>"
+                            + "<span style='width: 8px; height: 8px; border-radius: 50%%; background: %s; flex-shrink: 0;'></span>"
+                            + "<span>%s</span>"
+                            + "</span>",
+                    circleColor, genreName));
         }
         html.append("</div>");
         return html.toString();

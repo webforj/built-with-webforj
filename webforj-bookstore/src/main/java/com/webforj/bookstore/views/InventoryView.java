@@ -102,8 +102,8 @@ public class InventoryView extends Composite<FlexLayout> {
         .setPrefixComponent(FeatherIcon.PLUS.create());
 
     searchField = new TextField()
-        .setPlaceholder("Search books...")
-        .setPrefixComponent(FeatherIcon.SEARCH.create());
+        .setPlaceholder("Search books...");
+    searchField.setPrefixComponent(TablerIcon.create("search"));
     searchField.setStyle("width", "200px");
 
     genreFilter = new ChoiceBox();
@@ -117,8 +117,23 @@ public class InventoryView extends Composite<FlexLayout> {
     bookTable = new Table<>();
     setupTableColumns();
 
-    noResultsMessage = new Div("No results found");
-    noResultsMessage.addClassName("no-results-message");
+    // Create empty state component with icon and text
+    noResultsMessage = new Div();
+    noResultsMessage.addClassName("empty-state");
+
+    FlexLayout emptyStateContent = new FlexLayout();
+    emptyStateContent.setDirection(FlexDirection.COLUMN);
+    emptyStateContent.addClassName("empty-state-content");
+
+    Div iconDiv = new Div();
+    iconDiv.addClassName("empty-state-icon");
+    iconDiv.add(FeatherIcon.BOOK.create());
+
+    Div textDiv = new Div("That search seems to be empty.");
+    textDiv.addClassName("empty-state-text");
+
+    emptyStateContent.add(iconDiv, textDiv);
+    noResultsMessage.add(emptyStateContent);
     noResultsMessage.setVisible(false);
 
     inventoryDrawer = new InventoryDrawer(authorService, publisherService, genreService);
@@ -141,7 +156,7 @@ public class InventoryView extends Composite<FlexLayout> {
     toolbar = new Toolbar();
     toolbar.addClassName("toolbar");
 
-    Button manageGenresButton = new Button(TablerIcon.create("category"));
+    Button manageGenresButton = new Button(FeatherIcon.FOLDER.create());
     manageGenresButton.addClickListener(e -> genreDrawer.open());
     manageGenresButton.setTooltipText("Manage Genres");
     manageGenresButton.setTheme(ButtonTheme.OUTLINED_GRAY);

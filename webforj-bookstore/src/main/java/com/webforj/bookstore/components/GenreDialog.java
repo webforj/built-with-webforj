@@ -2,7 +2,7 @@ package com.webforj.bookstore.components;
 
 import com.webforj.bookstore.domain.Genre;
 import com.webforj.component.Composite;
-import com.webforj.component.Theme;
+
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.dialog.Dialog;
@@ -10,7 +10,8 @@ import com.webforj.component.field.ColorField;
 import com.webforj.component.field.TextField;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
-import com.webforj.component.toast.Toast;
+import com.webforj.component.layout.flexlayout.FlexAlignment;
+
 import com.webforj.component.html.elements.H2;
 import com.webforj.component.icons.FeatherIcon;
 import com.webforj.component.layout.flexlayout.FlexJustifyContent;
@@ -41,7 +42,14 @@ public class GenreDialog extends Composite<Dialog> {
         header.setDirection(FlexDirection.ROW);
         header.setSpacing("var(--dwc-space-s)");
         header.setStyle("align-items", "center");
-        header.add(FeatherIcon.TAG.create(), new H2("Add New Genre"));
+
+        FlexLayout titleLayout = new FlexLayout();
+        titleLayout.setDirection(FlexDirection.ROW);
+        titleLayout.setSpacing("var(--dwc-space-s)");
+        titleLayout.setAlignment(FlexAlignment.BASELINE);
+        titleLayout.add(FeatherIcon.FOLDER.create(), new H2("Add New Genre"));
+
+        header.add(titleLayout);
 
         self.addToHeader(header);
         self.setCancelOnOutsideClick(true);
@@ -57,11 +65,12 @@ public class GenreDialog extends Composite<Dialog> {
 
         nameField = new TextField("Genre Name");
         nameField.setPlaceholder("e.g. Science Fiction");
+        nameField.onModify(e -> nameField.setInvalid(false)); // Clear validation on input
 
         // Compact color picker as prefix component
         colorField = new ColorField();
-        colorField.setWidth("40px");
-        colorField.setHeight("40px");
+        colorField.setWidth("30px");
+        colorField.setHeight("30px");
         colorField.addClassName("genre-color-picker");
         colorField.setValue(Color.BLUE);
 
@@ -74,10 +83,11 @@ public class GenreDialog extends Composite<Dialog> {
         footer.setJustifyContent(FlexJustifyContent.END);
         footer.setSpacing("var(--dwc-space-s)");
 
-        Button cancelButton = new Button("Cancel", e -> self.close());
         Button saveButton = new Button("Add", ButtonTheme.PRIMARY, e -> save());
+        saveButton.setPrefixComponent(FeatherIcon.PLUS.create());
+        Button cancelButton = new Button("Cancel", e -> self.close());
 
-        footer.add(cancelButton, saveButton);
+        footer.add(saveButton, cancelButton);
 
         self.add(content);
         self.addToFooter(footer);
@@ -92,9 +102,11 @@ public class GenreDialog extends Composite<Dialog> {
     private void save() {
         String name = nameField.getText().trim();
         if (name.isEmpty()) {
-            Toast.show("Genre name is required", Theme.DANGER);
+            nameField.setInvalid(true);
+            nameField.setInvalidMessage("can not be empty.");
             return;
         }
+        nameField.setInvalid(false);
 
         Color c = colorField.getValue();
         // Convert to hex string

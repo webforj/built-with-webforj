@@ -10,7 +10,9 @@ import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.drawer.Drawer;
 import com.webforj.component.drawer.Drawer.Placement;
 import com.webforj.component.field.TextField;
+import com.webforj.component.html.elements.H2;
 import com.webforj.component.icons.FeatherIcon;
+import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.optiondialog.ConfirmDialog;
 import com.webforj.component.optiondialog.OptionDialog;
@@ -64,9 +66,16 @@ public class GenreDrawer extends Composite<Drawer> {
 
     private void configureDrawer() {
         self.setPlacement(Placement.BOTTOM_CENTER);
-        self.setLabel("Manage Genres");
         self.addClassName("bookstore-drawer");
-        // self.setStyle("max-width", "500px"); // Constrain to table width
+
+        // Create title layout with icon and text aligned on baseline
+        FlexLayout titleLayout = new FlexLayout();
+        titleLayout.setDirection(FlexDirection.ROW);
+        titleLayout.setSpacing("var(--dwc-space-s)");
+        titleLayout.setAlignment(FlexAlignment.BASELINE);
+        titleLayout.add(FeatherIcon.FOLDER.create(), new H2("Manage Genres"));
+
+        self.addToTitle(titleLayout);
     }
 
     private void createContent() {
@@ -83,7 +92,7 @@ public class GenreDrawer extends Composite<Drawer> {
 
         searchField = new TextField();
         searchField.setPlaceholder("Filter genres...");
-        searchField.setPrefixComponent(FeatherIcon.SEARCH.create());
+        searchField.setPrefixComponent(TablerIcon.create("search"));
         searchField.onModify(e -> filterGenres(searchField.getText()));
         searchField.setStyle("flex", "1");
 

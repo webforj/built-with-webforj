@@ -12,10 +12,11 @@ import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.drawer.Drawer;
 import com.webforj.component.drawer.Drawer.Placement;
 import com.webforj.component.field.MaskedDateField;
-import com.webforj.component.field.MaskedTextField;
 import com.webforj.component.field.TextField;
+import com.webforj.component.html.elements.H2;
 import com.webforj.component.icons.FeatherIcon;
 
+import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.list.ChoiceBox;
@@ -68,7 +69,7 @@ public class InventoryDrawer extends Composite<Drawer> {
     @UseProperty("publicationDate")
     private MaskedDateField published;
 
-    private MaskedTextField isbn;
+    private TextField isbn;
 
     @UseProperty("genres")
     private ListBox genresBox;
@@ -76,6 +77,8 @@ public class InventoryDrawer extends Composite<Drawer> {
     // Shared close button
     @BindingExclude
     private Button closeButton;
+
+    private H2 label;
 
     /**
      * Constructs an InventoryDrawer.
@@ -100,6 +103,15 @@ public class InventoryDrawer extends Composite<Drawer> {
     private void configureDrawer() {
         self.setPlacement(Placement.BOTTOM_CENTER);
         self.addClassName("bookstore-drawer");
+        label = new H2("");
+        // Create title layout with icon and text aligned on baseline
+        FlexLayout titleLayout = new FlexLayout();
+        titleLayout.setDirection(FlexDirection.ROW);
+        titleLayout.setSpacing("var(--dwc-space-s)");
+        titleLayout.setAlignment(FlexAlignment.BASELINE);
+
+        titleLayout.add(FeatherIcon.BOOK.create(), label);
+        self.addToTitle(titleLayout);
     }
 
     /**
@@ -120,10 +132,10 @@ public class InventoryDrawer extends Composite<Drawer> {
         this.currentBook = book != null ? book : new Book();
 
         if (book == null) {
-            self.setLabel("\uD83D\uDCDA Add New Book");
+            label.setText("Add New Book");
             this.currentBook.setGenres(List.of());
         } else {
-            self.setLabel("\uD83D\uDCDA Edit Book");
+            label.setText("Edit Book");
         }
 
         populateDropdowns();
@@ -148,14 +160,11 @@ public class InventoryDrawer extends Composite<Drawer> {
         published.setAllowCustomValue(false);
         published.getPicker().setAutoOpen(true);
 
-        isbn = new MaskedTextField("ISBN");
+        isbn = new TextField("ISBN");
         isbn.setPrefixComponent(FeatherIcon.HASH.create());
         isbn.setPlaceholder("9780000000000"); // Example format
-        isbn.setMask("0000000000000"); // 13 digits required
         genresBox = new ListBox("Genres");
-        genresBox.setStyle("flex-grow", "1");
-        genresBox.setStyle("min-height", "150px");
-        genresBox.setStyle("overflow-y", "auto");
+        genresBox.addClassName("genres-box");
 
         genresBox.setSelectionMode(MultipleSelectableList.SelectionMode.MULTIPLE);
 
