@@ -1,22 +1,8 @@
-/* Base Drawer Styles */
-.bookstore-drawer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-
-}
-
-.bookstore-drawer:not([opened]) {
-    display: none;
-}
-
 .bookstore-drawer::part(control) {
     height: 80vh;
     border-top-left-radius: var(--dwc-border-radius-l);
     border-top-right-radius: var(--dwc-border-radius-l);
-    box-shadow: 0 -4px 10px hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 0% / 0.1);
+    box-shadow: var(--dwc-shadow-l);
 }
 
 /* Common Drawer Layout */
@@ -26,6 +12,7 @@
     gap: var(--dwc-space-m);
     padding: var(--dwc-space-l);
     height: 100%;
+    overflow: hidden;
 }
 
 .drawer-button-bar {
@@ -33,12 +20,12 @@
     gap: var(--dwc-space-s);
 }
 
+
 /* Genre Management specific */
 .genre-main-layout {
     display: flex;
     flex-direction: column;
     gap: var(--dwc-space-m);
-    padding: var(--dwc-space-l);
     height: 100%;
 }
 
@@ -56,14 +43,6 @@
     gap: var(--dwc-space-s);
 }
 
-.genre-list-row {
-    display: flex;
-    align-items: center;
-    gap: var(--dwc-space-s);
-    border-bottom: 1px solid hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.15);
-    padding: var(--dwc-space-xs);
-}
-
 .genre-name-label {
     flex-grow: 1;
 }
@@ -71,4 +50,20 @@
 /* Book Form specific */
 .book-genres-box {
     height: 150px;
+}
+
+/* Hide Table Header */
+.genre-table::part(header) {
+    display: none;
+}
+
+/* Color Picker - Fill prefix area */
+.genre-color-picker::part(input-wrapper) {
+    width: 100%;
+    height: 100%;
+}
+
+.genre-color-picker::part(input) {
+    width: 100%;
+    height: 100%;
 }

@@ -1,13 +1,20 @@
 package com.webforj.bookstore.views;
 
+import com.webforj.App;
 import com.webforj.annotation.StyleSheet;
 import com.webforj.component.Composite;
+import com.webforj.component.html.elements.H1;
+import com.webforj.component.html.elements.H2;
+import com.webforj.component.html.elements.Paragraph;
+import com.webforj.component.icons.Icon;
+import com.webforj.component.icons.TablerIcon;
+import com.webforj.component.layout.flexlayout.FlexAlignment;
+import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.router.annotation.Route;
 
 /**
  * View used to display information about the application.
- * 
  */
 @Route(value = "/About", outlet = MainLayout.class)
 @StyleSheet("ws://about.css")
@@ -18,33 +25,31 @@ public class AboutView extends Composite<FlexLayout> {
      * Constructs the AboutView.
      */
     public AboutView() {
+        self.setDirection(FlexDirection.COLUMN);
+        self.setAlignment(FlexAlignment.CENTER);
+        self.setItemAlignment(FlexAlignment.CENTER);
+        self.setSpacing("var(--dwc-space-l)");
+        self.setPadding("var(--dwc-space-xl)");
         self.addClassName("about-view");
-        self.setDirection(com.webforj.component.layout.flexlayout.FlexDirection.COLUMN);
 
-        java.util.Random random = new java.util.Random();
-        for (int i = 0; i < 15; i++) {
-            com.webforj.component.icons.Icon bookIcon = com.webforj.component.icons.FeatherIcon.BOOK.create();
-            bookIcon.addClassName("flying-book");
+        // App icon
+        Icon appIcon = TablerIcon.create("books");
+        appIcon.addClassName("about-view__icon");
 
-            // Random size between 30px and 80px
-            int size = 30 + random.nextInt(51);
-            bookIcon.setSize(size + "px", size + "px");
+        // Title
+        H1 title = new H1(App.getApplicationName());
+        title.addClassName("about-view__title");
 
-            // Random color
-            String color = String.format("#%06x", random.nextInt(0xffffff + 1));
-            bookIcon.setStyle("color", color);
+        // Subtitle
+        H2 subtitle = new H2("Book Inventory Management System");
+        subtitle.addClassName("about-view__subtitle");
 
-            // Random negative delay so they start at different points in the animation
-            // The animation duration is 30s, so random delay between -30s and 0s
-            int delay = -random.nextInt(30);
-            bookIcon.setStyle("animation-delay", delay + "s");
+        // Description
+        Paragraph description = new Paragraph(
+                "A modern web application for managing your bookstore inventory. " +
+                        "Built with webforJ and Spring Boot.");
+        description.addClassName("about-view__description");
 
-            self.add(bookIcon);
-        }
-
-        com.webforj.component.html.elements.H1 title = new com.webforj.component.html.elements.H1("webforJ Bookstore");
-        title.addClassName("about-text");
-
-        self.add(title);
+        self.add(appIcon, title, subtitle, description);
     }
 }

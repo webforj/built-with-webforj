@@ -1,102 +1,27 @@
 .about-view {
-    align-items: center;
-    justify-content: center;
     height: 100%;
     width: 100%;
-    position: relative;
-    overflow: hidden;
 }
 
-.floating-icon {
-    animation: float 6s ease-in-out infinite;
-    color: hsl(var(--dwc-color-primary-h) var(--dwc-color-primary-s) 50%);
-    filter: drop-shadow(0 20px 20px hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 0% / 0.15));
-    z-index: 1;
+.about-view__icon {
+    width: 80px;
+    height: 80px;
+    color: var(--dwc-color-primary);
 }
 
-.about-text {
-    font-family: var(--dwc-font-family);
-    font-size: 2.5rem;
-    font-weight: 300;
-    color: hsl(var(--dwc-color-primary-h) var(--dwc-color-primary-s) 50%);
-    letter-spacing: 2px;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: randomFloat 30s ease-in-out infinite alternate;
-    z-index: -1;
-    white-space: nowrap;
+.about-view__title {
+    margin: 0;
+    color: var(--dwc-color-primary-40);
 }
 
-.flying-book {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: randomFloat 30s ease-in-out infinite alternate;
-    z-index: -2;
-    opacity: 0.6;
-    /* Optional: make them slightly transparent so text is clearer */
+.about-view__subtitle {
+    margin: 0;
+    font-weight: 400;
+    color: var(--dwc-color-default-40);
 }
 
-@keyframes float {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-
-    50% {
-        transform: translateY(-20px) rotate(5deg);
-    }
-
-    100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-}
-
-@keyframes randomFloat {
-    0% {
-        transform: translate(-50%, -50%) translate(0, 0);
-    }
-
-    10% {
-        transform: translate(-50%, -50%) translate(35vw, -25vh);
-    }
-
-    20% {
-        transform: translate(-50%, -50%) translate(-35vw, 25vh);
-    }
-
-    30% {
-        transform: translate(-50%, -50%) translate(25vw, -35vh);
-    }
-
-    40% {
-        transform: translate(-50%, -50%) translate(-35vw, -25vh);
-    }
-
-    50% {
-        transform: translate(-50%, -50%) translate(35vw, 35vh);
-    }
-
-    60% {
-        transform: translate(-50%, -50%) translate(-25vw, -25vh);
-    }
-
-    70% {
-        transform: translate(-50%, -50%) translate(35vw, 15vh);
-    }
-
-    80% {
-        transform: translate(-50%, -50%) translate(-25vw, -35vh);
-    }
-
-    90% {
-        transform: translate(-50%, -50%) translate(25vw, 25vh);
-    }
-
-    100% {
-        transform: translate(-50%, -50%) translate(35vw, -25vh);
-    }
+.about-view__description {
+    max-width: 600px;
+    text-align: center;
+    color: var(--dwc-color-default-30);
 }

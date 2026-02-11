@@ -1,4 +1,3 @@
-html,
 body {
     height: 100%;
     margin: 0;
@@ -6,7 +5,7 @@ body {
 
 .main-container {
     height: 100%;
-    padding: var(--dwc-space-m);
+    padding-top: var(--dwc-space-m);
     box-sizing: border-box;
     gap: var(--dwc-space-m);
     overflow: hidden;
@@ -14,14 +13,31 @@ body {
 
 .table-container {
     flex: 1;
-    min-height: 0;
-    /* Crucial for scrolling inside flex items */
-    display: flex;
-    flex-direction: column;
 }
 
 .books-table {
     width: 100%;
     height: 100%;
     flex: 1;
+}
+
+.no-results-message {
+    text-align: center;
+    padding: 20px;
+    color: var(--dwc-color-gray-500);
+}
+
+.toolbar {
+    padding: 0 var(--dwc-space-s);
+}
+
+.toolbar::part(control) {
+    justify-content: space-between;
+}
+
+/* Shadow Part Styling for ISBN Cell */
+dwc-table::part(isbn-cell) {
+    font-family: monospace;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
 }

@@ -61,4 +61,14 @@ public class GenreService {
     public void deleteGenre(String id) {
         genreRepository.deleteById(id);
     }
+
+    /**
+     * Returns a filterable wrapper for the repository for use with WebforJ
+     * components.
+     * 
+     * @return a SpringDataRepository wrapper
+     */
+    public com.webforj.data.repository.spring.SpringDataRepository<Genre, String> getFilterableRepository() {
+        return new com.webforj.data.repository.spring.SpringDataRepository<>(genreRepository);
+    }
 }

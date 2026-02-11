@@ -4,10 +4,46 @@
   --dwc-color-primary-h: 210;
   --dwc-color-primary-s: 100%;
   --dwc-font-family: "Inter", sans-serif;
-  --dwc-font-size: 16px;
 }
 
-dwc-app-nav-item {
-  font-size: 1.2rem;
-  --dwc-app-nav-item-height: 50px;
+.toolbar-separator {
+  height: 24px;
+  width: 1px;
+  background-color: var(--dwc-color-gray-300);
+  margin: 0 var(--dwc-space-s);
+}
+
+dwc-app-layout::part(content) {
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+
+dwc-table {
+
+  &::part(table-wrapper),
+  &::part(table),
+  &::part(header),
+  &::part(body) {
+    border-radius: 0;
+  }
+}
+
+/* Genre Chips - Layout only, colors are dynamic */
+.genre-chips-container {
+  display: flex;
+  gap: var(--dwc-space-xs);
+  flex-wrap: wrap;
+}
+
+.genre-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  border-width: 1px;
+  border-style: solid;
 }

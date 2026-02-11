@@ -2,7 +2,7 @@ package com.webforj.bookstore.components;
 
 import com.webforj.annotation.StyleSheet;
 import com.webforj.bookstore.domain.Book;
-import com.webforj.bookstore.domain.Genre;
+
 import com.webforj.bookstore.service.AuthorService;
 import com.webforj.bookstore.service.GenreService;
 import com.webforj.bookstore.service.PublisherService;
@@ -11,54 +11,45 @@ import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.drawer.Drawer;
 import com.webforj.component.drawer.Drawer.Placement;
+import com.webforj.component.field.MaskedDateField;
+import com.webforj.component.field.MaskedTextField;
 import com.webforj.component.field.TextField;
-import com.webforj.component.html.elements.Div;
 import com.webforj.component.icons.FeatherIcon;
+
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.list.ChoiceBox;
 import com.webforj.component.list.ListBox;
-import com.webforj.component.list.ListItem;
+import com.webforj.component.list.MultipleSelectableList;
 import com.webforj.data.binding.annotation.BindingExclude;
 import com.webforj.data.binding.annotation.UseProperty;
+
 import com.webforj.data.binding.BindingContext;
 import com.webforj.data.validation.server.ValidationResult;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Consumer;
 
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 /**
- * A unified drawer component for managing both books and genres.
+ * A drawer component for managing books.
  * <p>
- * This drawer can dynamically switch between two modes:
+ * <p>
+ * This drawer is used for:
  * <ul>
- * <li>Book Form Mode - For adding or editing books</li>
- * <li>Genre Management Mode - For managing genres</li>
+ * <li>Adding or editing books</li>
  * </ul>
  * </p>
  */
-@Component
-@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @StyleSheet("ws://drawer.css")
 public class InventoryDrawer extends Composite<Drawer> {
 
-    private enum DrawerMode {
-        BOOK_FORM,
-        GENRE_MANAGEMENT
-    }
-
-    private DrawerMode currentMode;
     private Drawer self = getBoundComponent();
 
     // Services
-    private final AuthorService authorService;
-    private final PublisherService publisherService;
-    private final GenreService genreService;
+    private AuthorService authorService;
+    private PublisherService publisherService;
+    private GenreService genreService;
 
     // Book Form Components
     private BindingContext<Book> bindingContext;
@@ -68,48 +59,37 @@ public class InventoryDrawer extends Composite<Drawer> {
     // These components will be recreated each time the form is opened
     private TextField title;
 
-    @BindingExclude
+    @UseProperty("author")
     private ChoiceBox authorBox;
 
-    @BindingExclude
+    @UseProperty("publisher")
     private ChoiceBox publisherBox;
 
     @UseProperty("publicationDate")
-    private TextField published;
+    private MaskedDateField published;
 
-    private TextField isbn;
+    private MaskedTextField isbn;
 
-    @BindingExclude
+    @UseProperty("genres")
     private ListBox genresBox;
-
-    @BindingExclude
-    private FlexLayout genreListContainer;
-
-    @BindingExclude
-    private TextField newGenreField;
-
-    @BindingExclude
-    private TextField genreSearchField;
-
-    @BindingExclude
-    private Button addGenreButton;
 
     // Shared close button
     @BindingExclude
     private Button closeButton;
 
     /**
-     * Constructs an InventoryDrawer with the required services.
-     *
-     * @param authorService    the service for managing authors
-     * @param publisherService the service for managing publishers
-     * @param genreService     the service for managing genres
+     * Constructs an InventoryDrawer.
+     * 
+     * @param authorService    the author service for managing authors
+     * @param publisherService the publisher service for managing publishers
+     * @param genreService     the genre service for managing genres
      */
     public InventoryDrawer(AuthorService authorService, PublisherService publisherService, GenreService genreService) {
         this.authorService = authorService;
         this.publisherService = publisherService;
         this.genreService = genreService;
 
+        self.add(createBookFormLayout());
         configureDrawer();
         self.close();
     }
@@ -132,63 +112,22 @@ public class InventoryDrawer extends Composite<Drawer> {
     }
 
     /**
-     * Opens the drawer in book form mode.
+     * Opens the drawer for adding or editing a book.
      *
      * @param book the book to edit, or null to create a new book
      */
-    public void openBookForm(Book book) {
-        currentMode = DrawerMode.BOOK_FORM;
+    public void open(Book book) {
         this.currentBook = book != null ? book : new Book();
 
         if (book == null) {
-            self.setLabel("Add New Book");
+            self.setLabel("\uD83D\uDCDA Add New Book");
             this.currentBook.setGenres(List.of());
         } else {
-            self.setLabel("Edit Book");
+            self.setLabel("\uD83D\uDCDA Edit Book");
         }
-
-        self.removeAll();
-        self.add(createBookFormLayout());
 
         populateDropdowns();
         bindingContext.read(this.currentBook);
-
-        if (this.currentBook.getAuthor() != null) {
-            selectChoiceBoxItem(authorBox, this.currentBook.getAuthor());
-        } else {
-            authorBox.setValue(null);
-        }
-
-        if (this.currentBook.getPublisher() != null) {
-            selectChoiceBoxItem(publisherBox, this.currentBook.getPublisher());
-        } else {
-            publisherBox.setValue(null);
-        }
-
-        genresBox.deselectAll();
-        if (this.currentBook.getGenres() != null) {
-            for (String genreName : this.currentBook.getGenres()) {
-                selectListBoxItem(genresBox, genreName);
-            }
-        }
-
-        self.open();
-    }
-
-    /**
-     * Opens the drawer in genre management mode.
-     */
-    public void openGenreManagement() {
-        currentMode = DrawerMode.GENRE_MANAGEMENT;
-        self.setLabel("Manage Genres");
-
-        self.removeAll();
-        self.add(createGenreManagementLayout());
-
-        if (genreSearchField != null) {
-            genreSearchField.setText("");
-        }
-        refreshGenreList();
 
         self.open();
     }
@@ -200,12 +139,25 @@ public class InventoryDrawer extends Composite<Drawer> {
      */
     private FlexLayout createBookFormLayout() {
         title = new TextField("Title");
+        title.setPrefixComponent(FeatherIcon.TYPE.create());
+
         authorBox = new ChoiceBox("Author");
         publisherBox = new ChoiceBox("Publisher");
-        published = new TextField("Published (e.g. October 6, 2016)");
-        isbn = new TextField("ISBN");
+
+        published = new MaskedDateField("Published");
+        published.setAllowCustomValue(false);
+        published.getPicker().setAutoOpen(true);
+
+        isbn = new MaskedTextField("ISBN");
+        isbn.setPrefixComponent(FeatherIcon.HASH.create());
+        isbn.setPlaceholder("9780000000000"); // Example format
+        isbn.setMask("0000000000000"); // 13 digits required
         genresBox = new ListBox("Genres");
-        genresBox.setStyle("height", "150px");
+        genresBox.setStyle("flex-grow", "1");
+        genresBox.setStyle("min-height", "150px");
+        genresBox.setStyle("overflow-y", "auto");
+
+        genresBox.setSelectionMode(MultipleSelectableList.SelectionMode.MULTIPLE);
 
         FlexLayout formLayout = new FlexLayout();
         formLayout.setDirection(FlexDirection.COLUMN);
@@ -213,76 +165,21 @@ public class InventoryDrawer extends Composite<Drawer> {
 
         formLayout.add(title, authorBox, publisherBox, published, isbn, genresBox);
 
-        FlexLayout buttonLayout = new FlexLayout();
-        buttonLayout.addClassName("drawer-button-bar");
-
-        Button saveButton = new Button("Save").setTheme(ButtonTheme.PRIMARY);
+        Button saveButton = new Button("Save").setTheme(ButtonTheme.PRIMARY)
+                .setPrefixComponent(FeatherIcon.SAVE.create());
         Button cancelButton = new Button("Cancel");
+        cancelButton.setStyle("margin-right", "var(--dwc-space-s)");
+        cancelButton.setStyle("margin-left", "var(--dwc-space-s)");
 
         saveButton.onClick(e -> saveBook());
-        cancelButton.onClick(e -> handleClose());
+        cancelButton.onClick(e -> self.close());
 
-        buttonLayout.add(saveButton, cancelButton);
-        formLayout.add(buttonLayout);
+        self.addToFooter(saveButton, cancelButton);
 
         // Initialize binding context with fresh components
         bindingContext = BindingContext.of(this, Book.class, true);
 
         return formLayout;
-    }
-
-    /**
-     * Creates the genre management layout.
-     *
-     * @return the configured FlexLayout for genre management
-     */
-    private FlexLayout createGenreManagementLayout() {
-        FlexLayout mainLayout = new FlexLayout();
-        mainLayout.setDirection(FlexDirection.COLUMN);
-        mainLayout.addClassName("genre-main-layout");
-
-        // Add New Genre Section
-        FlexLayout addSection = new FlexLayout();
-        addSection.addClassName("genre-add-section");
-
-        genreSearchField = new TextField();
-        genreSearchField.setPlaceholder("Search");
-        genreSearchField.setStyle("flex-grow", "1");
-        genreSearchField.onModify(e -> refreshGenreList());
-
-        newGenreField = new TextField();
-        newGenreField.setPlaceholder("New Genre Name");
-        newGenreField.setStyle("flex-grow", "1");
-
-        addGenreButton = new Button("Add");
-        addGenreButton.setTheme(ButtonTheme.PRIMARY);
-        addGenreButton.onClick(e -> addGenre());
-
-        addSection.add(genreSearchField, newGenreField, addGenreButton);
-        mainLayout.add(addSection);
-
-        // List of Genres
-        genreListContainer = new FlexLayout();
-        genreListContainer.setDirection(FlexDirection.COLUMN);
-        genreListContainer.addClassName("genre-list-container");
-        mainLayout.add(genreListContainer);
-
-        // Close button at the bottom
-        Button closeButton = new Button("Close");
-        closeButton.onClick(e -> handleClose());
-        mainLayout.add(closeButton);
-
-        return mainLayout;
-    }
-
-    /**
-     * Handles the close action based on current mode.
-     */
-    private void handleClose() {
-        if (currentMode == DrawerMode.GENRE_MANAGEMENT && genreSearchField != null) {
-            genreSearchField.setText("");
-        }
-        self.close();
     }
 
     /**
@@ -306,83 +203,15 @@ public class InventoryDrawer extends Composite<Drawer> {
     }
 
     /**
-     * Refreshes the genre list based on search criteria.
-     */
-    private void refreshGenreList() {
-        genreListContainer.removeAll();
-        String searchTerm = genreSearchField != null ? genreSearchField.getText() : "";
-        List<Genre> genres;
-
-        if (searchTerm == null || searchTerm.trim().isEmpty()) {
-            genres = genreService.getAllGenresSorted();
-        } else {
-            genres = genreService.searchGenres(searchTerm.trim());
-        }
-
-        for (Genre genre : genres) {
-            FlexLayout row = new FlexLayout();
-            row.setDirection(FlexDirection.ROW);
-            row.addClassName("genre-list-row");
-
-            Div nameLabel = new Div(genre.getName());
-            nameLabel.addClassName("genre-name-label");
-
-            Button deleteBtn = new Button(FeatherIcon.TRASH.create());
-            deleteBtn.setTheme(ButtonTheme.DANGER);
-            deleteBtn.addClickListener(e -> deleteGenre(genre));
-
-            row.add(nameLabel, deleteBtn);
-            genreListContainer.add(row);
-        }
-    }
-
-    /**
-     * Adds a new genre.
-     */
-    private void addGenre() {
-        String name = newGenreField.getText().trim();
-        if (!name.isEmpty()) {
-            Genre newGenre = new Genre();
-            newGenre.setName(name);
-            genreService.saveGenre(newGenre);
-            newGenreField.setText("");
-            refreshGenreList();
-        }
-    }
-
-    /**
-     * Deletes the specified genre.
-     *
-     * @param genre the genre to delete
-     */
-    private void deleteGenre(Genre genre) {
-        genreService.deleteGenre(genre.getId());
-        refreshGenreList();
-    }
-
-    /**
      * Saves the current book.
      */
     private void saveBook() {
+
         ValidationResult result = bindingContext.write(this.currentBook);
         if (result.isValid()) {
-            if (authorBox.getSelectedItem() != null) {
-                this.currentBook.setAuthor(authorBox.getSelectedItem().getText());
-            } else {
-                this.currentBook.setAuthor(null);
+            if (this.currentBook.getId() == null || this.currentBook.getId().isEmpty()) {
+                this.currentBook.setId(UUID.randomUUID().toString());
             }
-
-            if (publisherBox.getSelectedItem() != null) {
-                this.currentBook.setPublisher(publisherBox.getSelectedItem().getText());
-            } else {
-                this.currentBook.setPublisher(null);
-            }
-
-            List<String> selectedGenres = new ArrayList<>();
-            for (ListItem item : genresBox.getSelectedItems()) {
-                selectedGenres.add(item.getText());
-            }
-            this.currentBook.setGenres(selectedGenres);
 
             if (onSave != null) {
                 onSave.accept(this.currentBook);
@@ -391,33 +220,4 @@ public class InventoryDrawer extends Composite<Drawer> {
         }
     }
 
-    /**
-     * Selects an item in a ChoiceBox by text.
-     *
-     * @param box  the ChoiceBox
-     * @param text the text to match
-     */
-    private void selectChoiceBoxItem(ChoiceBox box, String text) {
-        for (ListItem item : box.getItems()) {
-            if (item.getText().equals(text)) {
-                box.select(item);
-                return;
-            }
-        }
-        box.setValue(null);
-    }
-
-    /**
-     * Selects items in a ListBox by text (supports multiple selection).
-     *
-     * @param box  the ListBox
-     * @param text the text to match
-     */
-    private void selectListBoxItem(ListBox box, String text) {
-        for (ListItem item : box.getItems()) {
-            if (item.getText().equals(text)) {
-                box.select(item);
-            }
-        }
-    }
 }

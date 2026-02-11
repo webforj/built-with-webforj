@@ -2,7 +2,9 @@ package com.webforj.bookstore.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.webforj.data.HasEntityKey;
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 /**
@@ -27,6 +29,7 @@ public class Genre implements Comparable<Genre>, HasEntityKey {
     /** The name of the genre. */
     @EqualsAndHashCode.Include
     @Column
+    @NotBlank(message = "Genre name is required")
     private String name;
 
     /** A description of the genre. */
@@ -40,6 +43,10 @@ public class Genre implements Comparable<Genre>, HasEntityKey {
     /** Detailed information about the genre. */
     @Column(length = 2000)
     private String details;
+
+    /** The color associated with the genre for UI display. */
+    @Column
+    private String color;
 
     /**
      * Compares this genre to another based on name.

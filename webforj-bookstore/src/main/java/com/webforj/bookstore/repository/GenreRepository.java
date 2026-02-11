@@ -2,6 +2,7 @@ package com.webforj.bookstore.repository;
 
 import com.webforj.bookstore.domain.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Optional;
  * 
  */
 @Repository
-public interface GenreRepository extends JpaRepository<Genre, String> {
+public interface GenreRepository extends JpaRepository<Genre, String>, JpaSpecificationExecutor<Genre> {
 
     /**
      * Finds a genre by its name, ignoring case.
