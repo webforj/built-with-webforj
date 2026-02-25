@@ -14,7 +14,7 @@ import com.webforj.annotation.StyleSheet;
 @SpringBootApplication
 @Routify(packages = "com.webforj.builtwithwebforj.ghostai.views")
 @StyleSheet("ws://app.css")
-@StyleSheet("https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css")
+@StyleSheet("ws://prism-theme.css")
 @JavaScript(value = "https://cdn.jsdelivr.net/combine/npm/prismjs@1/prism.min.js,npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js", top = true)
 @AppProfile(name = "ghost:ai", shortName = "ghost:ai")
 public class Application extends App {

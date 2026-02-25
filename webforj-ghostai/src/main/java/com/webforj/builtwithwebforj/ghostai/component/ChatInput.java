@@ -4,6 +4,8 @@ import com.webforj.Environment;
 import com.webforj.builtwithwebforj.ghostai.service.PredictionService;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
+import com.webforj.concern.HasClassName;
+import com.webforj.concern.HasStyle;
 import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.event.KeypressEvent;
 import com.webforj.component.field.TextArea;
@@ -15,7 +17,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-public class ChatInput extends Composite<Div> {
+public class ChatInput extends Composite<Div> implements HasStyle<ChatInput>, HasClassName<ChatInput> {
 
   public enum State {
     IDLE, STREAMING

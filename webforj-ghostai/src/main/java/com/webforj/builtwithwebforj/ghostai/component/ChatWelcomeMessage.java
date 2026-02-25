@@ -10,11 +10,13 @@ import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexJustifyContent;
 import com.webforj.component.layout.flexlayout.FlexLayout;
+import com.webforj.concern.HasClassName;
 import com.webforj.concern.HasStyle;
 import com.webforj.concern.HasVisibility;
 
 public class ChatWelcomeMessage extends Composite<FlexLayout>
-    implements HasVisibility<ChatWelcomeMessage>, HasStyle<ChatWelcomeMessage> {
+    implements HasVisibility<ChatWelcomeMessage>, HasStyle<ChatWelcomeMessage>,
+    HasClassName<ChatWelcomeMessage> {
   private final FlexLayout self = getBoundComponent();
 
   public ChatWelcomeMessage() {
