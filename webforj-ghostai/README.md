@@ -6,6 +6,8 @@ An AI chat demo built with webforJ and Spring AI, showcasing streaming markdown 
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.8-green)
 ![Java](https://img.shields.io/badge/Java-21-orange)
 
+![ghost:ai screenshot](screenshot.png)
+
 ## Overview
 
 This app demonstrates webforJ's AI-ready components integrated with Spring AI. Features a ChatGPT-style interface with streaming responses, syntax-highlighted code blocks, and intelligent text predictions.
@@ -23,7 +25,7 @@ This app demonstrates webforJ's AI-ready components integrated with Spring AI. F
 
 - **Frontend**: webforJ 25.11
 - **Backend**: Spring Boot 3.5.8 with Spring AI
-- **LLM**: Google Gemini via Spring AI
+- **LLM**: Mistral AI via Spring AI
 - **MCP**: webforJ MCP Server for documentation
 - **Build Tool**: Maven
 - **Java Version**: 21
@@ -34,19 +36,19 @@ This app demonstrates webforJ's AI-ready components integrated with Spring AI. F
 
 - Java 21
 - Maven 3.9+
-- Google Gemini API key
+- Mistral AI API key
 
 ### API Key Setup
 
-This app uses Google Gemini as the LLM. To get your API key:
+This app uses Mistral AI as the LLM. To get your API key:
 
-1. Go to [Google AI Studio](https://aistudio.google.com/apikey)
-2. Sign in with your Google account
-3. Click "Create API Key"
+1. Go to [Mistral AI Console](https://console.mistral.ai/api-keys)
+2. Sign in or create an account
+3. Create a new API key
 4. Copy the key and add it to `src/main/resources/application.properties`:
 
 ```properties
-spring.ai.google.genai.api-key=YOUR_API_KEY_HERE
+spring.ai.mistralai.api-key=YOUR_API_KEY_HERE
 ```
 
 ### Running the App

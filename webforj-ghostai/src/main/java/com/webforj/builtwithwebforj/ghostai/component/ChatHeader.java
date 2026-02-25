@@ -6,9 +6,12 @@ import com.webforj.component.html.elements.H1;
 import com.webforj.component.icons.Icon;
 import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.layout.flexlayout.FlexLayout;
+import com.webforj.concern.HasClassName;
+import com.webforj.concern.HasStyle;
 import com.webforj.concern.HasVisibility;
 
-public class ChatHeader extends Composite<Div> implements HasVisibility<ChatHeader> {
+public class ChatHeader extends Composite<Div>
+    implements HasVisibility<ChatHeader>, HasStyle<ChatHeader>, HasClassName<ChatHeader> {
   private final Div self = getBoundComponent();
 
   public ChatHeader() {

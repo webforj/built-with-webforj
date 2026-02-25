@@ -1,0 +1,190 @@
+/* PrismJS theme using DWC design tokens */
+
+:root {
+  --ghost-code-text: var(--dwc-color-default-15);
+  --ghost-code-selection: var(--dwc-color-primary-85);
+  --ghost-code-comment: var(--dwc-color-success);
+  --ghost-code-keyword: var(--dwc-color-primary-dark);
+  --ghost-code-string: var(--dwc-color-warning-dark);
+  --ghost-code-number: var(--dwc-color-success-dark);
+  --ghost-code-function: var(--dwc-color-warning);
+  --ghost-code-class: var(--dwc-color-info);
+  --ghost-code-variable: var(--dwc-color-primary);
+  --ghost-code-punctuation: var(--dwc-color-default-25);
+  --ghost-code-operator: var(--dwc-color-default-25);
+  --ghost-code-control: var(--dwc-color-danger);
+  --ghost-code-regex: var(--dwc-color-danger-dark);
+  --ghost-code-line-number: var(--dwc-color-default-60);
+  --ghost-code-line-border: var(--dwc-color-default-80);
+  --ghost-code-line-highlight: color-mix(in srgb, var(--dwc-color-default-50) 15%, transparent);
+}
+
+/* PrismJS Theme */
+pre[class*="language-"],
+code[class*="language-"] {
+  color: var(--ghost-code-text);
+  font-size: 13px;
+  text-shadow: none;
+  font-family: var(--dwc-font-family-mono);
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  tab-size: 4;
+  hyphens: none;
+}
+
+pre[class*="language-"]::selection,
+code[class*="language-"]::selection,
+pre[class*="language-"] *::selection,
+code[class*="language-"] *::selection {
+  text-shadow: none;
+  background: var(--ghost-code-selection);
+}
+
+pre[class*="language-"] {
+  padding: 1em;
+  margin: 0;
+  overflow: auto;
+  background: var(--dwc-surface-1);
+  border: var(--dwc-border-width) var(--dwc-border-style) var(--dwc-color-default);
+  border-radius: var(--dwc-border-radius-m);
+}
+
+:not(pre) > code[class*="language-"] {
+  padding: .1em .3em;
+  border-radius: .3em;
+  color: var(--ghost-code-string);
+  background: transparent;
+}
+
+.namespace {
+  opacity: .7;
+}
+
+.token.doctype .token.doctype-tag,
+.token.keyword,
+.token.operator.arrow,
+.token.important {
+  color: var(--ghost-code-keyword);
+}
+
+.token.doctype .token.name,
+.token.variable {
+  color: var(--ghost-code-variable);
+}
+
+.token.comment,
+.token.prolog {
+  color: var(--ghost-code-comment);
+}
+
+.token.punctuation {
+  color: var(--ghost-code-punctuation);
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.inserted,
+.token.unit {
+  color: var(--ghost-code-number);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.deleted,
+.token.atrule {
+  color: var(--ghost-code-string);
+}
+
+.token.operator,
+.token.entity {
+  color: var(--ghost-code-operator);
+}
+
+.token.atrule .token.rule,
+.token.keyword.module,
+.token.keyword.control-flow {
+  color: var(--ghost-code-control);
+}
+
+.token.function {
+  color: var(--ghost-code-function);
+}
+
+.token.regex {
+  color: var(--ghost-code-regex);
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.class-name {
+  color: var(--ghost-code-class);
+}
+
+.token.cdata {
+  color: var(--ghost-code-punctuation);
+}
+
+/* PrismJS Line Numbers Plugin */
+pre[class*="language-"].line-numbers {
+  position: relative;
+  padding-left: 3.8em;
+  counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+  position: relative;
+  white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  font-size: 100%;
+  left: -3.8em;
+  width: 3em;
+  letter-spacing: -1px;
+  border-right: 1px solid var(--ghost-code-line-border);
+  user-select: none;
+}
+
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: var(--ghost-code-line-number);
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
+}
+
+/* Line Highlight */
+pre.line-numbers {
+  position: relative;
+}
+
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--line-top, 0px) + 1em);
+  height: var(--line-height, 1.5em);
+  background: var(--ghost-code-line-highlight);
+  pointer-events: none;
+}

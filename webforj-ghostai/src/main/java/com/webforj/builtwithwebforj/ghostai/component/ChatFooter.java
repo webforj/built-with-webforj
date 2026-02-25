@@ -2,12 +2,14 @@ package com.webforj.builtwithwebforj.ghostai.component;
 
 import com.webforj.component.Composite;
 import com.webforj.component.html.elements.Anchor;
+import com.webforj.concern.HasClassName;
+import com.webforj.concern.HasStyle;
 import com.webforj.component.html.elements.Span;
 import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexJustifyContent;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 
-public class ChatFooter extends Composite<FlexLayout> {
+public class ChatFooter extends Composite<FlexLayout> implements HasStyle<ChatFooter>, HasClassName<ChatFooter> {
   private final FlexLayout self = getBoundComponent();
 
   public ChatFooter() {

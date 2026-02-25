@@ -33,23 +33,32 @@ public class ChatView extends Composite<FlexLayout> {
     this.chatService = chatService;
 
     self.setDirection(FlexDirection.COLUMN)
-        .setStyle("height", "100vh")
-        .setStyle("maxWidth", "900px")
-        .setStyle("margin", "0 auto");
+        .setStyle("height", "100vh");
 
     markdownViewer.setAutoScroll(true)
         .setProgressiveRender(true)
         .setVisible(false);
+    markdownViewer.addClassName("chat-centered");
+
+    welcomeMessage.addClassName("chat-centered");
 
     contentArea = FlexLayout.create(welcomeMessage, markdownViewer).vertical().build();
-    contentArea.setStyle("overflowY", "auto").setStyle("padding", "var(--dwc-space-xl)");
+    contentArea.setStyle("overflowY", "auto")
+        .setStyle("padding", "var(--dwc-space-xl)")
+        .setStyle("alignItems", "center");
     contentArea.setItemGrow(1, welcomeMessage);
     contentArea.setItemGrow(1, markdownViewer);
 
     chatInput = new ChatInput(predictionService, debouncerExecutor);
     chatInput.onSend(this::handleSend).onStop(this::handleStop);
+    chatInput.addClassName("chat-centered");
 
-    self.add(header, contentArea, chatInput, new ChatFooter());
+    header.addClassName("chat-centered");
+
+    ChatFooter footer = new ChatFooter();
+    footer.addClassName("chat-centered");
+
+    self.add(header, contentArea, chatInput, footer);
     self.setItemGrow(1, contentArea);
   }
 
@@ -117,6 +126,7 @@ public class ChatView extends Composite<FlexLayout> {
 
   private void showThinking() {
     thinkingIndicator = new ChatThinkingIndicator();
+    thinkingIndicator.addClassName("chat-centered");
     contentArea.add(thinkingIndicator);
   }
 
