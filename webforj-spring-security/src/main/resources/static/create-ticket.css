@@ -1,0 +1,23 @@
+/*
+ * Create Ticket View
+ */
+
+.form-view {
+  max-width: 640px;
+}
+
+.back-button {
+  margin-bottom: var(--dwc-space-m);
+  --dwc-button-border-color: var(--border-default);
+  --dwc-button-background: transparent;
+  --dwc-button-color: var(--dwc-color-on-default-text-light);
+}
+
+.back-button:hover {
+  --dwc-button-background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.08);
+  --dwc-button-color: var(--dwc-color-on-default-text);
+}
+
+.create-ticket-description::part(input) {
+  min-height: 200px;
+}

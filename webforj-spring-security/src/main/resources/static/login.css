@@ -1,0 +1,94 @@
+/*
+ * Login View
+ */
+
+/* Magenta-themed background for login page */
+
+dwc-login {
+  --dwc-dialog-border: 0;
+  --dwc-dialog-border-radius: var(--dwc-border-radius-xl);
+  --dwc-dialog-height: 100dvh;
+  --dwc-dialog-width: 100%;
+  --dwc-dialog-background: transparent;
+  --dwc-dialog-modal-background:
+    radial-gradient(ellipse 80% 60% at 50% 120%, hsl(var(--dwc-color-primary-h) 80% 35% / 0.8) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 100%, hsl(var(--dwc-color-primary-h) 70% 30% / 0.6) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, hsl(var(--dwc-color-primary-h) 90% 40% / 0.5) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, hsl(var(--dwc-color-primary-h) 20% 12%) 0%, transparent 70%),
+    linear-gradient(hsl(var(--dwc-color-primary-h) 30% 8% / 0.85), hsl(var(--dwc-color-primary-h) 30% 8% / 0.85)),
+    url('https://i.ibb.co/v6VwmgjZ/light-wool.png');
+  --dwc-dialog-shadow: none;
+}
+
+dwc-login::part(footer) {
+  background: inherit;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: var(--dwc-space-l);
+}
+
+.login-description {
+  color: var(--dwc-color-on-default-text-light);
+  font-size: var(--dwc-font-size-s);
+  margin: 0;
+}
+
+.oauth-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dwc-space-s);
+  width: 100%;
+}
+
+.social-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dwc-space-s);
+  width: 100%;
+  padding: var(--dwc-space-s) var(--dwc-space-m);
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.05);
+  border: 1px solid var(--border-default);
+  border-radius: var(--dwc-border-radius-m);
+  color: var(--dwc-color-on-default-text);
+  font-weight: var(--dwc-font-weight-medium);
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.social-login-button:hover {
+  background: hsl(var(--dwc-color-default-h) var(--dwc-color-default-s) 50% / 0.1);
+  border-color: var(--border-default);
+}
+
+.social-login-icon {
+  flex-shrink: 0;
+}
+
+.oauth-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--dwc-space-m);
+  color: var(--dwc-color-default-50);
+  font-size: var(--dwc-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: var(--dwc-space-m) 0;
+}
+
+.oauth-divider::before,
+.oauth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.email-signin-text {
+  color: var(--dwc-color-on-default-text-light);
+  font-size: var(--dwc-font-size-s);
+  text-align: center;
+  margin-bottom: var(--dwc-space-s);
+}
