@@ -1,0 +1,67 @@
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.main-container {
+    height: 100%;
+    padding-top: var(--dwc-space-m);
+    box-sizing: border-box;
+    gap: var(--dwc-space-m);
+    overflow: hidden;
+}
+
+.table-container {
+    flex: 1;
+}
+
+.books-table {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+}
+
+/* Empty State Styling */
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 400px;
+}
+
+.empty-state-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--dwc-space-m);
+    text-align: center;
+}
+
+.empty-state-icon {
+    font-size: 5rem;
+    color: var(--dwc-color-text);
+    opacity: 0.3;
+}
+
+.empty-state-text {
+    font-size: 1.25rem;
+    color: var(--dwc-color-text);
+    opacity: 0.6;
+}
+
+.toolbar {
+    padding: 0 var(--dwc-space-s);
+}
+
+.toolbar::part(control) {
+    justify-content: space-between;
+}
+
+/* Shadow Part Styling for ISBN Cell */
+dwc-table::part(isbn-cell) {
+    font-family: monospace;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+}

@@ -1,0 +1,27 @@
+.about-view {
+    height: 100%;
+    width: 100%;
+}
+
+.about-view__icon {
+    width: 80px;
+    height: 80px;
+    color: var(--dwc-color-primary);
+}
+
+.about-view__title {
+    margin: 0;
+    color: var(--dwc-color-primary-40);
+}
+
+.about-view__subtitle {
+    margin: 0;
+    font-weight: 400;
+    color: var(--dwc-color-default-40);
+}
+
+.about-view__description {
+    max-width: 600px;
+    text-align: center;
+    color: var(--dwc-color-default-30);
+}

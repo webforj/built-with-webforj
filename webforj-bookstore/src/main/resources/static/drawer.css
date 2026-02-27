@@ -1,0 +1,75 @@
+.bookstore-drawer::part(control) {
+    height: 90vh;
+    border-top-left-radius: var(--dwc-border-radius-l);
+    border-top-right-radius: var(--dwc-border-radius-l);
+    box-shadow: var(--dwc-shadow-l);
+}
+
+/* Common Drawer Layout */
+.drawer-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--dwc-space-m);
+    height: 100%;
+    overflow: hidden;
+}
+
+.drawer-button-bar {
+    display: flex;
+    gap: var(--dwc-space-s);
+}
+
+
+/* Genre Management specific */
+.genre-main-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--dwc-space-m);
+    height: 100%;
+}
+
+.genre-add-section {
+    display: flex;
+    align-items: center;
+    gap: var(--dwc-space-s);
+}
+
+.genre-list-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
+    gap: var(--dwc-space-s);
+}
+
+.genre-name-label {
+    flex-grow: 1;
+}
+
+/* Book Form specific */
+.book-genres-box {
+    height: 150px;
+}
+
+/* Hide Table Header */
+.genre-table::part(header) {
+    display: none;
+}
+
+/* Color Picker - Fill prefix area */
+.genre-color-picker::part(input-wrapper) {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.genres-box {
+    flex-grow: 1;
+    min-height: 150px;
+    overflow-y: auto;
+}
+
+.genres-box::part(container) {
+    height: 100%;
+}

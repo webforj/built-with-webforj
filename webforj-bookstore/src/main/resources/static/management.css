@@ -1,0 +1,34 @@
+.management-lock-icon {
+    color: var(--dwc-color-danger);
+    margin-bottom: var(--dwc-space-m);
+}
+
+.management-title {
+    margin: 0 0 var(--dwc-space-s) 0;
+    color: var(--dwc-color-default);
+    font-size: var(--dwc-font-size-2xl);
+    font-weight: var(--dwc-font-weight-bold);
+    text-align: center;
+}
+
+.management-description {
+    /* Use -text-light variant instead of opacity for dark mode support */
+    color: var(--dwc-color-default-text-light);
+    text-align: center;
+    max-width: 480px;
+    line-height: 1.6;
+}
+
+.management-card {
+    padding: var(--dwc-space-2xl);
+    /* Use surface-3 for elevated cards */
+    background: var(--dwc-surface-3);
+    /* Add border for better definition in dark mode */
+    border: 1px solid var(--dwc-border-color-default);
+    border-radius: var(--dwc-border-radius-m);
+    box-shadow: var(--dwc-shadow-m);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--dwc-space-m);
+}
