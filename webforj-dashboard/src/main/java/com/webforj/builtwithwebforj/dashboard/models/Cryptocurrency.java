@@ -1,11 +1,22 @@
 package com.webforj.builtwithwebforj.dashboard.models;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "cryptocurrencies")
 public class Cryptocurrency {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  
+  @Column(unique = true, nullable = false)
   private String symbol;
+  
+  @Column(nullable = false)
   private String name;
+  
   private double currentPrice;
   private double previousPrice;
   private double priceChange24h;
@@ -17,8 +28,17 @@ public class Cryptocurrency {
   private long totalSupply;
   private long circulatingSupply;
   private int rank;
+  
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "price_history", joinColumns = @JoinColumn(name = "crypto_id"))
   private List<Double> priceHistory;
+  
   private long lastUpdated;
+
+  public Cryptocurrency() {
+    // Default constructor required by JPA
+    this.priceHistory = new ArrayList<>();
+  }
 
   public Cryptocurrency(String symbol, String name, double currentPrice, double marketCap,
       double volume24h, int rank) {
@@ -31,6 +51,14 @@ public class Cryptocurrency {
     this.rank = rank;
     this.priceHistory = new ArrayList<>();
     this.lastUpdated = System.currentTimeMillis();
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getSymbol() {

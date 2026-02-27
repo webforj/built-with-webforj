@@ -47,17 +47,23 @@ public class CryptocurrencyTable extends Composite<Table> {
     volumeColumn = table.addColumn("Volume (24h)", c -> FormatUtils.formatLargeNumber(c.getVolume24h()))
         .setSortable(true);
     table.addColumn("Price Chart", Cryptocurrency::getCurrentPrice)
-        .setRenderer(new PriceChartRenderer());
+        .setRenderer(new PriceChartRenderer())
+        .setResizable(true)
+        .setMovable(true);
     table.addColumn("PriceHistory", Cryptocurrency::getPriceHistoryJson)
         .setHidden(true);
 
     // Configure table properties
     table.setMultiSorting(true);
     table.setRowHeight(65);
+    table.setColumnsToMovable(true);
+    table.setColumnsToResizable(true);
   }
 
   public void setData(List<Cryptocurrency> cryptocurrencies) {
     table.setRepository(new CollectionRepository<>(cryptocurrencies));
+    table.setColumnsToMovable(true);
+    table.setColumnsToResizable(true);
   }
 
   public CollectionRepository<Cryptocurrency> getRepository() {
