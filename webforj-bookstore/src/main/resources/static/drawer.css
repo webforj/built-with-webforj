@@ -1,8 +1,11 @@
-.bookstore-drawer::part(control) {
-    height: 90vh;
-    border-top-left-radius: var(--dwc-border-radius-l);
-    border-top-right-radius: var(--dwc-border-radius-l);
-    box-shadow: var(--dwc-shadow-l);
+.bookstore-drawer {
+    --dwc-drawer-max-size: 80vh;
+    --dwc-drawer-border-radius: var(--dwc-border-radius-l);
+    --dwc-drawer-shadow: var(--dwc-shadow-l);
+}
+
+.genre-drawer {
+    --dwc-drawer-size: 50vh;
 }
 
 /* Common Drawer Layout */
@@ -60,8 +63,10 @@
 .genre-color-picker::part(input-wrapper) {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 0;
+    padding: var(--dwc-space-2xs);
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .genres-box {

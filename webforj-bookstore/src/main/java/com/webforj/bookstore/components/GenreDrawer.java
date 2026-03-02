@@ -65,8 +65,8 @@ public class GenreDrawer extends Composite<Drawer> {
     }
 
     private void configureDrawer() {
-        self.setPlacement(Placement.BOTTOM_CENTER);
-        self.addClassName("bookstore-drawer");
+        self.setPlacement(Placement.RIGHT);
+        self.addClassName("bookstore-drawer genre-drawer");
 
         // Create title layout with icon and text aligned on baseline
         FlexLayout titleLayout = new FlexLayout();

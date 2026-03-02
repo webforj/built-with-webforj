@@ -61,12 +61,8 @@ public class MainLayout extends Composite<AppLayout> {
         .align().center()
         .build();
 
-    // Add separator
     Div separator = new Div();
-    separator.setStyle("width", "1px");
-    separator.setStyle("height", "var(--dwc-size-l)");
-    separator.setStyle("border-left", "1px solid var(--dwc-color-default)");
-    separator.setStyle("margin", "0 var(--dwc-space-m)");
+    separator.addClassName("toolbar-separator");
     logoutContainer.add(separator);
 
     Button logoutBtn = new Button();

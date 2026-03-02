@@ -16,7 +16,6 @@ import jakarta.annotation.security.RolesAllowed;
 
 /**
  * View for managing users, restricted to administrators.
- * Displays a centered card with a lock icon and restricted access message.
  */
 @Route(value = "/management", outlet = MainLayout.class)
 @FrameTitle("User Management")
@@ -27,33 +26,31 @@ public class ManagementView extends Composite<FlexLayout> {
     private FlexLayout self = getBoundComponent();
 
     public ManagementView() {
-        // Main container with design tokens
         self.setDirection(FlexDirection.COLUMN);
         self.setAlignment(FlexAlignment.CENTER);
         self.setJustifyContent(FlexJustifyContent.CENTER);
-        self.setSpacing("var(--dwc-space-xl)");
-        // Use 100% height to fill available space (after toolbar)
+        self.setPadding("var(--dwc-space-xl)");
         self.setHeight("100%");
-        self.setStyle("box-sizing", "border-box");
+        self.addClassName("management-view");
 
-        // Icon with larger size and danger color
-        Icon lockIcon = TablerIcon.create("lock-access");
-        lockIcon.setAttribute("size", "80");
-        lockIcon.addClassName("management-lock-icon");
+        // Header card
+        Div headerCard = new Div();
+        headerCard.addClassName("management-card");
 
-        // Title with proper styling
-        H1 title = new H1("User Management");
+        Icon headerIcon = TablerIcon.create("settings");
+        headerIcon.addClassName("management-icon");
+
+        H1 title = new H1("Administration");
         title.addClassName("management-title");
 
-        // Description text
-        Div description = new Div("This area is restricted to administrators only.");
-        description.addClassName("management-description");
+        Div subtitle = new Div("Manage your bookstore settings, users, and system configuration.");
+        subtitle.addClassName("management-subtitle");
 
-        // Content card wrapper
-        Div contentCard = new Div();
-        contentCard.addClassName("management-card");
-        contentCard.add(lockIcon, title, description);
+        Div note = new Div("This page and its navigation tab are only visible to users with the admin role.");
+        note.addClassName("management-note");
 
-        self.add(contentCard);
+        headerCard.add(headerIcon, title, subtitle, note);
+
+        self.add(headerCard);
     }
 }

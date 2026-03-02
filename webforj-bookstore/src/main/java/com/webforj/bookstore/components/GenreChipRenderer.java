@@ -19,7 +19,7 @@ public class GenreChipRenderer {
         if (genreNames == null || genreNames.isEmpty()) {
             return "";
         }
-        StringBuilder html = new StringBuilder("<div class='genre-chips-container'>");
+        StringBuilder html = new StringBuilder("<div style='display:flex;gap:var(--dwc-space-xs);flex-wrap:wrap;'>");
         for (String genreName : genreNames) {
             Genre g = genreService.getAllGenresSorted().stream()
                     .filter(gen -> gen.getName().equals(genreName))
@@ -58,8 +58,8 @@ public class GenreChipRenderer {
 
             // Chip with small colored circle prefix - default background, centered text
             html.append(String.format(
-                    "<span class='genre-chip' style='display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 2px 10px; border-radius: 9999px; background: transparent; border: 1px solid var(--dwc-border-color-default); color: var(--dwc-color-text);'>"
-                            + "<span style='width: 8px; height: 8px; border-radius: 50%%; background: %s; flex-shrink: 0;'></span>"
+                    "<span style='display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:2px 10px;border-radius:9999px;background:transparent;border:1px solid var(--dwc-border-color-default);font-size:var(--dwc-font-size-xs);font-weight:600;line-height:1.5;'>"
+                            + "<span style='width:8px;height:8px;border-radius:50%%;background:%s;flex-shrink:0;'></span>"
                             + "<span>%s</span>"
                             + "</span>",
                     circleColor, genreName));

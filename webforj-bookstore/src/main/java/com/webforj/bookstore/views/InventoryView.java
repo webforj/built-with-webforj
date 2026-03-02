@@ -104,7 +104,7 @@ public class InventoryView extends Composite<FlexLayout> {
     searchField = new TextField()
         .setPlaceholder("Search books...");
     searchField.setPrefixComponent(TablerIcon.create("search"));
-    searchField.setStyle("width", "200px");
+    searchField.addClassName("search-field");
 
     genreFilter = new ChoiceBox();
 
@@ -152,17 +152,18 @@ public class InventoryView extends Composite<FlexLayout> {
     self.setDirection(FlexDirection.COLUMN);
     self.addClassName("main-container");
     self.setHeight("100%");
+    self.setSpacing("0px");
 
     toolbar = new Toolbar();
     toolbar.addClassName("toolbar");
 
-    Button manageGenresButton = new Button(FeatherIcon.FOLDER.create());
+    Button manageGenresButton = new Button("Genres");
+    manageGenresButton.setPrefixComponent(TablerIcon.create("tags"));
     manageGenresButton.addClickListener(e -> genreDrawer.open());
     manageGenresButton.setTooltipText("Manage Genres");
-    manageGenresButton.setTheme(ButtonTheme.OUTLINED_GRAY);
 
-    toolbar.addToStart(addButton, manageGenresButton);
-    toolbar.addToEnd(searchField, genreFilter);
+    toolbar.addToStart(addButton);
+    toolbar.addToEnd(searchField, genreFilter, manageGenresButton);
 
     tableContainer = new FlexLayout();
     tableContainer.setDirection(FlexDirection.COLUMN);
@@ -210,7 +211,7 @@ public class InventoryView extends Composite<FlexLayout> {
 
     bookTable.setMultiSorting(true);
     bookTable.addClassName("books-table");
-    bookTable.setRowHeight(45);
+    bookTable.setRowHeight(52);
     bookTable.setSelectionMode(Table.SelectionMode.SINGLE);
   }
 
