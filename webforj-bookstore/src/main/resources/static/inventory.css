@@ -1,0 +1,89 @@
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.main-container {
+  height: 100%;
+  box-sizing: border-box;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.table-container {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.books-table {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  font-size: var(--dwc-font-size-m);
+
+  &::part(header) {
+    background: var(--dwc-color-default-95);
+    font-weight: var(--dwc-font-weight-semibold);
+  }
+
+  &::part(row):hover {
+    background: var(--dwc-color-primary-95);
+  }
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 400px;
+}
+
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dwc-space-m);
+  text-align: center;
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  color: var(--dwc-color-default-text-light);
+  opacity: 0.4;
+}
+
+.empty-state-text {
+  font-size: 1.25rem;
+  color: var(--dwc-color-default-text-light);
+  opacity: 0.6;
+}
+
+.toolbar {
+  padding: var(--dwc-space-s);
+  border-bottom: 3px solid var(--dwc-border-color-default);
+
+  &::part(control) {
+    justify-content: space-between;
+  }
+}
+
+.search-field {
+  width: clamp(150px, 20vw, 250px);
+}
+
+dwc-table::part(isbn-cell) {
+  font-family: var(--dwc-font-family-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--dwc-font-weight-semibold);
+}
+
+dwc-table::part(table-wrapper){
+  border-radius: 0;
+}

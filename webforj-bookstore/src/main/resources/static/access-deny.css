@@ -1,0 +1,37 @@
+.access-deny-view {
+  height: 100%;
+  width: 100%;
+}
+
+.access-deny-view__card {
+  padding: var(--dwc-space-2xl);
+  background: var(--dwc-surface-3);
+  border: 1px solid var(--dwc-border-color-default);
+  border-radius: var(--dwc-border-radius-m);
+  box-shadow: var(--dwc-shadow-s);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--dwc-space-m);
+}
+
+.access-deny-view__icon {
+  width: 64px;
+  height: 64px;
+  color: var(--dwc-color-warning);
+}
+
+.access-deny-view__title {
+  margin: 0;
+  color: var(--dwc-color-default-text);
+  font-size: var(--dwc-font-size-2xl);
+  font-weight: var(--dwc-font-weight-bold);
+  text-align: center;
+}
+
+.access-deny-view__message {
+  color: var(--dwc-color-default-text-light);
+  text-align: center;
+  max-width: 480px;
+  line-height: 1.6;
+}

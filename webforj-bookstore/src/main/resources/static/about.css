@@ -1,0 +1,111 @@
+.about-view {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.about-view__card {
+  padding: var(--dwc-space-2xl);
+  background: var(--dwc-surface-3);
+  border: 1px solid var(--dwc-border-color-default);
+  border-radius: var(--dwc-border-radius-m);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--dwc-space-m);
+  max-width: 780px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.about-view__icon {
+  width: 72px;
+  height: 72px;
+  color: var(--dwc-color-primary);
+}
+
+.about-view__title {
+  margin: 0;
+  color: var(--dwc-color-primary-text);
+}
+
+.about-view__subtitle {
+  margin: 0;
+  font-weight: 400;
+  font-size: var(--dwc-font-size-l);
+  color: var(--dwc-color-default-text);
+}
+
+.about-view__description {
+  max-width: 600px;
+  text-align: center;
+  color: var(--dwc-color-default-text-light);
+  font-size: var(--dwc-font-size-m);
+  line-height: 1.6;
+}
+
+.about-view__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--dwc-space-xs);
+  justify-content: center;
+}
+
+.about-view__badge {
+  padding: var(--dwc-space-2xs) var(--dwc-space-s);
+  border-radius: var(--dwc-border-radius-pill);
+  background: var(--dwc-color-primary-90);
+  color: var(--dwc-color-primary-text);
+  font-size: var(--dwc-font-size-s);
+  font-weight: var(--dwc-font-weight-semibold);
+}
+
+.about-view__resources {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--dwc-space-m);
+  max-width: 780px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.about-view__resource {
+  background: var(--dwc-surface-3);
+  border: 1px solid var(--dwc-border-color-default);
+  border-radius: var(--dwc-border-radius-m);
+  transition: box-shadow var(--dwc-transition-fast), border-color var(--dwc-transition-fast);
+
+  &:hover {
+    border-color: var(--dwc-color-primary-light);
+    box-shadow: var(--dwc-shadow-s);
+  }
+}
+
+.about-view__resource-link {
+  display: flex;
+  align-items: center;
+  gap: var(--dwc-space-m);
+  padding: var(--dwc-space-m) var(--dwc-space-l);
+  text-decoration: none;
+  color: inherit;
+}
+
+.about-view__resource-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--dwc-color-primary);
+  flex-shrink: 0;
+}
+
+.about-view__resource-name {
+  display: block;
+  font-size: var(--dwc-font-size-m);
+  font-weight: var(--dwc-font-weight-semibold);
+  color: var(--dwc-color-default-text);
+}
+
+.about-view__resource-desc {
+  display: block;
+  font-size: var(--dwc-font-size-s);
+  color: var(--dwc-color-default-text-light);
+}
