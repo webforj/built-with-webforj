@@ -3,7 +3,7 @@
 :root {
   --dwc-font-family: "Inter", sans-serif;
 
---dwc-color-primary-h: 25;
+  --dwc-color-primary-h: 25;
   --dwc-color-primary-s: 75%;
   --dwc-color-primary-c: 45;
   --dwc-color-info-h: 205;

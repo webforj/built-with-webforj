@@ -23,34 +23,34 @@ import jakarta.annotation.security.RolesAllowed;
 @StyleSheet("ws://management.css")
 public class ManagementView extends Composite<FlexLayout> {
 
-    private FlexLayout self = getBoundComponent();
+  private FlexLayout self = getBoundComponent();
 
-    public ManagementView() {
-        self.setDirection(FlexDirection.COLUMN);
-        self.setAlignment(FlexAlignment.CENTER);
-        self.setJustifyContent(FlexJustifyContent.CENTER);
-        self.setPadding("var(--dwc-space-xl)");
-        self.setHeight("100%");
-        self.addClassName("management-view");
+  public ManagementView() {
+    self.setDirection(FlexDirection.COLUMN);
+    self.setAlignment(FlexAlignment.CENTER);
+    self.setJustifyContent(FlexJustifyContent.CENTER);
+    self.setPadding("var(--dwc-space-xl)");
+    self.setHeight("100%");
+    self.addClassName("management-view");
 
-        // Header card
-        Div headerCard = new Div();
-        headerCard.addClassName("management-card");
+    // Header card
+    Div headerCard = new Div();
+    headerCard.addClassName("management-card");
 
-        Icon headerIcon = TablerIcon.create("settings");
-        headerIcon.addClassName("management-icon");
+    Icon headerIcon = TablerIcon.create("settings");
+    headerIcon.addClassName("management-icon");
 
-        H1 title = new H1("Administration");
-        title.addClassName("management-title");
+    H1 title = new H1("Administration");
+    title.addClassName("management-title");
 
-        Div subtitle = new Div("Manage your bookstore settings, users, and system configuration.");
-        subtitle.addClassName("management-subtitle");
+    Div subtitle = new Div("Manage your bookstore settings, users, and system configuration.");
+    subtitle.addClassName("management-subtitle");
 
-        Div note = new Div("This page and its navigation tab are only visible to users with the admin role.");
-        note.addClassName("management-note");
+    Div note = new Div("This page and its navigation tab are only visible to users with the admin role.");
+    note.addClassName("management-note");
 
-        headerCard.add(headerIcon, title, subtitle, note);
+    headerCard.add(headerIcon, title, subtitle, note);
 
-        self.add(headerCard);
-    }
+    self.add(headerCard);
+  }
 }

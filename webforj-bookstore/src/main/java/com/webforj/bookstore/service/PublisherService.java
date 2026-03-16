@@ -17,14 +17,14 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class PublisherService {
 
-    private final PublisherRepository publisherRepository;
+  private final PublisherRepository publisherRepository;
 
-    /**
-     * Retrieves all publishers sorted by name alphabetically.
-     * 
-     * @return a list of publishers sorted by name
-     */
-    public List<Publisher> getAllPublishersSorted() {
-        return publisherRepository.findAllByOrderByNameAsc();
-    }
+  /**
+   * Retrieves all publishers sorted by name alphabetically.
+   * 
+   * @return a list of publishers sorted by name
+   */
+  public List<Publisher> getAllPublishersSorted() {
+    return publisherRepository.findAllByOrderByNameAsc();
+  }
 }

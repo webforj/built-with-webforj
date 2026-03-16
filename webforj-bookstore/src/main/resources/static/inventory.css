@@ -25,15 +25,15 @@ body {
   padding: 0;
   margin: 0;
   font-size: var(--dwc-font-size-m);
+}
 
-  &::part(header) {
-    background: var(--dwc-color-default-95);
-    font-weight: var(--dwc-font-weight-semibold);
-  }
+.books-table::part(header) {
+  background: var(--dwc-color-default-95);
+  font-weight: var(--dwc-font-weight-semibold);
+}
 
-  &::part(row):hover {
-    background: var(--dwc-color-primary-95);
-  }
+.books-table::part(row):hover {
+  background: var(--dwc-color-primary-95);
 }
 
 .empty-state {
@@ -68,10 +68,10 @@ body {
 .toolbar {
   padding: var(--dwc-space-s);
   border-bottom: 3px solid var(--dwc-border-color-default);
+}
 
-  &::part(control) {
-    justify-content: space-between;
-  }
+.toolbar::part(control) {
+  justify-content: space-between;
 }
 
 .search-field {

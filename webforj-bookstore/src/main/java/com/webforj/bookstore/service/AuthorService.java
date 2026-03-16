@@ -17,14 +17,14 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class AuthorService {
 
-    private final AuthorRepository authorRepository;
+  private final AuthorRepository authorRepository;
 
-    /**
-     * Retrieves all authors sorted by name alphabetically.
-     * 
-     * @return a list of authors sorted by name
-     */
-    public List<Author> getAllAuthorsSorted() {
-        return authorRepository.findAllByOrderByNameAsc();
-    }
+  /**
+   * Retrieves all authors sorted by name alphabetically.
+   * 
+   * @return a list of authors sorted by name
+   */
+  public List<Author> getAllAuthorsSorted() {
+    return authorRepository.findAllByOrderByNameAsc();
+  }
 }

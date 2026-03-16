@@ -1,4 +1,5 @@
 .bookstore-drawer {
+    --dwc-drawer-size: 80vh;
     --dwc-drawer-max-size: 80vh;
     --dwc-drawer-border-radius: var(--dwc-border-radius-l);
     --dwc-drawer-shadow: var(--dwc-shadow-l);

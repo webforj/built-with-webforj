@@ -41,4 +41,5 @@ bbj/.project
 
 .DS_Store
 *.versionsBackup
+*.bls
 

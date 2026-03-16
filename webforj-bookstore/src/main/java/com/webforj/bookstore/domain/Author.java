@@ -23,74 +23,74 @@ import java.util.List;
 @ToString
 public class Author implements HasEntityKey {
 
-    /** Unique identifier for the author. */
-    @Id
-    private String id;
+  /** Unique identifier for the author. */
+  @Id
+  private String id;
 
-    /** The name of the author. */
-    @Column
-    private String name;
+  /** The name of the author. */
+  @Column
+  private String name;
 
-    /** The pen name of the author, if any. */
-    private String penName;
+  /** The pen name of the author, if any. */
+  private String penName;
 
-    /** The full name of the author. */
-    private String fullName;
+  /** The full name of the author. */
+  private String fullName;
 
-    /** The birth date of the author. */
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
+  /** The birth date of the author. */
+  @Column(name = "date_of_birth")
+  private LocalDate dateOfBirth;
 
-    /** The death date of the author, if deceased. */
-    @Column(name = "date_of_death")
-    private LocalDate dateOfDeath;
+  /** The death date of the author, if deceased. */
+  @Column(name = "date_of_death")
+  private LocalDate dateOfDeath;
 
-    /** The nationality of the author. */
-    private String nationality;
+  /** The nationality of the author. */
+  private String nationality;
 
-    /** A description or biography of the author. */
-    @Column(length = 2000)
-    private String description;
+  /** A description or biography of the author. */
+  @Column(length = 2000)
+  private String description;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "author_languages", joinColumns = @JoinColumn(name = "author_id"))
-    @Column(name = "language")
-    @Builder.Default
-    private List<String> languages = new ArrayList<>();
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "author_languages", joinColumns = @JoinColumn(name = "author_id"))
+  @Column(name = "language")
+  @Builder.Default
+  private List<String> languages = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "author_impacts", joinColumns = @JoinColumn(name = "author_id"))
-    @Column(name = "impact")
-    @Builder.Default
-    private List<String> impacts = new ArrayList<>();
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "author_impacts", joinColumns = @JoinColumn(name = "author_id"))
+  @Column(name = "impact")
+  @Builder.Default
+  private List<String> impacts = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "author_influences", joinColumns = @JoinColumn(name = "author_id"))
-    @Column(name = "influence")
-    @Builder.Default
-    private List<String> influences = new ArrayList<>();
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "author_influences", joinColumns = @JoinColumn(name = "author_id"))
+  @Column(name = "influence")
+  @Builder.Default
+  private List<String> influences = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "author_professions", joinColumns = @JoinColumn(name = "author_id"))
-    @Column(name = "profession")
-    @Builder.Default
-    private List<String> professions = new ArrayList<>();
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "author_professions", joinColumns = @JoinColumn(name = "author_id"))
+  @Column(name = "profession")
+  @Builder.Default
+  private List<String> professions = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "author_genres", joinColumns = @JoinColumn(name = "author_id"))
-    @Column(name = "genre")
-    @Builder.Default
-    private List<String> genres = new ArrayList<>();
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "author_genres", joinColumns = @JoinColumn(name = "author_id"))
+  @Column(name = "genre")
+  @Builder.Default
+  private List<String> genres = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "author_publishers", joinColumns = @JoinColumn(name = "author_id"))
-    @Column(name = "publisher")
-    @Builder.Default
-    private List<String> publishers = new ArrayList<>();
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "author_publishers", joinColumns = @JoinColumn(name = "author_id"))
+  @Column(name = "publisher")
+  @Builder.Default
+  private List<String> publishers = new ArrayList<>();
 
-    @JsonIgnore
-    @Override
-    public Object getEntityKey() {
-        return id;
-    }
+  @JsonIgnore
+  @Override
+  public Object getEntityKey() {
+    return id;
+  }
 }

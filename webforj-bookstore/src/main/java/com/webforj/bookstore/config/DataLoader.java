@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -38,7 +37,7 @@ public class DataLoader implements CommandLineRunner {
     private final GenreRepository genreRepository;
     private final PublisherRepository publisherRepository;
 
-    private final Faker faker = new Faker(new Locale("en"));
+    private final Faker faker = new Faker(Locale.ENGLISH);
 
     @Override
     public void run(String... args) throws Exception {
@@ -79,7 +78,7 @@ public class DataLoader implements CommandLineRunner {
             Genre genre = new Genre();
             genre.setId(UUID.randomUUID().toString());
             genre.setName(name);
-            genre.setColor(getRandomRgbaColor());
+            genre.setColor(getRandomHexColor());
             genres.add(genre);
         }
         genreRepository.saveAll(genres);
@@ -145,7 +144,7 @@ public class DataLoader implements CommandLineRunner {
                 Book book = new Book();
                 book.setId(UUID.randomUUID().toString());
                 book.setTitle(title);
-                book.setIsbn(faker.code().isbn13());
+                book.setIsbn(faker.code().isbn13().replaceAll("[^\\d]", ""));
                 book.setLanguage("English");
                 book.setNotes(faker.lorem().paragraph());
 
@@ -182,11 +181,10 @@ public class DataLoader implements CommandLineRunner {
         log.info("Generated {} books", books.size());
     }
 
-    private String getRandomRgbaColor() {
-        Random random = new Random();
-        int r = random.nextInt(256);
-        int g = random.nextInt(256);
-        int b = random.nextInt(256);
-        return String.format("rgba(%d, %d, %d, 0.8)", r, g, b);
+    private String getRandomHexColor() {
+        int r = faker.random().nextInt(256);
+        int g = faker.random().nextInt(256);
+        int b = faker.random().nextInt(256);
+        return String.format("#%02x%02x%02x", r, g, b);
     }
 }

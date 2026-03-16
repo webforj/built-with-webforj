@@ -74,11 +74,11 @@
   border: 1px solid var(--dwc-border-color-default);
   border-radius: var(--dwc-border-radius-m);
   transition: box-shadow var(--dwc-transition-fast), border-color var(--dwc-transition-fast);
+}
 
-  &:hover {
-    border-color: var(--dwc-color-primary-light);
-    box-shadow: var(--dwc-shadow-s);
-  }
+.about-view__resource:hover {
+  border-color: var(--dwc-color-primary-light);
+  box-shadow: var(--dwc-shadow-s);
 }
 
 .about-view__resource-link {

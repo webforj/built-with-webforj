@@ -28,71 +28,74 @@ import jakarta.validation.constraints.Pattern;
 @ToString
 public class Book implements Comparable<Book>, HasEntityKey {
 
-    /** Unique identifier for the book. */
-    @Id
-    private String id;
+  /** Unique identifier for the book. */
+  @Id
+  private String id;
 
-    /** The title of the book. */
-    @Column
-    @NotBlank(message = "Title is required")
-    private String title;
+  /** The title of the book. */
+  @Column
+  @NotBlank(message = "Title is required")
+  private String title;
 
-    /** The author of the book. */
-    @Column(length = 1000)
-    @NotBlank(message = "Author is required")
-    private String author;
+  /** The author of the book. */
+  @Column(length = 1000)
+  @NotBlank(message = "Author is required")
+  private String author;
 
-    /** The language the book is written in. */
-    @Column(length = 100)
-    private String language;
+  /** The language the book is written in. */
+  @Column(length = 100)
+  private String language;
 
-    /** The list of genres associated with the book. */
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "book_genres", joinColumns = @JoinColumn(name = "book_id"))
-    @Column(name = "genre")
-    @Builder.Default
-    @NotEmpty(message = "At least one genre is required")
-    private List<String> genres = new ArrayList<>();
+  /** The list of genres associated with the book. */
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "book_genres", joinColumns = @JoinColumn(name = "book_id"))
+  @Column(name = "genre")
+  @Builder.Default
+  @NotEmpty(message = "At least one genre is required")
+  private List<String> genres = new ArrayList<>();
 
-    /** The publisher of the book. */
-    @NotBlank(message = "Publisher is required")
-    private String publisher;
+  /** The publisher of the book. */
+  @NotBlank(message = "Publisher is required")
+  private String publisher;
 
-    /** The ISBN of the book. */
-    @Column
-    @NotBlank(message = "ISBN is required")
-    @Pattern(regexp = "\\d{13}", message = "ISBN must be exactly 13 digits")
-    private String isbn;
+  /** The ISBN of the book. */
+  @Column
+  @NotBlank(message = "ISBN is required")
+  @Pattern(regexp = "\\d{13}", message = "ISBN must be exactly 13 digits")
+  private String isbn;
 
-    /** The publication date of the book. */
-    @Column(name = "publication_date")
-    @JsonProperty("publication_date")
-    @NotNull(message = "Publication date is required")
-    private LocalDate publicationDate;
+  /** The publication date of the book. */
+  @Column(name = "publication_date")
+  @JsonProperty("publication_date")
+  @NotNull(message = "Publication date is required")
+  private LocalDate publicationDate;
 
-    /** Additional notes about the book. */
-    @Column(length = 2000)
-    private String notes;
+  /** Additional notes about the book. */
+  @Column(length = 2000)
+  private String notes;
 
-    /**
-     * Compares this book to another based on title.
-     * 
-     * @param other the other book to compare to
-     * @return a negative integer, zero, or a positive integer as this book's title
-     *         is less than, equal to, or greater than the specified book's title
-     */
-    @Override
-    public int compareTo(Book other) {
-        if (other == null) {
-            return 1;
-        }
-        return this.title.compareTo(other.getTitle());
+  /**
+   * Compares this book to another based on title.
+   * 
+   * @param other the other book to compare to
+   * @return a negative integer, zero, or a positive integer as this book's title
+   *         is less than, equal to, or greater than the specified book's title
+   */
+  @Override
+  public int compareTo(Book other) {
+    if (other == null) {
+      return 1;
     }
-
-    @JsonIgnore
-    @Override
-    public Object getEntityKey() {
-        return id;
+    if (this.title == null) {
+      return other.getTitle() == null ? 0 : -1;
     }
+    return other.getTitle() == null ? 1 : this.title.compareTo(other.getTitle());
+  }
+
+  @JsonIgnore
+  @Override
+  public Object getEntityKey() {
+    return id;
+  }
 
 }

@@ -11,7 +11,7 @@
     "org.mockito.ArgumentMatchers.*",
     "org.mockito.Answers.*",
     "com.webforj.component.optiondialog.OptionDialog.*",
-    "com.webforj.App.console",
+    "com.webforj.App.console"
   ],
   "java.completion.filteredTypes": [
     "java.awt.*",
@@ -21,6 +21,6 @@
     "org.graalvm.*",
     "io.micrometer.shaded.*",
     "com.basis.*",
-    "javax.swing.*",
-  ],
+    "javax.swing.*"
+  ]
 }

@@ -33,70 +33,70 @@ import com.webforj.spring.security.WebforjSecurityConfigurer;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    /**
-     * Configures the security filter chain.
-     * 
-     * @param http the HttpSecurity to configure
-     * @return the configured SecurityFilterChain
-     * @throws Exception if an error occurs while configuring the security chain
-     */
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
-                .with(WebforjSecurityConfigurer.webforj(), configurer -> configurer
-                        .loginPage(LoginView.class)
-                        .accessDeniedPage(AccessDenyView.class)
-                        .logout())
-                .build();
-    }
+  /**
+   * Configures the security filter chain.
+   * 
+   * @param http the HttpSecurity to configure
+   * @return the configured SecurityFilterChain
+   * @throws Exception if an error occurs while configuring the security chain
+   */
+  @Bean
+  SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    return http
+        .with(WebforjSecurityConfigurer.webforj(), configurer -> configurer
+            .loginPage(LoginView.class)
+            .accessDeniedPage(AccessDenyView.class)
+            .logout())
+        .build();
+  }
 
-    /**
-     * Provides the password encoder.
-     * 
-     * @return a BCryptPasswordEncoder instance
-     */
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  /**
+   * Provides the password encoder.
+   * 
+   * @return a BCryptPasswordEncoder instance
+   */
+  @Bean
+  PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    /**
-     * Configures an in-memory user details service with sample users.
-     * 
-     * @param passwordEncoder the password encoder to use for encoding passwords
-     * @return the UserDetailsService containing the configured users
-     */
-    @Bean
-    UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder.encode("password"))
-                .roles("USER")
-                .build();
+  /**
+   * Configures an in-memory user details service with sample users.
+   * 
+   * @param passwordEncoder the password encoder to use for encoding passwords
+   * @return the UserDetailsService containing the configured users
+   */
+  @Bean
+  UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+    UserDetails user = User.builder()
+        .username("user")
+        .password(passwordEncoder.encode("password"))
+        .roles("USER")
+        .build();
 
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder.encode("admin"))
-                .roles("USER", "ADMIN")
-                .build();
+    UserDetails admin = User.builder()
+        .username("admin")
+        .password(passwordEncoder.encode("admin"))
+        .roles("USER", "ADMIN")
+        .build();
 
-        return new InMemoryUserDetailsManager(user, admin);
-    }
+    return new InMemoryUserDetailsManager(user, admin);
+  }
 
-    /**
-     * Configures the authentication manager.
-     * 
-     * @param userDetailsService the user details service to use
-     * @param passwordEncoder    the password encoder to use
-     * @return the configured AuthenticationManager
-     */
-    @Bean
-    AuthenticationManager authenticationManager(
-            UserDetailsService userDetailsService,
-            PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder);
+  /**
+   * Configures the authentication manager.
+   * 
+   * @param userDetailsService the user details service to use
+   * @param passwordEncoder    the password encoder to use
+   * @return the configured AuthenticationManager
+   */
+  @Bean
+  AuthenticationManager authenticationManager(
+      UserDetailsService userDetailsService,
+      PasswordEncoder passwordEncoder) {
+    DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
+    authenticationProvider.setPasswordEncoder(passwordEncoder);
 
-        return new ProviderManager(authenticationProvider);
-    }
+    return new ProviderManager(authenticationProvider);
+  }
 }

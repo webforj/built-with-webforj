@@ -3,7 +3,6 @@ package com.webforj.bookstore.views;
 import com.webforj.bookstore.domain.Book;
 
 import com.webforj.bookstore.components.InventoryDrawer;
-import com.webforj.bookstore.components.GenreChipRenderer;
 import com.webforj.bookstore.service.BookService;
 import com.webforj.component.Composite;
 import com.webforj.component.button.Button;
@@ -12,11 +11,11 @@ import com.webforj.component.field.TextField;
 
 import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.icons.FeatherIcon;
-import com.webforj.component.loading.Loading;
 import com.webforj.component.html.elements.Div;
 
 import com.webforj.bookstore.service.GenreService;
 import com.webforj.bookstore.components.GenreDrawer;
+import com.webforj.bookstore.components.GenreChipRenderer;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.layout.toolbar.Toolbar;
@@ -26,14 +25,16 @@ import com.webforj.component.table.Table;
 import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforj.router.annotation.FrameTitle;
 import com.webforj.router.annotation.Route;
-import com.webforj.App;
+import com.google.gson.Gson;
 import com.webforj.annotation.StyleSheet;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.criteria.Predicate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * The main inventory view for managing books.
@@ -48,20 +49,18 @@ import java.util.List;
 @StyleSheet("ws://inventory.css")
 public class InventoryView extends Composite<FlexLayout> {
 
-  @Autowired
-  private BookService bookService;
-  @Autowired
-  private GenreService genreService;
-  @Autowired
-  private com.webforj.bookstore.service.AuthorService authorService;
-  @Autowired
-  private com.webforj.bookstore.service.PublisherService publisherService;
+  private final BookService bookService;
+  private final GenreService genreService;
+  private final com.webforj.bookstore.service.AuthorService authorService;
+  private final com.webforj.bookstore.service.PublisherService publisherService;
 
   private SpringDataRepository<Book, String> repository;
 
+  private static final String DEFAULT_GENRE_COLOR = "rgba(107, 107, 107, 1)";
+  private static final Gson GSON = new Gson();
+  private Map<String, String> genreColorCache = new HashMap<>();
+
   private FlexLayout self = getBoundComponent();
-  private Toolbar toolbar;
-  private FlexLayout tableContainer;
 
   private Button addButton;
 
@@ -71,13 +70,17 @@ public class InventoryView extends Composite<FlexLayout> {
   private Div noResultsMessage;
   private InventoryDrawer inventoryDrawer;
   private GenreDrawer genreDrawer;
-  private Loading loading = new Loading("Loading genres...");
 
   /**
-   * Constructs the InventoryView.
+   * Constructs the InventoryView with required services.
    */
-  public InventoryView() {
-    // Default constructor
+  public InventoryView(BookService bookService, GenreService genreService,
+      com.webforj.bookstore.service.AuthorService authorService,
+      com.webforj.bookstore.service.PublisherService publisherService) {
+    this.bookService = bookService;
+    this.genreService = genreService;
+    this.authorService = authorService;
+    this.publisherService = publisherService;
   }
 
   /**
@@ -143,6 +146,20 @@ public class InventoryView extends Composite<FlexLayout> {
     });
 
     genreDrawer = new GenreDrawer(genreService);
+    genreDrawer.setOnClose(() -> {
+      refreshGenreCache();
+      String selected = genreFilter.getSelectedItem() != null
+          ? genreFilter.getSelectedItem().getText()
+          : "All Genres";
+      genreFilter.removeAll();
+      genreFilter.add(new ListItem("All Genres", "All Genres"));
+      genreService.getAllGenresSorted()
+          .forEach(genre -> genreFilter.add(new ListItem(genre.getName(), genre.getName())));
+      genreFilter.selectKey(selected);
+      if (repository != null) {
+        repository.commit();
+      }
+    });
   }
 
   /**
@@ -154,7 +171,7 @@ public class InventoryView extends Composite<FlexLayout> {
     self.setHeight("100%");
     self.setSpacing("0px");
 
-    toolbar = new Toolbar();
+    Toolbar toolbar = new Toolbar();
     toolbar.addClassName("toolbar");
 
     Button manageGenresButton = new Button("Genres");
@@ -165,12 +182,12 @@ public class InventoryView extends Composite<FlexLayout> {
     toolbar.addToStart(addButton);
     toolbar.addToEnd(searchField, genreFilter, manageGenresButton);
 
-    tableContainer = new FlexLayout();
+    FlexLayout tableContainer = new FlexLayout();
     tableContainer.setDirection(FlexDirection.COLUMN);
     tableContainer.addClassName("table-container");
     tableContainer.add(bookTable, noResultsMessage);
 
-    self.add(toolbar, tableContainer, loading);
+    self.add(toolbar, tableContainer);
     self.whenAttached().thenAccept(e -> getWindow().add(inventoryDrawer, genreDrawer));
   }
 
@@ -199,8 +216,13 @@ public class InventoryView extends Composite<FlexLayout> {
       return val;
     }).setMinWidth(110.0f).setSortable(false);
 
-    bookTable.addColumn("Genres", book -> new GenreChipRenderer(genreService).render(book.getGenres()))
-        .setMinWidth(200.0f).setSortable(false);
+    bookTable.addColumn("Genres", book -> GSON.toJson(book.getGenres() == null ? List.of()
+        : book.getGenres().stream()
+            .map(name -> Map.of("name", name,
+                "color", genreColorCache.getOrDefault(name, DEFAULT_GENRE_COLOR)))
+            .collect(Collectors.toList())))
+        .setMinWidth(200.0f).setSortable(false)
+        .setRenderer(new GenreChipRenderer<>());
 
     bookTable.setCellPartProvider((book, column) -> {
       if ("ISBN".equals(column.getLabel())) {
@@ -249,9 +271,10 @@ public class InventoryView extends Composite<FlexLayout> {
         Predicate predicate = cb.conjunction();
 
         if (!term.isEmpty()) {
+          String escaped = escapeLikePattern(term);
           predicate = cb.and(predicate, cb.or(
-              cb.like(cb.lower(root.get("title")), "%" + term + "%"),
-              cb.like(cb.lower(root.get("author")), "%" + term + "%")));
+              cb.like(cb.lower(root.get("title")), "%" + escaped + "%", '\\'),
+              cb.like(cb.lower(root.get("author")), "%" + escaped + "%", '\\')));
         }
 
         if (genre != null) {
@@ -270,12 +293,31 @@ public class InventoryView extends Composite<FlexLayout> {
   }
 
   /**
-   * Loads data into the table from the book service.
+   * Loads data into the table from the book service and refreshes the genre color
+   * cache.
    */
   private void loadData() {
+    refreshGenreCache();
     repository = bookService.getFilterableRepository();
     bookTable.setRepository(repository);
-    App.console().log(repository.size());
+  }
+
+  /**
+   * Refreshes the genre color cache and the genre filter dropdown from the
+   * current DB state.
+   */
+  private void refreshGenreCache() {
+    genreColorCache.clear();
+    genreService.getAllGenresSorted().forEach(g -> genreColorCache.put(g.getName(),
+        g.getColor() != null && !g.getColor().isEmpty() ? g.getColor() : DEFAULT_GENRE_COLOR));
+  }
+
+  /**
+   * Escapes SQL LIKE wildcards in user-supplied search input.
+   */
+  private static String escapeLikePattern(String input) {
+    return input.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_");
   }
 
 }
+
