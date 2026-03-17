@@ -10,7 +10,6 @@ import java.util.List;
 
 /**
  * Publisher entity representing a book publisher.
- * 
  */
 @Entity
 @Table(name = "publishers")

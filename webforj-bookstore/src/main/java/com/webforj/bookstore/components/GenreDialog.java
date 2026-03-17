@@ -46,12 +46,13 @@ public class GenreDialog extends Composite<Dialog> {
     FlexLayout titleLayout = new FlexLayout();
     titleLayout.setDirection(FlexDirection.ROW);
     titleLayout.setSpacing("var(--dwc-space-s)");
-    titleLayout.setAlignment(FlexAlignment.BASELINE);
+    titleLayout.setAlignment(FlexAlignment.CENTER);
     titleLayout.add(FeatherIcon.FOLDER.create(), new H2("Add New Genre"));
 
     header.add(titleLayout);
 
     self.addToHeader(header);
+    self.addClassName("bookstore-dialog");
     self.setCancelOnOutsideClick(true);
     self.setBlurred(true);
     self.setStyle("max-width", "400px");

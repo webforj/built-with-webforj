@@ -16,7 +16,6 @@ import jakarta.validation.constraints.Pattern;
 
 /**
  * Book entity representing a book in the bookstore.
- * 
  */
 @Entity
 @Table(name = "books")

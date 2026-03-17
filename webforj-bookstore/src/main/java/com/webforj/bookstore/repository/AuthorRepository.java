@@ -10,7 +10,6 @@ import java.util.List;
 
 /**
  * Repository interface for Author entities.
- * 
  */
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, String> {

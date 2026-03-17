@@ -36,11 +36,7 @@ import java.util.function.Consumer;
 /**
  * A drawer component for managing books.
  * <p>
- * <p>
- * This drawer is used for:
- * <ul>
- * <li>Adding or editing books</li>
- * </ul>
+ * This drawer is used for adding or editing books.
  * </p>
  */
 @StyleSheet("ws://drawer.css")
@@ -102,14 +98,14 @@ public class InventoryDrawer extends Composite<Drawer> {
    * Configures the drawer's base settings.
    */
   private void configureDrawer() {
-    self.setPlacement(Placement.BOTTOM_CENTER);
+    self.setPlacement(Placement.LEFT);
     self.addClassName("bookstore-drawer");
     label = new H2("");
     // Create title layout with icon and text aligned on baseline
     FlexLayout titleLayout = new FlexLayout();
     titleLayout.setDirection(FlexDirection.ROW);
     titleLayout.setSpacing("var(--dwc-space-s)");
-    titleLayout.setAlignment(FlexAlignment.BASELINE);
+    titleLayout.setAlignment(FlexAlignment.CENTER);
 
     titleLayout.add(FeatherIcon.BOOK.create(), label);
     self.addToTitle(titleLayout);

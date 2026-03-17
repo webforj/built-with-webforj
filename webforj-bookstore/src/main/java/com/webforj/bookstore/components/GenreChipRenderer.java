@@ -2,6 +2,11 @@ package com.webforj.bookstore.components;
 
 import com.webforj.component.table.renderer.Renderer;
 
+/**
+ * A table cell renderer that displays genre names as colored chip badges.
+ *
+ * @param <T> the type of the table row entity
+ */
 public class GenreChipRenderer<T> extends Renderer<T> {
 
   @Override

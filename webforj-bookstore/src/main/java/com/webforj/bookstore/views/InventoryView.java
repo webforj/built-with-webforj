@@ -13,7 +13,9 @@ import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.icons.FeatherIcon;
 import com.webforj.component.html.elements.Div;
 
+import com.webforj.bookstore.service.AuthorService;
 import com.webforj.bookstore.service.GenreService;
+import com.webforj.bookstore.service.PublisherService;
 import com.webforj.bookstore.components.GenreDrawer;
 import com.webforj.bookstore.components.GenreChipRenderer;
 import com.webforj.component.layout.flexlayout.FlexDirection;
@@ -42,7 +44,6 @@ import java.util.stream.Collectors;
  * Displays a table of books with options to search, add, and edit entries.
  * Uses {@link InventoryDrawer} for creating/updating books and managing genres.
  * </p>
- * 
  */
 @Route(value = "/", outlet = MainLayout.class)
 @FrameTitle("Inventory")
@@ -51,8 +52,8 @@ public class InventoryView extends Composite<FlexLayout> {
 
   private final BookService bookService;
   private final GenreService genreService;
-  private final com.webforj.bookstore.service.AuthorService authorService;
-  private final com.webforj.bookstore.service.PublisherService publisherService;
+  private final AuthorService authorService;
+  private final PublisherService publisherService;
 
   private SpringDataRepository<Book, String> repository;
 
@@ -73,10 +74,15 @@ public class InventoryView extends Composite<FlexLayout> {
 
   /**
    * Constructs the InventoryView with required services.
+   *
+   * @param bookService      the service for managing books
+   * @param genreService     the service for managing genres
+   * @param authorService    the service for managing authors
+   * @param publisherService the service for managing publishers
    */
   public InventoryView(BookService bookService, GenreService genreService,
-      com.webforj.bookstore.service.AuthorService authorService,
-      com.webforj.bookstore.service.PublisherService publisherService) {
+      AuthorService authorService,
+      PublisherService publisherService) {
     this.bookService = bookService;
     this.genreService = genreService;
     this.authorService = authorService;
@@ -92,7 +98,6 @@ public class InventoryView extends Composite<FlexLayout> {
     setupLayout();
     setupEventHandlers();
     loadData();
-
   }
 
   /**
@@ -238,7 +243,7 @@ public class InventoryView extends Composite<FlexLayout> {
   }
 
   /**
-   * configures event handlers for user interactions such as button clicks and
+   * Configures event handlers for user interactions such as button clicks and
    * search input.
    */
   private void setupEventHandlers() {
@@ -318,6 +323,4 @@ public class InventoryView extends Composite<FlexLayout> {
   private static String escapeLikePattern(String input) {
     return input.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_");
   }
-
 }
-

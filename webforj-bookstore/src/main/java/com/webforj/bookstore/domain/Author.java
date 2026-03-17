@@ -11,7 +11,6 @@ import java.util.List;
 
 /**
  * Author entity representing a book author.
- * 
  */
 @Entity
 @Table(name = "authors")

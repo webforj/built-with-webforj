@@ -14,6 +14,7 @@ import com.webforj.component.layout.applayout.AppLayout;
 import com.webforj.component.layout.appnav.AppNav;
 import com.webforj.component.layout.appnav.AppNavItem;
 import com.webforj.component.layout.flexlayout.FlexLayout;
+import com.webforj.component.layout.applayout.AppDrawerToggle;
 import com.webforj.component.layout.toolbar.Toolbar;
 import com.webforj.router.annotation.Route;
 import org.springframework.security.core.Authentication;
@@ -22,7 +23,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 /**
  * The main application layout, providing navigation and structure for the
  * application.
- * 
  */
 @Route
 public class MainLayout extends Composite<AppLayout> {
@@ -44,7 +44,7 @@ public class MainLayout extends Composite<AppLayout> {
   private void setHeader() {
 
     Toolbar toolbar = new Toolbar();
-    toolbar.addToStart(TablerIcon.create("books"));
+    toolbar.addToStart(new AppDrawerToggle(), TablerIcon.create("books"));
     title.setText("Bookstore");
     toolbar.addToTitle(title);
 

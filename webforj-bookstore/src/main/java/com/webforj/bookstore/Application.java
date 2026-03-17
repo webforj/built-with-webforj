@@ -15,7 +15,6 @@ import com.webforj.annotation.StyleSheet;
  * application settings
  * such as routing packages, styling, and theme.
  * </p>
- * 
  */
 @SpringBootApplication
 @Routify(packages = "com.webforj.bookstore.views")

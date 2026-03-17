@@ -10,7 +10,6 @@ import java.util.Optional;
 
 /**
  * Repository interface for Genre entities.
- * 
  */
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, String>, JpaSpecificationExecutor<Genre> {

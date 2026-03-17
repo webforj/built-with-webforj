@@ -17,7 +17,6 @@ import com.webforj.router.security.annotation.AnonymousAccess;
  * Displays a login form and handles feedback for authentication errors or
  * logout messages.
  * </p>
- * 
  */
 @Route("/signin")
 @AnonymousAccess

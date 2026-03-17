@@ -9,7 +9,6 @@ import java.util.Optional;
 
 /**
  * Repository interface for Publisher entities.
- * 
  */
 @Repository
 public interface PublisherRepository extends JpaRepository<Publisher, String> {

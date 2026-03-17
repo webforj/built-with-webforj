@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Service class for managing books.
- * 
  */
 @Service
 @RequiredArgsConstructor

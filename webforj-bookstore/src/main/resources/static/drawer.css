@@ -1,3 +1,10 @@
+.bookstore-drawer h2,
+.bookstore-drawer h1,
+.bookstore-dialog h2,
+.bookstore-dialog h1 {
+    margin: 0;
+}
+
 .bookstore-drawer {
     --dwc-drawer-size: 80vh;
     --dwc-drawer-max-size: 80vh;
@@ -6,6 +13,10 @@
 }
 
 .genre-drawer {
+    --dwc-drawer-size: 50vh;
+}
+
+.bookstore-drawer:not(.genre-drawer) {
     --dwc-drawer-size: 50vh;
 }
 

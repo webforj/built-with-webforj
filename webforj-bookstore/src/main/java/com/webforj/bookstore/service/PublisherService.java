@@ -10,7 +10,6 @@ import java.util.List;
 
 /**
  * Service class for managing publishers.
- * 
  */
 @Service
 @RequiredArgsConstructor

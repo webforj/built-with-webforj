@@ -30,6 +30,10 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.ArrayList;
 import com.webforj.component.toast.Toast;
 
+/**
+ * A drawer component for managing genres, allowing users to add, search, and
+ * delete genres.
+ */
 @StyleSheet("ws://drawer.css")
 public class GenreDrawer extends Composite<Drawer> {
 
@@ -72,7 +76,7 @@ public class GenreDrawer extends Composite<Drawer> {
     FlexLayout titleLayout = new FlexLayout();
     titleLayout.setDirection(FlexDirection.ROW);
     titleLayout.setSpacing("var(--dwc-space-s)");
-    titleLayout.setAlignment(FlexAlignment.BASELINE);
+    titleLayout.setAlignment(FlexAlignment.CENTER);
     titleLayout.add(FeatherIcon.FOLDER.create(), new H2("Manage Genres"));
 
     self.addToTitle(titleLayout);
@@ -112,7 +116,6 @@ public class GenreDrawer extends Composite<Drawer> {
     genreTable.setSelectionMode(Table.SelectionMode.NONE);
 
     self.add(container);
-
   }
 
   private void configureTableColumns() {

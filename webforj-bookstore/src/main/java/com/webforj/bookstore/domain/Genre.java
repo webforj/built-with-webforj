@@ -10,7 +10,6 @@ import lombok.*;
 
 /**
  * Genre entity representing a book genre.
- * 
  */
 @Entity
 @Table(name = "genres")
