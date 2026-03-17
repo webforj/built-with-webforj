@@ -1,0 +1,47 @@
+.management-view {
+  overflow-y: auto;
+}
+
+.management-card {
+  padding: var(--dwc-space-2xl);
+  background: var(--dwc-surface-3);
+  border: 1px solid var(--dwc-border-color-default);
+  border-radius: var(--dwc-border-radius-m);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--dwc-space-m);
+  max-width: 780px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.management-icon {
+  width: 56px;
+  height: 56px;
+  color: var(--dwc-color-primary);
+}
+
+.management-title {
+  margin: 0;
+  color: var(--dwc-color-primary-text);
+  font-size: var(--dwc-font-size-2xl);
+  font-weight: var(--dwc-font-weight-bold);
+  text-align: center;
+}
+
+.management-subtitle {
+  color: var(--dwc-color-default-text-light);
+  text-align: center;
+  font-size: var(--dwc-font-size-m);
+  line-height: 1.6;
+  max-width: 520px;
+}
+
+.management-note {
+  margin-top: var(--dwc-space-s);
+  padding: var(--dwc-space-s) var(--dwc-space-m);
+  text-align: center;
+  line-height: 1.5;
+}
+
