@@ -238,6 +238,7 @@ public class InventoryView extends Composite<FlexLayout> {
 
     bookTable.setMultiSorting(true);
     bookTable.addClassName("books-table");
+    bookTable.setHeaderHeight(52);
     bookTable.setRowHeight(52);
     bookTable.setSelectionMode(Table.SelectionMode.SINGLE);
   }
