@@ -1,106 +1,66 @@
-# webforj-bookstore
+# webforJ Bookstore
 
-A webforJ application powered by Spring Boot. This project combines the power of webforJ framework with Spring Boot's comprehensive ecosystem for building enterprise applications.
+A book inventory management system built with webforJ and Spring Boot, demonstrating CRUD operations, role-based access control, and data filtering.
 
-## Prerequisites
+![webforJ Version](https://img.shields.io/badge/webforJ-25.11-blue)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-green)
+![Java](https://img.shields.io/badge/Java-21-orange)
 
-- Java 21 or newer  
-- Maven 3.9+
+## Overview
+
+This app showcases webforJ's UI components integrated with Spring Boot and Spring Security. It provides a complete book inventory system with genre management, search and filtering, and role-based access to admin sections.
+
+## Features
+
+- **Book Inventory**: Browse, search, add, and edit books with a sortable, filterable table
+- **Genre Management**: Create and delete genres with custom colors, displayed as colored chips
+- **Search & Filter**: Full-text search across titles and authors, genre-based filtering
+- **Role-Based Access**: Spring Security with login, logout, and admin-only views
+- **Data Binding**: Automatic form-to-model binding with Jakarta validation
+- **In-Memory Database**: H2 database with sample data pre-loaded via Java Faker
+
+## Tech Stack
+
+- **Frontend**: webforJ 25.11
+- **Backend**: Spring Boot 3.5.3 with Spring Data JPA
+- **Security**: Spring Security with in-memory authentication
+- **Database**: H2 (in-memory)
+- **Build Tool**: Maven
+- **Java Version**: 21
 
 ## Getting Started
 
-To run the application in development mode:
+### Prerequisites
 
+- Java 21 or higher
+- Maven 3.9+
+
+### Running the App
+
+1. Clone the repository:
+```bash
+git clone https://github.com/webforj/built-with-webforj.git
+cd built-with-webforj/webforj-bookstore
+```
+
+2. Run the application:
 ```bash
 mvn spring-boot:run
 ```
 
-Then open [http://localhost:8080](http://localhost:8080) in your browser.
-
-### Spring Boot Features
-
-This project leverages Spring Boot's features:
-
-- **Embedded Server**: No need to deploy WAR files, runs as a standalone JAR
-- **Auto-configuration**: Spring Boot automatically configures your application
-- **DevTools**: Automatic restart when code changes (included by default)
-- **Spring Ecosystem**: Easy integration with Spring Data, etc.
-
-### Hot Reload with DevTools
-
-Spring Boot DevTools is included for automatic application restart:
-
-```xml
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-devtools</artifactId>
-  <optional>true</optional>
-</dependency>
+3. Open your browser and navigate to:
+```
+http://localhost:8080
 ```
 
-Your application will automatically restart when files on the classpath change.
+### Test Credentials
 
-
-## Running Integration Tests
-
-To run end-to-end and integration tests:
-
-```bash
-mvn verify
-```
-
-This command runs your integration tests using Spring Boot Test framework. Tests annotated with `@SpringBootTest` will:
-- Start the full Spring application context
-- Run on a random port to avoid conflicts
-- Execute Playwright browser tests against the running application
-- Automatically shut down after tests complete
-
-## Spring Boot Configuration
-
-Configure your application using `src/main/resources/application.properties`:
-
-```properties
-# Application name
-spring.application.name=webforj-bookstore
-
-# Server configuration
-server.port=8080
-
-# Add your custom configurations here
-```
-
-## Building for Production
-
-To create an executable JAR:
-
-```bash
-mvn clean package -Pprod
-java -jar target/webforj-bookstore-1.0-SNAPSHOT.jar
-```
-
-Or build and run a Docker image:
-
-```bash
-# Build the Docker image
-mvn spring-boot:build-image
-
-# Run the Docker container
-docker run -p 8080:8080 webforj-bookstore:1.0-SNAPSHOT
-
-# Or run with environment variables
-docker run -p 8080:8080 -e SPRING_PROFILES_ACTIVE=prod webforj-bookstore:1.0-SNAPSHOT
-```
+- **User**: `user` / `password` (inventory access)
+- **Admin**: `admin` / `admin` (inventory + management access)
 
 ## Learn More
 
-Explore the webforJ ecosystem through our documentation and examples:
-
-- [Full Documentation](https://docs.webforj.com)
-- [Component Overview](https://docs.webforj.com/docs/components/overview)
-- [Quick Tutorial](https://docs.webforj.com/docs/introduction/tutorial/overview)
-- [Advanced Topics](https://docs.webforj.com/docs/advanced/overview)
-
-### Spring Boot Resources
-
+- [webforJ Documentation](https://docs.webforj.com)
 - [Spring Boot Documentation](https://spring.io/projects/spring-boot)
-- [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/current/reference/html/)
+- [Spring Security Documentation](https://spring.io/projects/spring-security)
+- [webforJ Security Documentation](https://docs.webforj.com/docs/security/overview)
