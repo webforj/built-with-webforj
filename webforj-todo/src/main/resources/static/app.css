@@ -12,7 +12,7 @@
 h1 {
   color: var(--dwc-color-primary);
   font-weight: var(--dwc-font-weight-light);
-  font-size: var(--dwc-font-size-3xl);
+  font-size: var(--dwc-font-size-4xl);
   letter-spacing: var(--dwc-letter-spacing-wide);
   margin: 0;
   opacity: var(--dwc-opacity-90);
@@ -103,7 +103,7 @@ h1 {
 }
 
 .todo-footer-count {
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
   font-weight: var(--dwc-font-weight-normal);
 }
 
