@@ -25,7 +25,7 @@
 .management-title {
   margin: 0;
   color: var(--dwc-color-primary-text);
-  font-size: var(--dwc-font-size-2xl);
+  font-size: var(--dwc-font-size-3xl);
   font-weight: var(--dwc-font-weight-bold);
   text-align: center;
 }
@@ -33,7 +33,7 @@
 .management-subtitle {
   color: var(--dwc-color-default-text-light);
   text-align: center;
-  font-size: var(--dwc-font-size-m);
+  font-size: var(--dwc-font-size-l);
   line-height: 1.6;
   max-width: 520px;
 }

@@ -24,7 +24,7 @@
 .access-deny-view__title {
   margin: 0;
   color: var(--dwc-color-default-text);
-  font-size: var(--dwc-font-size-2xl);
+  font-size: var(--dwc-font-size-3xl);
   font-weight: var(--dwc-font-weight-bold);
   text-align: center;
 }

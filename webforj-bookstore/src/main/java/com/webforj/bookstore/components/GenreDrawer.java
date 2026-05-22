@@ -173,10 +173,10 @@ public class GenreDrawer extends Composite<Drawer> {
     }
 
     if (query == null || query.isBlank()) {
-      repository.setFilter((Specification<Genre>) null);
+      repository.setBaseFilter((Specification<Genre>) null);
     } else {
       String escaped = escapeLikePattern(query.toLowerCase());
-      repository.setFilter((root, q, cb) -> cb.like(cb.lower(root.get("name")), "%" + escaped + "%", '\\'));
+      repository.setBaseFilter((root, q, cb) -> cb.like(cb.lower(root.get("name")), "%" + escaped + "%", '\\'));
     }
     repository.commit();
   }

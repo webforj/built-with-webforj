@@ -113,7 +113,7 @@ public class GenreDialog extends Composite<Dialog> {
     if (c == null) {
       c = Color.BLUE;
     }
-    String color = String.format("#%02x%02x%02x", c.getRed(), c.getGreen(), c.getBlue());
+    String color = "#%02x%02x%02x".formatted(c.getRed(), c.getGreen(), c.getBlue());
 
     Genre genre = new Genre();
     genre.setName(name);
