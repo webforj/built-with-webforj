@@ -14,7 +14,7 @@ dwc-table::part(artist-avatar) {
   align-items: center;
   justify-content: center;
   font-weight: var(--dwc-font-weight-bold);
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
   background-color: var(--dwc-color-primary-70);
   color: var(--dwc-color-primary-text-70);
 }
@@ -33,11 +33,11 @@ dwc-table::part(artist-text) {
 
 dwc-table::part(artist-name) {
   font-weight: var(--dwc-font-weight-bold);
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
 }
 
 dwc-table::part(artist-year) {
-  font-size: var(--dwc-font-size-xs);
+  font-size: var(--dwc-font-size-s);
   opacity: 0.6;
 }
 
