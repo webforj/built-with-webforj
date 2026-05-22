@@ -25,7 +25,7 @@
 }
 
 .about-view__subtitle {
-  font-size: var(--dwc-font-size-l);
+  font-size: var(--dwc-font-size-xl);
   opacity: 0.9;
 }
 
@@ -38,14 +38,14 @@
 /* Shared title styles */
 .about-view__section-title {
   margin: 0 0 var(--dwc-space-l) 0;
-  font-size: var(--dwc-font-size-3xl);
+  font-size: var(--dwc-font-size-4xl);
   font-weight: var(--dwc-font-weight-semibold);
   text-align: center;
 }
 
 .about-view__list li {
   margin-bottom: var(--dwc-space-m);
-  font-size: var(--dwc-font-size-l);
+  font-size: var(--dwc-font-size-xl);
 }
 
 .about-view__list li strong,
@@ -59,7 +59,7 @@
 }
 
 .about-view__description {
-  font-size: var(--dwc-font-size-l);
+  font-size: var(--dwc-font-size-xl);
   line-height: var(--dwc-font-line-height-l);
 }
 
@@ -91,7 +91,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: var(--dwc-space-l);
-  font-size: var(--dwc-font-size-3xl);
+  font-size: var(--dwc-font-size-4xl);
 }
 
 /* External Link Icon */
@@ -115,7 +115,7 @@
 
 .about-view__app-title {
   margin: 0 0 var(--dwc-space-m) 0;
-  font-size: var(--dwc-font-size-2xl);
+  font-size: var(--dwc-font-size-3xl);
   font-weight: var(--dwc-font-weight-semibold);
 }
 
@@ -126,12 +126,12 @@
 
 /* Shared Card Styles */
 .about-view__card-title {
-  font-size: var(--dwc-font-size-l);
+  font-size: var(--dwc-font-size-xl);
   font-weight: var(--dwc-font-weight-semibold);
 }
 
 .about-view__card-description {
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
   line-height: var(--dwc-font-line-height-l);
 }
 
@@ -150,7 +150,7 @@
 
 @media (max-width: 768px) {
   .about-view__title {
-    font-size: var(--dwc-font-size-3xl);
+    font-size: var(--dwc-font-size-4xl);
   }
 
 .about-view__list {
