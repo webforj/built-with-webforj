@@ -2,7 +2,7 @@
 
 :root {
   --dwc-font-family: "Geist", system-ui, sans-serif;
-  --dwc-font-size: var(--dwc-font-size-l);
+  --dwc-font-size: var(--dwc-font-size-xl);
 }
 
 dwc-window-center {
@@ -48,7 +48,7 @@ dwc-window-center {
 
 .focus-tracker__hint {
   margin-top: var(--dwc-space-3xl);
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
   opacity: 0.5;
   text-align: center;
 }
