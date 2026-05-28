@@ -181,6 +181,6 @@ public class DataLoader implements CommandLineRunner {
     int r = faker.random().nextInt(256);
     int g = faker.random().nextInt(256);
     int b = faker.random().nextInt(256);
-    return String.format("#%02x%02x%02x", r, g, b);
+    return "#%02x%02x%02x".formatted(r, g, b);
   }
 }

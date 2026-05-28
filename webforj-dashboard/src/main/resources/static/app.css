@@ -1,10 +1,8 @@
 :root {
   --dwc-color-primary-h: 262;
   --dwc-color-primary-s: 52%;
-  --dwc-color-primary-c: 60;
   --dwc-color-default-h: var(--dwc-color-primary-h);
   --dwc-color-default-s: 10%;
-  --dwc-color-default-c: 50;
   --dwc-color-primary-dark: var(--dwc-color-primary-40);
   --dwc-color-on-primary-text-dark: var(--dwc-color-primary-text-40);
   --dwc-color-primary: var(--dwc-color-primary-45);
@@ -197,7 +195,7 @@ google-chart {
 }
 
 .drawer-logo__tagline {
-  font-size: var(--dwc-font-size-xs);
+  font-size: var(--dwc-font-size-s);
   color: var(--dwc-color-gray-40);
   font-weight: var(--dwc-font-weight-semibold);
   letter-spacing: 0.5px;
@@ -326,11 +324,11 @@ google-chart {
 }
 
 .drawer-footer__user-name {
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
   font-weight: var(--dwc-font-weight-bold);
 }
 
 .drawer-footer__user-role {
-  font-size: var(--dwc-font-size-xs);
+  font-size: var(--dwc-font-size-s);
   color: var(--dwc-color-gray-40);
 }

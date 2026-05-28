@@ -267,7 +267,7 @@ public class InventoryView extends Composite<FlexLayout> {
     }
 
     if ((searchTerm == null || searchTerm.trim().isEmpty()) && selectedGenre == null) {
-      repository.setFilter((Specification<Book>) null);
+      repository.setBaseFilter((Specification<Book>) null);
     } else {
       String term = (searchTerm != null) ? searchTerm.trim().toLowerCase() : "";
       String genre = selectedGenre;
@@ -289,7 +289,7 @@ public class InventoryView extends Composite<FlexLayout> {
 
         return predicate;
       };
-      repository.setFilter(searchSpec);
+      repository.setBaseFilter(searchSpec);
     }
     repository.commit();
 

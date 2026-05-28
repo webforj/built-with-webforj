@@ -10,6 +10,7 @@ import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.field.TextField;
 import com.webforj.component.html.elements.H1;
 import com.webforj.component.icons.FeatherIcon;
+import com.webforj.component.icons.Icon;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.layout.flexlayout.FlexWrap;
@@ -115,7 +116,7 @@ public class MusicArtistsView extends Composite<FlexLayout> {
 		artistTable.addColumn("Country", MusicArtist::getCountry);
 		artistTable.addColumn("Year Formed", MusicArtist::getYearFormed);
 		artistTable.addColumn("Active", artist -> artist.getIsActive() ? "✓" : "✗");
-		artistTable.addColumn("", new IconRenderer<MusicArtist>("edit", "feather", e -> {
+		artistTable.addColumn("", new IconRenderer<MusicArtist>(new Icon("edit", "feather"), e -> {
 			MusicArtist artist = e.getItem();
 			artistDialog.showDialog(artist);
 		}))
@@ -141,7 +142,7 @@ public class MusicArtistsView extends Composite<FlexLayout> {
 			}
 
 			if (searchTerm == null || searchTerm.trim().isEmpty()) {
-				repository.setFilter((Specification<MusicArtist>) null);
+				repository.setBaseFilter((Specification<MusicArtist>) null);
 			} else {
 				String term = searchTerm.trim().toLowerCase();
 
@@ -149,7 +150,7 @@ public class MusicArtistsView extends Composite<FlexLayout> {
 						cb.like(cb.lower(root.get("name")), "%" + term + "%"),
 						cb.like(cb.lower(root.get("genre")), "%" + term + "%"),
 						cb.like(cb.lower(root.get("country")), "%" + term + "%"));
-				repository.setFilter(searchSpec);
+				repository.setBaseFilter(searchSpec);
 			}
 			repository.commit();
 		});
