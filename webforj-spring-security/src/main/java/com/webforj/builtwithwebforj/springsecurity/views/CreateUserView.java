@@ -1,6 +1,5 @@
 package com.webforj.builtwithwebforj.springsecurity.views;
 
-import com.webforj.annotation.StyleSheet;
 import com.webforj.builtwithwebforj.springsecurity.components.PageHeader;
 import com.webforj.builtwithwebforj.springsecurity.entity.User;
 import com.webforj.builtwithwebforj.springsecurity.service.UserService;
@@ -41,7 +40,6 @@ import java.util.HashSet;
 @Route(value = "/admin/users/form/:id?", outlet = MainLayout.class)
 @FrameTitle("User Form")
 @RolesAllowed("ADMIN")
-@StyleSheet("ws://admin-users.css")
 public class CreateUserView extends Composite<Div> implements DidEnterObserver {
 
   @Autowired
@@ -304,13 +302,10 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
   }
 
   private void handleDelete() {
-    // Show confirmation dialog
     Dialog confirmDialog = new Dialog();
 
-    Div content = new Div();
-    Paragraph message = new Paragraph("Are you sure you want to delete user '" + user.getUsername() + "'? This action cannot be undone.");
-    content.add(message);
-    confirmDialog.add(content);
+    Paragraph message = new Paragraph(
+        "Are you sure you want to delete user '" + user.getUsername() + "'? This action cannot be undone.");
 
     Button confirmButton = new Button("Delete");
     confirmButton.setTheme(ButtonTheme.DANGER);
@@ -325,11 +320,23 @@ public class CreateUserView extends Composite<Div> implements DidEnterObserver {
       }
     });
 
-    Button cancelButton = new Button("Cancel");
-    cancelButton.setTheme(ButtonTheme.DEFAULT);
-    cancelButton.onClick(e -> confirmDialog.close());
+    Button cancelBtn = new Button("Cancel");
+    cancelBtn.setTheme(ButtonTheme.DEFAULT);
+    cancelBtn.onClick(e -> confirmDialog.close());
 
-    confirmDialog.addToFooter(cancelButton, confirmButton);
+    FlexLayout footer = FlexLayout.create(cancelBtn, confirmButton)
+        .horizontal()
+        .justify().end()
+        .build();
+    footer.setSpacing("var(--dwc-space-s)");
+    footer.setStyle("width", "100%");
+
+    confirmDialog
+        .addToHeader(new Div("Delete User"))
+        .addToContent(message)
+        .addToFooter(footer);
+
+    container.add(confirmDialog);
     confirmDialog.open();
   }
 }

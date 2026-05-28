@@ -1,7 +1,12 @@
 package com.webforj.builtwithwebforj.springsecurity.components;
 
 import com.webforj.builtwithwebforj.springsecurity.entity.ticket.Ticket;
+import com.webforj.builtwithwebforj.springsecurity.entity.ticket.TicketPriority;
+import com.webforj.builtwithwebforj.springsecurity.entity.ticket.TicketStatus;
+import com.webforj.component.Component;
 import com.webforj.component.Composite;
+import com.webforj.component.badge.Badge;
+import com.webforj.component.badge.BadgeTheme;
 import com.webforj.component.html.elements.Div;
 import com.webforj.component.html.elements.Span;
 
@@ -19,49 +24,49 @@ public class TicketMetadataCard extends Composite<Div> {
     container.addClassName("ticket-metadata");
 
     container.add(
-        createMetadataBox("Type", createTypeBadge(ticket)),
-        createMetadataBox("Priority", createPriorityLabel(ticket)),
-        createMetadataBox("Status", createStatusBadge(ticket)),
+        createMetadataBox("Type", new Badge(ticket.getType().getDisplayName(), BadgeTheme.OUTLINED_PRIMARY)),
+        createMetadataBox("Priority", new Badge(ticket.getPriority().getDisplayName(), priorityTheme(ticket.getPriority()))),
+        createMetadataBox("Status", new Badge(formatStatus(ticket.getStatus()), statusTheme(ticket.getStatus()))),
         createMetadataBox("Created By", new Span(ticket.getCreatedBy().getDisplayName())),
         createMetadataBox("Created", new Span(ticket.getCreatedAt().format(DATE_FORMATTER)))
     );
   }
 
-  private Div createMetadataBox(String label, Span value) {
+  private Div createMetadataBox(String label, Component value) {
     Div box = new Div();
     box.addClassName("metadata-item");
 
     Span labelSpan = new Span(label);
     labelSpan.addClassName("metadata-label");
 
-    value.addClassName("metadata-value");
+    if (value instanceof Span s) {
+      s.addClassName("metadata-value");
+    }
 
     box.add(labelSpan, value);
     return box;
   }
 
-  private Span createTypeBadge(Ticket ticket) {
-    Span badge = new Span(ticket.getType().getDisplayName());
-    badge.addClassName("type-badge");
-    badge.addClassName(ticket.getType().name().toLowerCase().replace('_', '-'));
-    return badge;
+  private BadgeTheme priorityTheme(TicketPriority priority) {
+    return switch (priority) {
+      case LOW -> BadgeTheme.DEFAULT;
+      case MEDIUM -> BadgeTheme.PRIMARY;
+      case HIGH -> BadgeTheme.WARNING;
+      case URGENT -> BadgeTheme.DANGER;
+    };
   }
 
-  private Span createPriorityLabel(Ticket ticket) {
-    Span label = new Span(ticket.getPriority().getDisplayName());
-    label.addClassName("priority-label");
-    label.addClassName(ticket.getPriority().name().toLowerCase().replace('_', '-'));
-    return label;
+  private BadgeTheme statusTheme(TicketStatus status) {
+    return switch (status) {
+      case OPEN -> BadgeTheme.PRIMARY;
+      case IN_PROGRESS -> BadgeTheme.WARNING;
+      case RESOLVED -> BadgeTheme.SUCCESS;
+      case CLOSED -> BadgeTheme.DEFAULT;
+    };
   }
 
-  private Span createStatusBadge(Ticket ticket) {
-    Span badge = new Span(formatStatus(ticket.getStatus().name()));
-    badge.addClassName("status-badge");
-    badge.addClassName(ticket.getStatus().name().toLowerCase().replace('_', '-'));
-    return badge;
-  }
-
-  private String formatStatus(String status) {
-    return status.substring(0, 1) + status.substring(1).toLowerCase().replace('_', ' ');
+  private String formatStatus(TicketStatus status) {
+    String name = status.name();
+    return name.charAt(0) + name.substring(1).toLowerCase().replace('_', ' ');
   }
 }

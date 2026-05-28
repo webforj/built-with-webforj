@@ -1,30 +1,41 @@
-/*
- * Dashboard View
- */
-
 .dashboard-tabs {
-  margin-bottom: var(--dwc-space-l);
+  --dwc-tabbed-pane-border-color: var(--dwc-border-color-default);
+  --dwc-tabbed-pane-indicator-border-color: var(--dwc-color-primary);
+  margin-bottom: var(--dwc-space-m);
 }
 
-.dashboard-tabs::part(tabs-wrapper) {
-  background: transparent;
-  border-bottom: 1px solid var(--border-subtle);
-}
+/* Table chrome */
+dwc-table {
+  border: 1px solid var(--dwc-border-color-default);
 
-.dashboard-tabs::part(tab) {
-  color: var(--dwc-color-on-default-text-light);
-  transition: color 200ms ease;
-}
+  /* Header */
+  &::part(header) {
+    background: var(--dwc-surface-3);
+  }
 
-.dashboard-tabs::part(tab):hover {
-  color: var(--dwc-color-on-default-text);
-}
+  &::part(cell-header) {
+    font-weight: var(--dwc-font-weight-semibold);
+    font-size: var(--dwc-font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--dwc-color-body-text);
+  }
 
-.dashboard-tabs::part(tab-selected) {
-  color: var(--dwc-color-primary);
-}
+  &::part(cell-group) {
+    font-weight: var(--dwc-font-weight-semibold);
+    font-size: var(--dwc-font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--dwc-color-body-text);
+  }
 
-.tickets-table {
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--dwc-border-radius-l);
+  /* Rows */
+  &::part(row):hover {
+    background: var(--dwc-surface-3);
+    cursor: pointer;
+  }
+
+  &::part(row-odd) {
+    background: var(--dwc-surface-2);
+  }
 }

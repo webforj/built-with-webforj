@@ -235,6 +235,7 @@ public class TicketDetailView extends Composite<Div> implements DidEnterObserver
     commentTextArea = new TextArea();
     commentTextArea.setPlaceholder("Write your comment here...");
     commentTextArea.addClassName("comment-textarea");
+    commentTextArea.setWidth("100%");
 
     FlexLayout buttonLayout = FlexLayout.create()
         .horizontal()

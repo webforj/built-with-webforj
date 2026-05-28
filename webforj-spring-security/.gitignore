@@ -42,3 +42,6 @@ bbj/.project
 .DS_Store
 *.versionsBackup
 
+# Playwright testing artifacts
+/playwright/
+

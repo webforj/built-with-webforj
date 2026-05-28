@@ -5,18 +5,25 @@ import com.webforj.builtwithwebforj.springsecurity.components.EmptyState;
 import com.webforj.builtwithwebforj.springsecurity.components.PageHeader;
 import com.webforj.builtwithwebforj.springsecurity.entity.User;
 import com.webforj.builtwithwebforj.springsecurity.entity.ticket.Ticket;
-import com.webforj.builtwithwebforj.springsecurity.renderers.ticket.PriorityRenderer;
-import com.webforj.builtwithwebforj.springsecurity.renderers.ticket.StatusBadgeRenderer;
-import com.webforj.builtwithwebforj.springsecurity.renderers.ticket.TicketNumberRenderer;
-import com.webforj.builtwithwebforj.springsecurity.renderers.ticket.TypeBadgeRenderer;
+import com.webforj.builtwithwebforj.springsecurity.entity.ticket.TicketPriority;
+import com.webforj.builtwithwebforj.springsecurity.entity.ticket.TicketStatus;
 import com.webforj.builtwithwebforj.springsecurity.service.UserService;
 import com.webforj.builtwithwebforj.springsecurity.service.TicketService;
 import com.webforj.component.Composite;
+import com.webforj.component.Theme;
+import com.webforj.component.badge.BadgeTheme;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
 import com.webforj.component.html.elements.Div;
+import com.webforj.component.html.elements.Span;
 import com.webforj.component.icons.TablerIcon;
+import com.webforj.component.table.ColumnGroup;
 import com.webforj.component.table.Table;
+import com.webforj.component.table.renderer.BadgeRenderer;
+import com.webforj.component.table.renderer.ConditionalRenderer;
+import com.webforj.component.table.renderer.StatusDotRenderer;
+import com.webforj.component.table.renderer.TextRenderer;
+import com.webforj.component.table.renderer.TextRenderer.TextDecoration;
 import com.webforj.component.tabbedpane.TabbedPane;
 import com.webforj.router.Router;
 import com.webforj.router.annotation.FrameTitle;
@@ -31,6 +38,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.format.DateTimeFormatter;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -55,6 +63,7 @@ public class DashboardView extends Composite<Div> {
   private boolean isSupport;
   private boolean isAdmin;
   private Div ticketsContainer;
+  private Div statsContainer;
   private TabbedPane tabbedPane;
   private PageHeader pageHeader;
   private boolean showMyTicketsOnly = false;
@@ -101,6 +110,11 @@ public class DashboardView extends Composite<Div> {
 
     container.add(pageHeader);
 
+    // Stats row
+    statsContainer = new Div();
+    statsContainer.addClassName("stat-cards");
+    container.add(statsContainer);
+
     // Tabs for regular users
     if (!isSupport && !isAdmin) {
       tabbedPane = new TabbedPane();
@@ -138,19 +152,31 @@ public class DashboardView extends Composite<Div> {
   }
 
   private void loadTickets() {
-    // Clear existing tickets
+    // Clear existing
     ticketsContainer.removeAll();
+    statsContainer.removeAll();
 
     // Load tickets based on filter
     List<Ticket> tickets;
     if (showMyTicketsOnly) {
-      // Load only user's tickets
       User currentUser = userService.getRequiredUserByUsername(username);
       tickets = ticketService.getTicketsByUser(currentUser);
     } else {
-      // Load all tickets
       tickets = ticketService.getAllTickets();
     }
+
+    // Build stat cards
+    long total = tickets.size();
+    long open = tickets.stream().filter(t -> t.getStatus() == TicketStatus.OPEN).count();
+    long inProgress = tickets.stream().filter(t -> t.getStatus() == TicketStatus.IN_PROGRESS).count();
+    long resolved = tickets.stream().filter(t -> t.getStatus() == TicketStatus.RESOLVED).count();
+
+    statsContainer.add(
+        createStatCard("ticket", String.valueOf(total), "Total", "primary"),
+        createStatCard("alert-circle", String.valueOf(open), "Open", "primary"),
+        createStatCard("clock", String.valueOf(inProgress), "In Progress", "warning"),
+        createStatCard("circle-check", String.valueOf(resolved), "Resolved", "success")
+    );
 
     if (tickets.isEmpty()) {
       String title = showMyTicketsOnly ? "No tickets yet" : "No tickets found";
@@ -172,48 +198,76 @@ public class DashboardView extends Composite<Div> {
 
     // Create table
     Table<Ticket> table = new Table<>();
-    table.addClassName("tickets-table");
-    table.setHeight("calc(80dvh - 280px)");
+    table.setHeight("calc(90dvh - 260px)");
+    table.setRowHeight(48);
+    table.setHeaderHeight(44);
+    table.setStriped(true);
+    table.setBordersVisible(EnumSet.of(Table.Border.ROWS));
 
-    // Add columns
+    // Ticket # — bold primary text
+    TextRenderer<Ticket> ticketNumRenderer = new TextRenderer<>(Theme.PRIMARY);
+    ticketNumRenderer.setDecorations(EnumSet.of(TextDecoration.BOLD));
     table.addColumn("ticketNumber", Ticket::getTicketNumber)
         .setLabel("Ticket #")
-        .setRenderer(new TicketNumberRenderer());
+        .setMinWidth(120)
+        .setRenderer(ticketNumRenderer);
 
+    // Subject — takes most space
     table.addColumn("subject", Ticket::getSubject)
-        .setLabel("Subject");
+        .setLabel("Subject")
+        .setFlex(2f);
 
-    // Hidden columns for type data
-    table.addColumn("typeDisplay", ticket -> ticket.getType().getDisplayName()).setHidden(true);
-
-    // Type column with renderer
-    table.addColumn("type", ticket -> ticket.getType().name())
+    // Type — outlined badge
+    BadgeRenderer<Ticket> typeBadge = new BadgeRenderer<>();
+    typeBadge.setTheme(BadgeTheme.OUTLINED_PRIMARY);
+    table.addColumn("type", ticket -> ticket.getType().getDisplayName())
         .setLabel("Type")
-        .setRenderer(new TypeBadgeRenderer());
+        .setRenderer(typeBadge);
 
-    // Hidden columns for priority data
-    table.addColumn("priorityDisplay", ticket -> ticket.getPriority().getDisplayName()).setHidden(true);
-    table.addColumn("priorityColor", ticket -> ticket.getPriority().getColor()).setHidden(true);
+    // Priority — status dot with theme mapping
+    StatusDotRenderer<Ticket> priorityDot = new StatusDotRenderer<>();
+    priorityDot.addMapping(TicketPriority.LOW.getDisplayName(), Theme.DEFAULT);
+    priorityDot.addMapping(TicketPriority.MEDIUM.getDisplayName(), Theme.PRIMARY);
+    priorityDot.addMapping(TicketPriority.HIGH.getDisplayName(), Theme.WARNING);
+    priorityDot.addMapping(TicketPriority.URGENT.getDisplayName(), Theme.DANGER);
+    table.addColumn("priority", ticket -> ticket.getPriority().getDisplayName())
+        .setLabel("Priority")
+        .setRenderer(priorityDot);
 
-    // Priority column with renderer
-    table.addColumn("priority", new PriorityRenderer())
-        .setLabel("Priority");
-
-    table.addColumn("status", Ticket::getStatus)
+    // Status — conditional badge
+    ConditionalRenderer<Ticket> statusRenderer = new ConditionalRenderer<>();
+    statusRenderer.when("Open", new BadgeRenderer<>(BadgeTheme.PRIMARY));
+    statusRenderer.when("In Progress", new BadgeRenderer<>(BadgeTheme.WARNING));
+    statusRenderer.when("Resolved", new BadgeRenderer<>(BadgeTheme.SUCCESS));
+    statusRenderer.when("Closed", new BadgeRenderer<>(BadgeTheme.DEFAULT));
+    statusRenderer.otherwise(new BadgeRenderer<>(BadgeTheme.DEFAULT));
+    table.addColumn("status", ticket -> {
+      String name = ticket.getStatus().name();
+      return name.substring(0, 1) + name.substring(1).toLowerCase().replace('_', ' ');
+    })
         .setLabel("Status")
-        .setRenderer(new StatusBadgeRenderer());
+        .setRenderer(statusRenderer);
 
     // Show "Created By" column for support/admins OR when viewing all tickets
-    if (isSupport || isAdmin || !showMyTicketsOnly) {
+    boolean showCreatedBy = isSupport || isAdmin || !showMyTicketsOnly;
+    if (showCreatedBy) {
       table.addColumn("createdBy", ticket -> ticket.getCreatedBy().getDisplayName())
-          .setLabel("Created By");
+          .setLabel("By");
     }
 
     table.addColumn("createdAt", ticket -> {
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
       return ticket.getCreatedAt().format(formatter);
     })
-        .setLabel("Created");
+        .setLabel("Date");
+
+    // Column group for creation info
+    if (showCreatedBy) {
+      ColumnGroup createdGroup = ColumnGroup.of("created", "Created")
+          .add("createdBy")
+          .add("createdAt");
+      table.setColumnGroups(List.of(createdGroup));
+    }
 
     // Set table data
     table.setItems(tickets);
@@ -227,5 +281,25 @@ public class DashboardView extends Composite<Div> {
     });
 
     ticketsContainer.add(table);
+  }
+
+  private Div createStatCard(String iconName, String value, String label, String theme) {
+    Div card = new Div();
+    card.addClassName("stat-card");
+
+    Div iconBox = new Div();
+    iconBox.addClassName("stat-card-icon stat-card-icon--" + theme);
+    iconBox.add(TablerIcon.create(iconName));
+
+    Div textBox = new Div();
+    textBox.addClassName("stat-card-info");
+    Span valueSpan = new Span(value);
+    valueSpan.addClassName("stat-card-value");
+    Span labelSpan = new Span(label);
+    labelSpan.addClassName("stat-card-label");
+    textBox.add(valueSpan, labelSpan);
+
+    card.add(iconBox, textBox);
+    return card;
   }
 }
