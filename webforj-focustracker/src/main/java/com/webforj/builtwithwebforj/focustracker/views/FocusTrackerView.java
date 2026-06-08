@@ -1,7 +1,7 @@
 package com.webforj.builtwithwebforj.focustracker.views;
 
+import com.webforj.App;
 import com.webforj.Interval;
-import com.webforj.Page;
 import com.webforj.component.Composite;
 import com.webforj.component.desktopnotification.DesktopNotification;
 import com.webforj.component.html.elements.Div;
@@ -168,15 +168,15 @@ public class FocusTrackerView extends Composite<FlexLayout> {
 
   private void updateBadge() {
     int value = minutes > 0 ? minutes : (seconds > 0 ? 1 : 0);
-    Page.getCurrent().executeJsVoidAsync("navigator.setAppBadge(" + value + ")");
+    App.setBadge(value);
   }
 
   private void clearBadge() {
-    Page.getCurrent().executeJsVoidAsync("navigator.clearAppBadge()");
+    App.setBadge(0);
   }
 
   private String formatTime(int mins, int secs) {
-    return String.format("%02d:%02d", mins, secs);
+    return "%02d:%02d".formatted(mins, secs);
   }
 
   @Override
