@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wonders of the World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cutive+Mono&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<main class="page">
+
+  <!-- ============================ MASTHEAD ============================ -->
+  <header class="masthead" data-screen-label="Masthead">
+    <button class="info-btn" id="info-btn" type="button" aria-haspopup="dialog" aria-label="How to set a custom location">?</button>
+    <div class="overline">A Codex of Human &amp; Natural Achievement</div>
+    <h1>Wonders of the World</h1>
+    <p class="location">
+      <span class="caps" style="font-family:var(--font-mono);font-size:0.72em;letter-spacing:0.2em;color:var(--text-muted)">Your location</span>
+      <span class="dot">·</span>
+      <span id="loc-coords" class="mono">41.88°N, 87.63°W</span>
+      <span class="dot">·</span>
+      <span id="loc-accuracy" class="mono">locating…</span>
+    </p>
+  </header>
+
+  <!-- ============================ FILTER CHIPS ============================ -->
+  <nav class="filters" aria-label="Filter wonders by era">
+    <button class="chip" data-filter="all" aria-pressed="true" type="button">All</button>
+    <button class="chip" data-filter="ancient" aria-pressed="false" type="button">Ancient</button>
+    <button class="chip" data-filter="medieval" aria-pressed="false" type="button">Medieval</button>
+    <button class="chip" data-filter="modern" aria-pressed="false" type="button">Modern</button>
+    <button class="chip" data-filter="natural" aria-pressed="false" type="button">Natural</button>
+  </nav>
+
+  <!-- ============================ COMPASS CENTERPIECE ============================ -->
+  <section class="compass-bay framed" aria-label="Compass and distance readout" data-screen-label="Compass">
+    <span class="corner corner-tl">❖</span><span class="corner corner-tr">❖</span>
+    <span class="corner corner-bl">❖</span><span class="corner corner-br">❖</span>
+
+    <div class="compass" role="img" aria-label="Compass rose; the needle points toward the selected wonder">
+      <svg viewBox="0 0 200 200">
+        <!-- outer rings -->
+        <circle class="ring-line" cx="100" cy="100" r="96" stroke-width="2" />
+        <circle class="ring-line" cx="100" cy="100" r="90" stroke-width="0.75" />
+        <circle class="ring-line" cx="100" cy="100" r="66" stroke-width="0.75" opacity="0.6" />
+        <!-- degree ticks -->
+        <g id="ticks"></g>
+        <!-- 8-point rose star -->
+        <g>
+          <polygon class="rose-star-minor" points="100,100 108,108 100,38 92,108" opacity="0.55" transform="rotate(45 100 100)" />
+          <polygon class="rose-star-minor" points="100,100 108,108 100,38 92,108" opacity="0.55" transform="rotate(135 100 100)" />
+          <polygon class="rose-star-minor" points="100,100 108,108 100,38 92,108" opacity="0.55" transform="rotate(225 100 100)" />
+          <polygon class="rose-star-minor" points="100,100 108,108 100,38 92,108" opacity="0.55" transform="rotate(315 100 100)" />
+          <polygon class="rose-star-major" points="100,100 110,110 100,26 90,110" />
+          <polygon class="rose-star-major" points="100,100 110,110 100,26 90,110" transform="rotate(90 100 100)" />
+          <polygon class="rose-star-major" points="100,100 110,110 100,26 90,110" transform="rotate(180 100 100)" />
+          <polygon class="rose-star-major" points="100,100 110,110 100,26 90,110" transform="rotate(270 100 100)" />
+        </g>
+        <!-- cardinal letters -->
+        <text class="rose-letter" x="100" y="22" text-anchor="middle" font-size="15">N</text>
+        <text class="rose-letter" x="183" y="105" text-anchor="middle" font-size="13">E</text>
+        <text class="rose-letter" x="100" y="190" text-anchor="middle" font-size="13">S</text>
+        <text class="rose-letter" x="17" y="105" text-anchor="middle" font-size="13">W</text>
+        <!-- magnetic needle -->
+        <g id="needle-group" class="needle-group">
+          <polygon class="needle-n" points="100,30 106,100 100,108 94,100" />
+          <polygon class="needle-s" points="100,170 106,100 100,92 94,100" />
+        </g>
+        <circle class="rose-center needle-cap" cx="100" cy="100" r="7" stroke-width="1.5" />
+        <circle cx="100" cy="100" r="2.4" fill="var(--gold-500)" />
+      </svg>
+    </div>
+
+    <div class="readout">
+      <div class="target-label">Bearing toward</div>
+      <div class="target-name" id="readout-name">Great Pyramid of Giza</div>
+      <div class="distance mono" id="readout-dist" aria-live="polite">—</div>
+      <div class="bearing-line" id="readout-bearing">
+        <span class="bearing-words italic" id="readout-bear-words">—</span>
+        <span class="bearing-deg mono" id="readout-bear-deg"></span>
+      </div>
+      <div class="instrument-row">
+        <div class="unit-toggle" role="group" aria-label="Distance units">
+          <button type="button" data-unit="km" aria-pressed="true">km</button>
+          <button type="button" data-unit="mi" aria-pressed="false">mi</button>
+          <button type="button" data-unit="nm" aria-pressed="false">nm</button>
+        </div>
+        <span class="mono" style="font-size:var(--t-mono-sm);color:var(--text-muted);letter-spacing:0.12em">kilometres · miles · nautical</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CUSTOM COORDINATES ============================ -->
+  <section class="coords-section" aria-label="Measure to custom coordinates">
+    <span class="lede">Measure to anywhere</span>
+    <form class="coords-form" id="coords-form" novalidate>
+      <div class="field">
+        <label for="in-lat">Latitude</label>
+        <input id="in-lat" name="lat" type="text" inputmode="decimal" placeholder="29.9792" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="in-lng">Longitude</label>
+        <input id="in-lng" name="lng" type="text" inputmode="decimal" placeholder="31.1342" autocomplete="off" />
+      </div>
+      <button class="btn" type="submit">Set Origin</button>
+      <p class="hint">Enter any latitude / longitude to reckon every distance from that point.</p>
+    </form>
+  </section>
+
+  <!-- ============================ WONDER CARDS GRID ============================ -->
+  <div class="section-head">
+    <div class="kicker">The Compendium</div>
+    <h2>Great Works of the Ancient, Modern &amp; Natural World</h2>
+    <div class="divider"><span class="fleuron">❧</span></div>
+  </div>
+
+  <section class="grid" id="grid" aria-label="Wonder cards"></section>
+
+  <!-- ============================ CARD STATES GALLERY ============================ -->
+  <div class="section-head" data-screen-label="Card States">
+    <div class="kicker">Plate Reference</div>
+    <h2>The Wonder Card · Five States</h2>
+    <div class="divider"><span class="fleuron">❧</span></div>
+  </div>
+  <section class="states-gallery" id="states-gallery" aria-label="Card state reference"></section>
+
+  <!-- ============================ COLOPHON ============================ -->
+  <footer class="colophon">
+    <div class="divider"><span class="fleuron">✦</span></div>
+    <p>Reckoned by Haversine over a spherical Earth · bearings are initial great-circle headings</p>
+    <p><a href="Design Tokens.html">View the design-token export &amp; handoff sheet →</a></p>
+  </footer>
+
+</main>
+
+<!-- ============================ INFO DIALOG ============================ -->
+<dialog class="codex-modal" id="info-dialog" aria-labelledby="dlg-title">
+  <div class="modal-sheet">
+    <button class="modal-close" type="button" data-close aria-label="Close">✕</button>
+    <div class="modal-kicker">Cartographer's Note</div>
+    <h2 id="dlg-title">Feign Your Position</h2>
+    <p class="modal-lede">Wish to measure from Cairo, the South Pole, or your childhood home? Your browser can pretend to stand anywhere on Earth.</p>
+    <div class="divider"><span class="fleuron">❧</span></div>
+    <ol class="steps">
+      <li>
+        <div class="step-body">
+          <strong>Open the Developer Tools</strong>
+          <p>Press <span class="kbd">F12</span>, or <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">I</span> (<span class="kbd">⌘</span>+<span class="kbd">⌥</span>+<span class="kbd">I</span> on macOS).</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Summon the Sensors panel</strong>
+          <p>Open the Command Menu with <span class="kbd">Ctrl/⌘</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span>, type <em>“Sensors,”</em> and choose <em>Show Sensors</em>.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Set a custom location</strong>
+          <p>Under <em>Location</em>, pick a preset city or choose <em>Other…</em> and type any latitude and longitude.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Watch the codex recompute</strong>
+          <p>Every distance and bearing on this page updates the moment your phantom position changes.</p>
+        </div>
+      </li>
+    </ol>
+    <p class="modal-note">Firefox &amp; Edge offer the same panel; in Safari, use the custom-coordinates field above instead.</p>
+  </div>
+</dialog>
+
+<script>
+  // Generate degree ticks around the compass rose
+  (function () {
+    var g = document.getElementById("ticks");
+    if (!g) return;
+    var ns = "http://www.w3.org/2000/svg";
+    for (var deg = 0; deg < 360; deg += 6) {
+      var major = deg % 30 === 0;
+      var r1 = 90, r2 = major ? 80 : 85;
+      var rad = (deg - 90) * Math.PI / 180;
+      var l = document.createElementNS(ns, "line");
+      l.setAttribute("x1", (100 + r1 * Math.cos(rad)).toFixed(2));
+      l.setAttribute("y1", (100 + r1 * Math.sin(rad)).toFixed(2));
+      l.setAttribute("x2", (100 + r2 * Math.cos(rad)).toFixed(2));
+      l.setAttribute("y2", (100 + r2 * Math.sin(rad)).toFixed(2));
+      l.setAttribute("class", major ? "tick tick-major" : "tick");
+      l.setAttribute("stroke-width", major ? "1.4" : "0.6");
+      l.setAttribute("opacity", major ? "0.8" : "0.45");
+      g.appendChild(l);
+    }
+  })();
+</script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

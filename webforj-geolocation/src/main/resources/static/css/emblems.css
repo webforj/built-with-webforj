@@ -1,0 +1,25 @@
+/* ============================================================================
+   WONDER EMBLEMS — augmented strokes for the per-wonder SVGs.
+   The base styles.css covers .ink / .ink-stroke / .faint; these new classes
+   (.fine and .hatch) appear in the engraved-line SVGs and need stroke styling
+   to render at all. Round caps applied across the board to match the engraver
+   look documented in Wonder Icons.html.
+   ============================================================================ */
+.emblem .ink-stroke {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.emblem .fine {
+  fill: none;
+  stroke: var(--ink-800);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.emblem .hatch {
+  fill: none;
+  stroke: var(--ink-800);
+  stroke-width: 0.7;
+  stroke-linecap: round;
+  opacity: 0.32;
+}

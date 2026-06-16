@@ -1,0 +1,132 @@
+/*
+ * Define application theme
+ *
+ * See the documentation for details:
+ * https://docs.webforj.com/docs/styling/overview
+ */
+
+/* :root {
+  --dwc-color-primary-seed: #008060;
+} */
+
+dwc-app-layout {
+  --dwc-app-layout-header-height: 4rem;
+}
+
+/* ============================================================================
+   PAGE LAYOUT
+
+   webforJ wraps the page in:
+     dwc-frame (abs, 100dvh)
+       dwc-window-container (overflow: hidden auto)
+         dwc-window-center  <-- THIS is overflow: hidden, viewport-height
+           dwc-window-content (sticky, natural height)
+             main.page
+
+   The default `overflow: hidden` on `dwc-window-center` is what clips the
+   page and prevents scrolling — main.page grows tall, but the center clips
+   it and the outer container has nothing to scroll. We open this clip and
+   let dwc-window-center be the scroll surface.
+   ============================================================================ */
+
+/* The actual blocker — open the scroll clip on the inner viewport wrapper. */
+dwc-window-center {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Make sure nothing higher up clips or fights for scroll. */
+dwc-window-container {
+  overflow: visible !important;
+}
+
+main.page {
+  /* let main flow naturally; no fixed height, no internal scroll */
+  height: auto;
+  min-height: 100%;
+}
+
+/* ------------ Masthead — cap the giant H1 on wide screens ------------------- */
+.masthead {
+  padding-top: 0;
+}
+.masthead h1 {
+  font-size: clamp(2rem, 1.4rem + 2vw, 3rem);
+  margin: var(--sp-1) 0;
+}
+.masthead .overline {
+  font-size: 0.68rem;
+}
+
+/* ------------ Compass bay — compress the centerpiece ------------------------ */
+.compass-bay {
+  padding: var(--sp-4) var(--sp-5);
+  margin: var(--sp-3) 0;
+  gap: var(--sp-5);
+}
+.compass {
+  max-width: 220px;
+}
+
+/* ------------ Section heading — fit on one line and tighten margins --------- */
+.section-head {
+  margin: var(--sp-4) 0 var(--sp-3);
+}
+.section-head h2 {
+  font-size: 1.2rem;
+  max-width: none;
+}
+
+/* ------------ Grid — let it flow naturally with the page scroll ------------- */
+/* (No max-height/overflow here — the page scrolls, not the grid.) */
+
+/* ============================================================================
+   STICKY HEADER (nice-to-have)
+   masthead + filters + compass-bay stay visible while user scrolls cards.
+   Each element is sticky with a `top` value equal to the cumulative height
+   of the elements above it, so they form a contiguous sticky band rather
+   than a single replacing element. Background is set so cards scrolling
+   beneath don't bleed through.
+   ============================================================================ */
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--parchment-200);
+  /* tiny bottom shadow so the sticky band reads as a unified header */
+  padding-bottom: var(--sp-2);
+  margin-bottom: 0;
+}
+.filters {
+  position: sticky;
+  /* masthead is ~115px tall after compression — sit just below it */
+  top: 115px;
+  z-index: 25;
+  background: var(--parchment-200);
+  margin: 0;
+  /* Extra top padding so the active chip's ❦ over-mark (which sits at
+     top: -0.65em) stays inside .filters' own box instead of poking into
+     the masthead above it (which has higher z-index and would hide it). */
+  padding: var(--sp-4) 0 var(--sp-2);
+}
+
+/* Selected-card SELECTED badge — replace the design's ❖ (U+2756, very sparse
+   font coverage) with ★ (BLACK STAR, U+2605, in essentially every font).
+   Uses CSS hex escape so the file is encoding-safe. Keep the design's
+   original "perched above the card" position. */
+.card.is-selected::before {
+  content: "\2605  SELECTED";
+}
+
+/* Active-chip over-mark — design uses ❦ (U+2766) which is also sparse. Swap
+   to ★ to match the SELECTED badge and stay consistent. */
+.chip[aria-pressed="true"]::after {
+  content: "\2605";
+}
+.compass-bay {
+  position: sticky;
+  /* masthead (115) + filters (56) ≈ 171px */
+  top: 171px;
+  z-index: 20;
+  /* background is already opaque (var(--surface)) so cards don't bleed through */
+}

@@ -1,0 +1,576 @@
+/* ============================================================================
+   WONDERS OF THE WORLD — COMPONENT STYLES
+   ============================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: var(--leading-body);
+  font-feature-settings: "liga" 1, "onum" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ---- Parchment field: warm gradient + vignette + fibre grain ------------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(120% 80% at 50% -10%, var(--parchment-100), transparent 60%),
+    radial-gradient(130% 120% at 50% 120%, oklch(0.78 0.05 70 / 0.55), transparent 55%),
+    linear-gradient(180deg, var(--parchment-200), var(--parchment-200));
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+/* ---------------------------------------------------------------------------
+   TYPOGRAPHY HELPERS
+   --------------------------------------------------------------------------- */
+.display { font-family: var(--font-display); font-weight: 600; letter-spacing: var(--tracking-display); color: var(--text-strong); line-height: var(--leading-tight); }
+.caps    { font-family: var(--font-display); text-transform: uppercase; letter-spacing: var(--tracking-caps); }
+.mono    { font-family: var(--font-mono); letter-spacing: var(--tracking-mono); font-feature-settings: "tnum" 1; }
+.italic  { font-style: italic; }
+
+a { color: var(--gold-700); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+/* ---------------------------------------------------------------------------
+   ORNAMENTS
+   --------------------------------------------------------------------------- */
+/* Fleuron divider: tapering rules with a centered glyph */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  color: var(--gold-600);
+  width: 100%;
+}
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background:
+    linear-gradient(90deg, transparent, var(--gold-600) 35%, var(--gold-600) 65%, transparent);
+}
+.divider .fleuron { font-size: 1.4rem; line-height: 1; transform: translateY(-1px); color: var(--gold-600); }
+
+/* Double-rule frame with corner fleurons — applied to panels/cards */
+.framed { position: relative; }
+.framed::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid var(--gold-600);
+  opacity: 0.55;
+  pointer-events: none;
+  border-radius: var(--r-xs);
+}
+.corner {
+  position: absolute;
+  width: 13px; height: 13px;
+  color: var(--gold-600);
+  font-size: 13px; line-height: 13px;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.corner-tl { top: 1px; left: 4px; }
+.corner-tr { top: 1px; right: 4px; }
+.corner-bl { bottom: 1px; left: 4px; }
+.corner-br { bottom: 1px; right: 4px; }
+
+/* ---------------------------------------------------------------------------
+   PAGE SHELL
+   --------------------------------------------------------------------------- */
+.page { max-width: var(--maxw); margin: 0 auto; padding: var(--sp-6) var(--sp-5) var(--sp-9); }
+
+/* ---- Masthead ----------------------------------------------------------- */
+.masthead { text-align: center; position: relative; padding-top: var(--sp-3); }
+.masthead .overline { font-family: var(--font-mono); font-size: var(--t-mono-sm); letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted); }
+.masthead h1 { font-family: var(--font-display); font-weight: 700; font-size: var(--t-hero); letter-spacing: 0.08em; color: var(--text-strong); margin: var(--sp-2) 0 var(--sp-1); }
+.masthead .location { font-family: var(--font-mono); font-size: var(--t-mono); color: var(--ink-600); font-style: normal; }
+.masthead .location .dot { color: var(--gold-600); margin: 0 0.5em; }
+.masthead .location #loc-accuracy { color: var(--text-muted); }
+
+.info-btn {
+  position: absolute; top: var(--sp-3); right: 0;
+  width: 46px; height: 46px;
+  border-radius: var(--r-pill);
+  border: 2px solid var(--gold-600);
+  background:
+    radial-gradient(circle at 38% 30%, var(--gold-400), var(--gold-600) 70%, var(--gold-700));
+  color: var(--ink-900);
+  font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-raised), 0 0 0 4px var(--parchment-200);
+  transition: transform var(--dur-fast) var(--ease-page), box-shadow var(--dur-fast);
+}
+.info-btn:hover { transform: rotate(-6deg) scale(1.06); }
+.info-btn:focus-visible { outline: none; box-shadow: var(--glow-gold), 0 0 0 4px var(--parchment-200); }
+
+/* ---------------------------------------------------------------------------
+   CATEGORY FILTER CHIPS  ("the codex flips to that section")
+   --------------------------------------------------------------------------- */
+.filters {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-2);
+  margin: var(--sp-5) 0 var(--sp-3);
+}
+.chip {
+  font-family: var(--font-display);
+  font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+  color: var(--ink-600);
+  background: var(--parchment-200);
+  border: 1px solid var(--ink-200);
+  border-bottom-width: 2px;
+  padding: 10px 18px 8px;
+  border-radius: var(--r-sm) var(--r-sm) 0 0;
+  cursor: pointer;
+  position: relative;
+  transition: color var(--dur-fast), background var(--dur-fast), transform var(--dur-fast);
+}
+.chip:hover { color: var(--ink-900); background: var(--parchment-100); }
+.chip[aria-pressed="true"] {
+  color: var(--ink-900);
+  background: var(--parchment-300);
+  border-color: var(--gold-600);
+  border-bottom: 3px solid var(--gold-600);
+  box-shadow: var(--shadow-raised);
+  transform: translateY(-2px);
+}
+.chip[aria-pressed="true"]::after {
+  content: "❦";
+  position: absolute; top: -0.65em; left: 50%; transform: translateX(-50%);
+  font-size: 0.7rem; color: var(--gold-600);
+}
+.chip:focus-visible { outline: none; box-shadow: var(--glow-gold); }
+
+/* ---------------------------------------------------------------------------
+   COMPASS CENTERPIECE
+   --------------------------------------------------------------------------- */
+.compass-bay {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: var(--sp-7);
+  align-items: center;
+  background: var(--surface);
+  border: var(--bw-rule) solid var(--gold-600);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-raised);
+  padding: var(--sp-6) var(--sp-7);
+  margin: var(--sp-4) 0 var(--sp-7);
+}
+
+/* ---- The rose ----------------------------------------------------------- */
+.compass { position: relative; width: 100%; max-width: 340px; margin: 0 auto; aspect-ratio: 1; }
+.compass svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.compass .ring-line { fill: none; stroke: var(--gold-600); }
+.compass .tick { stroke: var(--ink-600); }
+.compass .tick-major { stroke: var(--ink-900); }
+.compass .rose-star-major { fill: var(--ink-800); }
+.compass .rose-star-minor { fill: var(--gold-600); }
+.compass .rose-letter { fill: var(--ink-900); font-family: var(--font-display); font-weight: 700; letter-spacing: 0.04em; }
+.compass .rose-center { fill: var(--parchment-300); stroke: var(--gold-600); }
+
+/* needle rotates to --bearing (deg, 0 = north/up) */
+.needle-group {
+  transform: rotate(var(--bearing, 0deg));
+  transform-origin: 50% 50%;
+  transition: transform var(--dur-swing) var(--ease-swing);
+}
+.needle-n { fill: var(--gold-500); stroke: var(--gold-700); stroke-width: 0.6; }
+.needle-s { fill: var(--ink-800); stroke: var(--ink-900); stroke-width: 0.6; }
+.needle-cap { fill: var(--ink-900); stroke: var(--gold-500); }
+
+/* ---- Instrument readout ------------------------------------------------- */
+.readout { min-width: 0; }
+.readout .target-label { font-family: var(--font-mono); font-size: var(--t-mono-sm); letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+.readout .target-name { font-family: var(--font-display); font-size: var(--t-h2); color: var(--text-strong); margin: 2px 0 var(--sp-4); line-height: 1.15; }
+.readout .distance {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono-xl);
+  color: var(--ink-900);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+.readout .distance .unit { font-size: 0.42em; color: var(--gold-700); letter-spacing: 0.16em; margin-left: 0.3em; }
+.readout .distance .approx { color: var(--text-muted); }
+.readout .bearing-line {
+  margin-top: var(--sp-3);
+  display: flex; align-items: baseline; gap: var(--sp-3); flex-wrap: wrap;
+}
+.readout .bearing-words { font-family: var(--font-body); font-style: italic; font-size: var(--t-h3); color: var(--ink-700); }
+.readout .bearing-deg { font-family: var(--font-mono); font-size: var(--t-mono); color: var(--ink-600); }
+
+.readout .instrument-row { display: flex; align-items: center; gap: var(--sp-4); flex-wrap: wrap; margin-top: var(--sp-5); }
+
+/* ---- Unit toggle (brass segmented control) ------------------------------ */
+.unit-toggle {
+  display: inline-flex;
+  border: 1.5px solid var(--gold-600);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--parchment-200);
+}
+.unit-toggle button {
+  font-family: var(--font-mono); font-size: var(--t-mono-sm); letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 7px 13px; border: 0; background: transparent; color: var(--ink-600); cursor: pointer;
+  border-right: 1px solid var(--gold-600);
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.unit-toggle button:last-child { border-right: 0; }
+.unit-toggle button[aria-pressed="true"] { background: var(--gold-600); color: var(--parchment-50); }
+.unit-toggle button:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--gold-400); }
+
+/* ---- Custom coordinates form ------------------------------------------- */
+.coords-form { display: flex; align-items: flex-end; gap: var(--sp-3); flex-wrap: wrap; }
+.coords-form .field { display: flex; flex-direction: column; gap: 3px; }
+.coords-form label { font-family: var(--font-mono); font-size: var(--t-mono-sm); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+.coords-form input {
+  font-family: var(--font-mono); font-size: var(--t-mono); color: var(--ink-900);
+  width: 7.5em; padding: 8px 10px;
+  background: var(--parchment-100);
+  border: 1px solid var(--ink-200);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-well);
+}
+.coords-form input:focus-visible { outline: none; border-color: var(--gold-600); box-shadow: var(--shadow-well), 0 0 0 2px oklch(0.70 0.09 81 / 0.35); }
+.coords-form .hint { width: 100%; font-family: var(--font-body); font-style: italic; font-size: var(--t-small); color: var(--text-muted); margin: 0; }
+
+/* ---- Buttons ------------------------------------------------------------ */
+.btn {
+  font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 10px 18px;
+  border-radius: var(--r-sm); cursor: pointer;
+  border: 1.5px solid var(--gold-600);
+  background: linear-gradient(180deg, var(--gold-500), var(--gold-600));
+  color: var(--ink-900);
+  box-shadow: var(--shadow-raised);
+  transition: transform var(--dur-fast), filter var(--dur-fast);
+}
+.btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-ghost { background: var(--parchment-200); color: var(--ink-800); }
+.btn:focus-visible { outline: none; box-shadow: var(--glow-gold); }
+
+.coords-section {
+  display: flex; align-items: center; gap: var(--sp-5); flex-wrap: wrap;
+  margin-bottom: var(--sp-6);
+  padding: var(--sp-4) var(--sp-5);
+  background: var(--parchment-100);
+  border: 1px solid var(--gold-600);
+  border-radius: var(--r-sm);
+}
+.coords-section .lede { font-family: var(--font-display); font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-700); }
+
+/* ---------------------------------------------------------------------------
+   SECTION HEADINGS
+   --------------------------------------------------------------------------- */
+.section-head { text-align: center; margin: var(--sp-8) 0 var(--sp-5); }
+.section-head .kicker { font-family: var(--font-mono); font-size: var(--t-mono-sm); letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted); }
+.section-head h2 { font-family: var(--font-display); font-weight: 600; font-size: var(--t-h2); letter-spacing: 0.06em; color: var(--text-strong); margin: var(--sp-2) auto; max-width: 28ch; }
+.section-head .divider { max-width: 360px; margin: var(--sp-3) auto 0; }
+
+/* ---------------------------------------------------------------------------
+   WONDER CARDS GRID
+   --------------------------------------------------------------------------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-min), 1fr));
+  gap: var(--sp-6);
+}
+
+.card {
+  --accent: var(--gold-600);
+  position: relative;
+  display: flex; flex-direction: column;
+  background: var(--surface);
+  border: var(--bw-rule) solid var(--gold-600);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-raised);
+  cursor: pointer;
+  transition: transform var(--dur-med) var(--ease-page), box-shadow var(--dur-med) var(--ease-page), border-color var(--dur-med);
+  outline: none;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lifted); }
+.card:focus-visible { box-shadow: var(--glow-gold), var(--shadow-lifted); }
+
+/* SELECTED */
+.card.is-selected {
+  border-color: var(--gold-500);
+  box-shadow: var(--shadow-lifted), 0 0 0 1px var(--gold-500), 0 0 26px oklch(0.70 0.09 81 / 0.28);
+  transform: translateY(-4px);
+}
+.card.is-selected::before {
+  content: "❖ SELECTED";
+  position: absolute; top: -1px; right: var(--sp-4); transform: translateY(-50%);
+  font-family: var(--font-display); font-size: 0.62rem; letter-spacing: 0.18em; font-weight: 700;
+  color: var(--parchment-50);
+  background: var(--gold-600);
+  padding: 4px 10px; border-radius: var(--r-pill);
+  box-shadow: var(--shadow-raised);
+}
+
+.card-body { padding: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-3); flex: 1; }
+
+/* ---- Engraving plate ---------------------------------------------------- */
+.plate {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  margin: var(--sp-3) var(--sp-3) 0;
+  border: 1px solid var(--gold-600);
+  border-radius: var(--r-xs);
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(45deg, oklch(0.40 0.03 55 / 0.06) 0 1.5px, transparent 1.5px 5px),
+    repeating-linear-gradient(-45deg, oklch(0.40 0.03 55 / 0.04) 0 1.5px, transparent 1.5px 6px),
+    radial-gradient(120% 100% at 50% 18%, var(--parchment-200), var(--parchment-400));
+  box-shadow: var(--shadow-well);
+}
+.plate .plate-frame { position: absolute; inset: 6px; border: 1px solid oklch(0.62 0.088 78 / 0.6); border-radius: 1px; pointer-events: none; }
+.plate .plate-caption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em;
+  color: var(--ink-600);
+  text-align: center; padding: 5px 8px;
+  background: linear-gradient(180deg, transparent, oklch(0.83 0.042 77 / 0.92) 60%);
+}
+.plate img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.plate .emblem { position: absolute; inset: 0; display: grid; place-items: center; }
+
+/* Emblems built only from primitive shapes / gradients */
+.emblem svg { width: 58%; height: 58%; opacity: 0.82; }
+.emblem .ink { fill: var(--ink-800); }
+.emblem .ink-stroke { fill: none; stroke: var(--ink-800); stroke-width: 2; }
+.emblem .faint { fill: var(--ink-600); opacity: 0.5; }
+
+/* ---- Card meta : era badge + status chip -------------------------------- */
+.card-meta { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
+
+.badge {
+  font-family: var(--font-display); font-weight: 600; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 5px 11px 4px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: oklch(0.905 0.045 85 / 0.6);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.badge::before { content: "✦"; font-size: 0.7em; opacity: 0.8; }
+
+.chip-status {
+  font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 5px 11px 4px;
+  border-radius: var(--r-pill);
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid currentColor;
+}
+.chip-status .seal { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.chip-status.standing  { color: var(--status-standing);  background: var(--status-standing-bg); }
+.chip-status.ruins     { color: var(--status-ruins);     background: var(--status-ruins-bg); }
+.chip-status.destroyed { color: var(--status-destroyed); background: var(--status-destroyed-bg); border-style: dashed; }
+.chip-status.destroyed .seal { border-radius: 0; transform: rotate(45deg); background: transparent; border: 1px solid currentColor; }
+
+/* ---- Card text ---------------------------------------------------------- */
+.card h3.wonder-name { font-family: var(--font-display); font-weight: 700; font-size: var(--t-h1); color: var(--text-strong); margin: var(--sp-1) 0 0; line-height: 1.1; }
+.card .dates { font-family: var(--font-mono); font-size: var(--t-mono-sm); letter-spacing: 0.08em; color: var(--ink-600); }
+.card .blurb { font-size: 1.02rem; color: var(--ink-800); margin: 0; text-wrap: pretty; }
+
+.flavor {
+  position: relative;
+  font-style: italic; font-size: 1.06rem; color: var(--ink-700);
+  text-align: center; text-wrap: balance;
+  padding: var(--sp-3) var(--sp-4);
+  margin: var(--sp-1) 0;
+  border-top: 1px solid oklch(0.62 0.088 78 / 0.45);
+  border-bottom: 1px solid oklch(0.62 0.088 78 / 0.45);
+}
+.flavor::before, .flavor::after { content: "❧"; color: var(--gold-600); font-style: normal; font-size: 0.8em; opacity: 0.7; margin: 0 0.4em; }
+
+/* ---- Card instrument footer (coords + distance + bearing) --------------- */
+.card-instr {
+  margin-top: auto;
+  display: grid; grid-template-columns: 1fr auto; gap: var(--sp-2) var(--sp-4);
+  padding-top: var(--sp-3);
+  border-top: 1.5px solid var(--gold-600);
+}
+.card-instr .coords { grid-column: 1 / -1; font-family: var(--font-mono); font-size: var(--t-mono-sm); color: var(--ink-600); letter-spacing: 0.04em; }
+.card-instr .dist-block { }
+.card-instr .dist-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); display: block; }
+.card-instr .dist-value { font-family: var(--font-mono); font-size: 1.5rem; color: var(--ink-900); line-height: 1.05; }
+.card-instr .dist-value .unit { font-size: 0.46em; color: var(--gold-700); letter-spacing: 0.12em; margin-left: 0.25em; }
+.card-instr .bear-block { text-align: right; align-self: end; }
+.card-instr .bear-value { font-family: var(--font-body); font-style: italic; font-size: 1.02rem; color: var(--ink-700); display: block; }
+.card-instr .bear-deg { font-family: var(--font-mono); font-size: var(--t-mono-sm); color: var(--ink-600); }
+
+/* ---- Select affordance -------------------------------------------------- */
+.card .select-row { display: flex; justify-content: center; padding: 0 var(--sp-5) var(--sp-5); }
+.card .select-btn {
+  width: 100%;
+  font-family: var(--font-display); font-weight: 600; font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 11px; border-radius: var(--r-sm); cursor: pointer;
+  border: 1.5px solid var(--gold-600); background: var(--parchment-200); color: var(--ink-800);
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.card .select-btn .needle-glyph { color: var(--gold-600); transition: transform var(--dur-med); }
+.card:hover .select-btn { background: var(--parchment-100); }
+.card.is-selected .select-btn { background: var(--gold-600); color: var(--parchment-50); }
+.card.is-selected .select-btn .needle-glyph { color: var(--parchment-50); transform: rotate(45deg); }
+
+/* ============================================================================
+   STATUS VARIANTS  — applied to the whole card
+   ============================================================================ */
+/* RUINS : weathered, ochre-tinted, partial desaturation */
+.card.status-ruins {
+  filter: saturate(0.82);
+}
+.card.status-ruins .plate {
+  background:
+    repeating-linear-gradient(45deg, oklch(0.40 0.03 55 / 0.06) 0 1.5px, transparent 1.5px 5px),
+    radial-gradient(120% 100% at 50% 18%, var(--parchment-300), var(--parchment-500));
+}
+.card.status-ruins .plate::after {
+  /* hairline fissures */
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background:
+    linear-gradient(118deg, transparent 39%, oklch(0.40 0.03 55 / 0.28) 39.4%, transparent 40%),
+    linear-gradient(64deg, transparent 61%, oklch(0.40 0.03 55 / 0.22) 61.3%, transparent 62%);
+}
+.card.status-ruins .wonder-name { color: var(--ink-700); }
+
+/* DESTROYED : washed-out, ghostly faded sepia — legible but clearly "gone" */
+.card.status-destroyed {
+  filter: saturate(0.45) contrast(0.92) brightness(1.03);
+  border-color: var(--status-destroyed);
+}
+.card.status-destroyed .plate { opacity: 0.72; }
+.card.status-destroyed .plate .emblem svg { opacity: 0.4; }
+.card.status-destroyed .plate::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(160deg, oklch(0.88 0.012 60 / 0.4), oklch(0.83 0.012 60 / 0.62));
+}
+.card.status-destroyed .wonder-name,
+.card.status-destroyed .blurb { color: var(--ink-600); }
+.card.status-destroyed .badge { opacity: 0.85; }
+.card.status-destroyed:hover { filter: saturate(0.6) contrast(0.95) brightness(1.02); }
+
+/* ============================================================================
+   CARD STATES GALLERY
+   ============================================================================ */
+.states-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--card-min), 1fr)); gap: var(--sp-6); align-items: start; }
+.state-cell { display: flex; flex-direction: column; gap: var(--sp-3); }
+.state-label {
+  font-family: var(--font-mono); font-size: var(--t-mono-sm); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-700); text-align: center;
+  padding-bottom: var(--sp-2); border-bottom: 1px dotted var(--gold-600);
+}
+.state-label .n { color: var(--gold-700); margin-right: 0.6em; }
+/* freeze interaction states for the gallery so they read statically */
+.state-cell .card { cursor: default; }
+.state-cell.frozen-hover .card { transform: translateY(-4px); box-shadow: var(--shadow-lifted); }
+.state-cell .card.no-hover:hover { transform: none; }
+.state-cell.frozen-hover .card.no-hover:hover { transform: translateY(-4px); }
+
+/* ============================================================================
+   INFO DIALOG  ("tipped-in dictionary page")
+   ============================================================================ */
+dialog.codex-modal {
+  border: none; padding: 0; background: transparent;
+  max-width: min(620px, 92vw);
+  color: var(--text);
+}
+dialog.codex-modal::backdrop {
+  background: oklch(0.25 0.02 52 / 0.62);
+  backdrop-filter: blur(1.5px);
+}
+.modal-sheet {
+  position: relative;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 31px, oklch(0.62 0.088 78 / 0.07) 31px 32px),
+    var(--parchment-200);
+  border: var(--bw-frame) double var(--gold-600);
+  border-radius: var(--r-md);
+  box-shadow: 0 30px 70px oklch(0.25 0.02 52 / 0.5);
+  padding: var(--sp-7) var(--sp-7) var(--sp-6);
+}
+.modal-sheet .modal-close {
+  position: absolute; top: var(--sp-4); right: var(--sp-4);
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1.5px solid var(--gold-600); background: var(--parchment-100);
+  color: var(--ink-800); font-size: 1.1rem; cursor: pointer; line-height: 1;
+}
+.modal-sheet .modal-close:hover { background: var(--parchment-50); }
+.modal-sheet .modal-kicker { font-family: var(--font-mono); font-size: var(--t-mono-sm); letter-spacing: 0.26em; text-transform: uppercase; color: var(--text-muted); text-align: center; }
+.modal-sheet h2 { font-family: var(--font-display); font-weight: 700; font-size: 1.7rem; letter-spacing: 0.05em; color: var(--text-strong); text-align: center; margin: var(--sp-2) 0 var(--sp-1); }
+.modal-sheet .modal-lede { text-align: center; font-style: italic; color: var(--ink-700); margin: 0 auto var(--sp-4); max-width: 44ch; }
+.modal-sheet .divider { max-width: 320px; margin: 0 auto var(--sp-5); }
+
+.steps { list-style: none; counter-reset: step; padding: 0; margin: 0 0 var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-4); }
+.steps li { display: grid; grid-template-columns: 42px 1fr; gap: var(--sp-4); align-items: start; }
+.steps li::before {
+  counter-increment: step; content: counter(step, upper-roman);
+  font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--ink-900);
+  width: 42px; height: 42px; display: grid; place-items: center;
+  border: 1.5px solid var(--gold-600); border-radius: 50%;
+  background: radial-gradient(circle at 38% 30%, var(--gold-400), var(--gold-100));
+}
+.steps li .step-body { padding-top: 2px; }
+.steps li strong { font-family: var(--font-display); font-weight: 600; letter-spacing: 0.02em; color: var(--text-strong); display: block; font-size: 1.02rem; }
+.steps li .kbd { font-family: var(--font-mono); font-size: 0.82rem; background: var(--parchment-100); border: 1px solid var(--ink-200); border-bottom-width: 2px; border-radius: 3px; padding: 1px 6px; color: var(--ink-900); }
+.steps li p { margin: 3px 0 0; font-size: 1.02rem; color: var(--ink-700); }
+
+.modal-note {
+  font-style: italic; text-align: center; color: var(--ink-700);
+  background: oklch(0.62 0.088 78 / 0.12);
+  border: 1px solid oklch(0.62 0.088 78 / 0.4); border-left: 3px solid var(--gold-600);
+  padding: var(--sp-3) var(--sp-4); border-radius: var(--r-sm); margin: 0;
+}
+
+/* ============================================================================
+   APPENDIX LINK / FOOTER
+   ============================================================================ */
+.colophon { text-align: center; margin-top: var(--sp-8); color: var(--text-muted); }
+.colophon .divider { max-width: 420px; margin: 0 auto var(--sp-4); }
+.colophon p { font-family: var(--font-mono); font-size: var(--t-mono-sm); letter-spacing: 0.06em; margin: var(--sp-2) 0; }
+
+/* ---------------------------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .compass-bay { grid-template-columns: 1fr; gap: var(--sp-5); padding: var(--sp-5); text-align: center; }
+  .compass { max-width: 260px; }
+  .readout .bearing-line, .readout .instrument-row, .coords-form { justify-content: center; }
+  .info-btn { position: static; margin: var(--sp-3) auto 0; }
+  .masthead { padding-top: 0; }
+}
+@media (max-width: 560px) {
+  .page { padding: var(--sp-5) var(--sp-4) var(--sp-8); }
+  .grid, .states-gallery { grid-template-columns: 1fr; }
+  --card-min: 100%;
+  .coords-section { flex-direction: column; align-items: stretch; }
+}
+
+/* ---------------------------------------------------------------------------
+   MOTION / PRINT
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .needle-group { transition: none; }
+  * { scroll-behavior: auto; }
+}

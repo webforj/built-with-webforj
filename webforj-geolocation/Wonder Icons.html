@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wonder Icons — Plate Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cutive+Mono&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/styles.css" />
+<style>
+  .ico-page { max-width: 1180px; margin: 0 auto; padding: var(--sp-7) var(--sp-5) var(--sp-9); }
+  .ico-head { text-align: center; margin-bottom: var(--sp-6); }
+  .ico-head .overline { font-family: var(--font-mono); font-size: var(--t-mono-sm); letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); }
+  .ico-head h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem,1.4rem+2vw,3rem); letter-spacing: 0.06em; color: var(--text-strong); margin: var(--sp-2) 0; }
+  .ico-head p { font-style: italic; color: var(--ink-700); max-width: 60ch; margin: 0 auto; }
+  .back { display: inline-block; font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-700); margin-bottom: var(--sp-4); }
+
+  .era-band { margin-top: var(--sp-7); }
+  .era-band > .section-head { margin: var(--sp-5) 0; }
+
+  .plate-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: var(--sp-5); }
+
+  .ico-cell { display: flex; flex-direction: column; }
+  /* a clean 3:2 engraving plate, identical framing to the card plate */
+  .ico-plate {
+    position: relative; aspect-ratio: 3 / 2;
+    border: 2px solid var(--gold-600); border-radius: var(--r-xs); overflow: hidden;
+    background:
+      repeating-linear-gradient(45deg, oklch(0.40 0.03 55 / 0.06) 0 1.5px, transparent 1.5px 5px),
+      repeating-linear-gradient(-45deg, oklch(0.40 0.03 55 / 0.04) 0 1.5px, transparent 1.5px 6px),
+      radial-gradient(120% 100% at 50% 18%, var(--parchment-200), var(--parchment-400));
+    box-shadow: var(--shadow-raised);
+  }
+  .ico-plate .frame { position: absolute; inset: 6px; border: 1px solid oklch(0.62 0.088 78 / 0.6); border-radius: 1px; pointer-events: none; }
+  .ico-plate .emblem { position: absolute; inset: 0; display: grid; place-items: center; }
+  .ico-plate .emblem svg { width: 64%; height: 64%; opacity: 0.9; }
+  .ico-plate .emblem .ink { fill: var(--ink-800); }
+  .ico-plate .emblem .ink-stroke { fill: none; stroke: var(--ink-800); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ico-plate .emblem .fine { fill: none; stroke: var(--ink-800); stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+  .ico-plate .emblem .hatch { fill: none; stroke: var(--ink-800); stroke-width: 0.7; stroke-linecap: round; opacity: 0.32; }
+  .ico-plate .emblem .faint { fill: var(--ink-600); opacity: 0.5; }
+  .ico-plate .num { position: absolute; top: 7px; left: 9px; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--ink-600); }
+  .ico-plate .key { position: absolute; bottom: 6px; right: 9px; font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.05em; color: var(--ink-400); }
+
+  /* status-driven plate treatment, mirrors the card variants */
+  .ico-cell.ruins .ico-plate {
+    filter: saturate(0.82);
+    background:
+      repeating-linear-gradient(45deg, oklch(0.40 0.03 55 / 0.06) 0 1.5px, transparent 1.5px 5px),
+      radial-gradient(120% 100% at 50% 18%, var(--parchment-300), var(--parchment-500));
+  }
+  .ico-cell.destroyed .ico-plate { filter: saturate(0.45) contrast(0.92) brightness(1.03); border-color: var(--status-destroyed); }
+  .ico-cell.destroyed .ico-plate .emblem svg { opacity: 0.5; }
+
+  .ico-meta { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); margin-top: var(--sp-3); }
+  .ico-name { font-family: var(--font-display); font-weight: 600; font-size: 0.92rem; letter-spacing: 0.02em; color: var(--text-strong); line-height: 1.2; }
+  .ico-chip {
+    font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 3px 8px 2px; border-radius: var(--r-pill); border: 1px solid currentColor; white-space: nowrap; flex-shrink: 0;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .ico-chip .seal { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .ico-chip.standing { color: var(--status-standing); background: var(--status-standing-bg); }
+  .ico-chip.ruins { color: var(--status-ruins); background: var(--status-ruins-bg); }
+  .ico-chip.destroyed { color: var(--status-destroyed); background: var(--status-destroyed-bg); border-style: dashed; }
+  .ico-chip.destroyed .seal { border-radius: 0; transform: rotate(45deg); background: transparent; border: 1px solid currentColor; }
+
+  .note-panel {
+    margin-top: var(--sp-8); background: var(--surface); border: 2px solid var(--gold-600); border-radius: var(--r-md);
+    box-shadow: var(--shadow-raised); padding: var(--sp-6); position: relative;
+  }
+  .note-panel h2 { font-family: var(--font-display); font-weight: 600; font-size: var(--t-h3); letter-spacing: 0.05em; color: var(--text-strong); margin: 0 0 var(--sp-3); }
+  .note-panel p { margin: 0 0 var(--sp-3); color: var(--ink-800); }
+  .note-panel ul { margin: 0; padding-left: 1.2em; color: var(--ink-800); }
+  .note-panel li { margin-bottom: 6px; }
+  .note-panel code { font-family: var(--font-mono); font-size: 0.82em; background: var(--parchment-100); border: 1px solid var(--rule-faint); border-radius: 3px; padding: 1px 6px; color: var(--ink-900); }
+</style>
+</head>
+<body>
+<main class="ico-page">
+
+  <a class="back" href="Wonders of the World.html">← Back to the codex</a>
+
+  <div class="ico-head">
+    <div class="overline">Plate Reference · 25 Devices</div>
+    <h1>The Engraver's Plates</h1>
+    <p>Every wonder rendered as a single-subject line device, drawn from the same hand so they read as plates from one book. Each sits in a 3:2 sepia plate frame ready to receive a true engraving.</p>
+  </div>
+
+  <div class="era-band" id="band-ancient"></div>
+  <div class="era-band" id="band-medieval"></div>
+  <div class="era-band" id="band-modern"></div>
+
+  <section class="note-panel framed">
+    <span class="corner corner-tl">❖</span><span class="corner corner-tr">❖</span><span class="corner corner-bl">❖</span><span class="corner corner-br">❖</span>
+    <h2>How to use &amp; export these</h2>
+    <p>These are stylized line devices, not photographic engravings — coherent, legible at any size, and free of slop. To export:</p>
+    <ul>
+      <li><strong>As code</strong> — every device lives in <code>js/emblems.js</code> as <code>window.EMBLEMS[key]</code>. Colour comes from three CSS hooks: <code>.ink</code>, <code>.faint</code>, <code>.ink-stroke</code>.</li>
+      <li><strong>As files</strong> — standalone, self-contained SVGs (styles inlined) are written to <code>/svg/&lt;key&gt;.svg</code> — drop straight into the webforJ project.</li>
+      <li><strong>Swapping in real plates</strong> — the 3:2 frame is the contract. Place a public-domain engraving (Wikimedia Commons / NYPL / British Library) into the plate and the device steps aside. Match it to the frame: monochrome, sepia-toned, single centered subject.</li>
+    </ul>
+  </section>
+
+</main>
+
+<script src="js/emblems.js"></script>
+<script>
+(function () {
+  var WONDERS = [
+    // ancient
+    { n: 1, name: "Great Pyramid of Giza", key: "pyramid", era: "ancient", status: "standing" },
+    { n: 2, name: "Hanging Gardens of Babylon", key: "babylon", era: "ancient", status: "destroyed" },
+    { n: 3, name: "Statue of Zeus at Olympia", key: "zeus", era: "ancient", status: "destroyed" },
+    { n: 4, name: "Temple of Artemis at Ephesus", key: "artemis", era: "ancient", status: "destroyed" },
+    { n: 5, name: "Mausoleum at Halicarnassus", key: "mausoleum", era: "ancient", status: "destroyed" },
+    { n: 6, name: "Colossus of Rhodes", key: "colossus", era: "ancient", status: "destroyed" },
+    { n: 7, name: "Lighthouse of Alexandria", key: "lighthouse", era: "ancient", status: "destroyed" },
+    { n: 8, name: "Petra", key: "petra", era: "ancient", status: "ruins" },
+    { n: 9, name: "Roman Colosseum", key: "colosseum", era: "ancient", status: "ruins" },
+    { n: 10, name: "Stonehenge", key: "stonehenge", era: "ancient", status: "ruins" },
+    // medieval
+    { n: 11, name: "Great Wall of China", key: "greatwall", era: "medieval", status: "standing" },
+    { n: 12, name: "Hagia Sophia", key: "hagiasophia", era: "medieval", status: "standing" },
+    { n: 13, name: "Angkor Wat", key: "angkorwat", era: "medieval", status: "standing" },
+    { n: 14, name: "Chichen Itza", key: "chichenitza", era: "medieval", status: "ruins" },
+    { n: 15, name: "Machu Picchu", key: "machupicchu", era: "medieval", status: "ruins" },
+    { n: 16, name: "Notre-Dame de Paris", key: "notredame", era: "medieval", status: "standing" },
+    { n: 17, name: "Taj Mahal", key: "tajmahal", era: "medieval", status: "standing" },
+    // modern
+    { n: 18, name: "Statue of Liberty", key: "libertystatue", era: "modern", status: "standing" },
+    { n: 19, name: "Eiffel Tower", key: "eiffel", era: "modern", status: "standing" },
+    { n: 20, name: "Big Ben (Elizabeth Tower)", key: "bigben", era: "modern", status: "standing" },
+    { n: 21, name: "Empire State Building", key: "empirestate", era: "modern", status: "standing" },
+    { n: 22, name: "Christ the Redeemer", key: "christredeemer", era: "modern", status: "standing" },
+    { n: 23, name: "Golden Gate Bridge", key: "goldengate", era: "modern", status: "standing" },
+    { n: 24, name: "Sydney Opera House", key: "sydneyopera", era: "modern", status: "standing" },
+    { n: 25, name: "Burj Khalifa", key: "burjkhalifa", era: "modern", status: "standing" },
+  ];
+
+  var STATUS_LABEL = { standing: "Standing", ruins: "Ruins", destroyed: "Destroyed" };
+  var ERA_TITLE = {
+    ancient: { kicker: "Section the First", title: "Ancient" },
+    medieval: { kicker: "Section the Second", title: "Medieval" },
+    modern: { kicker: "Section the Third", title: "Modern" },
+  };
+
+  function cell(w) {
+    var emblem = (window.EMBLEMS && window.EMBLEMS[w.key]) || '<svg viewBox="0 0 100 100"></svg>';
+    var nn = (w.n < 10 ? "0" : "") + w.n;
+    return (
+      '<div class="ico-cell ' + w.status + '">' +
+        '<div class="ico-plate">' +
+          '<span class="num">PL. ' + nn + '</span>' +
+          '<div class="emblem">' + emblem + '</div>' +
+          '<div class="frame"></div>' +
+          '<span class="key">' + w.key + '.svg</span>' +
+        '</div>' +
+        '<div class="ico-meta">' +
+          '<span class="ico-name">' + w.name + '</span>' +
+          '<span class="ico-chip ' + w.status + '"><span class="seal"></span>' + STATUS_LABEL[w.status] + '</span>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function band(era) {
+    var t = ERA_TITLE[era];
+    var items = WONDERS.filter(function (w) { return w.era === era; });
+    return (
+      '<div class="section-head">' +
+        '<div class="kicker">' + t.kicker + '</div>' +
+        '<h2>' + t.title + ' Wonders</h2>' +
+        '<div class="divider"><span class="fleuron">❧</span></div>' +
+      '</div>' +
+      '<div class="plate-grid">' + items.map(cell).join("") + '</div>'
+    );
+  }
+
+  document.getElementById("band-ancient").innerHTML = band("ancient");
+  document.getElementById("band-medieval").innerHTML = band("medieval");
+  document.getElementById("band-modern").innerHTML = band("modern");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+/* ============================================================================
+   WONDERS OF THE WORLD — DESIGN TOKENS
+   Aesthetic: Victorian atlas / illuminated codex / Civilization wonder screen.
+   Tokens are authored as semantic variables, then mirrored to the webforJ
+   --dwc-* namespace at the bottom so the Claude Code / webforJ handoff can
+   theme directly from these.
+   ============================================================================ */
+
+:root {
+  /* ---- PALETTE : parchment ------------------------------------------------ */
+  --parchment-50:  oklch(0.965 0.018 88);   /* lit page edge / highlights      */
+  --parchment-100: oklch(0.945 0.024 85);   /* lightest field                  */
+  --parchment-200: oklch(0.918 0.030 82);   /* BASE parchment (page)           */
+  --parchment-300: oklch(0.880 0.036 79);   /* card surface / raised page      */
+  --parchment-400: oklch(0.835 0.042 77);   /* sunk wells, plate fields        */
+  --parchment-500: oklch(0.780 0.046 74);   /* deep crease / shadow tone       */
+
+  /* ---- PALETTE : ink ------------------------------------------------------ */
+  --ink-900: oklch(0.245 0.022 52);         /* darkest sepia — headlines       */
+  --ink-800: oklch(0.310 0.026 53);         /* body text                       */
+  --ink-600: oklch(0.430 0.028 55);         /* secondary text                  */
+  --ink-400: oklch(0.560 0.026 58);         /* muted / captions                */
+  --ink-200: oklch(0.700 0.020 62);         /* faint rules                     */
+
+  /* ---- PALETTE : antique gold (borders, badges, brass) -------------------- */
+  --gold-700: oklch(0.520 0.078 76);        /* engraved gold shadow            */
+  --gold-600: oklch(0.620 0.088 78);        /* PRIMARY antique gold            */
+  --gold-500: oklch(0.705 0.090 81);        /* lit gold                        */
+  --gold-400: oklch(0.795 0.080 84);        /* highlight gleam                 */
+  --gold-100: oklch(0.905 0.045 85);        /* gold wash / chip fill           */
+
+  /* ---- PALETTE : status --------------------------------------------------- */
+  --status-standing:    oklch(0.520 0.062 150);   /* muted verdigris green     */
+  --status-standing-bg: oklch(0.890 0.040 150);
+  --status-ruins:       oklch(0.585 0.090 68);     /* muted ochre               */
+  --status-ruins-bg:    oklch(0.885 0.052 72);
+  --status-destroyed:   oklch(0.520 0.010 58);     /* desaturated grey          */
+  --status-destroyed-bg:oklch(0.870 0.012 60);
+
+  /* ---- PALETTE : era accents (subtle hue shifts on the gold family) ------- */
+  --era-ancient:  oklch(0.620 0.088 78);    /* gold                            */
+  --era-medieval: oklch(0.560 0.070 35);    /* iron-red bronze                 */
+  --era-modern:   oklch(0.560 0.060 250);   /* steel indigo                    */
+  --era-natural:  oklch(0.540 0.066 165);   /* aurora teal-green               */
+
+  /* ---- SEMANTIC ----------------------------------------------------------- */
+  --bg:            var(--parchment-200);
+  --surface:       var(--parchment-300);
+  --well:          var(--parchment-400);
+  --text:          var(--ink-800);
+  --text-strong:   var(--ink-900);
+  --text-muted:    var(--ink-400);
+  --rule:          var(--gold-600);
+  --rule-faint:    var(--ink-200);
+
+  /* ---- TYPE FAMILIES ------------------------------------------------------ */
+  --font-display: "Cinzel", "Trajan Pro", Georgia, serif;     /* headers       */
+  --font-body:    "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-mono:    "Cutive Mono", "Courier New", monospace;    /* instruments   */
+
+  /* ---- TYPE SCALE (fluid) ------------------------------------------------- */
+  --t-hero:    clamp(2.6rem, 1.6rem + 4.2vw, 5rem);   /* page title           */
+  --t-h1:      clamp(1.7rem, 1.2rem + 1.8vw, 2.4rem);  /* wonder name          */
+  --t-h2:      1.5rem;
+  --t-h3:      1.18rem;
+  --t-body:    1.12rem;   /* EB Garamond reads small; bump base                */
+  --t-small:   0.95rem;
+  --t-tiny:    0.8rem;
+  --t-mono-xl: clamp(2.2rem, 1.4rem + 2.6vw, 3.4rem);  /* distance readout     */
+  --t-mono:    0.92rem;
+  --t-mono-sm: 0.78rem;
+
+  --leading-body: 1.58;
+  --leading-tight: 1.2;
+  --tracking-display: 0.06em;
+  --tracking-caps:    0.18em;
+  --tracking-mono:    0.04em;
+
+  /* ---- SPACING (4pt base) ------------------------------------------------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  /* ---- RADII (engraved = nearly square) ----------------------------------- */
+  --r-xs: 1px;
+  --r-sm: 2px;
+  --r-md: 3px;
+  --r-pill: 999px;
+
+  /* ---- BORDERS ------------------------------------------------------------ */
+  --bw-hair: 1px;
+  --bw-rule: 2px;
+  --bw-frame: 3px;
+
+  /* ---- SHADOWS (warm, low) ------------------------------------------------ */
+  --shadow-page:    0 1px 0 var(--parchment-50), 0 0 0 1px oklch(0.78 0.046 74 / 0.5);
+  --shadow-raised:  0 2px 6px oklch(0.40 0.03 55 / 0.16), 0 1px 0 var(--parchment-50) inset;
+  --shadow-lifted:  0 14px 34px oklch(0.36 0.03 55 / 0.26), 0 2px 0 var(--parchment-50) inset;
+  --shadow-well:    inset 0 2px 7px oklch(0.40 0.03 55 / 0.22);
+  --glow-gold:      0 0 0 1px var(--gold-500), 0 0 22px oklch(0.70 0.09 81 / 0.35);
+
+  /* ---- MOTION ------------------------------------------------------------- */
+  --ease-swing: cubic-bezier(0.34, 1.32, 0.5, 1);   /* needle overshoot        */
+  --ease-page:  cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-fast: 160ms;
+  --dur-med:  320ms;
+  --dur-swing: 1200ms;
+
+  /* ---- LAYOUT ------------------------------------------------------------- */
+  --maxw: 1240px;
+  --card-min: 320px;
+}
+
+/* ============================================================================
+   webforJ HANDOFF MIRROR  ( --dwc-* )
+   Map the semantic tokens above onto the namespace webforJ themes consume.
+   ============================================================================ */
+:root {
+  --dwc-color-primary:        var(--gold-600);
+  --dwc-color-primary-dark:   var(--gold-700);
+  --dwc-color-primary-light:  var(--gold-500);
+  --dwc-color-on-primary:     var(--parchment-50);
+
+  --dwc-surface-1:            var(--parchment-200);  /* page                  */
+  --dwc-surface-2:            var(--parchment-300);  /* card                  */
+  --dwc-surface-3:            var(--parchment-400);  /* well                  */
+
+  --dwc-color-text:           var(--ink-800);
+  --dwc-color-text-strong:    var(--ink-900);
+  --dwc-color-text-muted:     var(--ink-400);
+
+  --dwc-color-success:        var(--status-standing);
+  --dwc-color-warning:        var(--status-ruins);
+  --dwc-color-neutral:        var(--status-destroyed);
+
+  --dwc-border-color:         var(--gold-600);
+  --dwc-border-width:         var(--bw-rule);
+  --dwc-border-radius:        var(--r-sm);
+
+  --dwc-font-family:          var(--font-body);
+  --dwc-font-family-heading:  var(--font-display);
+  --dwc-font-family-mono:     var(--font-mono);
+
+  --dwc-space-xs:  var(--sp-2);
+  --dwc-space-s:   var(--sp-3);
+  --dwc-space-m:   var(--sp-5);
+  --dwc-space-l:   var(--sp-6);
+  --dwc-space-xl:  var(--sp-7);
+
+  --dwc-shadow-1:  var(--shadow-raised);
+  --dwc-shadow-2:  var(--shadow-lifted);
+}
