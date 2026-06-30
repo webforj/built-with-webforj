@@ -13,7 +13,7 @@
   <name>focus-tracker</name>
   <properties>
     <java.version>21</java.version>
-    <webforj.version>26.01-SNAPSHOT</webforj.version>
+    <webforj.version>26.01</webforj.version>
     <maven.compiler.target>21</maven.compiler.target>
     <maven.compiler.source>21</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
