@@ -38,16 +38,16 @@
       <version>${webforj.version}</version>
     </dependency>
 
-    <!-- Jakarta Bean Validation API + reference impl (Hibernate Validator) -->
+    <!-- Jakarta Validation 3.0 API + reference implementation for Jakarta EE 10. -->
     <dependency>
       <groupId>jakarta.validation</groupId>
       <artifactId>jakarta.validation-api</artifactId>
-      <version>3.1.0</version>
+      <version>3.0.2</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>8.0.1.Final</version>
+      <version>8.0.3.Final</version>
     </dependency>
     <dependency>
       <groupId>org.glassfish.expressly</groupId>

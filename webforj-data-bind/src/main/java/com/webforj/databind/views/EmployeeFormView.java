@@ -176,12 +176,17 @@ public class EmployeeFormView extends Composite<Div> {
     service.save(saved);
     openSavedEmployeeDialog(saved);
 
+    resetForm();
+  }
+
+  private void resetForm() {
     current = new Employee();
     context.read(current);
     // ChoiceBox doesn't visually clear from an empty string; explicitly deselect on reset.
     roleBox.deselect();
     countryBox.deselect();
     relationshipBox.deselect();
+    saveButton.setEnabled(false);
   }
 
   /**
@@ -212,6 +217,7 @@ public class EmployeeFormView extends Composite<Div> {
     close.setStyle("margin-left", "auto");
     close.onClick(ev -> dialog.close());
     dialog.addToFooter(close);
+    dialog.onClose(ev -> self.remove(dialog));
 
     self.add(dialog);
     dialog.open();
