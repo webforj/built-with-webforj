@@ -1,4 +1,4 @@
-# webforj-nestedbeans
+# webforj-databind
 
 A small webforJ 26.01 demo of **data binding over nested Java beans**, packaged as a traditional WAR and run on the Jetty Maven plugin.
 
@@ -25,13 +25,13 @@ The Jetty plugin scans for class and resource changes every second (`<jetty.scan
 mvn clean package
 ```
 
-Produces `target/webforj-nestedbeans.war`, ready to drop into any Servlet 6 container.
+Produces `target/webforj-databind.war`, ready to drop into any Servlet 6 container.
 
 ## Project layout
 
 ```
 src/main/
-├── java/com/webforj/nestedbeans/
+├── java/com/webforj/databind/
 │   ├── Application.java             # webforJ entry (@Routify, @AppTheme, @StyleSheet)
 │   ├── domain/
 │   │   ├── Employee.java            # @Embedded address + emergencyContact
@@ -60,9 +60,9 @@ context.write(employee);  // creates missing nested beans via no-arg ctor, then 
 
 One context, dotted paths for every nested field. Jakarta validation messages declared on `Address`/`EmergencyContact` light up automatically because the `Employee` fields are annotated `@Valid`.
 
-## Viewing saved entries
+## Saving an employee
 
-The page has a **View saved** button that opens a `Dialog` containing an `Accordion`. Each accordion panel expands to show one saved employee's identity, address, and emergency contact.
+Clicking **Save** validates the form, persists the populated `Employee` to the in-memory store, and opens a `Dialog` showing the just-saved record. The dialog contains an `Accordion` with three panels — **Employee**, **Address**, and **Emergency contact** — and a primary-themed Close button.
 
 ## Learn more
 

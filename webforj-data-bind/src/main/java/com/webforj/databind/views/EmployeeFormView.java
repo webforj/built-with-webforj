@@ -1,7 +1,6 @@
-package com.webforj.nestedbeans.views;
+package com.webforj.databind.views;
 
 import com.webforj.component.Composite;
-import com.webforj.component.Theme;
 import com.webforj.component.accordion.Accordion;
 import com.webforj.component.accordion.AccordionPanel;
 import com.webforj.component.button.Button;
@@ -16,13 +15,12 @@ import com.webforj.component.icons.FeatherIcon;
 import com.webforj.component.layout.columnslayout.ColumnsLayout;
 import com.webforj.component.layout.columnslayout.ColumnsLayout.Breakpoint;
 import com.webforj.component.list.ChoiceBox;
-import com.webforj.component.toast.Toast;
 import com.webforj.data.binding.BindingContext;
 import com.webforj.data.validation.server.ValidationResult;
-import com.webforj.nestedbeans.domain.Address;
-import com.webforj.nestedbeans.domain.EmergencyContact;
-import com.webforj.nestedbeans.domain.Employee;
-import com.webforj.nestedbeans.service.EmployeeService;
+import com.webforj.databind.domain.Address;
+import com.webforj.databind.domain.EmergencyContact;
+import com.webforj.databind.domain.Employee;
+import com.webforj.databind.service.EmployeeService;
 import com.webforj.router.annotation.FrameTitle;
 import com.webforj.router.annotation.Route;
 import java.util.List;
@@ -31,7 +29,7 @@ import java.util.List;
  * Single-page demo of webforJ data binding with nested beans.
  *
  * <p>The form is backed by a single {@link BindingContext} over {@link Employee}. Fields inside
- * nested beans ({@link Address} and {@link com.webforj.nestedbeans.domain.EmergencyContact}) are
+ * nested beans ({@link Address} and {@link com.webforj.databind.domain.EmergencyContact}) are
  * bound via dotted property paths — e.g. {@code "address.street"} — which is the idiomatic
  * webforJ 26.01 pattern. {@code BindingContext.write()} populates the nested beans, creating
  * missing intermediate objects through their no-arg constructors as needed, and Jakarta
@@ -176,7 +174,6 @@ public class EmployeeFormView extends Composite<Div> {
 
     Employee saved = current;
     service.save(saved);
-    Toast.show("Saved " + saved.fullName(), Theme.SUCCESS);
     openSavedEmployeeDialog(saved);
 
     current = new Employee();
@@ -208,7 +205,11 @@ public class EmployeeFormView extends Composite<Div> {
     accordion.add(contactPanel(e.getEmergencyContact()));
     dialog.addToContent(accordion);
 
+    // margin-left: auto right-aligns the button inside the dwc-dialog's flex footer slot
+    // without stretching it to the full dialog width.
     Button close = new Button("Close");
+    close.setTheme(ButtonTheme.PRIMARY);
+    close.setStyle("margin-left", "auto");
     close.onClick(ev -> dialog.close());
     dialog.addToFooter(close);
 

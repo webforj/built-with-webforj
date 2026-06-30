@@ -1,4 +1,4 @@
-package com.webforj.nestedbeans.domain;
+package com.webforj.databind.domain;
 
 import jakarta.persistence.Embedded;
 import jakarta.validation.Valid;

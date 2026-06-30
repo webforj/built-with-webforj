@@ -1,8 +1,8 @@
-package com.webforj.nestedbeans.service;
+package com.webforj.databind.service;
 
-import com.webforj.nestedbeans.domain.Address;
-import com.webforj.nestedbeans.domain.Employee;
-import com.webforj.nestedbeans.domain.EmergencyContact;
+import com.webforj.databind.domain.Address;
+import com.webforj.databind.domain.Employee;
+import com.webforj.databind.domain.EmergencyContact;
 import java.util.ArrayList;
 import java.util.List;
 
