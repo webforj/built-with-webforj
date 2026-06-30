@@ -2,7 +2,7 @@
 
 :root {
   --dwc-font-family: "Geist", system-ui, sans-serif;
-  --dwc-font-size: var(--dwc-font-size-xl);
+  --dwc-font-size: calc(var(--dwc-font-size-xl) * 1.1);
 }
 
 dwc-window-center {
@@ -33,7 +33,7 @@ dwc-window-center {
   font-size: clamp(3rem, 15vw, 5rem);
   font-weight: 200;
   font-family: var(--dwc-font-family-mono);
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
   text-align: center;
 }
 
