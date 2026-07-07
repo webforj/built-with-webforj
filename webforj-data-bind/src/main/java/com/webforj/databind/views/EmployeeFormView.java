@@ -210,13 +210,19 @@ public class EmployeeFormView extends Composite<Div> {
     accordion.add(contactPanel(e.getEmergencyContact()));
     dialog.addToContent(accordion);
 
-    // margin-left: auto right-aligns the button inside the dwc-dialog's flex footer slot
-    // without stretching it to the full dialog width.
     Button close = new Button("Close");
     close.setTheme(ButtonTheme.PRIMARY);
-    close.setStyle("margin-left", "auto");
     close.onClick(ev -> dialog.close());
-    dialog.addToFooter(close);
+
+    // The dwc-dialog footer slot is height-compressed by default — a button placed directly
+    // inside renders short and pill-shaped. Wrap it in a vertically padded div so it gets
+    // the same breathing room as the Save button on the main page.
+    Div footerWrap = new Div();
+    footerWrap.setStyle("padding", "var(--dwc-space-m)");
+    footerWrap.setStyle("width", "100%");
+    footerWrap.setStyle("box-sizing", "border-box");
+    footerWrap.add(close);
+    dialog.addToFooter(footerWrap);
     dialog.onClose(ev -> self.remove(dialog));
 
     self.add(dialog);
