@@ -1,0 +1,12 @@
+/*
+ * Define application theme
+ *
+ * See the documentation for details:
+ * https://docs.webforj.com/docs/styling/overview
+ */
+
+/* dwc-window-center is the scroll container — make it actually scroll so the lower form
+   sections and the Save button stay reachable on small viewports. */
+dwc-window-center {
+  overflow-y: auto;
+}
