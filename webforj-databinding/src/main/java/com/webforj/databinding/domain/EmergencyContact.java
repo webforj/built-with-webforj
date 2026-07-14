@@ -1,11 +1,9 @@
-package com.webforj.databind.domain;
+package com.webforj.databinding.domain;
 
-import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-@Embeddable
 public class EmergencyContact {
 
   @NotBlank(message = "Contact name is required")

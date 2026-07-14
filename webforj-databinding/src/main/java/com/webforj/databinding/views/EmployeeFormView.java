@@ -1,4 +1,4 @@
-package com.webforj.databind.views;
+package com.webforj.databinding.views;
 
 import com.webforj.component.Composite;
 import com.webforj.component.accordion.Accordion;
@@ -16,11 +16,11 @@ import com.webforj.component.layout.columnslayout.ColumnsLayout;
 import com.webforj.component.layout.columnslayout.ColumnsLayout.Breakpoint;
 import com.webforj.component.list.ChoiceBox;
 import com.webforj.data.binding.BindingContext;
+import com.webforj.data.binding.annotation.UseProperty;
 import com.webforj.data.validation.server.ValidationResult;
-import com.webforj.databind.domain.Address;
-import com.webforj.databind.domain.EmergencyContact;
-import com.webforj.databind.domain.Employee;
-import com.webforj.databind.service.EmployeeService;
+import com.webforj.databinding.domain.Address;
+import com.webforj.databinding.domain.EmergencyContact;
+import com.webforj.databinding.domain.Employee;
 import com.webforj.router.annotation.FrameTitle;
 import com.webforj.router.annotation.Route;
 import java.util.List;
@@ -28,35 +28,47 @@ import java.util.List;
 /**
  * Single-page demo of webforJ data binding with nested beans.
  *
- * <p>The form is backed by a single {@link BindingContext} over {@link Employee}. Fields inside
- * nested beans ({@link Address} and {@link com.webforj.databind.domain.EmergencyContact}) are
- * bound via dotted property paths — e.g. {@code "address.street"} — which is the idiomatic
- * webforJ 26.01 pattern. {@code BindingContext.write()} populates the nested beans, creating
- * missing intermediate objects through their no-arg constructors as needed, and Jakarta
- * Validation cascades through {@code @Valid} on the nested fields.
+ * <p>The form is backed by a single {@link BindingContext} over {@link Employee}, created with
+ * {@code BindingContext.of()} (automatic binding). Fields whose names match Employee properties
+ * bind by name; fields inside nested beans ({@link Address} and
+ * {@link com.webforj.databinding.domain.EmergencyContact}) are mapped with {@code @UseProperty}
+ * dotted paths — e.g. {@code "address.street"}. {@code BindingContext.write()} populates the
+ * nested beans, creating missing intermediate objects through their no-arg constructors as
+ * needed, and Jakarta Validation cascades through {@code @Valid} on the nested fields.
  */
 @Route("/")
 @FrameTitle("Employee Onboarding")
 public class EmployeeFormView extends Composite<Div> {
 
   private final Div self = getBoundComponent();
-  private final EmployeeService service = EmployeeService.getInstance();
 
   // Employee fields
   private final TextField firstName = new TextField("First name");
   private final TextField lastName = new TextField("Last name");
   private final TextField email = new TextField("Email");
-  private final ChoiceBox roleBox = new ChoiceBox("Role");
+  private final ChoiceBox role = new ChoiceBox("Role");
 
   // Address fields (nested under Employee.address)
+  @UseProperty("address.street")
   private final TextField street = new TextField("Street");
+
+  @UseProperty("address.city")
   private final TextField city = new TextField("City");
+
+  @UseProperty("address.postalCode")
   private final TextField postalCode = new TextField("Postal code");
+
+  @UseProperty("address.country")
   private final ChoiceBox countryBox = new ChoiceBox("Country");
 
   // EmergencyContact fields (nested under Employee.emergencyContact)
+  @UseProperty("emergencyContact.contactName")
   private final TextField contactName = new TextField("Contact name");
+
+  @UseProperty("emergencyContact.relationship")
   private final ChoiceBox relationshipBox = new ChoiceBox("Relationship");
+
+  @UseProperty("emergencyContact.phone")
   private final TextField phone = new TextField("Phone");
 
   private final Button saveButton = new Button("Save");
@@ -71,7 +83,7 @@ public class EmployeeFormView extends Composite<Div> {
   }
 
   private void populateChoiceBoxes() {
-    roleBox.insert("Engineer", "Designer", "Product Manager", "Operations");
+    role.insert("Engineer", "Designer", "Product Manager", "Operations");
     countryBox.insert("United States", "United Kingdom", "Canada", "Germany", "Australia");
     relationshipBox.insert("Spouse", "Parent", "Sibling", "Friend", "Other");
   }
@@ -92,9 +104,9 @@ public class EmployeeFormView extends Composite<Div> {
     self.add(
         new H1("Employee Onboarding"),
         new Paragraph(
-            "Demonstrates webforJ 26.01 BindingContext with nested beans. A single "
-                + "BindingContext binds top-level Employee fields and nested Address / "
-                + "EmergencyContact fields via dotted property paths."),
+            "Demonstrates webforJ 26.01 automatic data binding with nested beans. A single "
+                + "BindingContext.of() binds top-level Employee fields by name and nested "
+                + "Address / EmergencyContact fields via @UseProperty dotted paths."),
         identityFieldset(),
         addressFieldset(),
         contactFieldset(),
@@ -102,9 +114,11 @@ public class EmployeeFormView extends Composite<Div> {
   }
 
   private Fieldset identityFieldset() {
-    ColumnsLayout grid = new ColumnsLayout(firstName, lastName, email, roleBox);
+    ColumnsLayout grid = new ColumnsLayout(firstName, lastName, email, role);
     applyBreakpoints(grid);
     grid.setSpan(email, "wide", 2);
+    grid.setSpan(role, "wide", 2);
+
     return fieldset("Employee", grid);
   }
 
@@ -113,6 +127,7 @@ public class EmployeeFormView extends Composite<Div> {
     applyBreakpoints(grid);
     grid.setSpan(street, "wide", 2);
     grid.setSpan(countryBox, "wide", 2);
+
     return fieldset("Address", grid);
   }
 
@@ -120,6 +135,7 @@ public class EmployeeFormView extends Composite<Div> {
     ColumnsLayout grid = new ColumnsLayout(contactName, relationshipBox, phone);
     applyBreakpoints(grid);
     grid.setSpan(phone, "wide", 2);
+
     return fieldset("Emergency contact", grid);
   }
 
@@ -132,6 +148,7 @@ public class EmployeeFormView extends Composite<Div> {
     fs.setStyle("padding", "var(--dwc-space-l) var(--dwc-space-l) var(--dwc-space-xl)");
     fs.setStyle("border-radius", "var(--dwc-border-radius)");
     fs.add(grid);
+
     return fs;
   }
 
@@ -143,24 +160,9 @@ public class EmployeeFormView extends Composite<Div> {
   }
 
   private void setupBindings() {
-    context = new BindingContext<>(Employee.class, true);
-
-    // Top-level Employee properties
-    context.bind(firstName, "firstName").add();
-    context.bind(lastName, "lastName").add();
-    context.bind(email, "email").add();
-    context.bind(roleBox, "role").add();
-
-    // Nested Address properties, bound through dotted paths.
-    context.bind(street, "address.street").add();
-    context.bind(city, "address.city").add();
-    context.bind(postalCode, "address.postalCode").add();
-    context.bind(countryBox, "address.country").add();
-
-    // Nested EmergencyContact properties, also via dotted paths.
-    context.bind(contactName, "emergencyContact.contactName").add();
-    context.bind(relationshipBox, "emergencyContact.relationship").add();
-    context.bind(phone, "emergencyContact.phone").add();
+    // Auto binding: fields whose names match Employee properties bind by name; the
+    // rest are mapped through @UseProperty, including nested dotted paths.
+    context = BindingContext.of(this, Employee.class, true);
 
     context.onValidate(e -> saveButton.setEnabled(e.isValid()));
     context.read(current);
@@ -172,9 +174,7 @@ public class EmployeeFormView extends Composite<Div> {
       return;
     }
 
-    Employee saved = current;
-    service.save(saved);
-    openSavedEmployeeDialog(saved);
+    openSavedEmployeeDialog(current);
 
     resetForm();
   }
@@ -183,7 +183,7 @@ public class EmployeeFormView extends Composite<Div> {
     current = new Employee();
     context.read(current);
     // ChoiceBox doesn't visually clear from an empty string; explicitly deselect on reset.
-    roleBox.deselect();
+    role.deselect();
     countryBox.deselect();
     relationshipBox.deselect();
     saveButton.setEnabled(false);
@@ -204,7 +204,7 @@ public class EmployeeFormView extends Composite<Div> {
     dialog.addToHeader(title);
 
     Accordion accordion = new Accordion();
-    accordion.setMultiple(true);
+    accordion.setMultiple(false);
     accordion.add(employeePanel(e));
     accordion.add(addressPanel(e.getAddress()));
     accordion.add(contactPanel(e.getEmergencyContact()));
@@ -214,9 +214,6 @@ public class EmployeeFormView extends Composite<Div> {
     close.setTheme(ButtonTheme.PRIMARY);
     close.onClick(ev -> dialog.close());
 
-    // The dwc-dialog footer slot is height-compressed by default — a button placed directly
-    // inside renders short and pill-shaped. Wrap it in a vertically padded div so it gets
-    // the same breathing room as the Save button on the main page.
     Div footerWrap = new Div();
     footerWrap.setStyle("padding", "var(--dwc-space-m)");
     footerWrap.setStyle("width", "100%");
@@ -236,6 +233,7 @@ public class EmployeeFormView extends Composite<Div> {
         detailRow("Last name", e.getLastName()),
         detailRow("Email", e.getEmail()),
         detailRow("Role", e.getRole())));
+
     return panel;
   }
 
@@ -246,6 +244,7 @@ public class EmployeeFormView extends Composite<Div> {
         detailRow("City", a.getCity()),
         detailRow("Postal code", a.getPostalCode()),
         detailRow("Country", a.getCountry())));
+
     return panel;
   }
 
@@ -255,6 +254,7 @@ public class EmployeeFormView extends Composite<Div> {
         detailRow("Contact name", c.getContactName()),
         detailRow("Relationship", c.getRelationship()),
         detailRow("Phone", c.getPhone())));
+
     return panel;
   }
 
@@ -265,6 +265,7 @@ public class EmployeeFormView extends Composite<Div> {
     body.setStyle("gap", "var(--dwc-space-s)");
     body.setStyle("padding", "var(--dwc-space-m) var(--dwc-space-s)");
     body.add(rows);
+
     return body;
   }
 
@@ -284,6 +285,7 @@ public class EmployeeFormView extends Composite<Div> {
     valueEl.setStyle("font-size", "var(--dwc-font-size-m)");
 
     row.add(labelEl, valueEl);
+
     return row;
   }
 }

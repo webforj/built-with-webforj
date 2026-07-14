@@ -4,14 +4,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.webforj.databind</groupId>
-  <artifactId>webforj-databind</artifactId>
+  <groupId>com.webforj.databinding</groupId>
+  <artifactId>webforj-databinding</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>webforj-databind</name>
+  <name>webforj-databinding</name>
 
   <properties>
-    <webforj.version>26.01-SNAPSHOT</webforj.version>
+    <webforj.version>26.01</webforj.version>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,12 +38,6 @@
       <version>${webforj.version}</version>
     </dependency>
 
-    <!-- Jakarta Validation 3.0 API + reference implementation for Jakarta EE 10. -->
-    <dependency>
-      <groupId>jakarta.validation</groupId>
-      <artifactId>jakarta.validation-api</artifactId>
-      <version>3.0.2</version>
-    </dependency>
     <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
@@ -53,13 +47,6 @@
       <groupId>org.glassfish.expressly</groupId>
       <artifactId>expressly</artifactId>
       <version>5.0.0</version>
-    </dependency>
-
-    <!-- @Embeddable / @Embedded annotations on the nested beans (no JPA runtime). -->
-    <dependency>
-      <groupId>jakarta.persistence</groupId>
-      <artifactId>jakarta.persistence-api</artifactId>
-      <version>3.2.0</version>
     </dependency>
   </dependencies>
 

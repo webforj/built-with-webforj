@@ -1,10 +1,8 @@
-package com.webforj.databind.domain;
+package com.webforj.databinding.domain;
 
-import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@Embeddable
 public class Address {
 
   @NotBlank(message = "Street is required")
@@ -52,9 +50,5 @@ public class Address {
 
   public void setCountry(String country) {
     this.country = country;
-  }
-
-  public String oneLine() {
-    return street + ", " + city + " " + postalCode + ", " + country;
   }
 }

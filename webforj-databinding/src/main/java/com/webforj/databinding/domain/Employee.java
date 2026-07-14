@@ -1,6 +1,5 @@
-package com.webforj.databind.domain;
+package com.webforj.databinding.domain;
 
-import jakarta.persistence.Embedded;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -23,11 +22,9 @@ public class Employee {
   @NotBlank(message = "Role is required")
   private String role = "";
 
-  @Embedded
   @Valid
   private Address address = new Address();
 
-  @Embedded
   @Valid
   private EmergencyContact emergencyContact = new EmergencyContact();
 

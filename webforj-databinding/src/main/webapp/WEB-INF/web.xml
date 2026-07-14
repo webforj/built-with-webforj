@@ -5,7 +5,7 @@
                         https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
     version="6.0">
 
-  <display-name>webforj-nestedbeans</display-name>
+  <display-name>webforj-databinding</display-name>
 
   <servlet>
     <servlet-name>WebforjServlet</servlet-name>
