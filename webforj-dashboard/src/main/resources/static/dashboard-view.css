@@ -28,7 +28,7 @@
   flex: 1 1 300px;
   padding: var(--dwc-space-m);
   min-width: 280px;
-  border-radius: var(--dwc-border-radius);
+  border-radius: var(--dwc-border-radius-s);
   border: var(--dwc-border-width) solid var(--dwc-color-default);
   transition: all var(--dwc-transition-medium) ease;
   animation: fadeInUp 500ms ease-out;
@@ -57,7 +57,7 @@
 
 /* Card content styles */
 .data-card__title {
-  font-size: var(--dwc-font-size-l);
+  font-size: var(--dwc-font-size-xl);
   color: var(--dwc-color-gray-15);
   font-weight: var(--dwc-font-weight-normal);
   transition: color var(--dwc-transition-fast) ease;
@@ -72,8 +72,8 @@
 .data-card__percent {
   padding: var(--dwc-space-2xs) var(--dwc-space-s);
   border-radius: var(--dwc-border-radius-m);
-  font-size: var(--dwc-font-size-m);
-  font-weight: var(--dwc-font-weight-semibold);
+  font-size: var(--dwc-font-size-l);
+  font-weight: var(--dwc-font-weight-medium);
   transition: all var(--dwc-transition-fast) ease;
 }
 
@@ -91,7 +91,7 @@
 }
 
 .data-card__details {
-  font-size: var(--dwc-font-size-m);
+  font-size: var(--dwc-font-size-l);
   color: var(--dwc-color-on-surface);
 }
 
@@ -145,13 +145,13 @@ dwc-table::part(price-cell) {
 dwc-table::part(cell-gain),
 dwc-table::part(price-change-gain) {
   color: var(--dwc-color-success-25);
-  font-weight: var(--dwc-font-weight-semibold);
+  font-weight: var(--dwc-font-weight-medium);
 }
 
 dwc-table::part(cell-loss),
 dwc-table::part(price-change-loss) {
   color: var(--dwc-color-danger-40);
-  font-weight: var(--dwc-font-weight-semibold);
+  font-weight: var(--dwc-font-weight-medium);
 }
 
 dwc-table::part(cell-neutral),
@@ -164,7 +164,7 @@ dwc-table::part(price-change-gain),
 dwc-table::part(price-change-loss),
 dwc-table::part(price-change-neutral) {
   font-weight: var(--dwc-font-weight-light);
-  font-size: var(--dwc-font-size-xl);
+  font-size: var(--dwc-font-size-2xl);
 }
 
 dwc-table::part(price-change-container) {
@@ -179,8 +179,8 @@ dwc-table::part(percentage-badge-loss),
 dwc-table::part(percentage-badge-neutral) {
   padding: var(--dwc-space-2xs) var(--dwc-space-s);
   border-radius: var(--dwc-border-radius-m);
-  font-size: var(--dwc-font-size-m);
-  font-weight: var(--dwc-font-weight-semibold);
+  font-size: var(--dwc-font-size-l);
+  font-weight: var(--dwc-font-weight-medium);
   font-variant-numeric: tabular-nums;
 }
 
@@ -240,7 +240,7 @@ dwc-table::part(crypto-name) {
 }
 
 dwc-table::part(crypto-symbol) {
-  font-size: var(--dwc-font-size-l);
+  font-size: var(--dwc-font-size-xl);
   color: var(--dwc-color-gray-15);
   font-weight: var(--dwc-font-weight-light);
 }
@@ -290,7 +290,7 @@ dwc-table::part(crypto-symbol) {
   }
 
   dwc-table {
-    font-size: var(--dwc-font-size-m);
+    font-size: var(--dwc-font-size-l);
   }
 }
 
@@ -340,33 +340,33 @@ dwc-table::part(crypto-symbol) {
   }
 
   dwc-table::part(crypto-name) {
-    font-size: var(--dwc-font-size-m);
+    font-size: var(--dwc-font-size-l);
   }
 
   dwc-table::part(crypto-symbol) {
-    font-size: var(--dwc-font-size-s);
+    font-size: var(--dwc-font-size-m);
   }
 
   dwc-table::part(cell-header) {
-    font-size: var(--dwc-font-size-s);
+    font-size: var(--dwc-font-size-m);
     padding: var(--dwc-space-2xs);
   }
 
   dwc-table::part(cell) {
-    font-size: var(--dwc-font-size-m);
+    font-size: var(--dwc-font-size-l);
   }
 
   dwc-table::part(percentage-badge-gain),
   dwc-table::part(percentage-badge-loss),
   dwc-table::part(percentage-badge-neutral) {
-    font-size: var(--dwc-font-size-s);
+    font-size: var(--dwc-font-size-m);
   }
 
   /* Make 24h change text smaller on small screens */
   dwc-table::part(price-change-gain),
   dwc-table::part(price-change-loss),
   dwc-table::part(price-change-neutral) {
-    font-size: var(--dwc-font-size-m);
+    font-size: var(--dwc-font-size-l);
   }
 
   /* Ensure table rows are compact on mobile */

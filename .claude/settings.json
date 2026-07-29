@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.webforj.com)",
+      "mcp__webforj-mcp__get_versions",
+      "WebFetch(domain:github.com)",
+      "Bash(Get-ChildItem -Path \"C:\\\\__webforJ\\\\built-with-webforj\\\\webforj-dashboard\" -Recurse -Directory)",
+      "Bash(Select-Object -First 20)",
+      "mcp__webforj-mcp__styles_list_tokens",
+      "mcp__webforj-mcp__search_knowledge_base",
+      "Bash(mvn -q compile)",
+      "Bash(mvn compile *)",
+      "Bash(mvn clean *)",
+      "Bash(mvn jetty:run)",
+      "Bash(curl -sS -o /dev/null -w \"root: %{http_code}\\\\n\" http://localhost:8080/)",
+      "Bash(curl -sS -o /dev/null -w \"app.css: %{http_code}\\\\n\" http://localhost:8080/webforj/webserver/app.css)",
+      "Bash(curl -sS http://localhost:8080/webforj/webserver/app.css)",
+      "Bash(curl -sS http://localhost:8080/static/app.css)",
+      "mcp__webforj-mcp__styles_validate_tokens",
+      "Bash(mvn process-resources *)"
+    ]
+  }
+}

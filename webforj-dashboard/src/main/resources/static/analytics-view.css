@@ -21,7 +21,7 @@
   min-width: 300px;
   background: var(--dwc-surface-3);
   border: thin solid var(--dwc-color-default);
-  border-radius: var(--dwc-border-radius);
+  border-radius: var(--dwc-border-radius-s);
   padding: var(--dwc-space-l);
   transition: all var(--dwc-transition-medium) ease;
   box-shadow: none;
@@ -119,7 +119,7 @@
 }
 
 .portfolio-hero__label {
-  font-size: var(--dwc-font-size-xl);
+  font-size: var(--dwc-font-size-2xl);
   opacity: 0.9;
 }
 
@@ -130,12 +130,12 @@
 
 .portfolio-hero__change-value {
   font-size: var(--dwc-font-size-2xl);
-  font-weight: var(--dwc-font-weight-semibold);
+  font-weight: var(--dwc-font-weight-medium);
   color: var(--dwc-color-success-50);
 }
 
 .portfolio-hero__change-percent {
-  font-size: var(--dwc-font-size-xl);
+  font-size: var(--dwc-font-size-2xl);
   opacity: 0.8;
 }
 
@@ -154,7 +154,7 @@
   border-radius: var(--dwc-border-radius-s);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
   width: 200px;
 }
 
@@ -176,13 +176,13 @@
 
 .portfolio-hero__quick-stat-label {
   margin: 0;
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
   opacity: 0.8;
 }
 
 .portfolio-hero__quick-stat-value {
-  font-size: var(--dwc-font-size-m);
-  font-weight: var(--dwc-font-weight-semibold);
+  font-size: var(--dwc-font-size-l);
+  font-weight: var(--dwc-font-weight-medium);
 }
 
 /* Portfolio hero animations */
@@ -244,7 +244,7 @@
 
 .performance-ring__label {
   margin: 0;
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
   color: rgba(255, 255, 255, 0.9);
   text-transform: uppercase;
   font-weight: 500;
@@ -255,11 +255,11 @@
 }
 
 .mini-metric__value {
-  font-weight: var(--dwc-font-weight-semibold);
+  font-weight: var(--dwc-font-weight-medium);
 }
 
 .mini-metric__label {
-  font-size: var(--dwc-font-size-m);
+  font-size: var(--dwc-font-size-l);
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
 }
@@ -299,7 +299,7 @@
   }
 
   .performance-ring__percentage {
-    font-size: var(--dwc-font-size-xl);
+    font-size: var(--dwc-font-size-2xl);
   }
 }
 

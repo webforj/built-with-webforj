@@ -4,17 +4,11 @@
   --dwc-color-default-h: var(--dwc-color-primary-h);
   --dwc-color-default-s: 10%;
   --dwc-color-primary-dark: var(--dwc-color-primary-40);
-  --dwc-color-on-primary-text-dark: var(--dwc-color-primary-text-40);
   --dwc-color-primary: var(--dwc-color-primary-45);
-  --dwc-color-on-primary-text: var(--dwc-color-primary-text-45);
   --dwc-color-primary-light: var(--dwc-color-primary-50);
-  --dwc-color-on-primary-text-light: var(--dwc-color-primary-text-50);
   --dwc-color-default-dark: var(--dwc-color-default-85);
-  --dwc-color-on-default-text-dark: var(--dwc-color-default-text-85);
   --dwc-color-default: var(--dwc-color-default-90);
-  --dwc-color-on-default-text: var(--dwc-color-default-text-90);
   --dwc-color-default-light: var(--dwc-color-default-95);
-  --dwc-color-on-default-text-light: var(--dwc-color-default-text-95);
   --dwc-color-default-text-dark: var(--dwc-color-default-35);
   --dwc-color-default-text: var(--dwc-color-default-40);
   --dwc-color-default-text-light: var(--dwc-color-default-45);
@@ -190,14 +184,14 @@ google-chart {
 
 .drawer-logo__brand {
   font-size: 1.25rem;
-  font-weight: var(--dwc-font-weight-semibold);
+  font-weight: var(--dwc-font-weight-medium);
   letter-spacing: -0.5px;
 }
 
 .drawer-logo__tagline {
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
   color: var(--dwc-color-gray-40);
-  font-weight: var(--dwc-font-weight-semibold);
+  font-weight: var(--dwc-font-weight-medium);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -324,11 +318,11 @@ google-chart {
 }
 
 .drawer-footer__user-name {
-  font-size: var(--dwc-font-size-m);
+  font-size: var(--dwc-font-size-l);
   font-weight: var(--dwc-font-weight-bold);
 }
 
 .drawer-footer__user-role {
-  font-size: var(--dwc-font-size-s);
+  font-size: var(--dwc-font-size-m);
   color: var(--dwc-color-gray-40);
 }
