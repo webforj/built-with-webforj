@@ -2,6 +2,7 @@ package com.webforj.builtwithwebforj.focustracker.views;
 
 import com.webforj.App;
 import com.webforj.Interval;
+import com.webforj.Page;
 import com.webforj.component.Composite;
 import com.webforj.component.desktopnotification.DesktopNotification;
 import com.webforj.component.html.elements.Div;
@@ -83,7 +84,8 @@ public class FocusTrackerView extends Composite<FlexLayout> {
 
     buttonRow.add(startBtn, completeBtn);
 
-    Paragraph hint = new Paragraph("Install this app to see the badge on your app icon");
+    Paragraph hint = new Paragraph(
+        "See the badge in your browser tab, or install this app to see it on the app icon");
     hint.addClassName("focus-tracker__hint");
 
     self.add(title, subtitle, timerRow, status, buttonRow, hint);
@@ -169,10 +171,12 @@ public class FocusTrackerView extends Composite<FlexLayout> {
   private void updateBadge() {
     int value = minutes > 0 ? minutes : (seconds > 0 ? 1 : 0);
     App.setBadge(value);
+    Page.getCurrent().setIconBadge(value);
   }
 
   private void clearBadge() {
     App.setBadge(0);
+    Page.getCurrent().setIconBadge(0);
   }
 
   private String formatTime(int mins, int secs) {
