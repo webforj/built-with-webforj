@@ -11,7 +11,7 @@
   <name>webforj-databinding</name>
 
   <properties>
-    <webforj.version>26.01</webforj.version>
+    <webforj.version>26.02-SNAPSHOT</webforj.version>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

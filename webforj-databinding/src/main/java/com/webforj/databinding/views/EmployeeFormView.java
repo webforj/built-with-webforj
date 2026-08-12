@@ -104,7 +104,7 @@ public class EmployeeFormView extends Composite<Div> {
     self.add(
         new H1("Employee Onboarding"),
         new Paragraph(
-            "Demonstrates webforJ 26.01 automatic data binding with nested beans. A single "
+            "Demonstrates webforJ 26.02 automatic data binding with nested beans. A single "
                 + "BindingContext.of() binds top-level Employee fields by name and nested "
                 + "Address / EmergencyContact fields via @UseProperty dotted paths."),
         identityFieldset(),

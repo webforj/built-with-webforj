@@ -5,14 +5,14 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.8</version>
+    <version>4.0.6</version>
   </parent>
   <groupId>com.webforj.builtwithwebforj.ghostai</groupId>
   <artifactId>webforj-ghostai</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>ghost:ai</name>
   <properties>
-    <webforj.version>25.12</webforj.version>
+    <webforj.version>26.02-SNAPSHOT</webforj.version>
     <maven.compiler.target>21</maven.compiler.target>
     <maven.compiler.source>21</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -94,6 +94,19 @@
       <url>https://central.sonatype.com/repository/maven-snapshots/</url>
     </repository>
   </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>central-portal-snapshots</id>
+      <name>Central Portal Snapshots</name>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+    </pluginRepository>
+  </pluginRepositories>
   <build>
     <defaultGoal>spring-boot:run</defaultGoal>
     <plugins>
