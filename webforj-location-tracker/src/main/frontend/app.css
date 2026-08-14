@@ -1,49 +1,34 @@
 /* ----------------------------------------------------------------------
-   Location Tracker — friend cards over city photos / gradients
+   Shipments console — surface styling on top of the framework's dwc-card
+   and FlexLayout components.
 
-   Photos are optional. Drop
-     src/main/resources/static/img/cities/<slug>.jpg
-   for any city and it takes over from the gradient. Without it, each
-   city keeps a signature gradient so the demo never looks unfinished.
+   Card structure (header row, dividers, expanse, shadow, border,
+   figure/title/caption/body/footer slots) is provided by `dwc-card`.
+   Every row/column/gap in the app shell and dialog is a FlexLayout, so
+   this file only owns visual treatment (colors, radii, backgrounds,
+   sizing, badge pulse, FAB shape) — no display:flex / gap plumbing.
    ---------------------------------------------------------------------- */
 
 :root {
   --dwc-color-primary-seed: #2f80ed;
-  --lt-card-radius: var(--dwc-border-radius-l);
-  --lt-card-height: 220px;
+  --lt-hero-height: 160px;
   --lt-content-max: 1120px;
 }
 
 /* -- shell --------------------------------------------------------------- */
 
+.app-shell__brand {
+  color: var(--dwc-color-primary-text);
+}
+
+.app-shell__brand dwc-icon {
+  font-size: 24px;
+}
+
 .app-shell__title {
   margin: 0;
   font-size: var(--dwc-font-size-xl);
   letter-spacing: -0.01em;
-}
-
-.app-shell__actions {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  position: relative;
-  min-height: 40px;
-}
-
-/* centered horizontally within the toolbar's action area */
-.app-shell__center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* far right of the toolbar */
-.app-shell__right {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: var(--dwc-space-s);
 }
 
 .app-shell__bell {
@@ -54,185 +39,160 @@
   max-width: var(--lt-content-max);
   margin: 0 auto;
   padding: var(--dwc-space-l) var(--dwc-space-l) var(--dwc-space-3xl);
-  display: flex;
-  flex-direction: column;
-  gap: var(--dwc-space-l);
 }
 
+/* "Dispatch hub near…" strip surface — layout comes from FlexLayout */
 .app-shell__you {
-  margin: 0;
   padding: var(--dwc-space-s) var(--dwc-space-m);
   border-radius: var(--dwc-border-radius-m);
   background: var(--dwc-surface-2);
   color: var(--dwc-color-body-text);
+}
+
+.app-shell__you-text {
+  margin: 0;
   font-size: var(--dwc-font-size-s);
   opacity: 0.9;
+  flex: 1;
+  min-width: 0;
+}
+
+.app-shell__unit-toggle {
+  flex: 0 0 auto;
+  font-size: var(--dwc-font-size-s);
+}
+
+/* -- floating action button --------------------------------------------- */
+
+/*
+ * Circular icon-only FAB pinned to bottom-right of the viewport.
+ *
+ * Same shadow-DOM trick as webforj-ghostai's `.chat-input-button`:
+ *   • `::part(button)` gets `border-radius: 50%` + flex-centered content
+ *   • `::part(label)` is hidden so the empty label span from
+ *     `setPrefixComponent(icon)` doesn't leave a text gap
+ *
+ * The FAB is reparented to <body> by ShipmentsView so `position: fixed`
+ * anchors to the viewport instead of AppLayout's scroll container.
+ */
+.app-shell__fab {
+  position: fixed;
+  bottom: var(--dwc-space-xl);
+  right: var(--dwc-space-xl);
+  z-index: 100;
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  padding: 0;
+  --dwc-border-radius: 50%;
+  /* NOTE: shadow lives on ::part(button), not the host — otherwise the
+     drop-shadow follows the rectangular host box and paints a visible
+     square halo behind the circular part. */
+  background: transparent;
+  border: none;
+}
+
+.app-shell__fab::part(button) {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--dwc-shadow-l);
+}
+
+.app-shell__fab::part(label) {
+  display: none;
+}
+
+.app-shell__fab dwc-icon {
+  font-size: 22px;
 }
 
 /* -- grid --------------------------------------------------------------- */
 
-.friends-grid {
+/* Fluid grid — auto-fill/minmax pattern is more compact than the
+   equivalent breakpoint list a ColumnsLayout would need. */
+.shipments-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--dwc-space-l);
 }
 
-/* -- card --------------------------------------------------------------- */
-
-.friend-card {
-  position: relative;
-  height: var(--lt-card-height);
-  border-radius: var(--lt-card-radius);
+/* -- card: figure hero photo + gray fallback --------------------------- */
+/*
+ * The <img> sits on top of the gray-painted wrapper so a placeholder
+ * shows while the photo loads, and stays visible if the photo URL fails.
+ * Both fill the framework Card's figure region.
+ */
+.shipment-card__hero {
+  display: block;
+  width: 100%;
+  height: var(--lt-hero-height);
+  background: linear-gradient(135deg, #6b7280, #374151);
   overflow: hidden;
-  background-color: var(--dwc-surface-2);
-  background-size: cover;
-  background-position: center;
-  background-image: var(--lt-card-gradient, linear-gradient(135deg, #6b7280, #374151));
-  box-shadow: var(--dwc-shadow-m);
-  transition: transform 160ms ease, box-shadow 160ms ease;
 }
 
-.friend-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--dwc-shadow-l);
+.shipment-card__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-.friend-card__scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0)   0%,
-    rgba(0, 0, 0, 0.1) 45%,
-    rgba(0, 0, 0, 0.75) 100%
-  );
-  pointer-events: none;
-}
+/* -- card: NEW badge in header-actions slot, red + pulsing ------------- */
 
-.friend-card__new {
-  position: absolute;
-  top: var(--dwc-space-s);
-  right: var(--dwc-space-s);
-  z-index: 2;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-}
-
-.friend-card__distance {
-  position: absolute;
-  top: var(--dwc-space-s);
-  left: var(--dwc-space-s);
-  z-index: 2;
-  padding: 4px 10px;
+.shipment-card__new {
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.45);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  color: white;
-  font-size: var(--dwc-font-size-xs);
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  animation: shipment-card-new-pulse 1.6s ease-in-out infinite;
+  transform-origin: center;
 }
 
-.friend-card__distance--muted {
-  opacity: 0.75;
+@keyframes shipment-card-new-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25),
+                0 0 0 0 rgba(220, 38, 38, 0.55);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25),
+                0 0 0 8px rgba(220, 38, 38, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shipment-card__new { animation: none; }
+}
+
+/* -- card: text ------------------------------------------------------- */
+
+.shipment-card__consignee {
+  font-size: var(--dwc-font-size-m);
+  font-weight: 600;
+}
+
+.shipment-card__distance {
+  font-size: var(--dwc-font-size-s);
+  font-weight: 600;
+  color: var(--dwc-color-primary-text);
+}
+
+.shipment-card__distance--muted {
+  color: var(--dwc-color-body-text);
+  opacity: 0.6;
   font-weight: 500;
   font-style: italic;
 }
 
-.friend-card__info {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: var(--dwc-space-m);
-  padding: var(--dwc-space-m);
-  color: white;
-}
-
-.friend-card__avatar {
-  flex: 0 0 auto;
-}
-
-.friend-card__text {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.friend-card__name {
-  font-weight: 700;
-  font-size: var(--dwc-font-size-m);
-  color: white;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.friend-card__where {
-  margin: 0;
-  font-size: var(--dwc-font-size-s);
-  color: rgba(255, 255, 255, 0.88);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
-}
-
-/* -- city gradients (fallback when no photo present) ------------------ */
-/*
- * Each slug sets --lt-card-gradient. FriendCard.java sets an inline
- * background-image = url(photo), var(--lt-card-gradient) when the City
- * has a photoUrl, so the gradient shows behind the photo while it loads
- * and shows through if the URL 404s.
- */
-.friend-card--paris         { --lt-card-gradient: linear-gradient(135deg, #ff6a88, #ffb199); }
-.friend-card--tokyo         { --lt-card-gradient: linear-gradient(135deg, #4a00e0, #8e2de2); }
-.friend-card--cape-town     { --lt-card-gradient: linear-gradient(135deg, #1e90ff, #00bcd4); }
-.friend-card--sydney        { --lt-card-gradient: linear-gradient(135deg, #ff9d47, #ffe259); }
-.friend-card--new-york      { --lt-card-gradient: linear-gradient(135deg, #485563, #29323c); }
-.friend-card--reykjavik     { --lt-card-gradient: linear-gradient(135deg, #89f7fe, #66a6ff); }
-.friend-card--rio           { --lt-card-gradient: linear-gradient(135deg, #00b09b, #96c93d); }
-.friend-card--marrakech     { --lt-card-gradient: linear-gradient(135deg, #c94b4b, #f6a821); }
-.friend-card--london        { --lt-card-gradient: linear-gradient(135deg, #4b6cb7, #182848); }
-.friend-card--rome          { --lt-card-gradient: linear-gradient(135deg, #d38312, #a83279); }
-.friend-card--barcelona     { --lt-card-gradient: linear-gradient(135deg, #f7971e, #ffd200); }
-.friend-card--amsterdam     { --lt-card-gradient: linear-gradient(135deg, #f77062, #fe5196); }
-.friend-card--berlin        { --lt-card-gradient: linear-gradient(135deg, #232526, #414345); }
-.friend-card--prague        { --lt-card-gradient: linear-gradient(135deg, #614385, #516395); }
-.friend-card--istanbul      { --lt-card-gradient: linear-gradient(135deg, #ee0979, #ff6a00); }
-.friend-card--dubai         { --lt-card-gradient: linear-gradient(135deg, #f2994a, #f2c94c); }
-.friend-card--singapore     { --lt-card-gradient: linear-gradient(135deg, #ee0979, #ff6a00); }
-.friend-card--hong-kong     { --lt-card-gradient: linear-gradient(135deg, #0f2027, #2c5364); }
-.friend-card--seoul         { --lt-card-gradient: linear-gradient(135deg, #dd3e54, #6be585); }
-.friend-card--bangkok       { --lt-card-gradient: linear-gradient(135deg, #f7b733, #fc4a1a); }
-.friend-card--mumbai        { --lt-card-gradient: linear-gradient(135deg, #f45c43, #eb3349); }
-.friend-card--nairobi       { --lt-card-gradient: linear-gradient(135deg, #2af598, #009efd); }
-.friend-card--cairo         { --lt-card-gradient: linear-gradient(135deg, #d1913c, #ffd194); }
-.friend-card--san-francisco { --lt-card-gradient: linear-gradient(135deg, #ff6e7f, #bfe9ff); }
-.friend-card--buenos-aires  { --lt-card-gradient: linear-gradient(135deg, #56ccf2, #2f80ed); }
-
 /* -- dialog ------------------------------------------------------------- */
 
-.add-friend-dialog__content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--dwc-space-m);
-  min-width: 320px;
-}
-
-.add-friend-dialog__hint {
+.new-shipment-dialog__hint {
   margin: 0;
   padding: var(--dwc-space-s) var(--dwc-space-m);
   border-radius: var(--dwc-border-radius-m);
   background: var(--dwc-color-info-95);
   color: var(--dwc-color-on-info-text-95);
   font-size: var(--dwc-font-size-s);
-}
-
-.add-friend-dialog__footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--dwc-space-s);
 }

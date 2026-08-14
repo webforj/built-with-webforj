@@ -20,4 +20,15 @@ public final class Haversine {
     if (km < 10) return String.format("%.1f km", km);
     return String.format("%,d km", Math.round(km));
   }
+
+  public static String formatMiles(double km) {
+    double mi = km * 0.621371;
+    if (mi < 1) return "< 1 mi";
+    if (mi < 10) return String.format("%.1f mi", mi);
+    return String.format("%,d mi", Math.round(mi));
+  }
+
+  public static String formatDistance(double km, boolean useMiles) {
+    return useMiles ? formatMiles(km) : formatKm(km);
+  }
 }
