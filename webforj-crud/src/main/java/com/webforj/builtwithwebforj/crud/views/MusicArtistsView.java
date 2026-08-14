@@ -4,6 +4,7 @@ import com.webforj.builtwithwebforj.crud.components.ArtistDialog;
 import com.webforj.builtwithwebforj.crud.entity.MusicArtist;
 import com.webforj.builtwithwebforj.crud.service.MusicArtistService;
 import com.webforj.component.Composite;
+import com.webforj.component.Theme;
 import com.webforj.component.avatar.AvatarTheme;
 import com.webforj.component.button.Button;
 import com.webforj.component.button.ButtonTheme;
@@ -11,6 +12,7 @@ import com.webforj.component.field.TextField;
 import com.webforj.component.html.elements.H1;
 import com.webforj.component.icons.FeatherIcon;
 import com.webforj.component.icons.Icon;
+import com.webforj.component.layout.flexlayout.FlexAlignment;
 import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.layout.flexlayout.FlexWrap;
@@ -19,11 +21,13 @@ import com.webforj.component.table.Column.PinDirection;
 import com.webforj.component.table.renderer.AvatarRenderer;
 import com.webforj.component.table.renderer.CompositeRenderer;
 import com.webforj.component.table.renderer.IconRenderer;
-import com.webforj.component.table.renderer.Renderer;
+import com.webforj.component.table.renderer.TextRenderer;
 import com.webforj.data.repository.spring.SpringDataRepository;
 import com.webforj.router.annotation.Route;
 
 import org.springframework.data.jpa.domain.Specification;
+
+import java.util.EnumSet;
 
 /**
  * Main view for managing music artists.
@@ -117,28 +121,26 @@ public class MusicArtistsView extends Composite<FlexLayout> {
 		AvatarRenderer<MusicArtist> avatarPart = new AvatarRenderer<>();
 		avatarPart.setTheme(AvatarTheme.PRIMARY);
 
-		Renderer<MusicArtist> textPart = new Renderer<MusicArtist>() {
-			@Override
-			public String build() {
-				return /* html */"""
-						<%
-						const name = cell.value;
-						const year = cell.row.getValue("YearFormedRaw");
-						const isActive = cell.row.getValue("Active") === '✓';
-						const yearInt = year != null ? Math.trunc(year) : "";
-						const yearText = year != null
-						  ? (isActive ? 'Active since ' + yearInt : 'Formed in ' + yearInt)
-						  : 'Status unknown';
-						%>
-						<div style="display:flex;flex-direction:column;line-height:1.25">
-						  <span style="font-weight:var(--dwc-font-weight-bold);font-size:var(--dwc-font-size-m)"><%= name %></span>
-						  <span style="font-size:var(--dwc-font-size-s);opacity:0.6"><%= yearText %></span>
-						</div>
-						""";
-			}
-		};
+		// Bold primary line — auto-picks up cell.value (the "Artist" column's name).
+		TextRenderer<MusicArtist> nameLine = new TextRenderer<>();
+		nameLine.setDecorations(EnumSet.of(TextRenderer.TextDecoration.BOLD));
 
-		CompositeRenderer<MusicArtist> artistRenderer = new CompositeRenderer<>(avatarPart, textPart);
+		// Muted secondary line — lodash template pulls year + active state from other columns.
+		TextRenderer<MusicArtist> yearLine = new TextRenderer<>(
+				"<% var year = cell.row.getValue('YearFormedRaw');"
+						+ "   var isActive = cell.row.getValue('Active') === '✓';"
+						+ "   var yearInt = year != null ? Math.trunc(year) : '';"
+						+ "%><%= year != null"
+						+ "     ? (isActive ? 'Active since ' + yearInt : 'Formed in ' + yearInt)"
+						+ "     : 'Status unknown' %>",
+				Theme.GRAY);
+
+		CompositeRenderer<MusicArtist> textStack = new CompositeRenderer<>(nameLine, yearLine);
+		textStack.setDirection(FlexDirection.COLUMN);
+		textStack.setAlignment(FlexAlignment.START);
+		textStack.setSpacing("2px");
+
+		CompositeRenderer<MusicArtist> artistRenderer = new CompositeRenderer<>(avatarPart, textStack);
 		artistRenderer.setSpacing("var(--dwc-space-s)");
 
 		artistTable.addColumn("Artist", MusicArtist::getName)
