@@ -168,20 +168,6 @@ public class ShipmentsView extends Composite<AppLayout> {
     fab.addClassName("app-shell__fab");
     fab.onClick(e -> createDialog.open());
     self.add(fab);
-
-    // Reparent the FAB to <body> so `position: fixed` anchors to the viewport
-    // rather than AppLayout's scroll container, which becomes a fixed-position
-    // containing block on some browsers and makes the FAB drift with content.
-    // Poll in case the element isn't mounted yet when this JS runs.
-    Page.getCurrent().executeJsAsync(
-        "(function move(tries){"
-            + "  var el = document.querySelector('.app-shell__fab');"
-            + "  if (el) {"
-            + "    if (el.parentNode !== document.body) document.body.appendChild(el);"
-            + "    return;"
-            + "  }"
-            + "  if (tries > 0) setTimeout(function(){ move(tries - 1); }, 100);"
-            + "})(20);");
   }
 
   private void refresh() {
