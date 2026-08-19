@@ -8,6 +8,9 @@
 }
 
 /* -- shell --------------------------------------------------------------- */
+dwc-app-layout {
+  --dwc-app-layout-header-height: 4rem;
+}
 
 .app-shell__brand {
   color: var(--dwc-color-primary-text);
