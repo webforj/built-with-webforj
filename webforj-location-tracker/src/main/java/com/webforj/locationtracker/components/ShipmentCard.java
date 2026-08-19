@@ -16,22 +16,16 @@ import com.webforj.locationtracker.model.Shipment;
 import com.webforj.locationtracker.util.Haversine;
 
 /**
- * One card in the shipments grid, built on the framework {@code dwc-card}
- * component. Slots the shipment content into the card's regions:
+ * A shipment rendered as a {@code dwc-card}:
  *
  * <ul>
- *   <li><b>figure</b> — hero photo of the destination city (falls back to a
- *       CSS gradient set per-slug in {@code app.css})</li>
+ *   <li><b>figure</b> — hero photo of the destination city</li>
  *   <li><b>title</b> — destination city + country</li>
  *   <li><b>caption</b> — tracking ID</li>
  *   <li><b>header-actions</b> — "NEW" badge for unseen shipments</li>
  *   <li><b>body</b> — consignee avatar + name</li>
  *   <li><b>footer</b> — great-circle distance from the dispatch hub</li>
  * </ul>
- *
- * <p>Because the framework Card handles the header row, dividers, expanse
- * and shadow, the only custom CSS we still need is the per-city gradient
- * fallback on {@code .shipment-card__hero} and the NEW badge pulse.</p>
  */
 public class ShipmentCard extends Composite<Card> {
 
@@ -46,10 +40,8 @@ public class ShipmentCard extends Composite<Card> {
     self.setShadow(Card.Shadow.SMALL);
 
     // figure ------------------------------------------------------------
-    // Card's figure slot expects an image element; the framework paints the
-    // figure region for us. The wrapper div sits *behind* the img and shows
-    // the city's signature gradient (via CSS) if the photo URL is missing
-    // or fails to load.
+    // The wrapper is painted behind the img, so it stands in while the photo
+    // loads and if the URL is missing or fails.
     String photoUrl = dest.getPhotoUrl();
     Div heroWrap = new Div().addClassName("shipment-card__hero");
     if (photoUrl != null && !photoUrl.isBlank()) {

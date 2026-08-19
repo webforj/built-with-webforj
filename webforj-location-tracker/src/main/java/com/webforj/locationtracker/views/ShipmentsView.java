@@ -33,7 +33,7 @@ import java.util.List;
 @FrameTitle("Shipments")
 public class ShipmentsView extends Composite<AppLayout> {
 
-  // shared across the JVM — fine for a single-user demo
+  // static: one shipment list shared by every session in this JVM
   private static final ShipmentsService SHIPMENTS = new ShipmentsService();
 
   private final AppLayout self = getBoundComponent();
@@ -111,7 +111,6 @@ public class ShipmentsView extends Composite<AppLayout> {
     themeToggle.addClassName("app-shell__theme");
     themeToggle.onClick(e -> toggleTheme());
 
-    // Toolbar: [ title ] .............................. [ bell + themeToggle ]
     FlexLayout actions = FlexLayout.create(bell, themeToggle)
         .horizontal().align().center().justify().end().build()
         .setSpacing("var(--dwc-space-s)")
@@ -130,7 +129,7 @@ public class ShipmentsView extends Composite<AppLayout> {
   private void buildContent() {
     hubStatus.addClassName("app-shell__you-text");
 
-    // km / mi toggle — plain grouped RadioButtons
+    // km / mi toggle
     RadioButton kmRadio = new RadioButton("km", "km", true);
     RadioButton miRadio = new RadioButton("mi", "mi", false);
     RadioButtonGroup unitGroup = new RadioButtonGroup("distanceUnit", kmRadio, miRadio);
@@ -147,7 +146,6 @@ public class ShipmentsView extends Composite<AppLayout> {
         .setSpacing("var(--dwc-space-xs)")
         .addClassName("app-shell__unit-toggle");
 
-    // Strip: "Dispatch hub near…" on the left, km/mi toggle on the right
     FlexLayout hubStrip = FlexLayout.create(hubStatus, unitToggle)
         .horizontal().align().center().justify().between().build()
         .setSpacing("var(--dwc-space-m)")
@@ -171,11 +169,10 @@ public class ShipmentsView extends Composite<AppLayout> {
     fab.onClick(e -> createDialog.open());
     self.add(fab);
 
-    // Reparent the FAB to <body> so `position: fixed` anchors to the
-    // viewport rather than AppLayout's internal scroll container (which
-    // becomes a fixed-position containing block on some browsers, causing
-    // the FAB to drift with content). Poll briefly in case the element
-    // isn't mounted by the time this JS runs.
+    // Reparent the FAB to <body> so `position: fixed` anchors to the viewport
+    // rather than AppLayout's scroll container, which becomes a fixed-position
+    // containing block on some browsers and makes the FAB drift with content.
+    // Poll in case the element isn't mounted yet when this JS runs.
     Page.getCurrent().executeJsAsync(
         "(function move(tries){"
             + "  var el = document.querySelector('.app-shell__fab');"
@@ -206,7 +203,7 @@ public class ShipmentsView extends Composite<AppLayout> {
   private void syncBadges() {
     int count = SHIPMENTS.unseenCount();
 
-    // in-app badge — the chip slotted into the bell button
+    // in-app badge slotted into the bell button
     bellBadge.setText(String.valueOf(count));
     bellBadge.setVisible(count > 0);
 

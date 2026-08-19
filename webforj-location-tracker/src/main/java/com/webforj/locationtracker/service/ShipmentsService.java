@@ -11,10 +11,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * In-memory shipment store. Seeded with a handful of pre-existing (already
- * "seen") shipments so the console has something to look at on first load,
- * plus one unseen shipment so the notification badges are visible from load.
- * New shipments created via the dialog arrive unseen, driving the badges.
+ * In-memory shipment store. New shipments arrive unseen; the unseen count
+ * drives the badges.
  */
 public class ShipmentsService {
 
@@ -31,7 +29,7 @@ public class ShipmentsService {
     shipments.add(new Shipment("SHP-100526", "Maison Levasseur",      City.PARIS,         seedTime, true));
     shipments.add(new Shipment("SHP-100527", "Pampas Cargo Group",    City.BUENOS_AIRES,  seedTime, true));
     shipments.add(new Shipment("SHP-100528", "Bay Freight Inc.",      City.SAN_FRANCISCO, seedTime, true));
-    // One "new" shipment so the notification badges are visible from load
+    // unseen, so the badges start at a non-zero count
     shipments.add(0, new Shipment("SHP-482103", "Costa Textiles SL",  City.BARCELONA,     Instant.now(), false));
   }
 

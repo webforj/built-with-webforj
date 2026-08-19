@@ -1,15 +1,8 @@
 package com.webforj.locationtracker.model;
 
 /**
- * Cities the demo ships with. Each entry carries an optional
- * {@link #getPhotoUrl() photo URL} — a stable Wikimedia Commons CDN
- * thumbnail sourced from the Wikipedia REST summary API. When present the
- * FriendCard sets it as the hero background; when absent (or the request
- * fails) the CSS gradient defined for the city's {@link #getSlug() slug}
- * takes over so the card always looks intentional.
- *
- * <p>The 8 original slugs also have signature CSS gradients in
- * {@code app.css}; new slugs added here will use a neutral gradient.</p>
+ * Destination cities, with coordinates for distance calculations and a
+ * Wikimedia Commons thumbnail used as the card hero photo.
  */
 public enum City {
   // (label, country, flag, lat, lon, slug, photoUrl)

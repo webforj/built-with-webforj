@@ -1,13 +1,5 @@
-/* ----------------------------------------------------------------------
-   Shipments console — surface styling on top of the framework's dwc-card
-   and FlexLayout components.
-
-   Card structure (header row, dividers, expanse, shadow, border,
-   figure/title/caption/body/footer slots) is provided by `dwc-card`.
-   Every row/column/gap in the app shell and dialog is a FlexLayout, so
-   this file only owns visual treatment (colors, radii, backgrounds,
-   sizing, badge pulse, FAB shape) — no display:flex / gap plumbing.
-   ---------------------------------------------------------------------- */
+/* Shipments console — colors, sizing and shapes for the app shell,
+   the cards and the dialog. */
 
 :root {
   --dwc-color-primary-seed: #2f80ed;
@@ -41,7 +33,7 @@
   padding: var(--dwc-space-l) var(--dwc-space-l) var(--dwc-space-3xl);
 }
 
-/* "Dispatch hub near…" strip surface — layout comes from FlexLayout */
+/* "Dispatch hub near…" strip */
 .app-shell__you {
   padding: var(--dwc-space-s) var(--dwc-space-m);
   border-radius: var(--dwc-border-radius-m);
@@ -65,15 +57,9 @@
 /* -- floating action button --------------------------------------------- */
 
 /*
- * Circular icon-only FAB pinned to bottom-right of the viewport.
- *
- * Same shadow-DOM trick as webforj-ghostai's `.chat-input-button`:
- *   • `::part(button)` gets `border-radius: 50%` + flex-centered content
- *   • `::part(label)` is hidden so the empty label span from
- *     `setPrefixComponent(icon)` doesn't leave a text gap
- *
- * The FAB is reparented to <body> by ShipmentsView so `position: fixed`
- * anchors to the viewport instead of AppLayout's scroll container.
+ * Circular icon-only FAB pinned to the bottom-right of the viewport.
+ * `::part(label)` is hidden because `setPrefixComponent(icon)` leaves an
+ * empty label span that would otherwise offset the icon.
  */
 .app-shell__fab {
   position: fixed;
@@ -85,9 +71,8 @@
   min-width: 56px;
   padding: 0;
   --dwc-border-radius: 50%;
-  /* NOTE: shadow lives on ::part(button), not the host — otherwise the
-     drop-shadow follows the rectangular host box and paints a visible
-     square halo behind the circular part. */
+  /* Shadow lives on ::part(button), not the host: on the host the drop-shadow
+     follows the rectangular box and paints a square halo behind the circle. */
   background: transparent;
   border: none;
 }
@@ -110,8 +95,7 @@
 
 /* -- grid --------------------------------------------------------------- */
 
-/* Fluid grid — auto-fill/minmax pattern is more compact than the
-   equivalent breakpoint list a ColumnsLayout would need. */
+/* Fluid grid: as many 300px-or-wider columns as fit. */
 .shipments-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -119,11 +103,8 @@
 }
 
 /* -- card: figure hero photo + gray fallback --------------------------- */
-/*
- * The <img> sits on top of the gray-painted wrapper so a placeholder
- * shows while the photo loads, and stays visible if the photo URL fails.
- * Both fill the framework Card's figure region.
- */
+/* The <img> sits on top of the gray wrapper, so the wrapper shows while the
+   photo loads and stays visible if the photo URL fails. */
 .shipment-card__hero {
   display: block;
   width: 100%;

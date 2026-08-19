@@ -4,9 +4,8 @@ import java.time.Instant;
 import java.util.UUID;
 
 /**
- * One shipment in transit to a destination city. Carries a human-friendly
- * tracking ID (SHP-######) and the consignee name; the destination is a
- * {@link City} so we can compute great-circle distance from the dispatch hub.
+ * A shipment in transit to a destination city, identified by a
+ * {@code SHP-######} tracking ID.
  */
 public class Shipment {
   private final String id;
