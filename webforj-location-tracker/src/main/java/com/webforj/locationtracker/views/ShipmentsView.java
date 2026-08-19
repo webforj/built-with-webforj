@@ -39,12 +39,13 @@ public class ShipmentsView extends Composite<AppLayout> {
 
   private final AppLayout self = getBoundComponent();
   private final Div grid = new Div();
-  private final Paragraph hubStatus = new Paragraph("Locating dispatch hub…");
+  private final Paragraph hubStatus = new Paragraph();
   private final Badge bellBadge = new Badge("0").setTheme(BadgeTheme.DANGER);
   private final Button bell = new Button(TablerIcon.create("bell"));
   private final IconButton themeToggle = new IconButton(TablerIcon.create("moon"));
   private final NewShipmentDialog createDialog = new NewShipmentDialog();
 
+  private FlexLayout hubStrip;
   private Double hubLatitude = null;
   private Double hubLongitude = null;
   private boolean darkTheme = false;
@@ -66,31 +67,36 @@ public class ShipmentsView extends Composite<AppLayout> {
       syncBadges();
     });
 
-    // The browser location stands in for the dispatch hub. The grid renders
-    // once the request settles, so the cards are sorted before they appear.
+    // The browser location stands in for the dispatch hub. The app is busy
+    // until the request settles, so the cards are sorted before they appear.
     if (Geolocation.isPresent()) {
+      App.busy("Locating dispatch hub…");
       Geolocation.getCurrent()
           .useTimeout(GEOLOCATION_TIMEOUT_SECONDS)
           .getCurrentPosition()
           .thenAccept(pos -> {
             hubLatitude = pos.getLatitude();
             hubLongitude = pos.getLongitude();
-            hubStatus.setText(String.format(
-                "🏭  Dispatch hub near %.3f, %.3f — distances shown from here",
+            showShipments(String.format(
+                "Dispatch hub near %.3f, %.3f — distances shown from here",
                 hubLatitude, hubLongitude));
-            refresh();
           })
           .exceptionally(err -> {
-            hubStatus.setText("🏭  Hub location unavailable — shipments shown without distances");
-            refresh();
+            showShipments("Hub location unavailable — shipments shown without distances");
             return null;
           });
     } else {
-      hubStatus.setText("🏭  Geolocation unavailable — shipments shown without distances");
-      refresh();
+      showShipments("Geolocation unavailable — shipments shown without distances");
     }
 
     syncBadges();
+  }
+
+  private void showShipments(String status) {
+    hubStatus.setText(status);
+    hubStrip.removeClassName("app-shell__you--pending");
+    refresh();
+    App.busy(false);
   }
 
   private void buildHeader() {
@@ -146,12 +152,14 @@ public class ShipmentsView extends Composite<AppLayout> {
       }
     });
 
-    FlexLayout unitToggle = FlexLayout.create(unitGroup)
+    // The group renders no element of its own, so the buttons go in the
+    // layout and the group only carries the selection logic.
+    FlexLayout unitToggle = FlexLayout.create(kmRadio, miRadio)
         .horizontal().align().center().build()
         .setSpacing("var(--dwc-space-xs)")
         .addClassName("app-shell__unit-toggle");
 
-    FlexLayout hubStrip = FlexLayout.create(hubStatus, unitToggle)
+    hubStrip = FlexLayout.create(hubStatus, unitToggle)
         .horizontal().align().center().justify().between().build()
         .setSpacing("var(--dwc-space-m)")
         .addClassName("app-shell__you");
@@ -162,6 +170,7 @@ public class ShipmentsView extends Composite<AppLayout> {
         .setSpacing("var(--dwc-space-l)")
         .addClassName("app-shell__content");
     self.add(content);
+    hubStrip.addClassName("app-shell__you--pending");
   }
 
   private void buildFab() {

@@ -36,11 +36,12 @@ dwc-app-layout {
   padding: var(--dwc-space-l) var(--dwc-space-l) var(--dwc-space-3xl);
 }
 
-/* "Dispatch hub near…" strip */
+.app-shell__you--pending {
+  display: none !important;
+}
+
 .app-shell__you {
   padding: var(--dwc-space-s) var(--dwc-space-m);
-  border-radius: var(--dwc-border-radius-m);
-  background: var(--dwc-surface-2);
   color: var(--dwc-color-body-text);
 }
 
