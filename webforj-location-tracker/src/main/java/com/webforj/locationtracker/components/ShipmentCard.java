@@ -30,10 +30,8 @@ import com.webforj.locationtracker.util.Haversine;
 public class ShipmentCard extends Composite<Card> {
 
   private final Card self = getBoundComponent();
-  private final Shipment shipment;
 
   public ShipmentCard(Shipment shipment, Double hubLatitude, Double hubLongitude, boolean useMiles) {
-    this.shipment = shipment;
     City dest = shipment.getDestination();
 
     self.addClassName("shipment-card");
@@ -89,9 +87,5 @@ public class ShipmentCard extends Composite<Card> {
       distance.addClassName("shipment-card__distance--muted");
     }
     self.addToFooter(distance);
-  }
-
-  public Shipment getShipment() {
-    return shipment;
   }
 }

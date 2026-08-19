@@ -10,7 +10,7 @@ import com.webforj.bundle.annotation.BundleEntry;
 @Routify(packages = "com.webforj.locationtracker.views")
 @BundleEntry("app.css")
 @AppTheme("light")
-@AppTitle("Friends")
-@AppProfile(name = "Friends", shortName = "Friends")
+@AppTitle("Shipments")
+@AppProfile(name = "Shipments", shortName = "Shipments")
 public class Application extends App {
 }

@@ -1,7 +1,9 @@
 package com.webforj.locationtracker.views;
 
 import com.webforj.App;
+import com.webforj.Interval;
 import com.webforj.Page;
+import com.webforj.PendingResult;
 import com.webforj.component.Composite;
 import com.webforj.component.badge.Badge;
 import com.webforj.component.badge.BadgeTheme;
@@ -18,6 +20,7 @@ import com.webforj.component.layout.toolbar.Toolbar;
 import com.webforj.component.optioninput.RadioButton;
 import com.webforj.component.optioninput.RadioButtonGroup;
 import com.webforj.geolocation.Geolocation;
+import com.webforj.geolocation.GeolocationPosition;
 import com.webforj.locationtracker.components.NewShipmentDialog;
 import com.webforj.locationtracker.components.ShipmentCard;
 import com.webforj.locationtracker.model.Shipment;
@@ -28,6 +31,7 @@ import com.webforj.router.annotation.Route;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 @Route("/")
 @FrameTitle("Shipments")
@@ -36,6 +40,12 @@ public class ShipmentsView extends Composite<AppLayout> {
   // static: one shipment list shared by every session in this JVM
   private static final ShipmentsService SHIPMENTS = new ShipmentsService();
   private static final double GEOLOCATION_TIMEOUT_SECONDS = 10;
+  // The browser starts the geolocation timeout only once permission is granted, so a
+  // prompt the user never answers would leave the app busy forever. This deadline caps
+  // the whole request, permission wait included.
+  private static final float HUB_DEADLINE_SECONDS = 20;
+  private static final String HUB_UNAVAILABLE =
+      "Hub location unavailable — shipments shown without distances";
 
   private final AppLayout self = getBoundComponent();
   private final Div grid = new Div();
@@ -46,7 +56,11 @@ public class ShipmentsView extends Composite<AppLayout> {
   private final NewShipmentDialog createDialog = new NewShipmentDialog();
   private final Button fab = new Button();
 
+  private final Interval hubDeadline =
+      new Interval(HUB_DEADLINE_SECONDS, e -> showShipments(HUB_UNAVAILABLE));
+
   private FlexLayout hubStrip;
+  private boolean shipmentsRendered = false;
   private Double hubLatitude = null;
   private Double hubLongitude = null;
   private boolean darkTheme = false;
@@ -55,6 +69,7 @@ public class ShipmentsView extends Composite<AppLayout> {
   public ShipmentsView() {
     self.addClassName("app-shell");
     self.setDrawerPlacement(AppLayout.DrawerPlacement.HIDDEN);
+    self.setHeaderShadow(AppLayout.Shadow.ALWAYS);
 
     buildHeader();
     buildContent();
@@ -70,30 +85,42 @@ public class ShipmentsView extends Composite<AppLayout> {
 
     // The browser location stands in for the dispatch hub. The app is busy
     // until the request settles, so the cards are sorted before they appear.
-    if (Geolocation.isPresent()) {
-      App.busy("Locating dispatch hub…");
-      Geolocation.getCurrent()
-          .useTimeout(GEOLOCATION_TIMEOUT_SECONDS)
-          .getCurrentPosition()
-          .thenAccept(pos -> {
-            hubLatitude = pos.getLatitude();
-            hubLongitude = pos.getLongitude();
-            showShipments(String.format(
-                "Dispatch hub near %.3f, %.3f — distances shown from here",
-                hubLatitude, hubLongitude));
-          })
-          .exceptionally(err -> {
-            showShipments("Hub location unavailable — shipments shown without distances");
-            return null;
-          });
-    } else {
-      showShipments("Geolocation unavailable — shipments shown without distances");
-    }
+    App.busy("Locating dispatch hub…");
+    hubDeadline.start();
+
+    PendingResult<GeolocationPosition> position = Geolocation.getCurrent()
+        .useTimeout(GEOLOCATION_TIMEOUT_SECONDS)
+        .getCurrentPosition();
+
+    // Both handlers hang off the same pending result. Chaining exceptionally() onto
+    // thenAccept() would also catch whatever the success handler throws and report it
+    // as a location failure.
+    position.thenAccept(pos -> {
+      hubLatitude = pos.getLatitude();
+      hubLongitude = pos.getLongitude();
+      showShipments(String.format(Locale.US,
+          "Dispatch hub near %.3f, %.3f — distances shown from here",
+          hubLatitude, hubLongitude));
+    });
+    position.exceptionally(err -> {
+      showShipments(HUB_UNAVAILABLE);
+      return null;
+    });
 
     syncBadges();
   }
 
+  /**
+   * Reveals the grid once the hub location settles. Whichever of the position callback,
+   * the error callback or the deadline gets here first wins; the rest are no-ops.
+   */
   private void showShipments(String status) {
+    if (shipmentsRendered) {
+      return;
+    }
+
+    shipmentsRendered = true;
+    hubDeadline.stop();
     hubStatus.setText(status);
     hubStrip.removeClassName("app-shell__you--pending");
     refresh();
@@ -153,12 +180,11 @@ public class ShipmentsView extends Composite<AppLayout> {
       }
     });
 
-    // The group renders no element of its own, so the buttons go in the
-    // layout and the group only carries the selection logic.
-    FlexLayout unitToggle = FlexLayout.create(kmRadio, miRadio)
+    FlexLayout unitToggle = FlexLayout.create()
         .horizontal().align().center().build()
         .setSpacing("var(--dwc-space-xs)")
         .addClassName("app-shell__unit-toggle");
+    unitToggle.add(unitGroup);
 
     hubStrip = FlexLayout.create(hubStatus, unitToggle)
         .horizontal().align().center().justify().between().build()
@@ -176,13 +202,22 @@ public class ShipmentsView extends Composite<AppLayout> {
 
   private void buildFab() {
     fab.setTheme(ButtonTheme.PRIMARY);
-    fab.setPrefixComponent(TablerIcon.create("plus"));
+    fab.setIcon(TablerIcon.create("plus"));
     fab.setAttribute("aria-label", "New shipment");
     fab.setAttribute("title", "New shipment");
     fab.addClassName("app-shell__fab");
     fab.onClick(e -> createDialog.open());
 
+    // Anchored to the frame rather than the layout so position:fixed is resolved
+    // against the viewport.
     App.getFrames().get(0).add(fab);
+  }
+
+  @Override
+  protected void onDidDestroy() {
+    super.onDidDestroy();
+    hubDeadline.stop();
+    fab.destroy();
   }
 
   private void refresh() {

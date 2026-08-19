@@ -13,7 +13,7 @@ public class Shipment {
   private final String consignee;
   private final City destination;
   private final Instant createdAt;
-  private boolean seen;
+  private volatile boolean seen;
 
   public Shipment(String trackingId, String consignee, City destination,
                   Instant createdAt, boolean seen) {

@@ -60,11 +60,7 @@ dwc-app-layout {
 
 /* -- floating action button --------------------------------------------- */
 
-/*
- * Circular icon-only FAB pinned to the bottom-right of the viewport.
- * `::part(label)` is hidden because `setPrefixComponent(icon)` leaves an
- * empty label span that would otherwise offset the icon.
- */
+/* Circular icon-only FAB pinned to the bottom-right of the viewport. */
 .app-shell__fab {
   position: fixed;
   bottom: var(--dwc-space-xl);
@@ -75,22 +71,16 @@ dwc-app-layout {
   min-width: 56px;
   padding: 0;
   --dwc-border-radius: 50%;
-  /* Shadow lives on ::part(button), not the host: on the host the drop-shadow
-     follows the rectangular box and paints a square halo behind the circle. */
   background: transparent;
   border: none;
 }
 
-.app-shell__fab::part(button) {
+.app-shell__fab::part(control) {
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--dwc-shadow-l);
-}
-
-.app-shell__fab::part(label) {
-  display: none;
+  box-shadow: var(--dwc-shadow-2xl);
 }
 
 .app-shell__fab dwc-icon {

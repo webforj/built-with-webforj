@@ -12,7 +12,6 @@ import com.webforj.component.list.ChoiceBox;
 import com.webforj.component.list.ListItem;
 import com.webforj.locationtracker.model.City;
 
-import java.util.Arrays;
 import java.util.function.BiConsumer;
 
 public class NewShipmentDialog extends Composite<Dialog> {
@@ -36,7 +35,7 @@ public class NewShipmentDialog extends Composite<Dialog> {
 
     destinationChoice.setLabel("Destination");
     for (City c : City.values()) {
-      destinationChoice.add(new ListItem(c.name(), c.getLabel() + ", " + c.getCountry()));
+      destinationChoice.add(new ListItem(c, c.getLabel() + ", " + c.getCountry()));
     }
     destinationChoice.selectIndex(0);
 
@@ -86,12 +85,14 @@ public class NewShipmentDialog extends Composite<Dialog> {
       consigneeField.focus();
       return;
     }
+    // Falling back to a default city here would quietly ship the goods elsewhere.
     ListItem picked = destinationChoice.getSelectedItem();
-    City city = picked == null ? City.PARIS : Arrays.stream(City.values())
-        .filter(c -> c.name().equals(picked.getKey()))
-        .findFirst().orElse(City.PARIS);
+    if (picked == null) {
+      destinationChoice.focus();
+      return;
+    }
 
-    onSave.accept(consignee, city);
+    onSave.accept(consignee, (City) picked.getKey());
     close();
   }
 }

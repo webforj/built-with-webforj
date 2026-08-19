@@ -5,9 +5,9 @@ import com.webforj.locationtracker.model.Shipment;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class ShipmentsService {
 
-  private final List<Shipment> shipments = new ArrayList<>();
+  private final List<Shipment> shipments = new CopyOnWriteArrayList<>();
   private final AtomicInteger counter = new AtomicInteger(482103);
 
   public ShipmentsService() {
