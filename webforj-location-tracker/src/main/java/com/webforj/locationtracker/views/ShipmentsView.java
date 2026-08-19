@@ -35,6 +35,7 @@ public class ShipmentsView extends Composite<AppLayout> {
 
   // static: one shipment list shared by every session in this JVM
   private static final ShipmentsService SHIPMENTS = new ShipmentsService();
+  private static final double GEOLOCATION_TIMEOUT_SECONDS = 10;
 
   private final AppLayout self = getBoundComponent();
   private final Div grid = new Div();
@@ -65,9 +66,12 @@ public class ShipmentsView extends Composite<AppLayout> {
       syncBadges();
     });
 
-    // one-shot geolocation request; treated as the dispatch hub's location
+    // The browser location stands in for the dispatch hub. The grid renders
+    // once the request settles, so the cards are sorted before they appear.
     if (Geolocation.isPresent()) {
-      Geolocation.getCurrent().getCurrentPosition()
+      Geolocation.getCurrent()
+          .useTimeout(GEOLOCATION_TIMEOUT_SECONDS)
+          .getCurrentPosition()
           .thenAccept(pos -> {
             hubLatitude = pos.getLatitude();
             hubLongitude = pos.getLongitude();
@@ -78,13 +82,14 @@ public class ShipmentsView extends Composite<AppLayout> {
           })
           .exceptionally(err -> {
             hubStatus.setText("🏭  Hub location unavailable — shipments shown without distances");
+            refresh();
             return null;
           });
     } else {
       hubStatus.setText("🏭  Geolocation unavailable — shipments shown without distances");
+      refresh();
     }
 
-    refresh();
     syncBadges();
   }
 
