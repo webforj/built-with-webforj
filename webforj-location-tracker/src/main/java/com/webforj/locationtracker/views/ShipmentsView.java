@@ -44,6 +44,7 @@ public class ShipmentsView extends Composite<AppLayout> {
   private final Button bell = new Button(TablerIcon.create("bell"));
   private final IconButton themeToggle = new IconButton(TablerIcon.create("moon"));
   private final NewShipmentDialog createDialog = new NewShipmentDialog();
+  private final Button fab = new Button();
 
   private FlexLayout hubStrip;
   private Double hubLatitude = null;
@@ -174,14 +175,14 @@ public class ShipmentsView extends Composite<AppLayout> {
   }
 
   private void buildFab() {
-    Button fab = new Button();
     fab.setTheme(ButtonTheme.PRIMARY);
     fab.setPrefixComponent(TablerIcon.create("plus"));
     fab.setAttribute("aria-label", "New shipment");
     fab.setAttribute("title", "New shipment");
     fab.addClassName("app-shell__fab");
     fab.onClick(e -> createDialog.open());
-    self.add(fab);
+
+    App.getFrames().get(0).add(fab);
   }
 
   private void refresh() {
