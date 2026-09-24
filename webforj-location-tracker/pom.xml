@@ -16,7 +16,7 @@
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
 
-    <webforj.version>26.02-SNAPSHOT</webforj.version>
+    <webforj.version>26.02</webforj.version>
 
     <jetty.version>12.1.8</jetty.version>
     <!--
