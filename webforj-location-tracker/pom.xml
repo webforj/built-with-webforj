@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.webforj.locationtracker</groupId>
+  <artifactId>webforj-location-tracker</artifactId>
+  <name>LocationTracker</name>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+
+    <webforj.version>26.02</webforj.version>
+
+    <jetty.version>12.1.8</jetty.version>
+    <!--
+      Configures automatic reload of Jetty server
+      (with 1 second timeout) when new classes are compiled.
+      Should be disabled when using a live reload system, such as JRebel.
+      -->
+    <jetty.scan>1</jetty.scan>
+    <jetty.port>8080</jetty.port>
+    <jetty.stopPort>9966</jetty.stopPort>
+    <jetty.stopWait>30</jetty.stopWait>
+  </properties>
+
+  <repositories>
+    <repository>
+      <name>Central Portal Snapshots</name>
+      <id>central-portal-snapshots</id>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>central-portal-snapshots</id>
+      <name>Central Portal Snapshots</name>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.webforj</groupId>
+        <artifactId>webforj-bom</artifactId>
+        <version>${webforj.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.10.3</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.webforj</groupId>
+      <artifactId>webforj</artifactId>
+      <version>${webforj.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.microsoft.playwright</groupId>
+      <artifactId>playwright</artifactId>
+      <version>1.59.0</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <defaultGoal>compile webforj:watch jetty:run</defaultGoal>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <webResources>
+            <resource>
+              <filtering>true</filtering>
+              <directory>src/main/webapp</directory>
+              <includes>
+                <include>**/web.xml</include>
+              </includes>
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.eclipse.jetty.ee11</groupId>
+        <artifactId>jetty-ee11-maven-plugin</artifactId>
+        <version>${jetty.version}</version>
+        <configuration>
+          <scan>${jetty.scan}</scan>
+          <scanClassesPattern>
+            <excludes>
+              <exclude>**/static</exclude>
+              <exclude>**/static/**</exclude>
+            </excludes>
+          </scanClassesPattern>
+          <stopPort>${jetty.stopPort}</stopPort>
+          <stopKey>${project.artifactId}</stopKey>
+          <stopWait>${jetty.stopWait}</stopWait>
+          <httpConnector>
+            <port>${jetty.port}</port>
+          </httpConnector>
+          <webApp>
+            <contextPath>/</contextPath>
+          </webApp>
+        </configuration>
+        <executions>
+          <execution>
+            <id>start-jetty</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stop-jetty</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- webforJ build plugin, drives the frontend bundler (bundle, watch, test, clean) -->
+      <plugin>
+        <groupId>com.webforj</groupId>
+        <artifactId>webforj-maven-plugin</artifactId>
+        <version>${webforj.version}</version>
+        <extensions>true</extensions>
+      </plugin>
+
+      <!-- Runs the integration tests (*IT) after the server is started -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>3.5.4</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>copy-webforj-config</id>
+            <phase>process-resources</phase>
+            <configuration>
+              <target>
+                <copy file="src/main/resources/${config.file}"
+                  tofile="${project.build.outputDirectory}/webforj.conf" />
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>prod</id>
+      <activation>
+      </activation>
+      <properties>
+        <config.file>webforj-prod.conf</config.file>
+      </properties>
+      <build>
+        <plugins>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <config.file>webforj-dev.conf</config.file>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.webforj</groupId>
+          <artifactId>webforj-devtools</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
+</project>

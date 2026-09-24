@@ -1,0 +1,173 @@
+/* Shipments console — colors, sizing and shapes for the app shell,
+   the cards and the dialog. */
+
+:root {
+  --dwc-color-primary-seed: #2f80ed;
+  --lt-hero-height: 160px;
+  --lt-content-max: 1120px;
+}
+
+/* -- shell --------------------------------------------------------------- */
+dwc-app-layout {
+  --dwc-app-layout-header-height: 4rem;
+}
+
+.app-shell__brand {
+  color: var(--dwc-color-primary-text);
+}
+
+.app-shell__brand dwc-icon {
+  font-size: 24px;
+}
+
+.app-shell__title {
+  margin: 0;
+  font-size: var(--dwc-font-size-xl);
+  letter-spacing: -0.01em;
+}
+
+.app-shell__bell {
+  position: relative;
+}
+
+.app-shell__content {
+  max-width: var(--lt-content-max);
+  margin: 0 auto;
+  padding: var(--dwc-space-l) var(--dwc-space-l) var(--dwc-space-3xl);
+}
+
+.app-shell__you--pending {
+  display: none !important;
+}
+
+.app-shell__you {
+  padding: var(--dwc-space-s) var(--dwc-space-m);
+  color: var(--dwc-color-body-text);
+}
+
+.app-shell__you-text {
+  margin: 0;
+  font-size: var(--dwc-font-size-s);
+  opacity: 0.9;
+  flex: 1;
+  min-width: 0;
+}
+
+.app-shell__unit-toggle {
+  flex: 0 0 auto;
+  font-size: var(--dwc-font-size-s);
+}
+
+/* -- floating action button --------------------------------------------- */
+
+/* Circular icon-only FAB pinned to the bottom-right of the viewport. */
+.app-shell__fab {
+  position: fixed;
+  bottom: var(--dwc-space-xl);
+  right: var(--dwc-space-xl);
+  z-index: 100;
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  padding: 0;
+  --dwc-border-radius: 50%;
+  background: transparent;
+  border: none;
+}
+
+.app-shell__fab::part(control) {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--dwc-shadow-2xl);
+}
+
+.app-shell__fab dwc-icon {
+  font-size: 22px;
+}
+
+/* -- grid --------------------------------------------------------------- */
+
+/* Fluid grid: as many 300px-or-wider columns as fit. */
+.shipments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--dwc-space-l);
+}
+
+/* -- card: figure hero photo + gray fallback --------------------------- */
+/* The <img> sits on top of the gray wrapper, so the wrapper shows while the
+   photo loads and stays visible if the photo URL fails. */
+.shipment-card__hero {
+  display: block;
+  width: 100%;
+  height: var(--lt-hero-height);
+  background: linear-gradient(135deg, #6b7280, #374151);
+  overflow: hidden;
+}
+
+.shipment-card__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* -- card: NEW badge in header-actions slot, red + pulsing ------------- */
+
+.shipment-card__new {
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  animation: shipment-card-new-pulse 1.6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes shipment-card-new-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25),
+                0 0 0 0 rgba(220, 38, 38, 0.55);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25),
+                0 0 0 8px rgba(220, 38, 38, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shipment-card__new { animation: none; }
+}
+
+/* -- card: text ------------------------------------------------------- */
+
+.shipment-card__consignee {
+  font-size: var(--dwc-font-size-m);
+  font-weight: 600;
+}
+
+.shipment-card__distance {
+  font-size: var(--dwc-font-size-s);
+  font-weight: 600;
+  color: var(--dwc-color-primary-text);
+}
+
+.shipment-card__distance--muted {
+  color: var(--dwc-color-body-text);
+  opacity: 0.6;
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* -- dialog ------------------------------------------------------------- */
+
+.new-shipment-dialog__hint {
+  margin: 0;
+  padding: var(--dwc-space-s) var(--dwc-space-m);
+  border-radius: var(--dwc-border-radius-m);
+  background: var(--dwc-color-info-95);
+  color: var(--dwc-color-on-info-text-95);
+  font-size: var(--dwc-font-size-s);
+}
