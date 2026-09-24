@@ -25,7 +25,7 @@
 }
 
 .about-view__subtitle {
-  font-size: var(--dwc-font-size-xl);
+  font-size: var(--dwc-font-size-2xl);
   opacity: 0.9;
 }
 
@@ -39,13 +39,13 @@
 .about-view__section-title {
   margin: 0 0 var(--dwc-space-l) 0;
   font-size: var(--dwc-font-size-4xl);
-  font-weight: var(--dwc-font-weight-semibold);
+  font-weight: var(--dwc-font-weight-medium);
   text-align: center;
 }
 
 .about-view__list li {
   margin-bottom: var(--dwc-space-m);
-  font-size: var(--dwc-font-size-xl);
+  font-size: var(--dwc-font-size-2xl);
 }
 
 .about-view__list li strong,
@@ -59,7 +59,7 @@
 }
 
 .about-view__description {
-  font-size: var(--dwc-font-size-xl);
+  font-size: var(--dwc-font-size-2xl);
   line-height: var(--dwc-font-line-height-l);
 }
 
@@ -116,7 +116,7 @@
 .about-view__app-title {
   margin: 0 0 var(--dwc-space-m) 0;
   font-size: var(--dwc-font-size-3xl);
-  font-weight: var(--dwc-font-weight-semibold);
+  font-weight: var(--dwc-font-weight-medium);
 }
 
 .about-view__app-description {
@@ -126,12 +126,12 @@
 
 /* Shared Card Styles */
 .about-view__card-title {
-  font-size: var(--dwc-font-size-xl);
-  font-weight: var(--dwc-font-weight-semibold);
+  font-size: var(--dwc-font-size-2xl);
+  font-weight: var(--dwc-font-weight-medium);
 }
 
 .about-view__card-description {
-  font-size: var(--dwc-font-size-m);
+  font-size: var(--dwc-font-size-l);
   line-height: var(--dwc-font-line-height-l);
 }
 
