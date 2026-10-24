@@ -1,0 +1,132 @@
+/* Toolbar layout — push start/end apart */
+dwc-toolbar::part(control) {
+  display: flex;
+  align-items: center;
+}
+
+dwc-toolbar::part(title) {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.app-toolbar {
+  border-bottom: 1px solid var(--dwc-border-color-default);
+}
+
+/* Brand */
+.brand {
+  cursor: pointer;
+  font-weight: var(--dwc-font-weight-bold);
+  font-size: var(--dwc-font-size-l);
+  color: var(--dwc-color-body-text);
+  letter-spacing: -0.01em;
+  user-select: none;
+  white-space: nowrap;
+
+  & dwc-icon {
+    color: var(--dwc-color-primary);
+    font-size: 22px;
+  }
+}
+
+/* Nav TabbedPane — pilled segment style */
+.nav-tabs {
+  max-width: max-content;
+}
+
+/* Vertical divider */
+.toolbar-divider {
+  display: block;
+  width: 1px;
+  height: 20px;
+  background: var(--dwc-border-color-default);
+  flex-shrink: 0;
+}
+
+/* Icon buttons */
+.toolbar-icon-btn {
+  --dwc-icon-button-color: var(--dwc-color-default-50);
+  --dwc-icon-button-hover-background: var(--dwc-surface-3);
+  --dwc-icon-button-hover-color: var(--dwc-color-body-text);
+  --dwc-icon-button-border-color: transparent;
+}
+
+.toolbar-icon-btn--danger {
+  --dwc-icon-button-hover-color: var(--dwc-color-danger);
+}
+
+/* User info chip */
+.user-info-container {
+  display: flex;
+  align-items: center;
+  gap: var(--dwc-space-s);
+  padding: var(--dwc-space-2xs) var(--dwc-space-s) var(--dwc-space-2xs) var(--dwc-space-2xs);
+  border-radius: var(--dwc-border-radius-pill);
+  border: 1px solid var(--dwc-border-color-default);
+  background: var(--dwc-surface-3);
+}
+
+.toolbar-username {
+  font-weight: var(--dwc-font-weight-medium);
+  font-size: var(--dwc-font-size-s);
+  white-space: nowrap;
+}
+
+/* Avatar — role ring */
+.toolbar-avatar {
+  &.avatar-user {
+    --dwc-avatar-border: 2px solid var(--dwc-color-success);
+  }
+  &.avatar-support {
+    --dwc-avatar-border: 2px solid var(--dwc-color-info);
+  }
+  &.avatar-admin {
+    --dwc-avatar-border: 2px solid var(--dwc-color-primary);
+  }
+}
+
+dwc-avatar::part(image) {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Mobile: nav on top row, actions row below with toggles centered + avatar right */
+@media (max-width: 768px) {
+  .brand { display: none !important; }
+  .toolbar-username { display: none !important; }
+  .user-info-container {
+    padding: var(--dwc-space-2xs);
+    border: none;
+    background: transparent;
+  }
+
+  /* Toolbar wraps into two rows */
+  dwc-toolbar::part(control) {
+    flex-wrap: wrap;
+    row-gap: var(--dwc-space-xs);
+  }
+
+  /* Top row: nav tabs */
+  dwc-toolbar::part(title) {
+    flex-basis: 100%;
+    justify-content: center;
+  }
+
+  /* Bottom row: actions — toggles centered, avatar pushed right */
+  dwc-toolbar::part(end) {
+    flex-basis: 100%;
+    order: 99;
+    justify-content: center;
+    position: relative;
+  }
+
+  .toolbar-divider { display: none; }
+
+  .user-info-container {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
