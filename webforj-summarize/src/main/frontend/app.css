@@ -1,0 +1,18 @@
+.summarize {
+  gap: var(--dwc-space-l);
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--dwc-space-3xl) var(--dwc-space-m);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.summarize dwc-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.summarize__result {
+  margin: var(--dwc-space-m) 0 0;
+  line-height: var(--dwc-font-line-height-l);
+}
