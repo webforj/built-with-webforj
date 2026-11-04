@@ -1,0 +1,68 @@
+/* SmartForm styles. Every value comes from a DWC design token, so light and dark mode both work. */
+
+.smartform {
+  gap: var(--dwc-space-l);
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--dwc-space-xl) var(--dwc-space-m);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.smartform__header h1 {
+  margin: 0 0 var(--dwc-space-xs);
+  font-size: var(--dwc-font-size-2xl);
+}
+
+.smartform__header p {
+  margin: 0;
+  color: var(--dwc-color-default-text);
+}
+
+.smartform__columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--dwc-space-l);
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .smartform__columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.smartform dwc-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.smartform__pasted {
+  width: 100%;
+}
+
+.smartform__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--dwc-space-s);
+  justify-content: flex-end;
+  margin-top: var(--dwc-space-s);
+}
+
+.smartform__thinking {
+  display: flex;
+  gap: var(--dwc-space-s);
+  align-items: center;
+  margin-top: var(--dwc-space-m);
+  color: var(--dwc-color-default-text);
+}
+
+.smartform__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dwc-space-m);
+}
+
+[hidden] {
+  display: none !important;
+}
