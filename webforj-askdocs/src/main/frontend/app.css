@@ -1,0 +1,103 @@
+/* AskDocs styles. Every value comes from a DWC design token, so light and dark mode both work. */
+
+.askdocs {
+  gap: var(--dwc-space-l);
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--dwc-space-xl) var(--dwc-space-m);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.askdocs__header h1 {
+  margin: 0 0 var(--dwc-space-xs);
+  font-size: var(--dwc-font-size-2xl);
+}
+
+.askdocs__header p {
+  margin: 0;
+  color: var(--dwc-color-default-text);
+}
+
+.askdocs__columns {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) 1fr;
+  gap: var(--dwc-space-l);
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .askdocs__columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.askdocs dwc-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.askdocs dwc-upload {
+  margin-bottom: var(--dwc-space-s);
+}
+
+.askdocs__row {
+  display: flex;
+  gap: var(--dwc-space-s);
+  align-items: center;
+}
+
+.askdocs__question {
+  flex: 1;
+}
+
+.askdocs__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--dwc-space-xs);
+  align-items: center;
+  margin-top: var(--dwc-space-s);
+}
+
+.askdocs__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dwc-space-2xs);
+  padding: var(--dwc-space-2xs) var(--dwc-space-s);
+  border-radius: var(--dwc-border-radius-xl);
+  background: var(--dwc-color-primary-alt);
+  color: var(--dwc-color-primary-text);
+  font-size: var(--dwc-font-size-s);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.askdocs__muted {
+  margin: var(--dwc-space-s) 0 0;
+  color: var(--dwc-color-default-text);
+  font-size: var(--dwc-font-size-s);
+}
+
+.askdocs__thinking {
+  display: flex;
+  gap: var(--dwc-space-s);
+  align-items: center;
+  margin-top: var(--dwc-space-m);
+  color: var(--dwc-color-default-text);
+}
+
+.askdocs__answer {
+  display: block;
+  margin-top: var(--dwc-space-m);
+  padding: var(--dwc-space-m);
+  border-radius: var(--dwc-border-radius-l);
+  background: var(--dwc-surface-2);
+  border: var(--dwc-border-width) solid var(--dwc-border-color);
+}
+
+/* Labels inside a chip row sit on the same line as the chips. */
+.askdocs__chips .askdocs__muted {
+  margin: 0;
+}
