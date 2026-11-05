@@ -1,0 +1,63 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+jobs:
+  discover:
+    name: Find projects with tests
+    runs-on: ubuntu-latest
+    outputs:
+      projects: ${{ steps.find.outputs.projects }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Every top-level folder with a pom.xml and at least one *Test.java, as a JSON array.
+      - id: find
+        run: |
+          projects=$(for d in */; do
+            d=${d%/}
+            if [ -f "$d/pom.xml" ] && find "$d/src/test" -name '*Test.java' 2>/dev/null | grep -q .; then
+              echo "$d"
+            fi
+          done | jq -R . | jq -sc .)
+          echo "Projects with tests: $projects"
+          echo "projects=$projects" >> "$GITHUB_OUTPUT"
+
+  test:
+    name: test (${{ matrix.project }})
+    needs: discover
+    if: needs.discover.outputs.projects != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.discover.outputs.projects) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Run tests
+        working-directory: ${{ matrix.project }}
+        run: mvn -B test
+
+  # One stable check to mark as required in branch protection. It covers every project,
+  # including ones added later, and passes when no project has tests.
+  tests-passed:
+    name: tests passed
+    needs: [discover, test]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check results
+        run: |
+          echo "discover: ${{ needs.discover.result }}, test: ${{ needs.test.result }}"
+          [ "${{ needs.discover.result }}" = "success" ] || exit 1
+          [ "${{ needs.test.result }}" = "success" ] || [ "${{ needs.test.result }}" = "skipped" ] || exit 1
