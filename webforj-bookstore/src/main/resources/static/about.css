@@ -54,7 +54,7 @@
 .about-view__badge {
   padding: var(--dwc-space-2xs) var(--dwc-space-s);
   border-radius: var(--dwc-border-radius-pill);
-  background: var(--dwc-color-primary-90);
+  background: var(--dwc-color-primary-alt);
   color: var(--dwc-color-primary-text);
   font-size: var(--dwc-font-size-m);
   font-weight: var(--dwc-font-weight-semibold);
