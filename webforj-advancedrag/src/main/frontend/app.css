@@ -1,0 +1,105 @@
+.advancedrag {
+  gap: var(--dwc-space-l);
+  /* DWC has no page width token, so the page width is set here. */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--dwc-space-3xl) var(--dwc-space-m);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.advancedrag dwc-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.advancedrag__columns {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: var(--dwc-space-l);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .advancedrag__columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.advancedrag__ask {
+  display: flex;
+  gap: var(--dwc-space-s);
+  align-items: flex-end;
+}
+
+.advancedrag__ask dwc-field {
+  flex: 1;
+}
+
+.pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dwc-space-m);
+}
+
+.pipeline__step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dwc-space-xs);
+  border-left: var(--dwc-border-width) solid var(--dwc-color-default);
+  padding-left: var(--dwc-space-m);
+}
+
+.pipeline__header {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--dwc-space-s);
+}
+
+.pipeline__title {
+  font-weight: var(--dwc-font-weight-semibold);
+}
+
+.pipeline__time,
+.pipeline__label {
+  color: var(--dwc-color-default-text);
+  font-size: var(--dwc-font-size-s);
+}
+
+.pipeline__label {
+  min-width: var(--dwc-size-2xl);
+}
+
+.pipeline__query {
+  margin-top: var(--dwc-space-xs);
+  font-weight: var(--dwc-font-weight-semibold);
+  font-size: var(--dwc-font-size-s);
+}
+
+.pipeline__chips,
+.pipeline__kept {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--dwc-space-xs);
+}
+
+.pipeline__kept {
+  flex-wrap: nowrap;
+  align-items: baseline;
+  font-size: var(--dwc-font-size-s);
+}
+
+.pipeline__chip {
+  padding: var(--dwc-space-3xs) var(--dwc-space-xs);
+  border-radius: var(--dwc-border-radius-s);
+  background: var(--dwc-surface-3);
+  font-family: var(--dwc-font-family-mono);
+  font-size: var(--dwc-font-size-xs);
+  white-space: nowrap;
+}
+
+.pipeline__chip--used {
+  background: var(--dwc-color-success-alt);
+  color: var(--dwc-color-on-success-text-alt);
+}
