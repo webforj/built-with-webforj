@@ -1,44 +1,31 @@
-# Focus Tracker
+# Focus tracker
 
-A Pomodoro-style focus timer built with webforJ, showcasing Progressive Web App capabilities including installable apps, desktop notifications, and app icon and favicon badges.
+A Pomodoro-style focus timer built with webforJ and Spring Boot.
 
-![webforJ Version](https://img.shields.io/badge/webforJ-26.01-blue)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.6-green)
-![Java](https://img.shields.io/badge/Java-21-orange)
+![webforJ](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-focustracker%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'webforj.version'%5D&label=webforJ&color=blue)
+![Spring Boot](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-focustracker%2Fpom.xml&query=%2F*%5Blocal-name()%3D'project'%5D%2F*%5Blocal-name()%3D'parent'%5D%2F*%5Blocal-name()%3D'version'%5D&label=Spring%20Boot&color=green)
+![Java](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-focustracker%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'maven.compiler.source'%5D&label=Java&color=orange)
 
 ## Overview
 
-This app demonstrates how webforJ enables Java developers to access modern web platform capabilities. A simple focus timer serves as the vehicle to showcase PWA features that were traditionally only available to JavaScript developers.
-
-## What You'll Learn
-
-- **Installable Web Apps**: Use `@AppProfile` to make your app installable on desktop and mobile
-- **Desktop Notifications**: Send native system notifications with `DesktopNotification.show()`
-- **Badge APIs**: Display dynamic badges on the installed app icon with `App.setBadge()` and on the browser favicon with `Page.setIconBadge()`
-- **Interval Timer**: Use webforJ's `Interval` class for periodic tasks
+This app shows how webforJ gives Java developers access to modern web platform capabilities. Set a duration, start the timer, and the remaining minutes appear on the browser favicon and on the installed app icon. When the session ends, a desktop notification tells you to take a break.
 
 ## Features
 
-- **Adjustable Timer**: +/- buttons to set focus duration (1-60 minutes)
-- **Badge Updates**: Installed app icon and browser favicon badges show remaining minutes
-- **Desktop Notification**: Alert when session completes
-- **Clean UI**: Responsive design using FlexLayout and CSS variables
+- **Installable app**: Install the app on desktop and mobile
+- **Adjustable timer**: Plus and minus buttons set the focus duration
+- **Badge updates**: The installed app icon and the browser favicon show the remaining minutes
+- **Desktop notification**: An alert tells you when the session completes
+- **Live countdown**: The timer counts down every second
+- **Responsive layout**: The UI stays clean at any width
 
-## Tech Stack
-
-- **Frontend**: webforJ 26.01
-- **Backend**: Spring Boot 4.0.6
-- **Build Tool**: Maven
-- **Java Version**: 21
-
-## Getting Started
+## Getting started
 
 ### Prerequisites
 
-- Java 21
-- Maven 3.9+
+- Java and Maven (see the badges for the Java version)
 
-### Running the App
+### Running the app
 
 1. Clone the repository:
 ```bash
@@ -48,56 +35,24 @@ cd built-with-webforj/webforj-focustracker
 
 2. Run the application:
 ```bash
-mvn spring-boot:run
+mvn
 ```
 
-3. Open your browser and navigate to:
-```
-http://localhost:8080
-```
+3. Open `http://localhost:8080` in your browser.
 
-### Trying the Badges
+### Trying the badges
 
 The browser favicon badge works without installing the app. To also see the badge on the operating system app icon:
 
 1. Open the app in Chrome or Edge
 2. Click the install icon in the address bar
 3. Launch the installed app
-4. Adjust or start the timer - the remaining minutes will show on both the browser favicon and app icon
+4. Adjust or start the timer. The remaining minutes show on both the browser favicon and the app icon
 
-## Key Code Examples
+## Learn more
 
-### Making the App Installable
-
-```java
-@AppProfile(name = "Focus Tracker", shortName = "Focus")
-public class Application extends App {
-}
-```
-
-### Sending Desktop Notifications
-
-```java
-DesktopNotification.show("Focus Session Complete!", "Great work! Take a break.");
-```
-
-### Setting the Badges
-
-```java
-App.setBadge(minutes);
-Page.getCurrent().setIconBadge(minutes);
-```
-
-### Using Interval for Timers
-
-```java
-timerInterval = new Interval(1f, e -> tick());
-timerInterval.start();
-```
-
-## Learn More
-
-- [webforJ Documentation](https://docs.webforj.com)
-- [webforJ App Badges](https://docs.webforj.com/docs/advanced/app-badges)
-- [App Badge API](https://developer.chrome.com/docs/capabilities/web-apis/badging-api)
-- [Desktop Notifications](https://docs.webforj.com/docs/components/desktop-notification)
+- [Installable web apps with webforJ](https://docs.webforj.com/blog/installable-apps)
+- [webforJ documentation](https://docs.webforj.com)
+- [webforJ app badges](https://docs.webforj.com/docs/advanced/app-badges)
+- [Desktop notifications](https://docs.webforj.com/docs/components/desktop-notification)
+- [Badging API](https://developer.chrome.com/docs/capabilities/web-apis/badging-api)

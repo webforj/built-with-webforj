@@ -1,39 +1,29 @@
-# webforJ Spring CRUD Application
+# CRUD
 
-A modern music artist management system built with webforJ and Spring Boot, demonstrating full-stack Java development with a modern web UI.
+A music artist management app built with webforJ and Spring Boot.
 
-![webforJ Version](https://img.shields.io/badge/webforJ-25.02-blue)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-green)
-![Java](https://img.shields.io/badge/Java-21-orange)
+![webforJ](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-crud%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'webforj.version'%5D&label=webforJ&color=blue)
+![Spring Boot](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-crud%2Fpom.xml&query=%2F*%5Blocal-name()%3D'project'%5D%2F*%5Blocal-name()%3D'parent'%5D%2F*%5Blocal-name()%3D'version'%5D&label=Spring%20Boot&color=green)
+![Java](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-crud%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'maven.compiler.source'%5D&label=Java&color=orange)
 
 ## Overview
 
-This app showcases webforJ's UI components integrated with Spring Boot's backend capabilities. The end result is a complete CRUD (Create, Read, Update, Delete) interface for managing music artists with a responsive design.
+A table lists music artists, a search field narrows the list, and a dialog adds, edits and deletes entries. The data lives in an in-memory database and is loaded with sample artists at startup. It shows how webforJ components work with a Spring Boot backend.
 
 ## Features
 
-- **Modern UI**: Gmail-style avatars with artist initials
-- **Full CRUD Operations**: Add, edit, delete, and search music artists
-- **Smart Filtering**: Built-in table filtering with webforJ's `SpringDataRepository`
-- **Data Validation**: Jakarta validation with user-friendly error messages
-- **Responsive Design**: Clean, professional interface that works on all screen sizes
-- **Auto Data Binding**: Automatic form-to-model binding with validation
-- **In-Memory Database**: H2 database with sample data pre-loaded
-
-## Tech stack
-
-- **Frontend**: webforJ 25.02
-- **Backend**: Spring Boot 3.5.3 with Spring Data JPA
-- **Database**: H2 (in-memory)
-- **Build Tool**: Maven
-- **Java Version**: 21
+- **Artist table**: Each artist is listed with an avatar built from their initials
+- **Add, edit and delete**: A dialog creates and updates artists, and a confirmation dialog protects deletion
+- **Search**: Filter the list by name, genre or country
+- **Validation**: Form fields show validation messages
+- **Data binding**: The dialog fields are bound to the artist record
+- **Sample data**: The in-memory database is filled with sample artists when it is empty
 
 ## Getting started
 
 ### Prerequisites
 
-- Java 21 or higher
-- Maven 3.6+
+- Java and Maven (see the badges for the Java version)
 
 ### Running the app
 
@@ -45,45 +35,26 @@ cd built-with-webforj/webforj-crud
 
 2. Run the application:
 ```bash
-mvn spring-boot:run
+mvn
 ```
 
-3. Open your browser and navigate to:
-```
-http://localhost:8080
-```
+3. Open `http://localhost:8080` in your browser.
 
-### H2 database console
+### Database console
 
 To view the database directly:
-1. Navigate to `http://localhost:8080/h2-console`
+
+1. Open `http://localhost:8080/h2-console`
 2. Use these connection settings:
    - JDBC URL: `jdbc:h2:mem:testdb`
    - Username: `sa`
    - Password: (leave empty)
 
-## Project structure
+## Learn more
 
-```
-src/main/java/com/webforj/crud/
-  Application.java           # Main Spring Boot application
-  components/
-    ArtistDialog.java     # Add/Edit dialog component
-    renderers/
-      ArtistAvatarRenderer.java  # Custom table renderer
-  config/
-    DataInitializer.java  # Sample data loader
-  entity/
-    MusicArtist.java      # JPA entity
-  repository/
-    MusicArtistRepository.java  # Spring Data repository
-  service/
-    MusicArtistService.java     # Business logic layer
-  views/
-    MusicArtistsView.java       # Main UI view
-```
-
-## Learn More
-
-- [webforJ Documentation](https://docs.webforj.com)
-- [Spring Boot Documentation](https://spring.io/projects/spring-boot)
+- [Full-stack development with webforJ](https://docs.webforj.com/blog/Full-stack%20development%20with%20webforJ)
+- [webforJ documentation](https://docs.webforj.com)
+- [Table component](https://docs.webforj.com/docs/components/table/overview)
+- [Data binding](https://docs.webforj.com/docs/data-binding/overview)
+- [Repository](https://docs.webforj.com/docs/advanced/repository/overview)
+- [Spring Boot documentation](https://spring.io/projects/spring-boot)

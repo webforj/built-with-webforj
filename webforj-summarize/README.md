@@ -2,44 +2,33 @@
 
 A document summary demo built with webforJ and Spring AI, turning an uploaded file into a short bullet point summary.
 
-![webforJ Version](https://img.shields.io/badge/webforJ-26.03-blue)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.0-green)
-![Java](https://img.shields.io/badge/Java-21-orange)
+![webforJ](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-summarize%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'webforj.version'%5D&label=webforJ&color=blue)
+![Spring Boot](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-summarize%2Fpom.xml&query=%2F*%5Blocal-name()%3D'project'%5D%2F*%5Blocal-name()%3D'parent'%5D%2F*%5Blocal-name()%3D'version'%5D&label=Spring%20Boot&color=green)
+![Java](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-summarize%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'maven.compiler.source'%5D&label=Java&color=orange)
 
 ![Summarize screenshot](screenshot.png)
 
 ## Overview
 
-This app demonstrates the webforJ `Upload` component together with Spring AI. Drop a PDF, Word, text or Markdown file, and the AI sums it up in at most five bullet points. The whole flow is three Java classes, with no REST controller and no JavaScript.
+This app demonstrates the webforJ file upload component together with Spring AI. Drop a PDF, Word, text or Markdown file, and the AI sums it up in a few bullet points. The whole flow is plain Java, with no REST controller and no JavaScript.
 
 ## Features
 
-- **File Upload**: The `Upload` component sends the file to the server as soon as it is picked or dropped
-- **Text Extraction**: Apache Tika reads the text out of PDF, Word, text and Markdown files
-- **AI Summary**: Gemini summarizes the first 12,000 characters of the document through a Spring AI `ChatClient`
-- **Markdown Output**: The summary renders in a `MarkdownViewer`, so the bullet points show as a list
-- **Background Work**: The model call runs in a Spring `@Async` method and updates the UI with `Environment.runLater`
+- **File upload**: The file is sent to the server as soon as it is picked or dropped
+- **Text extraction**: The text is read out of PDF, Word, text and Markdown files
+- **AI summary**: The model summarizes the document
+- **Markdown output**: The summary renders as a bullet list
+- **Background work**: The model call runs off the UI thread and the page updates when it finishes
 - **Cleanup**: The uploaded file is deleted as soon as it has been summarized
 
-## Tech Stack
-
-- **Frontend**: webforJ 26.03
-- **Backend**: Spring Boot 4.1.0 with Spring AI 2.0
-- **LLM**: Google Gemini via Spring AI
-- **Build Tool**: Maven
-- **Java Version**: 21
-
-## Getting Started
+## Getting started
 
 ### Prerequisites
 
-- Java 21
-- Maven 3.9+
-- Gemini API key
+- Java and Maven (see the badges for the Java version)
+- A Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey)
 
-### API Key Setup
-
-This app uses Google Gemini as the LLM. To get your API key:
+### API key setup
 
 1. Go to [Google AI Studio](https://aistudio.google.com/apikey)
 2. Sign in with your Google account
@@ -50,7 +39,7 @@ This app uses Google Gemini as the LLM. To get your API key:
 export SPRING_AI_GOOGLE_GENAI_API_KEY=YOUR_API_KEY_HERE
 ```
 
-### Running the App
+### Running the app
 
 1. Clone the repository:
 ```bash
@@ -63,13 +52,12 @@ cd built-with-webforj/webforj-summarize
 mvn
 ```
 
-3. Open your browser and navigate to:
-```
-http://localhost:8080
-```
+3. Open `http://localhost:8080` in your browser.
 
-## Learn More
+## Learn more
 
-- [webforJ Documentation](https://docs.webforj.com)
-- [webforJ Upload Component](https://docs.webforj.com/docs/components/upload)
-- [Spring AI Documentation](https://docs.spring.io/spring-ai/reference/)
+- [Summarize PDFs with AI](https://docs.webforj.com/blog/summarize-documents-spring-ai)
+- [webforJ documentation](https://docs.webforj.com)
+- [Upload component](https://docs.webforj.com/docs/components/upload)
+- [MarkdownViewer component](https://docs.webforj.com/docs/components/markdownviewer)
+- [Spring AI documentation](https://docs.spring.io/spring-ai/reference/)

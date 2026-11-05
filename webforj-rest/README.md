@@ -1,119 +1,52 @@
-# webforj-rest
+# REST
 
-A webforJ application powered by Spring Boot that shows two approaches for handling paginated data from REST APIs. You'll see how to load all data into memory, and how to fetch data on-demand.
+A webforJ and Spring Boot demo that shows two ways to load paginated data from a REST API into a table.
+
+![webforJ](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-rest%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'webforj.version'%5D&label=webforJ&color=blue)
+![Spring Boot](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-rest%2Fpom.xml&query=%2F*%5Blocal-name()%3D'project'%5D%2F*%5Blocal-name()%3D'parent'%5D%2F*%5Blocal-name()%3D'version'%5D&label=Spring%20Boot&color=green)
+![Java](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-rest%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'maven.compiler.source'%5D&label=Java&color=orange)
 
 ## Overview
 
-This application demonstrates two repository patterns for working with REST APIs in webforJ:
+The app displays the same customer records in two tabs. One tab loads every record into memory and pages locally, and the other fetches only the current page from the backend. The REST endpoints are served by the same application.
 
-1. **CollectionRepository** - Load all data into memory once, then paginate locally
-2. **DelegatingRepository** - Fetch only the data needed for the current page from the backend
+## Features
 
-## Prerequisites
+- **In-memory loading**: All customers are held in memory and paged locally
+- **Lazy loading**: The backend is asked for one page at a time
+- **REST backend**: Endpoints for listing, paging, lookup by id and counting customers
+- **Router exclusion**: The REST endpoints are kept out of the webforJ router
+- **Sample data**: Customers are generated into an in-memory database at startup
 
-- Java 17 or 21
-- Maven 3.9+
-- webforJ version 25.03 or newer
+## Getting started
 
-## Getting Started
+### Prerequisites
 
-To run the application in development mode:
+- Java and Maven (see the badges for the Java version)
 
+### Running the app
+
+1. Clone the repository:
+```bash
+git clone https://github.com/webforj/built-with-webforj.git
+cd built-with-webforj/webforj-rest
+```
+
+2. Run the application:
 ```bash
 mvn
 ```
 
-Then open [http://localhost:8080](http://localhost:8080) in your browser.
+3. Open `http://localhost:8080` in your browser.
 
-## What You'll Learn
+## Learn more
 
-This application demonstrates the same customer data (100 records) displayed in two tabs, each using a different approach:
-
-### Tab 1: CollectionRepository (In Memory)
-
-Fetches all 100 customers from the backend at once, stores them in memory using a [`CollectionRepository`](https://docs.webforj.com/docs/advanced/repository/overview#collection-repository), then provides client-side pagination with a [`Navigator`](https://docs.webforj.com/docs/components/navigator).
-
-**How it works:**
-```java
-// 1. Fetch all data from REST API
-List<Customer> customers = customerService.getAllCustomers();
-
-// 2. Create CollectionRepository from the list
-CollectionRepository<Customer> repository = new CollectionRepository<>(customers);
-
-// 3. Wire up Table and Navigator
-customerTable.setRepository(repository);
-navigator = new Navigator(repository, 15);
-```
-
-**When to use:**
-- Small to medium datasets
-- Data changes infrequently
-- You need all data for client-side operations (filtering, sorting)
-- Simple setup is a priority
-
-### Tab 2: DelegatingRepository (Lazy Loading)
-
-Only fetches 15 customers at a time from the backend as you navigate pages using a [`DelegatingRepository`](https://docs.webforj.com/docs/advanced/repository/delegating-repository).
-
-**How it works:**
-```java
-// Create a DelegatingRepository with three functions
-public class CustomerDelegatingRepository extends DelegatingRepository<Customer, Object> {
-    public CustomerDelegatingRepository(RestClientService service) {
-        super(
-            // Find: Fetch page of data
-            criteria -> service.fetchCustomers(criteria.getLimit(), criteria.getOffset()).stream(),
-
-            // Count: Get total count
-            criteria -> service.getCustomerCount(),
-
-            // Find by key: Fetch single item
-            key -> service.fetchCustomerById((Long) key)
-        );
-    }
-}
-```
-
-**When to use:**
-- Large datasets
-- Data changes frequently
-- Reduce initial load time and memory usage
-- Backend supports pagination
-
-### Backend Implementation
-
-The Spring Boot backend provides paginated endpoints:
-
-```java
-@RestController
-@RequestMapping("/api/customers")
-public class CustomerRestController {
-    @GetMapping
-    public List<Customer> getAllCustomers() { ... }
-
-    @GetMapping("/paginated")
-    public List<Customer> getCustomersPaginated(
-        @RequestParam int limit,
-        @RequestParam int offset) { ... }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) { ... }
-
-    @GetMapping("/count")
-    public long getCustomerCount() { ... }
-}
-```
-
-## Key Technologies
-
-**webforJ Resources:**
-- [Repository Overview](https://docs.webforj.com/docs/advanced/repository/overview) - Understanding repositories in webforJ
-- [DelegatingRepository Guide](https://docs.webforj.com/docs/advanced/repository/delegating-repository) - Deep dive into lazy loading
-- [Spring Boot Integration](https://docs.webforj.com/docs/integrations/spring/spring-boot) - Using webforJ with Spring Boot
-- [Table Component](https://docs.webforj.com/docs/components/table/overview) - Working with tables
-- [Navigator Component](https://docs.webforj.com/docs/components/navigator) - Adding pagination
-
-**Spring Boot Resources:**
-- [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/current/reference/html/)
-- [Building REST APIs](https://spring.io/guides/gs/rest-service/)
+- [Loading data from REST APIs](https://docs.webforj.com/blog/data-loading-strategies-rest-apis)
+- [webforJ documentation](https://docs.webforj.com)
+- [Repository overview](https://docs.webforj.com/docs/advanced/repository/overview)
+- [DelegatingRepository guide](https://docs.webforj.com/docs/advanced/repository/delegating-repository)
+- [Spring Boot integration](https://docs.webforj.com/docs/integrations/spring/spring-boot)
+- [Table component](https://docs.webforj.com/docs/components/table/overview)
+- [Navigator component](https://docs.webforj.com/docs/components/navigator)
+- [Spring Boot reference](https://docs.spring.io/spring-boot/reference/)
+- [Building a RESTful web service](https://spring.io/guides/gs/rest-service/)

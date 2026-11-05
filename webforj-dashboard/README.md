@@ -1,69 +1,49 @@
-# webforJ Dashboard
+# Dashboard
 
-A cryptocurrency market monitoring app built with webforJ, demonstrating advanced data visualization, real-time rendering capabilities, and modern UI patterns using webforJ's library of components.
+A cryptocurrency market dashboard built with webforJ, with live-updating tables, charts and custom table cells.
+
+![webforJ](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-dashboard%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'webforj.version'%5D&label=webforJ&color=blue)
+![Java](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-dashboard%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'maven.compiler.source'%5D&label=Java&color=orange)
 
 ## Overview
 
-The webforJ Dashboard showcases how to build a professional data-driven web app with webforJ. It features a cryptocurrency market dashboard with real-time data updates, financial news aggregation, portfolio analytics, and comprehensive user settings.
+The app has a market dashboard, analytics, news, settings and an about page. The dashboard shows summary cards with charts above a table of simulated cryptocurrencies whose prices refresh live. All cryptocurrency data, prices and news articles are randomly generated for demonstration and do not represent real market data.
 
-**Important:** All cryptocurrency data, prices, news articles, and market information displayed in this app are randomly generated for demonstration purposes and do not represent actual market data.
+## Features
 
-## Main Features
+- **Live price updates**: Prices in the table refresh continuously
+- **Cryptocurrency table**: Simulated cryptocurrencies with custom cells for icons, price changes and inline sparkline charts
+- **Charts**: Charts on the dashboard cards and in the analytics view, including portfolio allocation
+- **News view**: Simulated news articles with search, category filtering and a trending section
+- **Settings view**: Tabbed settings for general options, notifications, API keys and privacy
+- **Responsive layout**: A collapsible navigation drawer adapts to the screen size
+- **Theme toggle**: Switch between light and dark themes
 
-- **Real-time Data Rendering** - Tables and charts automatically update with new data points
-- **Interactive Data Visualization** - Google Charts integration for portfolio allocation, trading volumes, and market trends
-- **Dynamic Cryptocurrency Table** - Monitor 40+ simulated cryptocurrencies with automatic price updates and market metrics
-- **Financial News Hub** - Simulated cryptocurrency news with search, category filtering, and trending articles
-- **Responsive Design** - Mobile-optimized layouts with collapsible navigation drawer with webforJ's [`AppLayout`](https://docs.webforj.com/docs/components/app-layout)
-- **Theme Support** - Light/dark mode toggle
-- **Advanced Table Rendering** - Custom renderers for icons, price changes, and inline sparkline charts
+## Getting started
 
-## Technical Highlights
+### Prerequisites
 
-This app demonstrates several advanced webforJ features:
-- Real-time UI updates using intervals
-- Complex component composition and reusable UI components
-- Google Charts integration with custom styling and responsive behavior
-- Advanced table features with custom cell renderers
-- Service layer architecture with simulated market data generation
+- Java and Maven (see the badges for the Java version)
 
-## Prerequisites
+### Running the app
 
-- Java 21 or newer
-- Maven 3.9+
-
-## Getting Started
-
-1. Clone the repository and navigate to the webforj-dashboard directory:
-   ```bash
-   cd webforj-dashboard
-   ```
-
-2. Run the app:
-   ```bash
-   mvn jetty:run
-   ```
-
-3. Open [http://localhost:8080](http://localhost:8080) in your browser
-
-## Project Structure
-
-```
-src/main/java/com/webforj/builtwithwebforj/dashboard/
-├── components/          # Reusable UI components
-│   ├── analytics/      # Chart cards and portfolio components
-│   ├── dashboard/      # Cryptocurrency table and cards
-│   ├── news/          # News cards and sections
-│   └── settings/      # Settings panel components
-├── models/            # Data models (Cryptocurrency, NewsArticle)
-├── services/          # Business logic and data services
-├── utils/             # Formatters, renderers, and chart utilities
-└── views/             # App views and layouts
+1. Clone the repository:
+```bash
+git clone https://github.com/webforj/built-with-webforj.git
+cd built-with-webforj/webforj-dashboard
 ```
 
-## Learn More
+2. Run the application:
+```bash
+mvn jetty:run
+```
 
-- [webforJ Documentation](https://docs.webforj.com)
-- [Component Overview](https://docs.webforj.com/docs/components/overview)
-- [Google Charts in webforJ](https://docs.webforj.com/docs/components/googlecharts)
-- [Table Component Guide](https://docs.webforj.com/docs/components/table)
+3. Open `http://localhost:8080` in your browser.
+
+## Learn more
+
+- [Custom table cells with renderers in webforJ](https://docs.webforj.com/blog/table-renderers-custom-cells)
+- [webforJ documentation](https://docs.webforj.com)
+- [AppLayout](https://docs.webforj.com/docs/components/app-layout)
+- [Google Charts](https://docs.webforj.com/docs/components/google-charts)
+- [Table](https://docs.webforj.com/docs/components/table/overview)

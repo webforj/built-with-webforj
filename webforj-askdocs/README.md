@@ -1,111 +1,64 @@
 # AskDocs
 
-Chat with your own documents, written entirely in Java. AskDocs is a small retrieval augmented generation (RAG) app built with webforJ and Spring AI: you add files, ask a question, and the answer comes only from those files, with the files it used listed underneath.
+A retrieval augmented generation (RAG) demo built with webforJ and Spring AI that answers questions only from the documents you add and lists the files it used.
 
-![webforJ Version](https://img.shields.io/badge/webforJ-26.03-blue)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1-green)
-![Spring AI](https://img.shields.io/badge/Spring%20AI-2.0-green)
-![Java](https://img.shields.io/badge/Java-21-orange)
+![webforJ](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-askdocs%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'webforj.version'%5D&label=webforJ&color=blue)
+![Spring Boot](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-askdocs%2Fpom.xml&query=%2F*%5Blocal-name()%3D'project'%5D%2F*%5Blocal-name()%3D'parent'%5D%2F*%5Blocal-name()%3D'version'%5D&label=Spring%20Boot&color=green)
+![Java](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-askdocs%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'maven.compiler.source'%5D&label=Java&color=orange)
 
 ![AskDocs screenshot](screenshot.png)
 
-## What it teaches
+## Overview
 
-- How RAG works, in one Spring service
-- Uploading files with the webforJ `Upload` component and handing them to Spring AI
-- Streaming a model's answer into a `MarkdownViewer` from a background thread with `Environment.runLater`
-- Showing which documents an answer was based on
-- Giving users clear states: empty, working (spinner), answered, failed
+Add files, ask a question, and the answer comes only from those files, with the sources shown underneath. The whole app is written in Java and shows file upload, streaming updates to the UI and Spring AI integration.
 
-## How RAG works here
+## Features
 
-RAG has two flows. Both live in [`KnowledgeBase`](src/main/java/com/webforj/builtwithwebforj/askdocs/service/KnowledgeBase.java).
-
-**Indexing**, when a document is added:
-
-1. `TikaDocumentReader` reads the text out of a PDF, Word, Markdown or text file.
-2. `TokenTextSplitter` cuts the text into chunks small enough to embed.
-3. `VectorStore.add` turns every chunk into an embedding (a list of numbers that captures its meaning) with Gemini and keeps it in memory.
-
-**Asking**, when a question comes in:
-
-1. The `RetrievalAugmentationAdvisor` embeds the question and asks the vector store for the closest chunks (`topK(4)`, `similarityThreshold(0.5)`).
-2. It adds those chunks to the prompt as context.
-3. The system prompt tells the model to answer from that context only.
-
-The retrieved chunks travel with the response, so the view can list the files the answer used.
-
-## How the UI works
-
-[`AskView`](src/main/java/com/webforj/builtwithwebforj/askdocs/views/AskView.java) is a single webforJ view with two cards.
-
-- **Add documents** uses `Upload` with `AutoUpload.ALWAYS`, so files upload as soon as they are dropped. Each file is moved to a temporary folder under a unique name and passed to `KnowledgeBase.add`. *Try the sample handbook* loads [`travel-handbook.md`](src/main/resources/sample/travel-handbook.md) so you can try the app without a file of your own.
-- **Ask a question** sends the question with Enter or the *Ask* button. A spinner shows while the documents are searched, then the answer streams into a `MarkdownViewer` and the sources appear as chips.
-
-The answer arrives on a Reactor thread, not on the webforJ UI thread. The view captures the session's `Environment` before it starts the request and hands every UI change back with `Environment.runLater(env, ...)`:
-
-```java
-Environment env = Environment.getCurrent();
-Set<String> used = new LinkedHashSet<>();
-startAnswer();
-
-kb.ask(text).subscribe(
-    response -> {
-      used.addAll(KnowledgeBase.sourcesOf(response));
-      String chunk = response.chatResponse().getResult().getOutput().getText();
-      Environment.runLater(env, () -> showChunk(chunk));
-    },
-    error -> Environment.runLater(env, () -> {
-      showChunk("Sorry, the answer failed: " + error.getMessage());
-      finishAnswer(Set.of());
-    }),
-    () -> Environment.runLater(env, () -> finishAnswer(used)));
-```
-
-All styling is in [`app.css`](src/main/frontend/app.css) and uses DWC design tokens, so the app follows light and dark mode.
+- **Document upload**: Files are sent for processing as soon as you drop them
+- **Retrieval augmented generation**: The most relevant parts of your documents are found and given to the model to answer from
+- **Streaming answers**: The answer appears progressively as it is written
+- **Sources**: The files an answer was based on appear as chips under it
+- **Clear states**: Empty, working, answered and failed states are shown
+- **Sample handbook**: A bundled travel handbook lets you try the app without your own file
 
 ## Getting started
 
 ### Prerequisites
 
-- Java 21
-- Maven 3.9+
-- A Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
+- Java and Maven (see the badges for the Java version)
+- A Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey)
 
-### Run
+### API key setup
 
-Set the key in your environment, never in a file you commit:
+The app needs the key twice, once for the chat model and once for the embedding model. Set both in your environment, never in a file you commit:
 
 ```bash
-export SPRING_AI_GOOGLE_GENAI_API_KEY=your-key
-export SPRING_AI_GOOGLE_GENAI_EMBEDDING_API_KEY=your-key
+export SPRING_AI_GOOGLE_GENAI_API_KEY=YOUR_API_KEY_HERE
+export SPRING_AI_GOOGLE_GENAI_EMBEDDING_API_KEY=YOUR_API_KEY_HERE
 ```
 
-Then start the app:
+### Running the app
 
+1. Clone the repository:
 ```bash
+git clone https://github.com/webforj/built-with-webforj.git
 cd built-with-webforj/webforj-askdocs
+```
+
+2. Run the application:
+```bash
 mvn
 ```
 
-Open `http://localhost:8080`, click *Try the sample handbook*, and click one of the example questions.
+3. Open `http://localhost:8080` in your browser.
 
-The models are set in [`application.properties`](src/main/resources/application.properties): `gemini-3.5-flash-lite` for answers and `gemini-embedding-001` for embeddings. Every question makes one embedding call and one chat call, and every added document makes one embedding call per chunk.
-
-## Going further
-
-- **Keep documents across restarts.** `SimpleVectorStore` lives in memory. Replace it with a database-backed `VectorStore` such as PGVector. Nothing else changes, because the rest of the code only sees the `VectorStore` interface.
-- **Separate users.** Every user shares one knowledge base here. Store an owner in each chunk's metadata and filter with `VectorStoreDocumentRetriever.FILTER_EXPRESSION`.
-- **Large files.** Indexing runs on the UI thread to keep the sample short. For big PDFs, run it in a Spring `@Async` method and report progress with `Environment.runLater`.
-
-## A note on Guava
-
-The Google GenAI client pulls in the Android build of Guava, which breaks the webforJ servlet at startup. The `pom.xml` pins the JRE build (`33.4.0-jre`) in `dependencyManagement` to fix it.
+Click *Try the sample handbook*, then click one of the example questions.
 
 ## Learn more
 
+- [Spring AI RAG web UI](https://docs.webforj.com/blog/spring-ai-rag)
 - [webforJ documentation](https://docs.webforj.com)
 - [Upload component](https://docs.webforj.com/docs/components/upload)
 - [MarkdownViewer component](https://docs.webforj.com/docs/components/markdownviewer)
 - [Asynchronous updates](https://docs.webforj.com/docs/advanced/asynchronous-updates)
-- [Spring AI: retrieval augmented generation](https://docs.spring.io/spring-ai/reference/api/retrieval-augmented-generation.html)
+- [Spring AI retrieval augmented generation](https://docs.spring.io/spring-ai/reference/api/retrieval-augmented-generation.html)

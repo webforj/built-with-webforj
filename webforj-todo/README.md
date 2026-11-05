@@ -1,40 +1,29 @@
-# webforJ Spring Todo Application
+# Todo
 
-A modern todo list application built with webforJ and Spring Boot, demonstrating MVC architecture with a clean, responsive UI.
+A todo list app built with webforJ and Spring Boot, organized with the MVC pattern.
 
-![webforJ Version](https://img.shields.io/badge/webforJ-25.03-blue)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-green)
-![Java](https://img.shields.io/badge/Java-21-orange)
+![webforJ](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-todo%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'webforj.version'%5D&label=webforJ&color=blue)
+![Spring Boot](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-todo%2Fpom.xml&query=%2F*%5Blocal-name()%3D'project'%5D%2F*%5Blocal-name()%3D'parent'%5D%2F*%5Blocal-name()%3D'version'%5D&label=Spring%20Boot&color=green)
+![Java](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fwebforj%2Fbuilt-with-webforj%2Fmain%2Fwebforj-todo%2Fpom.xml&query=%2F%2F*%5Blocal-name()%3D'maven.compiler.source'%5D&label=Java&color=orange)
 
 ## Overview
 
-This app showcases webforJ's component-based UI integrated with Spring Boot's backend capabilities following the MVC pattern. The end result is a fully functional todo list application with filtering, persistence, and a clean user interface.
+This app shows how to build a small webforJ UI from reusable components and keep the logic in a controller and a service. Users add todos, toggle them done and delete them, and filter the list by status. Todos are stored in an in-memory database and sample todos load at startup.
 
 ## Features
 
-- **Modern UI**: Clean, minimalist design with intuitive controls
-- **Full CRUD Operations**: Add, toggle, and delete todo items
-- **Smart Filtering**: Filter todos by All, Active, or Completed status
-- **Data Persistence**: H2 database with state management
-- **MVC Architecture**: Clean separation of concerns with controller pattern
-- **Responsive Design**: Professional interface that works on all screen sizes
-- **Real-time Updates**: UI updates with state synchronization
-- **Sample Data**: Pre-loaded with example todos for immediate testing
-
-## Tech stack
-
-- **Frontend**: webforJ 25.03
-- **Backend**: Spring Boot 3.5.3 with Spring Data JPA
-- **Database**: H2 (in-memory)
-- **Build Tool**: Maven
-- **Java Version**: 21
+- **Add, toggle and delete**: Add items from a text field, mark them done with a switch and remove them
+- **Filtering**: The footer filters the list by All, Active or Completed
+- **MVC structure**: A controller sits between the view and the service layer
+- **Reusable components**: Item, list and footer are separate components
+- **Persistence**: Todos are stored in an in-memory database
+- **Sample data**: Example todos are added when the database is empty
 
 ## Getting started
 
 ### Prerequisites
 
-- Java 17 or 21
-- Maven 3.6+
+- Java and Maven (see the badges for the Java version)
 
 ### Running the app
 
@@ -46,57 +35,23 @@ cd built-with-webforj/webforj-todo
 
 2. Run the application:
 ```bash
-mvn spring-boot:run
+mvn
 ```
 
-3. Open your browser and navigate to:
-```
-http://localhost:8080
-```
+3. Open `http://localhost:8080` in your browser.
 
 ### H2 database console
 
 To view the database directly:
-1. Navigate to `http://localhost:8080/h2-console`
+
+1. Open `http://localhost:8080/h2-console`
 2. Use these connection settings:
    - JDBC URL: `jdbc:h2:mem:testdb`
    - Username: `sa`
    - Password: (leave empty)
 
-## Project structure
+## Learn more
 
-```
-src/main/java/com/webforj/builtwithwebforj/todo/
-  Application.java           # Main Spring Boot application
-  components/
-    TodoFooter.java         # Footer with filters and count
-    TodoItem.java           # Individual todo item component
-    TodoList.java           # Main todo list container
-  config/
-    DataInitializer.java    # Sample data loader
-  controller/
-    TodoController.java     # MVC controller layer
-  models/
-    Todo.java              # JPA entity
-  repository/
-    TodoRepository.java     # Spring Data repository
-  service/
-    TodoService.java        # Business logic layer
-  views/
-    TodoView.java          # Main UI view
-```
-
-## Architecture
-
-This application follows the MVC (Model-View-Controller) pattern:
-
-- **Model**: JPA entities and Spring Data repositories handle data persistence
-- **View**: webforJ components provide the user interface
-- **Controller**: Spring-managed controllers coordinate between view and model
-
-For more details on the architecture, see the [MVC Architecture Guide](MVC_ARCHITECTURE_GUIDE.md).
-
-## Learn More
-
-- [webforJ Documentation](https://docs.webforj.com)
-- [Spring Boot Documentation](https://spring.io/projects/spring-boot)
+- [Building a todo app with MVC](https://docs.webforj.com/blog/webforj-mvc)
+- [webforJ documentation](https://docs.webforj.com)
+- [Spring Boot documentation](https://spring.io/projects/spring-boot)

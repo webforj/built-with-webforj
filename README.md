@@ -1,55 +1,62 @@
-# built-with-webforj
+# Built with webforJ: Java web framework examples
 
-This repository contains various webforJ projects that showcase different aspects of the webforJ framework. Each project demonstrates specific features and capabilities of webforJ, providing practical examples for developers.
+Open source Java web app examples built with [webforJ](https://webforj.com), the Java web framework. The examples cover Spring AI, Spring Boot CRUD, data binding, charts, UI components and installable web apps. The UI and the logic live in one language, next to Java libraries you already use, such as Spring Boot and Spring AI. Each app is small, focused on one feature, and ready to copy into your own project. Every project has its own README.
 
-## Projects
+## Spring AI examples
 
-Name | Source | Version | Description
---- | --- | --- | ---
-[webforj-dashboard](https://docs.webforj.com/dashboard) | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-dashboard) | `26.01` | A demonstrative cryptocurrency dashboard app using test data, that showcases webforJ's advanced `Table` and UI capabilities. Features a responsive layout with real-time data visualization using webforJ's Google Charts API, dark/light theme support, and multiple views including market overview, news feed, portfolio analytics, and settings management.
-[webforj-howdy↗️](https://docs.webforj.com/howdy/you) | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-howdy) | `26.02-SNAPSHOT` | A web-based demonstration project built with webforJ framework. It showcases how to create a modern web app using Java, featuring a responsive user interface, Google Charts integration, and built-in routing capabilities. This app serves as a practical example for developers learning webforJ's core concepts and best practices.
-[webforj-tictactoe↗️](https://docs.webforj.com/tictactoe/) | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-tictactoe) | `26.02-SNAPSHOT` | A simple implementation of a Tic-Tac-Toe game that supports two players taking turns. The game utilizes webforJ namespaces to share the Java game object between running instances. This project demonstrates the capabilities of webforJ namespaces. No database, RESTful API, or WebSocket implementation is used in this version.
-webforj-explorer | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-explorer) | `26.02-SNAPSHOT` | The webforJ Explorer app is a minimal code viewer that mimics the VSCode layout. It uses webforJ's layout system, a file tree on the left, and a Monaco editor to display file contents in read-only mode. This project shows how to integrate dynamic data, build a tree UI, and embed third-party components.
-webforj-crud | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-crud) | `26.02-SNAPSHOT` | A simple CRUD application demonstrating the use of Spring Boot and JPA with webforJ. This music artist management system showcases how to utilize Spring Data repositories, JPA entities, and validation within a webforJ UI, featuring automatic data binding, built-in table filtering with `SpringDataRepository`, and the framework's first-class table renderers — `AvatarRenderer` composed with a `CompositeRenderer` power the Artist column, replacing the previously hand-rolled avatar HTML. Perfect for developers looking to combine webforJ's frontend capabilities with Spring's robust backend ecosystem.
-webforj-todo | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-todo) | `26.02-SNAPSHOT` | A modern todo list application built with webforJ and Spring Boot that demonstrates MVC architecture patterns. Features a clean, responsive UI with full CRUD operations, smart filtering (All/Active/Completed), real-time state updates, and H2 database persistence. This project showcases best practices for combining webforJ's component-based frontend with Spring's backend services using a clean controller pattern.
-webforj-rest | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-rest) | `26.02-SNAPSHOT` | A Spring Boot-powered webforJ application demonstrating two approaches for handling paginated REST API data. Features side-by-side comparison of `CollectionRepository` (in-memory pagination) and `DelegatingRepository` (lazy-loading pagination) patterns with a customer management interface. Showcases webforJ's `Table` component with page-based `Navigator` layout, REST API integration, and randomly generated test data. Perfect for learning how to choose between eager and lazy data loading strategies in webforJ applications.
-webforj-ghostai | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-ghostai) | `26.02-SNAPSHOT` | An AI chat demo built with webforJ and Spring AI. Features streaming markdown rendering with the `MarkdownViewer` component, predictive text input, chat memory, and MCP integration with the webforJ MCP Server for real-time documentation queries. Showcases how to build ChatGPT-style interfaces in pure Java using Google Gemini via `spring-ai-starter-model-google-genai`. **Runtime prerequisite:** set `SPRING_AI_MODEL_GOOGLE_GENAI_PROJECT_ID` and matching Google Cloud ADC credentials, otherwise Spring context init fails on the `googleGenAiChatModel` bean.
-webforj-askdocs | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-askdocs) | `26.03` | Chat with your own documents in a small retrieval augmented generation (RAG) app built with webforJ and Spring AI. Files dropped on the `Upload` component are read with Tika, split into chunks, and embedded with Gemini into an in-memory `SimpleVectorStore`. Questions go through a `RetrievalAugmentationAdvisor`, the answer streams into a `MarkdownViewer` from a Reactor thread via `Environment.runLater`, and the files the answer used appear as source chips. A bundled sample handbook lets you try it without your own files. **Runtime prerequisite:** set `SPRING_AI_GOOGLE_GENAI_API_KEY` and `SPRING_AI_GOOGLE_GENAI_EMBEDDING_API_KEY` to a Gemini API key from Google AI Studio.
-webforj-smartform | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-smartform) | `26.03` | Fill a support ticket form from an email, written entirely in Java with webforJ and Spring AI. Paste text or drop a PDF, Word, email or text file, read with Tika, and Gemini drafts the ticket through Spring AI structured output. The fields bind to a bean with `BindingContext.of`, so the same Jakarta Validation rules check typed and AI-filled values before anything is saved. The model call runs in a Spring `@Async` method and the form updates through `Environment.runLater`. **Runtime prerequisite:** set `SPRING_AI_GOOGLE_GENAI_API_KEY` to a Gemini API key from Google AI Studio.
-webforj-summarize | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-summarize) | `26.03` | Summarize an uploaded document in a few bullet points, written entirely in Java with webforJ and Spring AI. A PDF, Word, text or Markdown file dropped on the `Upload` component is read with Tika, and Gemini summarizes it through a Spring AI `ChatClient`. The model call runs in a Spring `@Async` method, and the summary renders in a `MarkdownViewer` through `Environment.runLater`. **Runtime prerequisite:** set `SPRING_AI_GOOGLE_GENAI_API_KEY` to a Gemini API key from Google AI Studio.
-webforj-invoicereader | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-invoicereader) | `26.03` | Read the fields of an invoice image, written entirely in Java with webforJ and Spring AI. A PNG or JPEG dropped on the `Upload` component, or the bundled sample invoice, is previewed in the page and sent to Gemini as media in the user message. Spring AI maps the answer to an `InvoiceData` record with `.entity()`, so the vendor, invoice number, date, currency and total arrive as typed fields. The model call runs on a worker thread and the view updates through `Environment.runLater`. **Runtime prerequisite:** set `SPRING_AI_GOOGLE_GENAI_API_KEY` to a Gemini API key from Google AI Studio.
-webforj-bookstore | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-bookstore) | `26.02-SNAPSHOT` | A book inventory management system built with webforJ and Spring Boot, demonstrating CRUD operations, role-based access control with Spring Security, and data filtering. Features genre management with colored chips, full-text search, sortable tables with custom renderers, and admin-only views. Uses H2 in-memory database with sample data generated via Java Faker. Test credentials for the signin card: `admin/admin` or `user/password`.
-webforj-databinding | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-databinding) | `26.02-SNAPSHOT` | An employee onboarding form demonstrating webforJ data binding over nested Java beans, packaged as a traditional WAR and run on the Jetty Maven plugin. A single `BindingContext` created with automatic binding (`BindingContext.of`) wires every field, reaching nested `Address` and `EmergencyContact` beans through `@UseProperty` dotted property paths like `address.street`. Jakarta Validation cascades through the nested beans via `@Valid`, and saving opens a dialog presenting the record in a single-open `Accordion`.
-webforj-focustracker | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-focustracker) | `26.02-SNAPSHOT` | A focus timer demonstrating Progressive Web App capabilities in webforJ. Features installable app support via `@AppProfile`, desktop notifications with `DesktopNotification.show()`, and dynamic app-icon badges via `App.setBadge()`. Shows how Java developers can access modern web platform features traditionally limited to JavaScript.
-webforj-location-tracker | [Source](https://github.com/webforj/built-with-webforj/tree/main/webforj-location-tracker) | `26.02` | A globe-spanning "where are my friends" demo that pairs the browser Geolocation API with **all three** faces of the webforJ Badge feature in one screen: the in-app `dwc-badge` slotted into the header bell, the browser-tab favicon overlay via `Page.setIconBadge()`, and the installable-app icon badge via `App.setBadge()`. Each friend card carries a stable Wikimedia Commons photo of their city (with signature CSS gradients as a graceful fallback), the grid sorts nearest-first using great-circle distance from the user's geolocated position, and a dark/light theme toggle sits on the far right of the toolbar. Adding a friend fires all three badges at once.
-[PingPal↗️](https://www.pingpal.dev/) | [Source](https://github.com/webforj/built-with-webforj/tree/main/pingpal) | `26.02-SNAPSHOT` | **🏆 First Place Winner - Built with webforJ Contest** • A Postman-inspired API testing and development tool created by [Rick van Baalen](https://www.linkedin.com/in/rickvanbaalen/). PingPal provides an interface for testing and managing API requests, featuring authentication support, custom headers, formatted responses, and request history. This contest-winning project showcases the power of webforJ for building professional developer tools. **Runs on `http://localhost:9965`**, and needs `PINGPAL_URL` (plus `PINGPAL_USERNAME` / `PINGPAL_PASSWORD` if the target API is authed) in the environment.
-[startforJ↗️](https://docs.webforj.com/startforj/) | | | The startforJ app generates a minimal starter project based on various available archetypes that includes all required dependencies, configuration files, and a pre-wired layout - ready to build on.
+Java apps that call a large language model through Spring AI and show the result in a webforJ UI.
 
-## Getting Started
+| Project | What it shows | Learn more |
+| --- | --- | --- |
+| [webforj-ghostai](webforj-ghostai) | ChatGPT-style chat with streaming markdown, predictive text and MCP | [Adding an AI chat feature to a Java app](https://docs.webforj.com/blog/add-ai-to-java-app) |
+| [webforj-askdocs](webforj-askdocs) | Chat with your own documents through retrieval-augmented generation (RAG) | [Spring AI RAG web UI](https://docs.webforj.com/blog/spring-ai-rag) |
+| [webforj-smartform](webforj-smartform) | Fill a validated support ticket form from an email or file | [AI form filling in Java](https://docs.webforj.com/blog/ai-form-filling-java) |
+| [webforj-summarize](webforj-summarize) | Summarize an uploaded document in a few bullet points | [Summarize PDFs with AI](https://docs.webforj.com/blog/summarize-documents-spring-ai) |
+| [webforj-invoicereader](webforj-invoicereader) | Read the fields of an invoice image into a Java record | [Extract data from an image](https://docs.webforj.com/blog/ai-image-data-extraction-java) |
 
-Every project builds with Maven and runs on `http://localhost:8080` (except **pingpal**, which uses `9965`).
+## Data, CRUD and form examples
 
-1. Navigate to the project directory:
+Apps that load, edit and validate data in webforJ tables and forms.
 
-   ```bash
-   cd webforj-howdy   # or any other project folder
-   ```
+| Project | What it shows | Learn more |
+| --- | --- | --- |
+| [webforj-crud](webforj-crud) | Spring Data CRUD with table filtering and table renderers | [Full-stack development with webforJ](https://docs.webforj.com/blog/Full-stack%20development%20with%20webforJ) |
+| [webforj-todo](webforj-todo) | MVC todo list with Spring Boot and H2 | [Building a todo app with MVC](https://docs.webforj.com/blog/webforj-mvc) |
+| [webforj-rest](webforj-rest) | Eager and lazy pagination of REST data in a table | [Loading data from REST APIs](https://docs.webforj.com/blog/data-loading-strategies-rest-apis) |
+| [webforj-bookstore](webforj-bookstore) | Book inventory with Spring Security roles and admin views | [Building a full-featured demo with Spring Boot](https://docs.webforj.com/blog/webforj-bookstore) |
+| [webforj-databinding](webforj-databinding) | Data binding and validation over nested Java beans | [Nested data binding in webforJ](https://docs.webforj.com/blog/nested-data-binding-webforj) |
 
-2. Start the app. Most projects have a default Maven goal wired up, so:
+## UI component examples
 
-   ```bash
-   mvn
-   ```
+Apps that show webforJ components, layouts and themes.
 
-   is enough. If a project doesn't start a server that way, use one of:
+| Project | What it shows | Learn more |
+| --- | --- | --- |
+| [webforj-dashboard](webforj-dashboard) | Crypto dashboard with tables, charts and themes | [Custom table cells with renderers in webforJ](https://docs.webforj.com/blog/table-renderers-custom-cells) |
+| [webforj-howdy](webforj-howdy) | A first webforJ app with routing and Google Charts | [Howdy README](webforj-howdy) |
+| [webforj-explorer](webforj-explorer) | Code viewer with a file tree and Monaco editor, styled like VS Code | [Explorer README](webforj-explorer) |
+| [webforj-tictactoe](webforj-tictactoe) | Two-player game sharing state through webforJ namespaces | [Tic-tac-toe README](webforj-tictactoe) |
 
-   - `mvn jetty:run` — for the classic Jetty WAR projects (webforj-dashboard, webforj-howdy, webforj-tictactoe, webforj-explorer, webforj-databinding, pingpal)
-   - `mvn spring-boot:run` — for the Spring Boot projects (webforj-bookstore, webforj-crud, webforj-todo, webforj-rest, webforj-ghostai, webforj-focustracker, webforj-askdocs, webforj-smartform, webforj-summarize, webforj-invoicereader)
+## Installable web app examples
 
-3. Open your browser at the URL in the console output.
+Apps that install on a device like a native app and use browser features such as notifications, badges and geolocation.
 
-## Requirements
+| Project | What it shows | Learn more |
+| --- | --- | --- |
+| [webforj-focustracker](webforj-focustracker) | Installable PWA with desktop notifications and app badges | [Installable web apps with webforJ](https://docs.webforj.com/blog/installable-apps) |
+| [webforj-location-tracker](webforj-location-tracker) | Geolocation with in-app, favicon and app icon badges | [Location tracker README](webforj-location-tracker) |
 
-- **Java 21** or newer (webforj-tictactoe still targets Java 17 for legacy reasons; everything else is on 21)
-- **Maven 3.9** or newer
-- Release versions such as `26.03` resolve from Maven Central. The `26.02-SNAPSHOT` line resolves from the Sonatype Central Portal snapshots repo, which every project's `pom.xml` already declares — no extra Maven settings are needed.
+## Community
+
+Apps built by the webforJ community.
+
+| Project | What it shows | Learn more |
+| --- | --- | --- |
+| [PingPal](pingpal) | Contest-winning API tester by [Rick van Baalen](https://www.linkedin.com/in/rickvanbaalen/) | [PingPal README](pingpal) |
+
+## webforJ docs and tutorials
+
+- [webforJ documentation](https://docs.webforj.com/docs/introduction/getting-started): components, routing, data binding and Spring integration.
+- [webforJ blog](https://docs.webforj.com/blog): tutorials and guides, including the walkthroughs linked above.
+- [startforJ](https://docs.webforj.com/startforj/): generate a new webforJ project to start your own Java web app.
+- [webforJ on GitHub](https://github.com/webforj/webforj): the framework source code and issue tracker.
