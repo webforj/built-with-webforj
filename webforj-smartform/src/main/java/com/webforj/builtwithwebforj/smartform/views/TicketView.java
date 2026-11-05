@@ -178,8 +178,10 @@ public class TicketView extends Composite<FlexLayout> {
     pasted.setInvalid(false);
     fill.setEnabled(false);
     thinking.setVisible(true);
+    // The result arrives on a Spring worker thread, so capture this session's Environment here.
+    Environment env = Environment.getCurrent();
     extractor.extract(text)
-        .whenComplete((ticket, error) -> Environment.runLater(() -> {
+        .whenComplete((ticket, error) -> Environment.runLater(env, () -> {
           fill.setEnabled(true);
           thinking.setVisible(false);
           // The model can also answer with nothing usable, which maps to no ticket.
