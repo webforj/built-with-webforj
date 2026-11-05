@@ -59,8 +59,10 @@ public class AskView extends Composite<FlexLayout> {
     answer.setContent("Searching the documentation...");
     pipeline.showEmpty("Rewriting, expanding, searching and reranking...");
     String asked = question.getValue();
+    // The result arrives on a Spring worker thread, so capture this session's Environment here.
+    Environment env = Environment.getCurrent();
     current = assistant.ask(asked);
-    current.whenComplete((result, error) -> Environment.runLater(() -> {
+    current.whenComplete((result, error) -> Environment.runLater(env, () -> {
       // A view the user left gets no updates.
       if (destroyed) {
         return;
