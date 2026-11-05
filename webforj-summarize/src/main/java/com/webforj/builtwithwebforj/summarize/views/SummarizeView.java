@@ -60,8 +60,10 @@ public class SummarizeView extends Composite<FlexLayout> {
     try {
       File saved = uploaded.move(target.toString());
       result.setText("Summarizing " + uploaded.getClientName() + "...");
+      // The result arrives on a Spring worker thread, so capture this session's Environment here.
+      Environment env = Environment.getCurrent();
       summaries.summarize(saved.toPath()).whenComplete((summary, error) ->
-          Environment.runLater(() -> showResult(summary, error)));
+          Environment.runLater(env, () -> showResult(summary, error)));
     } catch (IOException ex) {
       Toast.show("Could not read " + uploaded.getClientName(), Theme.DANGER);
     }
