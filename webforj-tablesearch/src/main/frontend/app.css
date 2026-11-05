@@ -1,0 +1,50 @@
+.tablesearch {
+  gap: var(--dwc-space-l);
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--dwc-space-3xl) var(--dwc-space-m);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.tablesearch dwc-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tablesearch__bar {
+  gap: var(--dwc-space-s);
+  width: 100%;
+}
+
+.tablesearch__bar dwc-field {
+  flex: 1 1 18rem;
+}
+
+.tablesearch__understood {
+  margin: var(--dwc-space-s) 0 0;
+  font-size: var(--dwc-font-size-s);
+  color: var(--dwc-color-default-text-40);
+}
+
+.tablesearch dwc-table {
+  height: clamp(18rem, 55vh, 34rem);
+}
+
+@media (max-width: 700px) {
+  .tablesearch {
+    padding: var(--dwc-space-l) var(--dwc-space-s);
+  }
+
+  .tablesearch__bar dwc-field {
+    flex-basis: 100%;
+  }
+
+  .tablesearch__bar dwc-button {
+    flex: 1 1 0;
+  }
+}
+
+dwc-app-layout {
+  --dwc-app-layout-header-height: 4rem;
+}

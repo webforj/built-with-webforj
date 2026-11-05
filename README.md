@@ -14,6 +14,7 @@ Java apps that call a large language model through Spring AI and show the result
 | [webforj-summarize](webforj-summarize) | Summarize an uploaded document in a few bullet points | [Summarize PDFs with AI](https://docs.webforj.com/blog/summarize-documents-spring-ai) |
 | [webforj-invoicereader](webforj-invoicereader) | Read the fields of an invoice image into a Java record | [Extract data from an image](https://docs.webforj.com/blog/ai-image-data-extraction-java) |
 | [webforj-advancedrag](webforj-advancedrag) | Watch query rewriting, hybrid search and reranking step by step | [Advanced RAG in Java](https://docs.webforj.com/blog/advanced-rag-java) |
+| [webforj-tablesearch](webforj-tablesearch) | Filter a table by typing a sentence in plain English | [Natural language table search](https://docs.webforj.com/blog/ai-table-natural-language-search) |
 
 ## Data, CRUD and form examples
 
