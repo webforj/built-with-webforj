@@ -25,6 +25,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Base64;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.util.MimeType;
 import org.springframework.util.MimeTypeUtils;
 
@@ -49,9 +50,11 @@ public class InvoiceUploadView extends Composite<FlexLayout> {
   private final Button sample = new Button("Try a sample invoice");
   private final Img preview = new Img();
   private final ChatClient chat;
+  private final TaskExecutor executor;
 
-  public InvoiceUploadView(ChatClient chat) {
+  public InvoiceUploadView(ChatClient chat, TaskExecutor executor) {
     this.chat = chat;
+    this.executor = executor;
 
     upload.setSelectionMode(Upload.SelectionMode.SINGLE);
     upload.addFilter("Invoice images", "*.png;*.jpg;*.jpeg");
@@ -116,7 +119,10 @@ public class InvoiceUploadView extends Composite<FlexLayout> {
   private void read(File file, MimeType type) {
     showPreview(file, type);
 
-    new Thread(() -> {
+    // The model call runs on Spring's shared task executor, so read this session's Environment
+    // here on the UI thread and hand every UI update back to it.
+    Environment env = Environment.getCurrent();
+    executor.execute(() -> {
       try {
         FileSystemResource image = new FileSystemResource(file);
         InvoiceData data = chat.prompt()
@@ -127,16 +133,16 @@ public class InvoiceUploadView extends Composite<FlexLayout> {
           throw new IllegalStateException("the model returned no fields");
         }
 
-        Environment.runLater(() -> show(data));
+        Environment.runLater(env, () -> show(data));
       } catch (Exception ex) {
-        Environment.runLater(() -> {
+        Environment.runLater(env, () -> {
           status.setText("Extraction failed: " + ex.getMessage());
         });
       } finally {
         // The image is only needed for the model call, so remove it once the model has read it.
         file.delete();
       }
-    }).start();
+    });
   }
 
   // Shows the image the model reads, embedded as a data URL, so it needs no extra endpoint.
