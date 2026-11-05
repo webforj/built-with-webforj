@@ -1,6 +1,7 @@
 package com.webforj.builtwithwebforj.invoicereader.views;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -45,9 +46,10 @@ class InvoiceUploadViewTest {
     UserInteraction.perform(
         ComponentLocator.of(Upload.class).locate(), UploadInteraction.upload("invoice.png"));
 
-    waitFor(() -> paragraph("Extracted invoice INV-42") != null);
-    assertEquals("webforJ, 2026-07-01, 118.00 EUR",
-        paragraph("webforJ, 2026-07-01, 118.00 EUR").getText());
+    // The result line is set after the status line, so wait for it before checking both.
+    waitFor(() -> paragraph("webforJ, 2026-07-01, 118.00 EUR") != null);
+    assertNotNull(paragraph("webforJ, 2026-07-01, 118.00 EUR"));
+    assertNotNull(paragraph("Extracted invoice INV-42"));
   }
 
   @Test
@@ -60,9 +62,10 @@ class InvoiceUploadViewTest {
     UserInteraction.click(ComponentLocator.of(Button.class).byText("Try a sample invoice").locate());
 
     assertTrue(ComponentLocator.of(Img.class).locate().getSrc().startsWith("data:image/png;base64,"));
-    waitFor(() -> paragraph("Extracted invoice INV-2026-0142") != null);
-    assertEquals("webforJ, 2026-07-14, 743.16 EUR",
-        paragraph("webforJ, 2026-07-14, 743.16 EUR").getText());
+    // The result line is set after the status line, so wait for it before checking both.
+    waitFor(() -> paragraph("webforJ, 2026-07-14, 743.16 EUR") != null);
+    assertNotNull(paragraph("webforJ, 2026-07-14, 743.16 EUR"));
+    assertNotNull(paragraph("Extracted invoice INV-2026-0142"));
   }
 
   @Test
@@ -73,9 +76,10 @@ class InvoiceUploadViewTest {
 
     UserInteraction.click(ComponentLocator.of(Button.class).byText("Try a sample invoice").locate());
 
-    waitFor(() -> paragraph("Extracted invoice not found") != null);
-    assertEquals("webforJ, not found, not found EUR",
-        paragraph("webforJ, not found, not found EUR").getText());
+    // The result line is set after the status line, so wait for it before checking both.
+    waitFor(() -> paragraph("webforJ, not found, not found EUR") != null);
+    assertNotNull(paragraph("webforJ, not found, not found EUR"));
+    assertNotNull(paragraph("Extracted invoice not found"));
   }
 
   @Test
