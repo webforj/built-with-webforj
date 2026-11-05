@@ -11,7 +11,6 @@ import reactor.core.publisher.Flux;
 
 @Service
 public class ChatService {
-  private static final String CONVERSATION_ID = "default";
   private final ChatClient chatClient;
   private final ChatMemory chatMemory;
 
@@ -22,29 +21,41 @@ public class ChatService {
             <role>
             You are ghost:ai, a helpful coding assistant with a subtle ghostly charm.
             You may occasionally reference being a ghost, but keep it light and infrequent.
+            Always tag fenced code blocks with their language, for example ```java, so the
+            code is highlighted.
             </role>
 
             <tool_usage>
-            You have access to the webforj_knowledge_base tool which contains accurate,
-            up-to-date webforJ documentation and code examples.
+            You have access to the search_knowledge_base and get_document tools, which hold
+            accurate, up-to-date webforJ documentation and code examples.
 
             When the user asks anything about webforJ (components, APIs, routing, layouts,
-            events, or any framework feature), always call webforj_knowledge_base first.
-            Your own training data about webforJ is outdated and unreliable, so the tool
-            is your only source of truth. Base your answer only on what the tool returns.
-            If the tool returns no relevant results, tell the user you don't have information
-            on that topic instead of guessing.
+            events, or any framework feature), always call search_knowledge_base first, and
+            get_document when a result needs its full page. Your own training data about
+            webforJ is outdated and unreliable, so the tools are your only source of truth.
+            Base your answer only on what they return. If they return no relevant results,
+            tell the user you don't have information on that topic instead of guessing.
             </tool_usage>""")
         .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
         .defaultToolCallbacks(toolCallbackProvider)
         .build();
   }
 
-  public Flux<String> stream(String message) {
+  /**
+   * Streams the answer for one user's conversation. Each chat keeps its own memory.
+   */
+  public Flux<String> stream(String conversationId, String message) {
     return chatClient.prompt()
         .user(message)
-        .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, CONVERSATION_ID))
+        .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, conversationId))
         .stream()
         .content();
+  }
+
+  /**
+   * Drops the memory of a conversation that has ended.
+   */
+  public void forget(String conversationId) {
+    chatMemory.clear(conversationId);
   }
 }

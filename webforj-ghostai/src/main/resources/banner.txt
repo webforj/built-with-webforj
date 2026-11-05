@@ -1,7 +1,8 @@
-                 _      __            ___
- __      _____  | |__  / _| ___  _ __|_  |
- \ \ /\ / / _ \ | '_ \| |_ / _ \| '__|| |
-  \ V  V /  __/ | |_) |  _| (_) | |  _| |
-   \_/\_/ \___| |_.__/|_|  \___/|_| |___|
-
-   :: webforJ (25.11) ::
+${AnsiColor.BRIGHT_CYAN}██╗    ██╗███████╗██████╗ ███████╗ ██████╗ ██████╗      ██╗
+${AnsiColor.BRIGHT_BLUE}██║    ██║██╔════╝██╔══██╗██╔════╝██╔═══██╗██╔══██╗     ██║
+${AnsiColor.BLUE}██║ █╗ ██║█████╗  ██████╔╝█████╗  ██║   ██║██████╔╝     ██║
+${AnsiColor.BRIGHT_MAGENTA}██║███╗██║██╔══╝  ██╔══██╗██╔══╝  ██║   ██║██╔══██╗██   ██║
+${AnsiColor.MAGENTA}╚███╔███╔╝███████╗██████╔╝██║     ╚██████╔╝██║  ██║╚█████╔╝
+${AnsiColor.BRIGHT_MAGENTA} ╚══╝╚══╝ ╚══════╝╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═╝ ╚════╝
+${AnsiColor.DEFAULT}
+  :: ${AnsiColor.BRIGHT_CYAN}webforJ${AnsiColor.DEFAULT} (${AnsiColor.BRIGHT_MAGENTA}26.03${AnsiColor.DEFAULT}) ::

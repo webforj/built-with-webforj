@@ -1,5 +1,6 @@
 package com.webforj.builtwithwebforj.ghostai.views;
 
+import com.webforj.Environment;
 import com.webforj.builtwithwebforj.ghostai.component.ChatFooter;
 import com.webforj.builtwithwebforj.ghostai.component.ChatHeader;
 import com.webforj.builtwithwebforj.ghostai.component.ChatInput;
@@ -12,7 +13,7 @@ import com.webforj.component.layout.flexlayout.FlexDirection;
 import com.webforj.component.layout.flexlayout.FlexLayout;
 import com.webforj.component.markdown.MarkdownViewer;
 import com.webforj.router.annotation.Route;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.UUID;
 import reactor.core.Disposable;
 
 @Route("/")
@@ -27,9 +28,11 @@ public class ChatView extends Composite<FlexLayout> {
   private ChatThinkingIndicator thinkingIndicator;
   private Disposable currentSubscription;
   private boolean firstChunkReceived;
+  // Each open chat is its own conversation, so users never share chat memory.
+  private final String conversationId = UUID.randomUUID().toString();
+  private int streamId;
 
-  public ChatView(ChatService chatService, PredictionService predictionService,
-      ScheduledExecutorService debouncerExecutor) {
+  public ChatView(ChatService chatService, PredictionService predictionService) {
     this.chatService = chatService;
 
     self.setDirection(FlexDirection.COLUMN)
@@ -49,7 +52,7 @@ public class ChatView extends Composite<FlexLayout> {
     contentArea.setItemGrow(1, welcomeMessage);
     contentArea.setItemGrow(1, markdownViewer);
 
-    chatInput = new ChatInput(predictionService, debouncerExecutor);
+    chatInput = new ChatInput(predictionService);
     chatInput.onSend(this::handleSend).onStop(this::handleStop);
     chatInput.addClassName("chat-centered");
 
@@ -82,35 +85,47 @@ public class ChatView extends Composite<FlexLayout> {
     // Set input to streaming state
     chatInput.setState(ChatInput.State.STREAMING);
 
-    // Start streaming
-    currentSubscription = chatService.stream(message)
-        .doOnNext(chunk -> {
+    // Chunks arrive on Reactor threads, so capture this session's Environment and hand every
+    // UI change back to it. A stream the user stopped gets no more updates.
+    Environment env = Environment.getCurrent();
+    int stream = ++streamId;
+    currentSubscription = chatService.stream(conversationId, message).subscribe(
+        chunk -> Environment.runLater(env, () -> {
+          if (stream != streamId) {
+            return;
+          }
           if (!firstChunkReceived) {
             firstChunkReceived = true;
             hideThinking();
           }
           markdownViewer.append(chunk);
-        })
-        .doOnError(error -> {
+        }),
+        error -> Environment.runLater(env, () -> {
+          if (stream != streamId) {
+            return;
+          }
           hideThinking();
           markdownViewer.setVisible(true);
           markdownViewer.append("*Error: " + error.getMessage() + "*");
           currentSubscription = null;
           chatInput.setState(ChatInput.State.IDLE);
           chatInput.focusInput();
-        })
-        .doOnComplete(() -> {
+        }),
+        () -> Environment.runLater(env, () -> {
+          if (stream != streamId) {
+            return;
+          }
           currentSubscription = null;
           // Wait for progressive rendering to finish
           markdownViewer.whenRenderComplete().thenAccept(v -> {
             chatInput.setState(ChatInput.State.IDLE);
             chatInput.focusInput();
           });
-        })
-        .subscribe();
+        }));
   }
 
   private void handleStop(Void v) {
+    streamId++;
     if (currentSubscription != null) {
       currentSubscription.dispose();
       currentSubscription = null;
@@ -135,5 +150,14 @@ public class ChatView extends Composite<FlexLayout> {
       contentArea.remove(thinkingIndicator);
       thinkingIndicator = null;
     }
+  }
+
+  @Override
+  protected void onDidDestroy() {
+    streamId++;
+    if (currentSubscription != null) {
+      currentSubscription.dispose();
+    }
+    chatService.forget(conversationId);
   }
 }

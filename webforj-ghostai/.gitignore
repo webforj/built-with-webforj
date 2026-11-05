@@ -24,6 +24,8 @@ hs_err_pid*
 replay_pid*
 
 **/target
+/node_modules
+/src/main/frontend/generated
 /.idea
 /.claude
 *.iml
@@ -42,3 +44,4 @@ bbj/.project
 .DS_Store
 *.versionsBackup
 
+/config/

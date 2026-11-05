@@ -2,10 +2,16 @@ package com.webforj.builtwithwebforj.ghostai.service;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.util.Locale;
+import java.util.concurrent.CompletableFuture;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PredictionService {
+  private static final Logger logger = System.getLogger(PredictionService.class.getName());
 
   private final ChatClient chatClient;
 
@@ -42,11 +48,21 @@ public class PredictionService {
         .build();
   }
 
-  public String predict(String input) {
+  /**
+   * Runs on a Spring task thread because the model call blocks. Completes with an empty string
+   * when there is no usable prediction.
+   */
+  @Async
+  public CompletableFuture<String> predict(String input) {
+    return CompletableFuture.completedFuture(complete(input));
+  }
+
+  private String complete(String input) {
     if (input == null || input.trim().length() < 10) return "";
 
     try {
       String result = chatClient.prompt().user(input).call().content();
+      logger.log(Level.DEBUG, "Prediction for \"{0}\": {1}", input, result);
       if (result == null || result.isBlank()) return "";
 
       result = result.trim();
@@ -55,12 +71,15 @@ public class PredictionService {
       }
 
       // Check if result starts with input (case-insensitive for flexibility)
-      if (result.toLowerCase().startsWith(input.toLowerCase()) && result.length() > input.length()) {
+      if (result.toLowerCase(Locale.ROOT).startsWith(input.toLowerCase(Locale.ROOT))
+          && result.length() > input.length()) {
         // Return with original input preserved
         return input + result.substring(input.length());
       }
+      logger.log(Level.DEBUG, "Prediction discarded, it does not continue the input: {0}", result);
       return "";
     } catch (Exception e) {
+      logger.log(Level.WARNING, "Prediction failed: {0}", e.getMessage());
       return "";
     }
   }
