@@ -36,6 +36,7 @@ Apps that show webforJ components, layouts and themes.
 | [webforj-dashboard](webforj-dashboard) | Crypto dashboard with tables, charts and themes | [Custom table cells with renderers in webforJ](https://docs.webforj.com/blog/table-renderers-custom-cells) |
 | [webforj-howdy](webforj-howdy) | A first webforJ app with routing and Google Charts | [Howdy README](webforj-howdy) |
 | [webforj-explorer](webforj-explorer) | Code viewer with a file tree and Monaco editor, styled like VS Code | [Explorer README](webforj-explorer) |
+| [webforj-terminal](webforj-terminal) | Browser terminal with typed commands, history and a Snake game | [Terminal README](webforj-terminal) |
 | [webforj-tictactoe](webforj-tictactoe) | Two-player game sharing state through webforJ namespaces | [Tic-tac-toe README](webforj-tictactoe) |
 
 ## Installable web app examples

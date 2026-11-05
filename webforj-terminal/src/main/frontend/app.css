@@ -1,0 +1,15 @@
+/*
+ * Define application theme
+ *
+ * See the documentation for details:
+ * https://docs.webforj.com/docs/styling/overview
+ */
+
+/* :root {
+  --dwc-color-primary-seed: #008060;
+} */
+
+.home {
+  margin: var(--dwc-space-3xl) auto;
+  text-align: center;
+}
