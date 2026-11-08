@@ -1,0 +1,74 @@
+/* Login dialog — minimal overrides, let DWC handle colors */
+dwc-login {
+  --dwc-dialog-shadow: var(--dwc-shadow-xl);
+  --dwc-dialog-border-radius: var(--dwc-border-radius-xl);
+  --dwc-dialog-max-width: 420px;
+
+  &::part(header-icon) { display: none; }
+}
+
+/* Social login buttons */
+.social-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dwc-space-s);
+  width: 100%;
+  padding: var(--dwc-space-s) var(--dwc-space-m);
+  background: transparent;
+  border: 1px solid var(--dwc-border-color-default);
+  border-radius: var(--dwc-border-radius-m);
+  cursor: pointer;
+  font-size: var(--dwc-font-size-m);
+  font-family: var(--dwc-font-family);
+  color: var(--dwc-color-body-text);
+  transition: border-color var(--dwc-transition-fast),
+              background var(--dwc-transition-fast);
+
+  &:hover {
+    border-color: var(--dwc-color-primary);
+  }
+}
+
+.social-login-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.oauth-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dwc-space-s);
+}
+
+.oauth-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--dwc-space-m);
+  color: var(--dwc-color-default-60);
+  font-size: var(--dwc-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: var(--dwc-space-s) 0;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--dwc-border-color-default);
+  }
+}
+
+.email-signin-text {
+  color: var(--dwc-color-default-60);
+  font-size: var(--dwc-font-size-s);
+  text-align: center;
+  margin: 0;
+}
+
+.login-description {
+  color: var(--dwc-color-default-60);
+  text-align: center;
+  margin: 0 0 var(--dwc-space-s);
+}
