@@ -22,7 +22,7 @@
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
 
-    <webforj.version>26.03</webforj.version>
+    <webforj.version>26.10-SNAPSHOT</webforj.version>
     <!-- Applies only to Maven runs. Packaged JARs select profiles at startup. -->
     <spring-boot.run.profiles>dev</spring-boot.run.profiles>
   </properties>
