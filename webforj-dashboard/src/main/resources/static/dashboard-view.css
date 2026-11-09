@@ -58,7 +58,7 @@
 /* Card content styles */
 .data-card__title {
   font-size: var(--dwc-font-size-xl);
-  color: var(--dwc-color-gray-15);
+  color: var(--dwc-color-body-text);
   font-weight: var(--dwc-font-weight-normal);
   transition: color var(--dwc-transition-fast) ease;
 }
@@ -92,7 +92,7 @@
 
 .data-card__details {
   font-size: var(--dwc-font-size-l);
-  color: var(--dwc-color-on-surface);
+  color: var(--dwc-color-body-text);
 }
 
 /* ========================================
@@ -100,23 +100,23 @@
    ======================================== */
 
 .percentage-positive {
-  background-color: var(--dwc-color-success-95);
-  color: var(--dwc-color-success-25);
-  border: 1px solid var(--dwc-color-success-25);
+  background-color: var(--dwc-color-success-alt);
+  color: var(--dwc-color-success-text);
+  border: 1px solid var(--dwc-border-color-success);
 }
 
 .percentage-positive:hover {
-  border: 2px solid var(--dwc-color-success-25);
+  border: 2px solid var(--dwc-border-color-success);
 }
 
 .percentage-negative {
-  background-color: var(--dwc-color-danger-95);
-  color: var(--dwc-color-danger-40);
-  border: 1px solid var(--dwc-color-danger-40);
+  background-color: var(--dwc-color-danger-alt);
+  color: var(--dwc-color-danger-text);
+  border: 1px solid var(--dwc-border-color-danger);
 }
 
 .percentage-negative:hover {
-  border: 2px solid var(--dwc-color-danger-40);
+  border: 2px solid var(--dwc-border-color-danger);
 }
 
 /* ========================================
@@ -137,26 +137,26 @@ dwc-table::part(cell-header) {
 /* Price cells */
 dwc-table::part(price-cell) {
   font-size: var(--dwc-font-size-2xl);
-  color: var(--dwc-color-gray-15);
+  color: var(--dwc-color-body-text);
   font-weight: var(--dwc-font-weight-light);
 }
 
 /* Gain/Loss cells */
 dwc-table::part(cell-gain),
 dwc-table::part(price-change-gain) {
-  color: var(--dwc-color-success-25);
+  color: var(--dwc-color-success-text);
   font-weight: var(--dwc-font-weight-medium);
 }
 
 dwc-table::part(cell-loss),
 dwc-table::part(price-change-loss) {
-  color: var(--dwc-color-danger-40);
+  color: var(--dwc-color-danger-text);
   font-weight: var(--dwc-font-weight-medium);
 }
 
 dwc-table::part(cell-neutral),
 dwc-table::part(price-change-neutral) {
-  color: var(--dwc-color-on-surface);
+  color: var(--dwc-color-body-text);
 }
 
 /* Price change containers */
@@ -185,18 +185,18 @@ dwc-table::part(percentage-badge-neutral) {
 }
 
 dwc-table::part(percentage-badge-gain) {
-  background-color: var(--dwc-color-success-95);
-  color: var(--dwc-color-success-25);
+  background-color: var(--dwc-color-success-alt);
+  color: var(--dwc-color-success-text);
 }
 
 dwc-table::part(percentage-badge-loss) {
-  background-color: var(--dwc-color-danger-95);
-  color: var(--dwc-color-danger-40);
+  background-color: var(--dwc-color-danger-alt);
+  color: var(--dwc-color-danger-text);
 }
 
 dwc-table::part(percentage-badge-neutral) {
-  background-color: var(--dwc-color-gray-95);
-  color: var(--dwc-color-gray-15);
+  background-color: var(--dwc-surface-2);
+  color: var(--dwc-color-body-text);
   box-shadow: 0 0 0 1px var(--dwc-color-gray-15);
   transition: all var(--dwc-transition-fast) ease;
 }
@@ -218,7 +218,7 @@ dwc-table::part(sparkline-cell) {
 
 dwc-table::part(symbol-cell) {
   font-weight: var(--dwc-font-weight-bold);
-  color: var(--dwc-color-on-surface);
+  color: var(--dwc-color-body-text);
 }
 
 /* Crypto info styling */
@@ -241,7 +241,7 @@ dwc-table::part(crypto-name) {
 
 dwc-table::part(crypto-symbol) {
   font-size: var(--dwc-font-size-xl);
-  color: var(--dwc-color-gray-15);
+  color: var(--dwc-color-body-text);
   font-weight: var(--dwc-font-weight-light);
 }
 
@@ -252,8 +252,8 @@ dwc-table::part(crypto-symbol) {
 }
 
 .app-theme-dark dwc-table::part(icon-cell) > div > div {
-  color: var(--dwc-color-gray-40) !important;
-  border-color: var(--dwc-color-gray-40) !important;
+  color: var(--dwc-color-body-text) !important;
+  border-color: var(--dwc-border-color) !important;
 }
 
 /* ========================================

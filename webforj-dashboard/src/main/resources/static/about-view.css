@@ -38,7 +38,7 @@
 /* Shared title styles */
 .about-view__section-title {
   margin: 0 0 var(--dwc-space-l) 0;
-  font-size: var(--dwc-font-size-4xl);
+  font-size: var(--dwc-font-size-3xl);
   font-weight: var(--dwc-font-weight-medium);
   text-align: center;
 }
@@ -91,7 +91,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: var(--dwc-space-l);
-  font-size: var(--dwc-font-size-4xl);
+  font-size: var(--dwc-font-size-3xl);
 }
 
 /* External Link Icon */
@@ -150,7 +150,7 @@
 
 @media (max-width: 768px) {
   .about-view__title {
-    font-size: var(--dwc-font-size-4xl);
+    font-size: var(--dwc-font-size-3xl);
   }
 
 .about-view__list {

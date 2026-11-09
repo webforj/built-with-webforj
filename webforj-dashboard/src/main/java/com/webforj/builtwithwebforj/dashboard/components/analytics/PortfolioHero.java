@@ -129,7 +129,7 @@ public class PortfolioHero extends Composite<FlexLayout> {
 
     Div iconContainer = new Div();
     iconContainer.addClassName("portfolio-hero__quick-stat-icon");
-    iconContainer.setHtml("<dwc-icon name=\"tabler:" + iconName + "\"></dwc-icon>");
+    iconContainer.setHtml("<dwc-icon pool=\"tabler\" name=\"" + iconName + "\"></dwc-icon>");
 
     FlexLayout textContainer = new FlexLayout();
     textContainer.addClassName("portfolio-hero__quick-stat-text")

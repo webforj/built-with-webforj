@@ -131,7 +131,7 @@
 .portfolio-hero__change-value {
   font-size: var(--dwc-font-size-2xl);
   font-weight: var(--dwc-font-weight-medium);
-  color: var(--dwc-color-success-50);
+  color: var(--dwc-color-success-text);
 }
 
 .portfolio-hero__change-percent {

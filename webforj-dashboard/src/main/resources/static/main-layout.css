@@ -37,7 +37,7 @@
 }
 
 .main-layout__toolbar-btn--theme {
-  border-left: 1px solid var(--dwc-color-gray-90);
+  border-left: 1px solid var(--dwc-border-color);
   margin-left: var(--dwc-space-s);
   padding-left: var(--dwc-space-s);
 }

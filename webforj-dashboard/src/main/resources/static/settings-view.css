@@ -17,13 +17,13 @@
 }
 
 .settings-view__section {
-  border: var(--dwc-border-width) solid var(--dwc-color-gray-90);
+  border: var(--dwc-border-width) solid var(--dwc-border-color);
   border-radius: var(--dwc-border-radius-m);
   padding: var(--dwc-space-l);
 }
 
 .settings-view__section:hover {
-  border-color: var(--dwc-color-gray-80);
+  border-color: var(--dwc-border-color);
 }
 
 .settings-view__section > * + * {

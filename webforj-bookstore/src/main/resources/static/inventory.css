@@ -28,12 +28,12 @@ body {
 }
 
 .books-table::part(header) {
-  background: var(--dwc-color-default-95);
+  background: var(--dwc-surface-2);
   font-weight: var(--dwc-font-weight-semibold);
 }
 
 .books-table::part(row):hover {
-  background: var(--dwc-color-primary-95);
+  background: var(--dwc-color-primary-alt);
 }
 
 .empty-state {

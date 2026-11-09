@@ -12,7 +12,6 @@ import com.webforj.component.Component;
 import com.webforj.component.Composite;
 import com.webforj.component.html.elements.H1;
 import com.webforj.component.html.elements.Div;
-import com.webforj.component.html.elements.Img;
 import com.webforj.component.icons.IconButton;
 import com.webforj.component.icons.TablerIcon;
 import com.webforj.component.icons.FeatherIcon;
@@ -76,15 +75,9 @@ public class MainLayout extends Composite<AppLayout> {
     // Profile menu (avatar)
     Div profileBtn = new Div();
     profileBtn.addClassName("main-layout__toolbar-btn main-layout__toolbar-btn--clickable");
-    Img avatarImg = new Img();
-    avatarImg.setSrc(
-        "https://static.vecteezy.com/system/resources/previews/024/183/502/original/male-avatar-portrait-of-a-young-man-with-a-beard-illustration-of-male-character-in-modern-color-style-vector.jpg");
-    avatarImg.setAlt("Profile Avatar");
-    avatarImg.setStyle("width", "24px");
-    avatarImg.setStyle("height", "24px");
-    avatarImg.setStyle("border-radius", "50%");
-    avatarImg.setStyle("object-fit", "cover");
-    profileBtn.add(avatarImg);
+    Div avatar = new Div("JD");
+    avatar.addClassName("drawer-footer__avatar");
+    profileBtn.add(avatar);
 
     mainActions.add(notificationsBtn, helpBtn, profileBtn);
 

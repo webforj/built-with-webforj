@@ -51,7 +51,7 @@
   gap: var(--dwc-space-s);
   justify-content: space-between;
   padding-top: var(--dwc-space-m);
-  border-top: 1px solid var(--dwc-color-outline);
+  border-top: 1px solid var(--dwc-border-color);
 }
 
 .dialog-buttons-right {

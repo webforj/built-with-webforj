@@ -53,7 +53,7 @@ public class AboutView extends Composite<FlexLayout> {
     Div techBadges = new Div();
     techBadges.addClassName("about-view__badges");
     techBadges.add(
-        createBadge("webforJ 25.11"),
+        createBadge("webforJ 26.03"),
         createBadge("Spring Boot 3.5"),
         createBadge("Java 21"),
         createBadge("H2 Database"));
