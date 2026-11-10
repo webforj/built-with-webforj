@@ -1,6 +1,6 @@
 # Built with webforJ: Java web framework examples
 
-Open source Java web app examples built with [webforJ](https://webforj.com), the full-stack Java framework. The examples cover Spring AI, Spring Boot CRUD, data binding, charts, UI components and installable web apps. The UI and the logic live in one language, next to Java libraries you already use, such as Spring Boot and Spring AI. Each app is small, focused on one feature, and ready to copy into your own project. Every project has its own README.
+Open source Java web app examples built with [webforJ](https://webforj.com), the [full-stack Java framework](https://docs.webforj.com/blog/java-full-stack-framework). The examples cover Spring AI, Spring Boot CRUD, data binding, charts, UI components and installable web apps. The UI and the logic live in one language, next to Java libraries you already use, such as Spring Boot and Spring AI. Each app is small, focused on one feature, and ready to copy into your own project. Every project has its own README.
 
 ## Spring AI examples
 
