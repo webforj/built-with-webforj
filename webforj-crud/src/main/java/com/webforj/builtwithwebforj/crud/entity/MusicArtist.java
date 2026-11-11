@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Max;
 
 /**
  * Entity representing a music artist or band.
@@ -54,9 +53,9 @@ public class MusicArtist implements HasEntityKey {
 	 */
 	@NotNull(message = "Artist year formed is required")
 	@Min(value = 1900, message = "Year must be 1900 or later")
-	@Max(value = 2025, message = "Year must be current year or earlier")
+	@NotAfterCurrentYear
 	@Column(name = "year_formed")
-	private Double yearFormed;
+	private Integer yearFormed;
 
 	/**
 	 * Whether the artist is currently active.
@@ -120,11 +119,11 @@ public class MusicArtist implements HasEntityKey {
 		this.country = country;
 	}
 
-	public Double getYearFormed() {
+	public Integer getYearFormed() {
 		return yearFormed;
 	}
 
-	public void setYearFormed(Double yearFormed) {
+	public void setYearFormed(Integer yearFormed) {
 		this.yearFormed = yearFormed;
 	}
 

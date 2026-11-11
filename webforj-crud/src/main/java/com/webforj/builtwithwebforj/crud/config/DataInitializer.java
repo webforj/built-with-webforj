@@ -81,7 +81,7 @@ public class DataInitializer implements CommandLineRunner {
 		MusicArtist artist = new MusicArtist(name);
 		artist.setGenre(genre);
 		artist.setCountry(country);
-		artist.setYearFormed(Double.valueOf(yearFormed));
+		artist.setYearFormed(yearFormed);
 		artist.setIsActive(isActive);
 		artist.setBiography(biography);
 		artistService.createArtist(artist);

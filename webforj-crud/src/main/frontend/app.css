@@ -1,0 +1,79 @@
+/*
+ * Chrome drops the hue of the stock neutral seed because it is almost gray, which tints every
+ * neutral surface pink. Passing the seed through color-mix() fills the missing hue in from the
+ * same hue fully saturated and changes nothing else. Remove this once DWC ships the fix.
+ */
+:root {
+  --dwc-color-default-seed: color-mix(
+    in oklch,
+    hsl(var(--dwc-color-default-h), var(--dwc-color-default-s), 50%) 100%,
+    hsl(var(--dwc-color-default-h), 100%, 50%) 0%
+  );
+}
+
+dwc-window-center {
+  background: var(--dwc-surface-3);
+}
+
+.artists {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--dwc-space-2xl) var(--dwc-space-m);
+  box-sizing: border-box;
+}
+
+.artists h2 {
+  margin: 0;
+}
+
+.artists__toolbar dwc-field {
+  flex: 1 1 16rem;
+  max-width: 24rem;
+}
+
+.artists__count {
+  margin: 0 auto 0 0;
+  font-size: var(--dwc-font-size-s);
+  color: var(--dwc-color-default-text-40);
+  font-variant-numeric: tabular-nums;
+}
+
+.artists__table {
+  width: 100%;
+  height: 32rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.artist-dialog {
+  --dwc-dialog-max-width: 34rem;
+}
+
+.artist-dialog__form {
+  width: 100%;
+}
+
+/* Genre and Country sit side by side and wrap onto two lines when the dialog is narrow. */
+.artist-dialog__row > * {
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+.artist-dialog__footer {
+  width: 100%;
+}
+
+.artist-dialog__actions {
+  margin-left: auto;
+}
+
+@media (max-width: 700px) {
+  .artists {
+    padding: var(--dwc-space-m);
+  }
+
+  .artists__toolbar dwc-field {
+    flex-basis: 100%;
+    max-width: none;
+  }
+}
