@@ -1,0 +1,83 @@
+/*
+ * Page layout of the app. Colors and fonts come from the UI5 theme: the UI5 components define the
+ * --sap* variables when their scripts load, and the fallbacks cover the moment before that.
+ */
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--sapBackgroundColor, #f5f6f7);
+  color: var(--sapTextColor, #1d2d3e);
+  font-family: var(--sapFontFamily, "72", Arial, Helvetica, sans-serif);
+  font-size: var(--sapFontSize, 0.875rem);
+}
+
+/*
+ * A custom element is in the page a moment before its script defines it, and until then the
+ * browser shows its raw text. Hiding it for that moment keeps the page from flashing, and a view
+ * appears complete because it stays hidden until every element in it is defined.
+ */
+.shell :not(:defined),
+.page:has(:not(:defined)) {
+  visibility: hidden;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.shell__body {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.shell__content {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: auto;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  box-sizing: border-box;
+}
+
+.page--narrow {
+  max-width: 40rem;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toolbar__search {
+  flex: 1 1 16rem;
+  max-width: 28rem;
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.form__field > ui5-input,
+.form__field > ui5-select,
+.form__field > ui5-date-picker {
+  width: 100%;
+}

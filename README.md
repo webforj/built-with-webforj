@@ -38,6 +38,7 @@ Apps that show webforJ components, layouts and themes.
 | [webforj-howdy](webforj-howdy) | A first webforJ app with routing and Google Charts | [Howdy README](webforj-howdy) |
 | [webforj-explorer](webforj-explorer) | Code viewer with a file tree and Monaco editor, styled like VS Code | [Explorer README](webforj-explorer) |
 | [webforj-terminal](webforj-terminal) | Browser terminal with typed commands, history and a Snake game | [Terminal README](webforj-terminal) |
+| [webforj-ui5](webforj-ui5) | Bring your own design system: a customer app built from SAP UI5 Web Components | [UI5 README](webforj-ui5) |
 | [webforj-tictactoe](webforj-tictactoe) | Two-player game sharing state through webforJ namespaces | [Tic-tac-toe README](webforj-tictactoe) |
 
 ## Installable web app examples
